@@ -1,6 +1,6 @@
 **Classroom Simulator MQP 2022-2023**
 
-This branch is for melonJSTesting.
+This branch is for godotTesting.
 
 Requirements:
  - Collision Handling?
