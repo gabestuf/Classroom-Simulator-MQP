@@ -5,5 +5,5 @@
 [node name="World" type="Node2D"]
 
 [node name="Floor" type="Sprite" parent="."]
-position = Vector2( 113.139, 83.7067 )
+position = Vector2( 24.9374, 27.3523 )
 texture = ExtResource( 1 )
