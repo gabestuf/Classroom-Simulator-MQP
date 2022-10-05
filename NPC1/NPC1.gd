@@ -2,12 +2,16 @@ extends KinematicBody2D
 
 var velocity = Vector2.ZERO
 var speed = 30
+var state = "downright"
 
 func moveToPos(x: float, y: float, delta):
 	if(self.position.x != x && self.position.y != y):
-		print(self.position)
 		self.position = self.position.move_toward(Vector2(x,y), delta * speed)
-	
+	else: 
+		if (state=="downright"):
+			state="upleft"
+		else:
+			state="downright"
 
 func _ready():
 	self.position = Vector2(64,64)
@@ -23,11 +27,13 @@ func _physics_process(delta):
 	else:
 		velocity = Vector2.ZERO
 	
-	#moveToPos(128,128, delta)
+	if (state=="downright"):
+		moveToPos(100,128, delta)
+	elif (state=="upleft"):
+		moveToPos(64,64, delta)
+		
 	#velocity.x = 2
-	move_and_collide(velocity)
-
-
+	#move_and_collide(velocity)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
