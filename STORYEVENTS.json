@@ -219,6 +219,38 @@
             "description": ["student hurts themself"]
         },
         "nextEvents": ["studentCries", "studentYells", "studentUncomfortable"]
+    },
+    "teacherMovesToStudent": {
+        "charactersInvolved": ["StudentA", "TeacherA"],
+        "StudentA": {
+            "mood": ["scared", "nervous", "neutral"],
+            "position": ["current"],
+            "description": ["Teacher is moving to student"]
+        },
+        "TeacherA":{
+            "mood": ["upset", "concerned"],
+            "position": ["current", "StudentA"],
+            "description": ["Teacher is moving to student"]
+        },
+        "nextEvents": ["TeacherGetsAngry", "teacherNeedsBreak", "studentCries", "studentUncomfortable"]
+    },
+    "teacherCleansMess": {
+        "charactersInvolved": ["TeacherA"],
+        "TeacherA": {
+            "mood": ["upset", "calm"],
+            "position": ["current"],
+            "description": ["Teacher Cleans up Mess"]
+        },
+        "nextEvents": ["teacherNeedsBreak", "teacherMovestoStudent"]
+    },
+    "teacherReads": {
+        "charactersInvolved": ["TeacherA"],
+        "TeacherA": {
+            "mood": ["happy", "calm"],
+            "position": ["current"],
+            "description": ["Teacher is Reading"]
+        },
+        "nextEvents": ["StudentRuns", "StudentsBored", "studentCries", "StudentSits"]
     }
-    
+
 }
