@@ -199,5 +199,15 @@
             "description": ["goes to carpet"]
         },
         "nextEvents": ["studentRuns","studentCries", "studentInCorner","studentsFight","studentHides"]
+    },
+    "studentHurtThemself": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["upset", "angry", "sad"],
+            "position": ["current"],
+            "description": ["student hurts themself"]
+        },
+        "nextEvents": ["studentCries", "studentYells", "studentUncomfortable"]
     }
+    
 }
