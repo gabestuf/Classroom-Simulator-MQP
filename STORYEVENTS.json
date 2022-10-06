@@ -100,7 +100,7 @@
         "StudentA": {
             "mood": ["sad"],
             "position": ["current"],
-            "description": ["crying", "yells"]
+            "description": ["crying", "yells", "breaks toy", "breaks material"]
         },
         "nextEvents": []
     },
