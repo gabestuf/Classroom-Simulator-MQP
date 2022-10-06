@@ -187,7 +187,8 @@
             "mood": ["sad", "angry"],
             "position": ["current"],
             "description": ["student is hungry"]
-        }
+        },
+        "nextEvents": ["studentEatsSnack"]
     },
     "studentGoesToCarpet": {
         "charactersInvolved": ["Student A"],
