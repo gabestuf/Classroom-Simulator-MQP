@@ -158,7 +158,6 @@
             "position": ["current", "corner", "bookshelf"],
             "description": ["student yells"]
         }
-
     },
     "TeacherGetsAngry": {
         "charactersInvolved": ["TeacherA"],
@@ -168,7 +167,6 @@
             "description": ["teacher anger"]
         }
     },
-
     "studentPlaysWithStudent": {
         "charactersInvolved": ["StudentA","StudentB"],
         "StudentA":{
