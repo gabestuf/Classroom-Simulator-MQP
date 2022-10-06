@@ -149,7 +149,8 @@
             "mood": ["happy", "neutral"],
             "position": ["current", "corner"],
             "description": ["snack time"]
-        }
+        },
+        "nextEvents": []
     },
     "studentYells": {
         "charactersInvolved": ["StudentA"],
@@ -157,7 +158,8 @@
             "mood": ["neutral", "angry", "sad"],
             "position": ["current", "corner", "bookshelf"],
             "description": ["student yells"]
-        }
+        },
+        "nextEvents": []
     },
     "TeacherGetsAngry": {
         "charactersInvolved": ["TeacherA"],
@@ -165,7 +167,17 @@
             "mood": ["angry", "sad", "neutral"],
             "position": ["current", "corner"],
             "description": ["teacher anger"]
-        }
+        },
+        "nextEvents": []
+    },
+    "teacherTalksToStudents": {
+        "charactersInvolved": ["TeacherA", "allStudents"],
+        "TeacherA": {
+            "mood": ["neutral", "angry", "calm"],
+            "position": ["table", "rug", "current"],
+            "description": ["teacher addresses students"]
+        },
+        "nextEvents": []
     },
     "studentPlaysWithStudent": {
         "charactersInvolved": ["StudentA","StudentB"],
@@ -187,7 +199,8 @@
             "mood": ["sad", "angry"],
             "position": ["current"],
             "description": ["student is hungry"]
-        }
+        },
+        "nextEvents": []
     },
     "studentGoesToCarpet": {
         "charactersInvolved": ["Student A"],
