@@ -58,6 +58,24 @@
         },
         "importance": [0,9],
         "nextEvents": []
+    },
+    "studentSneaksAway": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["calm", "neutral","angry","sad"],
+            "position": ["corner", "toys"],
+            "description": ["sneaks away"]
+        },
+        "nextEvents": ["studentPlaysWithToys"]
+    },
+    "studentPlaysWithToys": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["calm", "neutral", "happy"],
+            "position": ["current", "toys"],
+            "description": ["plays with toy"]
+        }
+
     }
 }
 
