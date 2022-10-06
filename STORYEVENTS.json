@@ -162,6 +162,21 @@
             "description": ["teacher anger"]
         }
 
+    },
+
+    "studentPlaysWithStudent": {
+        "charactersInvolved": ["StudentA","StudentB"],
+        "StudentA":{
+            "mood": ["happy, crazy","calm","neutral"],
+            "position": ["toys","carpet"],
+            "description": ["student a plays with student b"]
+        },
+        "StudentB":{
+            "mood": ["happy, crazy","calm","neutral"],
+            "position": ["toys","carpet"],
+            "description": ["student b plays with student a"]
+        },
+        "nextEvents":["studentPlaysWithToys","twoStudentsFight"]
     }
     
 }
