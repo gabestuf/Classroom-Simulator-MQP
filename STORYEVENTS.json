@@ -75,7 +75,24 @@
             "position": ["current", "toys"],
             "description": ["plays with toy"]
         }
-
+    },
+    "studentPutInCorner": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["sad","angry","calm","neutral"],
+            "position": ["corner"],
+            "description": ["student get put in corner"]
+        },
+        "nextEvents":["studentBecomesIdle","studentsGather"]
+    },
+    "studentHappy": {
+        "charactersInvolved":["StudentA"],
+        "StudentA":{
+            "mood": ["happy"],
+            "position": ["current"],
+            "description": ["student is happy"]
+        },
+        "nextEvents": []
     }
 }
 
