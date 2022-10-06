@@ -238,6 +238,24 @@
         },
         "nextEvents": ["studentCries", "studentYells", "studentUncomfortable"]
     },
+    "studentFireDrill": {
+        "charactersInvolved": ["allStudents"],
+        "allStudents": {
+            "mood": ["happy", "bored", "upset"],
+            "position": ["wall"],
+            "description": ["students prep for fire drill"]
+        },
+        "nextEvents": ["studentRuns","studentUncomfortable","studentYells","napTimeInterrupted"]
+    },
+    "teacherTeaches": {
+        "charactersInvolved": ["allStudents","TeacherA"],
+        "allStudents": {
+            "mood": ["happy","calm","bored","current"],
+            "position": ["carpet","bookshelf","table"],
+            "description": ["teacher teaches students in class"]
+        },
+        "nextEvents": ["studentsGather"]
+    },
     "studentCrafts": {
         "charactersInvolved":  ["StudentA"],
         "StudentA": {
@@ -293,6 +311,5 @@
         },
         "nextEvents": ["StudentRuns", "StudentsBored", "studentCries", "StudentSits"]
     }
-
 }
 
