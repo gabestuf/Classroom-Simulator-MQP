@@ -74,7 +74,8 @@
             "mood": ["calm", "neutral", "happy"],
             "position": ["current", "toys"],
             "description": ["plays with toy"]
-        }
+        },
+        "nextEvents": []
     },
     "studentPutInCorner": {
         "charactersInvolved": ["StudentA"],
@@ -94,46 +95,54 @@
         },
         "nextEvents": []
     },
-    "studentMakesAMess": {
+    "studentCausesDistraction": {
         "charactersInvolved": ["StudentA"],
         "StudentA": {
-            "mood": ["happy", "angry", "sad"],
-            "position": ["current", "corner"],
-            "description": ["makes a mess"]
-        }
-
+            "mood": ["sad"],
+            "position": ["current"],
+            "description": ["crying", "yells"]
+        },
+        "nextEvents": []
     },
-
-    "studentReadsABook": {
+    "napTime": {
+        "charactersInvolved": ["allStudents"],
+        "allStudents": {
+            "mood": ["sad","happy", "neutral"],
+            "position": ["rug"],
+            "description": ["students sleep"]
+        },
+        "nextEvents": ["napTimeInterrupted"]
+    },
+    "napTimeInterrupted": {
         "charactersInvolved": ["StudentA"],
         "StudentA": {
-            "mood": ["happy", "bored", "sad"],
-            "position": ["current", "corner", "bookshelf"],
-            "description": ["makes a mess"]
-        }
-
+            "mood": ["angry", "happy", "neutral"],
+            "position": ["rug", "current"],
+            "description": ["student wakes up"]
+        },
+        "nextEvents": ["napTimeInterrupted", "teacherCallsCalmDown"]
     },
-
-    "studentUncomfortable": {
+    "studentGetsBored": {
         "charactersInvolved": ["StudentA"],
         "StudentA": {
-            "mood": ["bored", "angry", "sad", "uncomfortable"],
-            "position": ["current", "corner", "bookshelf"],
-            "description": ["uncomfortable"]
-        }
-
+            "mood": ["bored"]
+        },
+        "nextEvents": []
     },
-
-    "TeacherBreak": {
+    "studentGetsTired": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["tired"]
+        },
+        "nextEvents": []
+    },
+    "teacherGetsTired": {
         "charactersInvolved": ["TeacherA"],
         "TeacherA": {
-            "mood": ["nuetral", "sad", "tired"],
-            "position": ["current", "corner", "teacher desk"],
-            "description": ["teacher break"]
-        }
-
+            "mood": ["tired"]
+        },
+        "nextEvents": []
     },
-
     "studentEatsSnack": {
         "charactersInvolved": ["StudentA"],
         "StudentA": {
@@ -141,9 +150,7 @@
             "position": ["current", "corner"],
             "description": ["snack time"]
         }
-
     },
-
     "studentYells": {
         "charactersInvolved": ["StudentA"],
         "StudentA": {
@@ -153,7 +160,6 @@
         }
 
     },
-
     "TeacherGetsAngry": {
         "charactersInvolved": ["TeacherA"],
         "TeacherA": {
@@ -161,7 +167,6 @@
             "position": ["current", "corner"],
             "description": ["teacher anger"]
         }
-
     },
 
     "studentPlaysWithStudent": {
@@ -178,5 +183,4 @@
         },
         "nextEvents":["studentPlaysWithToys","twoStudentsFight"]
     }
-    
 }
