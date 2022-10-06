@@ -190,5 +190,14 @@
             "position": ["current"],
             "description": ["student is hungry"]
         }
+    },
+    "studentGoesToCarpet": {
+        "charactersInvolved": ["Student A"],
+        "StudentA": {
+            "mood": ["neutral","calm","happy"],
+            "position": ["carpet", "current"],
+            "description": ["goes to carpet"]
+        },
+        "nextEvents": ["studentRuns","studentCries", "studentInCorner","studentsFight","studentHides"]
     }
 }
