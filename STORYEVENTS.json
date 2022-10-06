@@ -161,6 +161,15 @@
         },
         "nextEvents": []
     },
+    "studentRuns": {
+        "charactersInvolved": ["StudentA", "Teacher1"],
+        "StudentA": {
+            "mood": ["sad", "happy"],
+            "position": ["table", "carpet", "rug"],
+            "description": ["Student runs around classroom"]
+        }
+
+    },
     "TeacherGetsAngry": {
         "charactersInvolved": ["TeacherA"],
         "TeacherA": {
@@ -200,7 +209,16 @@
             "position": ["current"],
             "description": ["student is hungry"]
         },
-        "nextEvents": []
+        "nextEvents": ["studentEatsSnack"]
+    },
+    "studentSits": {
+        "charactersInvolved": ["StudentA", "StudentB"],
+        "StudentA": {
+            "mood": ["calm", "neutral"],
+            "position": ["table", "carpet", "rug"],
+            "description": ["Student comes in a takes a seat at a table"]
+        }
+
     },
     "studentGoesToCarpet": {
         "charactersInvolved": ["Student A"],
@@ -210,5 +228,16 @@
             "description": ["goes to carpet"]
         },
         "nextEvents": ["studentRuns","studentCries", "studentInCorner","studentsFight","studentHides"]
+    },
+    "studentHurtThemself": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["upset", "angry", "sad"],
+            "position": ["current"],
+            "description": ["student hurts themself"]
+        },
+        "nextEvents": ["studentCries", "studentYells", "studentUncomfortable"]
     }
+    
 }
+
