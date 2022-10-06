@@ -74,8 +74,57 @@
             "mood": ["calm", "neutral", "happy"],
             "position": ["current", "toys"],
             "description": ["plays with toy"]
-        }
+        },
+        "nextEvents": []
 
+    },
+    "studentCausesDistraction": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["sad"],
+            "position": ["current"],
+            "description": ["crying", "yells"]
+        },
+        "nextEvents": []
+    },
+    "napTime": {
+        "charactersInvolved": ["allStudents"],
+        "allStudents": {
+            "mood": ["sad","happy", "neutral"],
+            "position": ["rug"],
+            "description": ["students sleep"]
+        },
+        "nextEvents": ["napTimeInterrupted"]
+    },
+    "napTimeInterrupted": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["angry", "happy", "neutral"],
+            "position": ["rug", "current"],
+            "description": ["student wakes up"]
+        },
+        "nextEvents": ["napTimeInterrupted", "teacherCallsCalmDown"]
+    },
+    "studentGetsBored": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["bored"]
+        },
+        "nextEvents": []
+    },
+    "studentGetsTired": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["tired"]
+        },
+        "nextEvents": []
+    },
+    "teacherGetsTired": {
+        "charactersInvolved": ["TeacherA"],
+        "TeacherA": {
+            "mood": ["tired"]
+        },
+        "nextEvents": []
     }
 }
 
