@@ -149,7 +149,8 @@
             "mood": ["happy", "neutral"],
             "position": ["current", "corner"],
             "description": ["snack time"]
-        }
+        },
+        "nextEvents": []
     },
     "studentYells": {
         "charactersInvolved": ["StudentA"],
@@ -157,8 +158,8 @@
             "mood": ["neutral", "angry", "sad"],
             "position": ["current", "corner", "bookshelf"],
             "description": ["student yells"]
-        }
-
+        },
+        "nextEvents": []
     },
     "studentRuns": {
         "charactersInvolved": ["StudentA", "Teacher1"],
@@ -175,7 +176,17 @@
             "mood": ["angry", "sad", "neutral"],
             "position": ["current", "corner"],
             "description": ["teacher anger"]
-        }
+        },
+        "nextEvents": []
+    },
+    "teacherTalksToStudents": {
+        "charactersInvolved": ["TeacherA", "allStudents"],
+        "TeacherA": {
+            "mood": ["neutral", "angry", "calm"],
+            "position": ["table", "rug", "current"],
+            "description": ["teacher addresses students"]
+        },
+        "nextEvents": []
     },
     "studentPlaysWithStudent": {
         "charactersInvolved": ["StudentA","StudentB"],
@@ -197,7 +208,8 @@
             "mood": ["sad", "angry"],
             "position": ["current"],
             "description": ["student is hungry"]
-        }
+        },
+        "nextEvents": ["studentEatsSnack"]
     },
     "studentSits": {
         "charactersInvolved": ["StudentA", "StudentB"],
@@ -207,7 +219,25 @@
             "description": ["Student comes in a takes a seat at a table"]
         }
 
+    },
+    "studentGoesToCarpet": {
+        "charactersInvolved": ["Student A"],
+        "StudentA": {
+            "mood": ["neutral","calm","happy"],
+            "position": ["carpet", "current"],
+            "description": ["goes to carpet"]
+        },
+        "nextEvents": ["studentRuns","studentCries", "studentInCorner","studentsFight","studentHides"]
+    },
+    "studentHurtThemself": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["upset", "angry", "sad"],
+            "position": ["current"],
+            "description": ["student hurts themself"]
+        },
+        "nextEvents": ["studentCries", "studentYells", "studentUncomfortable"]
     }
-
+    
 }
 
