@@ -76,6 +76,15 @@
             "description": ["plays with toy"]
         }
 
+    },
+    "studentRuns": {
+        "charactersInvolved": ["StudentA", "Teacher1"],
+        "StudentA": {
+            "mood": ["sad", "happy"],
+            "position": ["table", "carpet", "rug"],
+            "description": ["Student runs around classroom"]
+        }
+
     }
 }
 
