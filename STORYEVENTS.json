@@ -125,6 +125,35 @@
             "mood": ["tired"]
         },
         "nextEvents": []
-    }
-}
+    },
+    "studentEatsSnack": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["happy", "neutral"],
+            "position": ["current", "corner"],
+            "description": ["snack time"]
+        }
 
+    },
+
+    "studentYells": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["neutral", "angry", "sad"],
+            "position": ["current", "corner", "bookshelf"],
+            "description": ["student yells"]
+        }
+
+    },
+
+    "TeacherGetsAngry": {
+        "charactersInvolved": ["TeacherA"],
+        "TeacherA": {
+            "mood": ["angry", "sad", "neutral"],
+            "position": ["current", "corner"],
+            "description": ["teacher anger"]
+        }
+
+    }
+    
+}
