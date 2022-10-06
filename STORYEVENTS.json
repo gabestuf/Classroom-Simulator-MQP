@@ -182,5 +182,13 @@
             "description": ["student b plays with student a"]
         },
         "nextEvents":["studentPlaysWithToys","twoStudentsFight"]
+    },
+    "studentHungry": {
+        "charactersInvolved" : ["StudentA"],
+        "StudentA":{
+            "mood": ["sad", "angry"],
+            "position": ["current"],
+            "description": ["student is hungry"]
+        }
     }
 }
