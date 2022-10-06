@@ -4,7 +4,7 @@
         "StudentA": {
             "mood": ["happy, angry, crazy"],
             "position": ["current", "corner", "table", "wall"],
-            "description": ["breaks toy", "draws on object"]
+            "description": ["breaks toy", "draws on object", "student spills food"]
         },
         "importance": [0,5],
         "nextEvents": ["twoStudentsFight", "teacherCallsCalmDown"]
@@ -43,8 +43,8 @@
         "charactersInvolved": ["allStudents"],
         "allStudents": {
             "mood": ["current", "calm"],
-            "position": ["table", "carpet"],
-            "description": ["students gather"]
+            "position": ["table", "carpet", "rug"],
+            "description": ["students gather", "students go to nap time"]
         },
         "importance": [3,9],
         "nextEvents": [] 
