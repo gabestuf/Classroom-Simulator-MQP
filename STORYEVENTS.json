@@ -76,7 +76,24 @@
             "description": ["plays with toy"]
         },
         "nextEvents": []
-
+    },
+    "studentPutInCorner": {
+        "charactersInvolved": ["StudentA"],
+        "StudentA": {
+            "mood": ["sad","angry","calm","neutral"],
+            "position": ["corner"],
+            "description": ["student get put in corner"]
+        },
+        "nextEvents":["studentBecomesIdle","studentsGather"]
+    },
+    "studentHappy": {
+        "charactersInvolved":["StudentA"],
+        "StudentA":{
+            "mood": ["happy"],
+            "position": ["current"],
+            "description": ["student is happy"]
+        },
+        "nextEvents": []
     },
     "studentCausesDistraction": {
         "charactersInvolved": ["StudentA"],
@@ -133,9 +150,7 @@
             "position": ["current", "corner"],
             "description": ["snack time"]
         }
-
     },
-
     "studentYells": {
         "charactersInvolved": ["StudentA"],
         "StudentA": {
@@ -145,7 +160,6 @@
         }
 
     },
-
     "TeacherGetsAngry": {
         "charactersInvolved": ["TeacherA"],
         "TeacherA": {
@@ -153,7 +167,5 @@
             "position": ["current", "corner"],
             "description": ["teacher anger"]
         }
-
     }
-    
 }
