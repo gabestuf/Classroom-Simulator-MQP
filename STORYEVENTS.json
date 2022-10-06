@@ -237,6 +237,29 @@
             "description": ["student hurts themself"]
         },
         "nextEvents": ["studentCries", "studentYells", "studentUncomfortable"]
+    },
+    "studentCrafts": {
+        "charactersInvolved":  ["StudentA"],
+        "StudentA": {
+            "mood": ["happy", "neutral"],
+            "position": ["table"],
+            "description": ["student does crafts"]
+        },
+        "nextEvents": []
+    },
+    "studentSteals": {
+        "charactersInvolved": ["StudentA", "StudentB"],
+        "StudentA": {
+            "mood": ["neutral"],
+            "position": ["current", "carpet", "table"],
+            "description": ["student steals food from student B", "student steals toy from student B"]
+        },
+        "StudentB": {
+            "mood": ["sad", "angry"],
+            "position": ["current", "carpet", "table"],
+            "description": ["student gets food stolen from student A", "student gets toy stolen from student B"]
+        },
+        "nextEvents": ["twoStudentsFight"]
     }
     
 }
