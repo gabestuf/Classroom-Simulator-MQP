@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/gabestuf/Classroom-Simulator-MQP/issues"
   },
-  "homepage": "https://github.com/gabestuf/Classroom-Simulator-MQP#readme"
+  "homepage": "https://github.com/gabestuf/Classroom-Simulator-MQP#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }

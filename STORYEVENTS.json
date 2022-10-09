@@ -217,8 +217,8 @@
             "mood": ["calm", "neutral"],
             "position": ["table", "carpet", "rug"],
             "description": ["Student comes in a takes a seat at a table"]
-        }
-
+        },
+        "nextEvents": []
     },
     "studentGoesToCarpet": {
         "charactersInvolved": ["Student A"],
