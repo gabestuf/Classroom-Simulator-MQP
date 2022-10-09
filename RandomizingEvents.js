@@ -1,6 +1,7 @@
 const data = require('./STORYEVENTS.json')
 const jsonLength = require('./js/scripts/objLength')
 const getRandomKey = require('./js/scripts/objRandomKey')
+const fs = require('fs')
 
 
 
@@ -37,31 +38,46 @@ const randomEventsNonReplace = (numOfEvents, json) => {
 
 const semiRandomEvents = (numOfEvents, json) => {
     let EventArray = []
+    let i = 0;
+
     const semiRandomEventsRecursive = (numOfEvents, json) => {
         let EventsToPullFrom = json
-        let i = 0;
 
         while (i < numOfEvents) {
             const key = getRandomKey(EventsToPullFrom)
+            console.log(key)
             const event = EventsToPullFrom[key]
             let obj = {}
             obj[key] = event
-            console.log("ASASCD")
-            console.log(event)
+            // console.log("ASASCD")
+            // console.log(event)
             EventArray.push(obj)
+            i++
             if ("nextEvents" in event && event.nextEvents.length > 0) {
-                console.log("ASDASDASD")
+                // console.log("ASDASDASD")
                 const nextEventsObj = {}
                 for (const key of event.nextEvents) {
                     nextEventsObj[key] = EventsToPullFrom[key]
                 }
-                console.log(nextEventsObj)
+                // console.log(nextEventsObj)
                 semiRandomEventsRecursive(numOfEvents - i, nextEventsObj)
             }
-            i++
         }
     }
     semiRandomEventsRecursive(numOfEvents, json)
     return EventArray
 }
-console.log(semiRandomEvents(1, data))
+
+
+const objToFile = (obj) => {
+    fs.writeFile("./obj.txt", JSON.stringify(obj), 'utf8', function (err) {
+        if (err) {
+            return console.log(err);
+        }
+
+        console.log("The file was saved!");
+    });
+}
+const eventList = semiRandomEvents(3, data)
+objToFile(eventList)
+
