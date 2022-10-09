@@ -237,7 +237,15 @@
             "description": ["student hurts themself"]
         },
         "nextEvents": ["studentCries", "studentYells", "studentUncomfortable"]
+    },
+    "teacherMovesTowardsStudent": {
+        "charactersInvolved": ["TeacherA", "StudentA"],
+        "TeacherA": {
+            "mood": ["upset", "calm", "neutral", "tired"],
+            "position": ["StudentA"],
+            "description": ["moves to student"]
+        },
+        "nextEvents": []
     }
-    
 }
 
