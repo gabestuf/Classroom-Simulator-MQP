@@ -246,6 +246,79 @@
             "description": ["moves to student"]
         },
         "nextEvents": []
+    },
+    "studentFireDrill": {
+        "charactersInvolved": ["allStudents"],
+        "allStudents": {
+            "mood": ["happy", "bored", "upset"],
+            "position": ["wall"],
+            "description": ["students prep for fire drill"]
+        },
+        "nextEvents": ["studentRuns","studentUncomfortable","studentYells","napTimeInterrupted"]
+    },
+    "teacherTeaches": {
+        "charactersInvolved": ["allStudents","TeacherA"],
+        "allStudents": {
+            "mood": ["happy","calm","bored","current"],
+            "position": ["carpet","bookshelf","table"],
+            "description": ["teacher teaches students in class"]
+        },
+        "nextEvents": ["studentsGather"]
+    },
+    "studentCrafts": {
+        "charactersInvolved":  ["StudentA"],
+        "StudentA": {
+            "mood": ["happy", "neutral"],
+            "position": ["table"],
+            "description": ["student does crafts"]
+        },
+        "nextEvents": []
+    },
+    "studentSteals": {
+        "charactersInvolved": ["StudentA", "StudentB"],
+        "StudentA": {
+            "mood": ["neutral"],
+            "position": ["current", "carpet", "table"],
+            "description": ["student steals food from student B", "student steals toy from student B"]
+        },
+        "StudentB": {
+            "mood": ["sad", "angry"],
+            "position": ["current", "carpet", "table"],
+            "description": ["student gets food stolen from student A", "student gets toy stolen from student B"]
+        },
+        "nextEvents": ["twoStudentsFight"]
+    },
+    "teacherMovesToStudent": {
+        "charactersInvolved": ["StudentA", "TeacherA"],
+        "StudentA": {
+            "mood": ["scared", "nervous", "neutral"],
+            "position": ["current"],
+            "description": ["Teacher is moving to student"]
+        },
+        "TeacherA":{
+            "mood": ["upset", "concerned"],
+            "position": ["current", "StudentA"],
+            "description": ["Teacher is moving to student"]
+        },
+        "nextEvents": ["TeacherGetsAngry", "teacherNeedsBreak", "studentCries", "studentUncomfortable"]
+    },
+    "teacherCleansMess": {
+        "charactersInvolved": ["TeacherA"],
+        "TeacherA": {
+            "mood": ["upset", "calm"],
+            "position": ["current"],
+            "description": ["Teacher Cleans up Mess"]
+        },
+        "nextEvents": ["teacherNeedsBreak", "teacherMovestoStudent"]
+    },
+    "teacherReads": {
+        "charactersInvolved": ["TeacherA"],
+        "TeacherA": {
+            "mood": ["happy", "calm"],
+            "position": ["current"],
+            "description": ["Teacher is Reading"]
+        },
+        "nextEvents": ["StudentRuns", "StudentsBored", "studentCries", "StudentSits"]
     }
 }
 
