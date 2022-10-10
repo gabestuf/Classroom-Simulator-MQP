@@ -1,83 +1,82 @@
-const data = require('./STORYEVENTS.json')
-const jsonLength = require('./js/scripts/objLength')
-const getRandomKey = require('./js/scripts/objRandomKey')
-const fs = require('fs')
-
-
+const data = require("./STORYEVENTS.json");
+const jsonLength = require("./js/scripts/objLength");
+const getRandomKey = require("./js/scripts/objRandomKey");
+const getRandomArrayElement = require("./js/scripts/getRandomElement");
+const fs = require("fs");
 
 const randomEvents = (numOfEvents, json) => {
-    let EventArray = []
-    let EventsToPullFrom = json
+  let EventArray = [];
+  let EventsToPullFrom = json;
 
-    // get a random key
+  // get a random key
 
-    for (let i = 0; i < numOfEvents; i++) {
-        const key = getRandomKey(EventsToPullFrom)
-        let obj = {}
-        obj[key] = EventsToPullFrom[key]
-        EventArray.push(obj)
-    }
-    return EventArray
-}
+  for (let i = 0; i < numOfEvents; i++) {
+    const key = getRandomKey(EventsToPullFrom);
+    let obj = {};
+    obj[key] = EventsToPullFrom[key];
+    EventArray.push(obj);
+  }
+  return EventArray;
+};
 
 const randomEventsNonReplace = (numOfEvents, json) => {
-    let EventArray = []
-    let EventsToPullFrom = json
+  let EventArray = [];
+  let EventsToPullFrom = json;
 
-    // get a random key
+  // get a random key
 
-    for (let i = 0; i < numOfEvents; i++) {
-        const key = getRandomKey(EventsToPullFrom)
-        let obj = {}
-        obj[key] = EventsToPullFrom[key]
-        EventArray.push(obj)
-        delete EventsToPullFrom[key]
-    }
-    return EventArray
-}
+  for (let i = 0; i < numOfEvents; i++) {
+    const key = getRandomKey(EventsToPullFrom);
+    let obj = {};
+    obj[key] = EventsToPullFrom[key];
+    EventArray.push(obj);
+    delete EventsToPullFrom[key];
+  }
+  return EventArray;
+};
 
 const semiRandomEvents = (numOfEvents, json) => {
-    let EventArray = []
-    let i = 0;
+  let EventArray = [];
+  let i = 0;
 
-    const semiRandomEventsRecursive = (numOfEvents, json) => {
-        let EventsToPullFrom = json
+  const semiRandomEventsRecursive = (numOfEvents, json) => {
+    let EventsToPullFrom = json;
 
-        while (i < numOfEvents) {
-            const key = getRandomKey(EventsToPullFrom)
-            console.log(key)
-            const event = EventsToPullFrom[key]
-            let obj = {}
-            obj[key] = event
-            // console.log("ASASCD")
-            // console.log(event)
-            EventArray.push(obj)
-            i++
-            if ("nextEvents" in event && event.nextEvents.length > 0) {
-                // console.log("ASDASDASD")
-                const nextEventsObj = {}
-                for (const key of event.nextEvents) {
-                    nextEventsObj[key] = EventsToPullFrom[key]
-                }
-                // console.log(nextEventsObj)
-                semiRandomEventsRecursive(numOfEvents - i, nextEventsObj)
-            }
+    while (i < numOfEvents) {
+      const key = getRandomKey(EventsToPullFrom);
+      const event = EventsToPullFrom[key];
+      let obj = {};
+      obj[key] = event;
+      EventArray.push(obj);
+      i++;
+      if ("nextEvents" in event && event.nextEvents.length > 0) {
+        const nextEventsObj = {};
+        for (const key of event.nextEvents) {
+          nextEventsObj[key] = EventsToPullFrom[key];
+          // for (const actor of nextEventsObj[key].charactersInvolved) {
+          // console.log(nextEventsObj[key][actor]);
+          // const moodArray = nextEventsObj[key][actor]["mood"];
+          // nextEventsObj[key][actor].mood = getRandomArrayElement(moodArray);
+          // const positionArray = nextEventsObj[key][actor].position;
+          // nextEventsObj[key][actor].position = getRandomArrayElement(positionArray);
+          // }
         }
+        semiRandomEventsRecursive(numOfEvents - i, nextEventsObj);
+      }
     }
-    semiRandomEventsRecursive(numOfEvents, json)
-    return EventArray
-}
-
+  };
+  semiRandomEventsRecursive(numOfEvents, json);
+  return EventArray;
+};
 
 const objToFile = (obj) => {
-    fs.writeFile("./obj.txt", JSON.stringify(obj), 'utf8', function (err) {
-        if (err) {
-            return console.log(err);
-        }
+  fs.writeFile("./obj.txt", JSON.stringify(obj), "utf8", function (err) {
+    if (err) {
+      return console.log(err);
+    }
 
-        console.log("The file was saved!");
-    });
-}
-const eventList = semiRandomEvents(3, data)
-objToFile(eventList)
-
+    console.log("The file was saved!");
+  });
+};
+const eventList = semiRandomEvents(5, data);
+console.log(eventList);
