@@ -17,7 +17,7 @@
             "description": ["fights", "tumbles"]
         },
         "importance": [6,10],
-        "nextEvents": ["teacherCallsCalmDown", "teacherCallsGather"]
+        "nextEvents": ["teacherCallsCalmDown", "teacherCallsToGather"]
     },
     "teacherCallsToGather": {
         "charactersInvolved": ["Teacher1"],
@@ -95,6 +95,24 @@
         },
         "nextEvents": []
     },
+    "studentUncomfortable": {
+        "charactersInvolved":["StudentA"],
+        "StudentA":{
+            "mood": ["scared"],
+            "position": ["current"],
+            "description": ["student is uncomfortable"]
+        },
+        "nextEvents": []
+    },
+    "studentCries": {
+        "charactersInvolved":["StudentA"],
+        "StudentA":{
+            "mood": ["sad"],
+            "position": ["current"],
+            "description": ["student is sad"]
+        },
+        "nextEvents": []
+    },
     "studentCausesDistraction": {
         "charactersInvolved": ["StudentA"],
         "StudentA": {
@@ -167,8 +185,8 @@
             "mood": ["sad", "happy"],
             "position": ["table", "carpet", "rug"],
             "description": ["Student runs around classroom"]
-        }
-
+        },
+        "nextEvents": []
     },
     "TeacherGetsAngry": {
         "charactersInvolved": ["TeacherA"],
@@ -227,7 +245,7 @@
             "position": ["carpet", "current"],
             "description": ["goes to carpet"]
         },
-        "nextEvents": ["studentRuns","studentCries", "studentInCorner","studentsFight","studentHides"]
+        "nextEvents": ["studentRuns","studentCries", "studentPutInCorner","twoStudentsFight","studentSneaksAway"]
     },
     "studentHurtThemself": {
         "charactersInvolved": ["StudentA"],
@@ -318,7 +336,16 @@
             "position": ["current"],
             "description": ["Teacher is Reading"]
         },
-        "nextEvents": ["StudentRuns", "StudentsBored", "studentCries", "StudentSits"]
+        "nextEvents": ["studentRuns", "studentGetsBored", "studentCries", "studentSits"]
+    },
+    "teacherNeedsBreak": {
+        "charactersInvolved": ["TeacherA"],
+        "TeacherA": {
+            "mood": ["tired", "happy"],
+            "position": ["current"],
+            "description": ["Teacher needs a break"]
+        },
+        "nextEvents": []
     }
 }
 
