@@ -195,6 +195,10 @@
       "position": ["table", "carpet", "rug"],
       "description": ["Student runs around classroom"]
     },
+    "Teacher1": {
+      "mood": ["tired"],
+      "position": ["current"]
+    },
     "nextEvents": []
   },
   "TeacherGetsAngry": {
@@ -212,6 +216,11 @@
       "mood": ["neutral", "angry", "calm"],
       "position": ["table", "rug", "current"],
       "description": ["teacher addresses students"]
+    },
+    "allStudents": {
+      "mood": ["current", "calm"],
+      "position": ["table", "carpet", "rug"],
+      "description": ["students gather", "students go to nap time"]
     },
     "nextEvents": []
   },
