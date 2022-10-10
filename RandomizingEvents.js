@@ -54,11 +54,12 @@ const semiRandomEvents = (numOfEvents, json) => {
         for (const key of event.nextEvents) {
           nextEventsObj[key] = EventsToPullFrom[key];
           // for (const actor of nextEventsObj[key].charactersInvolved) {
-          // console.log(nextEventsObj[key][actor]);
-          // const moodArray = nextEventsObj[key][actor]["mood"];
-          // nextEventsObj[key][actor].mood = getRandomArrayElement(moodArray);
-          // const positionArray = nextEventsObj[key][actor].position;
-          // nextEventsObj[key][actor].position = getRandomArrayElement(positionArray);
+          //   console.log(nextEventsObj[key][actor]);
+          //   const moodArray = nextEventsObj[key][actor]["mood"];
+          //   nextEventsObj[key][actor].mood = getRandomArrayElement(moodArray);
+          //   const positionArray = nextEventsObj[key][actor].position;
+          //   nextEventsObj[key][actor].position =
+          //     getRandomArrayElement(positionArray);
           // }
         }
         semiRandomEventsRecursive(numOfEvents - i, nextEventsObj);
