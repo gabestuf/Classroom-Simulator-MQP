@@ -57,7 +57,7 @@ const semiRandomEvents = (numOfEvents, json) => {
           //   console.log(nextEventsObj[key][actor]);
           //   const moodArray = nextEventsObj[key][actor]["mood"];
           //   nextEventsObj[key][actor].mood = getRandomArrayElement(moodArray);
-          //   const positionArray = nextEventsObj[key][actor].position;
+          //   const positionArray = nextEventsObj[key][actor]['position];
           //   nextEventsObj[key][actor].position =
           //     getRandomArrayElement(positionArray);
           // }
