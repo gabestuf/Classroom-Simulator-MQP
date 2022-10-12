@@ -1,4 +1,4 @@
 module.exports = (arr) => {
-  const randomElement = Math.floor(Math.random() * arr.length);
+  const randomElement = arr[Math.floor(Math.random() * arr.length)]
   return randomElement;
 };
