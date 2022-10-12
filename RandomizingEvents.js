@@ -112,13 +112,14 @@ const generateEventList = (config) => {
   //console.log("=====================================================")
   //Pick random mood, position, description for each event 
   for (const obj of eventList) {
+    // delete obj[Object.keys(obj)[0]].nextEvents // can use this to remove unneccesary info
     //console.log(obj)
     for (const character of obj[Object.keys(obj)[0]].charactersInvolved) {
-      const moodArray = obj[Object.keys(obj)[0]][character].mood
+      const moodArray = obj[Object.keys(obj)[0]][character]['mood']
       obj[Object.keys(obj)[0]][character].mood = getRandomArrayElement(moodArray)
-      const positionArray = obj[Object.keys(obj)[0]][character].position
+      const positionArray = obj[Object.keys(obj)[0]][character]['position']
       obj[Object.keys(obj)[0]][character].position = getRandomArrayElement(positionArray)
-      const descriptionArray = obj[Object.keys(obj)[0]][character].description
+      const descriptionArray = obj[Object.keys(obj)[0]][character]['description']
       obj[Object.keys(obj)[0]][character].description = getRandomArrayElement(descriptionArray)
     }
   }
