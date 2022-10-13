@@ -28,14 +28,20 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO
 	
 	if (state=="downright"):
-		moveToPos(100,128, delta)
+		moveToPos(100,128,delta)
+#		moveToPos(125,125, delta)
 	elif (state=="upleft"):
-		moveToPos(64,64, delta)
+		moveToPos(30,30, delta)
+	
 		
 	#velocity.x = 2
 	#move_and_collide(velocity)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	#print(delta)
 	pass
+
+
+func _on_Area2D_body_entered(body):
+	print(body)

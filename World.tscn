@@ -1,10 +1,13 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://NPC1/NPC1Spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://NPC1/NPC1.gd" type="Script" id=2]
 [ext_resource path="res://Tilesets/Floor.png" type="Texture" id=3]
 [ext_resource path="res://Tilesets/WallsTilemap.png" type="Texture" id=4]
 [ext_resource path="res://Tilesets/ClassroomObjectsTileset.png" type="Texture" id=5]
+[ext_resource path="res://Tilesets/Bush.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Bush.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Tilesets/studentA.png" type="Texture" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -233,6 +236,9 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
 [sub_resource type="CapsuleShape2D" id=15]
 
+[sub_resource type="CapsuleShape2D" id=21]
+height = 8.0
+
 [node name="World" type="Node2D"]
 
 [node name="BackgroundImg" type="Sprite" parent="."]
@@ -241,16 +247,27 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 320, 180 )
 
+[node name="Bush" type="Sprite" parent="BackgroundImg"]
+visible = false
+position = Vector2( 54, 46 )
+texture = ExtResource( 6 )
+
+[node name="StudentA" type="Sprite" parent="BackgroundImg"]
+position = Vector2( 261, 50 )
+texture = ExtResource( 8 )
+
 [node name="WallsTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
+collision_layer = 0
 format = 1
-tile_data = PoolIntArray( -65537, 0, 0, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 2, -2, 0, 0, -1, 0, 0, -65536, 0, 65537, -65535, 0, 65537, -65534, 0, 65537, -65533, 0, 65537, -65532, 0, 65537, -65531, 0, 65537, -65530, 0, 65537, -65529, 0, 65537, -65528, 0, 65537, -65527, 0, 65537, -65526, 0, 0, -65525, 0, 2, 65534, 0, 65536, 65535, 0, 65537, 0, 0, 0, 1, 0, 131073, 2, 0, 131073, 3, 0, 131073, 4, 0, 131073, 5, 0, 131073, 6, 0, 131073, 7, 0, 131073, 8, 0, 131073, 9, 0, 0, 10, 0, 65537, 11, 0, 65538, 131070, 0, 65536, 131071, 0, 65537, 65536, 0, 65538, 65545, 0, 65536, 65546, 0, 65537, 65547, 0, 65538, 196606, 0, 65536, 196607, 0, 65537, 131072, 0, 65538, 131081, 0, 65536, 131082, 0, 65537, 131083, 0, 65538, 262142, 0, 65536, 262143, 0, 65537, 196608, 0, 65538, 196617, 0, 65536, 196618, 0, 65537, 196619, 0, 65538, 327678, 0, 65536, 327679, 0, 65537, 262144, 0, 65538, 262153, 0, 65536, 262154, 0, 65537, 262155, 0, 65538, 393214, 0, 131072, 393215, 0, 0, 327680, 0, 0, 327681, 0, 1, 327682, 0, 1, 327683, 0, 1, 327684, 0, 1, 327685, 0, 1, 327686, 0, 1, 327687, 0, 1, 327688, 0, 1, 327689, 0, 0, 327690, 0, 65537, 327691, 0, 65538, 458751, 0, 131072, 393216, 0, 131073, 393217, 0, 131073, 393218, 0, 131073, 393219, 0, 131073, 393220, 0, 131073, 393221, 0, 131073, 393222, 0, 131073, 393223, 0, 131073, 393224, 0, 131073, 393225, 0, 131073, 393226, 0, 131073, 393227, 0, 131074 )
+tile_data = PoolIntArray( -65537, 0, 0, -131072, 0, 1, -131071, 0, 1, -131070, 0, 1, -131069, 0, 1, -131068, 0, 1, -131067, 0, 1, -131066, 0, 1, -131065, 0, 1, -131064, 0, 1, -131063, 0, 1, -131062, 0, 2, -2, 0, 0, -1, 0, 0, -65536, 0, 65537, -65535, 0, 65537, -65534, 0, 65537, -65533, 0, 65537, -65532, 0, 65537, -65531, 0, 65537, -65530, 0, 65537, -65529, 0, 65537, -65528, 0, 65537, -65527, 0, 65537, -65526, 0, 0, -65525, 0, 2, 65534, 0, 65536, 65535, 0, 65537, 0, 0, 0, 1, 0, 131073, 2, 0, 131073, 3, 0, 131073, 4, 0, 131073, 5, 0, 131073, 6, 0, 131073, 7, 0, 131073, 8, 0, 131073, 9, 0, 0, 10, 0, 65537, 11, 0, 65538, 131070, 0, 65536, 131071, 0, 65537, 65536, 0, 65538, 65545, 0, 65536, 65546, 0, 65537, 65547, 0, 65538, 196606, 0, 65536, 196607, 0, 65537, 131072, 0, 65538, 131081, 0, 65536, 131082, 0, 65537, 131083, 0, 65538, 262142, 0, 65536, 262143, 0, 65537, 196608, 0, 65538, 196612, 0, 0, 196613, 0, 0, 196617, 0, 65536, 196618, 0, 65537, 196619, 0, 65538, 327678, 0, 65536, 327679, 0, 65537, 262144, 0, 65538, 262153, 0, 65536, 262154, 0, 65537, 262155, 0, 65538, 393214, 0, 131072, 393215, 0, 0, 327680, 0, 0, 327681, 0, 1, 327682, 0, 1, 327683, 0, 1, 327684, 0, 1, 327685, 0, 1, 327686, 0, 1, 327687, 0, 1, 327688, 0, 1, 327689, 0, 0, 327690, 0, 65537, 327691, 0, 65538, 458751, 0, 131072, 393216, 0, 131073, 393217, 0, 131073, 393218, 0, 131073, 393219, 0, 131073, 393220, 0, 131073, 393221, 0, 131073, 393222, 0, 131073, 393223, 0, 131073, 393224, 0, 131073, 393225, 0, 131073, 393226, 0, 131073, 393227, 0, 131074 )
 
 [node name="WorldSpritesTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 18 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
+collision_layer = 4
 format = 1
 tile_data = PoolIntArray( 131079, 0, 1, 196612, 0, 1, 196613, 0, 0 )
 
@@ -269,7 +286,18 @@ hframes = 2
 vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/NPC1"]
+visible = false
 position = Vector2( 0, 10 )
 rotation = 1.5708
 scale = Vector2( 0.6, 0.8 )
 shape = SubResource( 15 )
+
+[node name="Area2D" type="Area2D" parent="YSort/NPC1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/NPC1/Area2D"]
+shape = SubResource( 21 )
+
+[node name="Bush" parent="." instance=ExtResource( 7 )]
+position = Vector2( 56, 49 )
+
+[connection signal="body_entered" from="YSort/NPC1/Area2D" to="YSort/NPC1" method="_on_Area2D_body_entered"]
