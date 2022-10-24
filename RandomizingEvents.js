@@ -103,12 +103,9 @@ const generateEventList = (config) => {
       console.error("NOT A VALID FUNCTION, check config");
       break;
   }
-  //console.log(JSON.stringify(eventList))
-  //console.log("=====================================================")
+
   //Pick random mood, position, description for each event
   for (const obj of eventList) {
-    // delete obj[Object.keys(obj)[0]].nextEvents // can use this to remove unneccesary info
-    //console.log(obj)
     for (const character of obj[Object.keys(obj)[0]].charactersInvolved) {
       const moodArray = obj[Object.keys(obj)[0]][character]["mood"];
       obj[Object.keys(obj)[0]][character].mood =
