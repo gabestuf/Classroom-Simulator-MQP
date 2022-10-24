@@ -1,7 +1,7 @@
 const STORYEVENTS = require("./STORYEVENTS.json");
 const getRandomKey = require("./js/scripts/objRandomKey");
 const getRandomArrayElement = require("./js/scripts/getRandomElement");
-const objToFile = require("./js/scripts/objToFile")
+const objToFile = require("./js/scripts/objToFile");
 
 const CONFIG = {
   howManyEvents: 15,
@@ -14,8 +14,8 @@ const CONFIG = {
     2. Semi Random Events, will chain events that point to next events using the nextEvents field
   */
   function: 2,
-  data: STORYEVENTS
-}
+  data: STORYEVENTS,
+};
 
 const randomEvents = (numOfEvents, json) => {
   let EventArray = [];
@@ -35,13 +35,13 @@ const randomEvents = (numOfEvents, json) => {
 const randomEventsNonReplace = (numOfEvents, json) => {
   let EventArray = [];
   let EventsToPullFrom = json;
-  const counter = numOfEvents
+  const counter = numOfEvents;
 
   // get a random key
 
   for (let i = 0; i < numOfEvents; i++) {
     if (counter == 0) {
-      return EventArray
+      return EventArray;
     }
     const key = getRandomKey(EventsToPullFrom);
     let obj = {};
@@ -53,18 +53,18 @@ const randomEventsNonReplace = (numOfEvents, json) => {
 };
 
 const semiRandomEvents = (numOfEvents, json) => {
-  let allEvents = json
+  let allEvents = json;
   let EventArray = [];
 
   const semiRandomEventsRecursive = (EventsToPullFrom) => {
-
-    if (EventArray.length < numOfEvents) { // While we have not hit max number of events
+    if (EventArray.length < numOfEvents) {
+      // While we have not hit max number of events
       // pick a random event from EventsToPullFrom
       const key = getRandomKey(EventsToPullFrom);
       const anEvent = EventsToPullFrom[key];
       let obj = {};
       obj[key] = anEvent;
-      // add this event to a new array 
+      // add this event to a new array
       EventArray.push(obj);
 
       // if this event has follow up events (nextEvents)
@@ -78,58 +78,56 @@ const semiRandomEvents = (numOfEvents, json) => {
           semiRandomEventsRecursive(nextEventsObj);
         }
       }
-      semiRandomEventsRecursive(allEvents)
+      semiRandomEventsRecursive(allEvents);
     }
   };
   semiRandomEventsRecursive(allEvents);
 
-
   return EventArray;
 };
 
-
-
-
 const generateEventList = (config) => {
-
-  let eventList = []
+  let eventList = [];
 
   switch (config.function) {
     case 0:
-      eventList = randomEvents(config.howManyEvents, config.data)
+      eventList = randomEvents(config.howManyEvents, config.data);
       break;
     case 1:
-      eventList = randomEventsNonReplace(config.howManyEvents, config.data)
+      eventList = randomEventsNonReplace(config.howManyEvents, config.data);
       break;
     case 2:
-      eventList = semiRandomEvents(config.howManyEvents, config.data)
+      eventList = semiRandomEvents(config.howManyEvents, config.data);
       break;
     default:
-      console.error("NOT A VALID FUNCTION, check config")
+      console.error("NOT A VALID FUNCTION, check config");
       break;
   }
   //console.log(JSON.stringify(eventList))
   //console.log("=====================================================")
-  //Pick random mood, position, description for each event 
+  //Pick random mood, position, description for each event
   for (const obj of eventList) {
     // delete obj[Object.keys(obj)[0]].nextEvents // can use this to remove unneccesary info
     //console.log(obj)
     for (const character of obj[Object.keys(obj)[0]].charactersInvolved) {
-      const moodArray = obj[Object.keys(obj)[0]][character]['mood']
-      obj[Object.keys(obj)[0]][character].mood = getRandomArrayElement(moodArray)
-      const positionArray = obj[Object.keys(obj)[0]][character]['position']
-      obj[Object.keys(obj)[0]][character].position = getRandomArrayElement(positionArray)
-      const descriptionArray = obj[Object.keys(obj)[0]][character]['description']
-      obj[Object.keys(obj)[0]][character].description = getRandomArrayElement(descriptionArray)
+      const moodArray = obj[Object.keys(obj)[0]][character]["mood"];
+      obj[Object.keys(obj)[0]][character].mood =
+        getRandomArrayElement(moodArray);
+      const positionArray = obj[Object.keys(obj)[0]][character]["position"];
+      obj[Object.keys(obj)[0]][character].position =
+        getRandomArrayElement(positionArray);
+      const descriptionArray =
+        obj[Object.keys(obj)[0]][character]["description"];
+      obj[Object.keys(obj)[0]][character].description =
+        getRandomArrayElement(descriptionArray);
     }
   }
-
   if (config.consoleLog) {
-    console.log(eventList)
+    console.log(eventList);
   }
   if (config.writeToFile) {
-    objToFile(eventList)
+    objToFile(eventList);
   }
-}
+};
 
-generateEventList(CONFIG)
+generateEventList(CONFIG);
