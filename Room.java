@@ -1,13 +1,14 @@
+import java.util.Properties;
+
 public class Room {
-    int defaultX = 10;
-    int defaultY = 10;
     int sizeX;
     int sizeY;
     private char[][] layout;
 
-    public Room(int sizeX, int sizeY) {
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
+    public Room(Properties config) {
+        this.sizeX = Integer.parseInt(config.getProperty("RoomSizeX"));
+        this.sizeY = Integer.parseInt(config.getProperty("RoomSizeY"));
+
         this.layout = loadDemoRoom();
     }
 
