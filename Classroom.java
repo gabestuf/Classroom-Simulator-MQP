@@ -1,4 +1,5 @@
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Properties;
 
@@ -7,36 +8,34 @@ public class Classroom {
     Room room;
     int roomSizeX;
     int roomSizeY;
+    Properties config;
+    ArrayList<Sprite> spriteList;
 
-    // init config
-    Properties CONFIG = new Properties();
-    final String configFilePath = "src/config.properties";
-
-
-    public Classroom ()  {
-        getConfig();
-        this.roomSizeX = Integer.parseInt(this.CONFIG.getProperty("RoomSizeX"));
-        this.roomSizeY = Integer.parseInt(this.CONFIG.getProperty("RoomSizeY"));
+    public Classroom (Properties config)  {
+        this.config = config;
+        this.roomSizeX = Integer.parseInt(config.getProperty("RoomSizeX"));
+        this.roomSizeY = Integer.parseInt(config.getProperty("RoomSizeY"));
+        this.spriteList = initSprites(Integer.parseInt(config.getProperty("numTeachers")), Integer.parseInt(config.getProperty("numStudents")));
         init();
 
     }
 
-    public void getConfig () {
-        try {
-            final FileInputStream propsInput = new FileInputStream(this.configFilePath);
-            this.CONFIG.load(propsInput);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+    public ArrayList<Sprite> initSprites(int numTeachers, int numStudents) {
+        // TODO make sprites w/ correct info
+        return new ArrayList<Sprite>();
+    }
+
+    public void addSprite () {
+        this.spriteList.add(new Sprite(this.config));
     }
 
     public void init() {
         // creates a new room for the classroom
-        this.room = new Room(this.roomSizeX,this.roomSizeY);
+        this.room = new Room(this.config);
 
     }
 
-    public void render() {
+    public void renderRoom() {
         // Might want to return this as a String if we need to print it as part of a log
         System.out.println("Render of Room: ");
         for(int i = 0; i < this.room.sizeX; i++) {
@@ -74,16 +73,13 @@ public class Classroom {
         }
         // pick a space from the indexes available
 
-        System.out.println(availSpaces);
         if (availSpaces.size() == 0) {
             System.out.println("NO locations for table");
             return;
         }
 
         int xCoord = availSpaces.get((int) Math.floor(Math.random() * availSpaces.size())) % this.roomSizeX;
-        int yCoord = (int) Math.floor(availSpaces.get((int) Math.floor(Math.random() * availSpaces.size())) / this.roomSizeY);
-        System.out.println(xCoord);
-        System.out.println(yCoord);
+        int yCoord = availSpaces.get((int) Math.floor(Math.random() * availSpaces.size())) / this.roomSizeY; // integer division!! floors naturally
         this.room.addTable(xCoord, yCoord);
     }
 
