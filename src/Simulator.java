@@ -1,19 +1,17 @@
-import java.io.FileInputStream;
-import java.util.Properties;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Simulator {
 
     public static void main (String[] args) {
 
         //Init Config
-        // init config
-        Properties CONFIG = new Properties();
-        try {
-            final FileInputStream propsInput = new FileInputStream("src/config.properties");
-            CONFIG.load(propsInput);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+
+        JSONReader jsonReader = new JSONReader();
+        JSONObject STORYEVENTS = jsonReader.readJSONFile("res/STORYEVENTS.json");
+        JSONObject CONFIG = jsonReader.readJSONFile("res/CONFIG.json");
+
+        CONFIG.append("STORYEVENTS", STORYEVENTS);
 
         // Init Classroom
         Classroom classroom = new Classroom(CONFIG);
@@ -36,5 +34,4 @@ public class Simulator {
 
     }
 }
-
 
