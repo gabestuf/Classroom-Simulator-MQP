@@ -1,5 +1,8 @@
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class Room {
     int sizeX;
     int sizeY;
@@ -31,44 +34,107 @@ public class Room {
         return this.layout;
     }
 
-    public void addTable(int x, int y){ // where x & y is the center of a 3x3 table
-        // TODO add collision detection to this function, also out of bounds detection
+    public boolean addTable(int x, int y){ // where x & y is the center of a 3x3 table
         char[][] temp = this.layout;
+
+        // Check for collision
+        for(int i = x-1; i <= x+1; i++) {
+            for(int j = y-1; j <= y+1; j++) {
+                if (this.layout[i][j] != 'x') {
+                    return false;
+                }
+            }
+        }
+
+        // Set coords to table
         for(int i = x-1; i <= x+1; i++) {
             for(int j = y-1; j <= y+1; j++) {
                 temp[i][j] = 't';
             }
         }
         this.layout = temp;
+        return true;
     }
 
-    public void addChair(int x, int y){
+    public boolean addChair(int x, int y){
         // TODO out of bounds detection
         if(this.layout[x][y] == 'x'){
             this.layout[x][y] = 'c';
         }
         else {
             System.out.printf("Can't add Chair at: X:%d Y:%d \n", x, y);
+            return false;
         }
+        return true;
     }
 
-    public void addDoor(int x, int y){
+    public boolean addDoor(int x, int y){
         // TODO out of bounds detection
         if(this.layout[x][y] == 'w'){
             this.layout[x][y] = 'd';
+            return true;
         }
         else {
             System.out.printf("Can't add Door at: X:%d Y:%d \n", x, y);
+            return false;
         }
     }
 
-    public void addStudent(int x, int y){
+    public boolean addRug(int x, int y) {
+        if (this.layout[x][y] == 'x') {
+            this.layout[x][y] = 'r';
+            return true;
+        } else {
+            System.out.printf("Can't add Rug at: X:%d Y:%d \n", x, y);
+            return false;
+        }
+    }
+
+    public void addStudent(Sprite s){
         // TODO out of bounds detection, also this code is just copied from addDoor
-        if(this.layout[x][y] == 'w'){
-            this.layout[x][y] = 'd';
+        int x = s.posX;
+        int y = s.posY;
+        if (this.layout[x][y] == 'x') {
+            this.layout[x][y] = 'S';
         }
-        else {
-            System.out.printf("Can't add Door at: X:%d Y:%d \n", x, y);
+    }
+
+    public void addTeacher(Sprite t) {
+        int x = t.posX;
+        int y = t.posY;
+        if (this.layout[x][y] == 'x') {
+            this.layout[x][y] = 'T';
         }
+    }
+
+    public LinkedList<Integer> findFirstEmptySpace() {
+        LinkedList<Integer> arr = new LinkedList<>();
+        for(int x = 0; x < this.sizeX; x++) {
+            for (int y = 0; y < this.sizeY; y++) {
+                if (this.layout[x][y] == 'x') {
+                    arr.add(0,x);
+                    arr.add(1,y);
+                    return arr;
+                }
+            }
+        }
+        System.out.println("No empty spaces left :(");
+        return null;
+    }
+    public LinkedList<Integer> findRandomEmptySpace() {
+        LinkedList<LinkedList<Integer>> coordList = new LinkedList<>();
+        for(int x = 0; x < this.sizeX; x++) {
+            for (int y = 0; y < this.sizeY; y++) {
+                LinkedList<Integer> arr = new LinkedList<>();
+                if (this.layout[x][y] == 'x') {
+                    arr.add(0, x);
+                    arr.add(1, y);
+                    coordList.add(arr);
+                }
+            }
+        }
+        if (coordList.size() > 0) {return coordList.get((int) Math.floor(Math.random() * coordList.size()));}
+        System.out.println("No empty spaces left :(");
+        return null;
     }
 }

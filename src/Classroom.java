@@ -15,29 +15,44 @@ public class Classroom {
 
         this.roomSizeX = config.getInt("RoomSizeX");
         this.roomSizeY = config.getInt("RoomSizeY");
-
+        initRoom();
         this.spriteList = initSprites(config.getInt("numTeachers"), config.getInt("numStudents"));
 
-        init();
     }
 
     public ArrayList<Sprite> initSprites(int numTeachers, int numStudents) {
         ArrayList<Sprite> s = new ArrayList<>();
         // INIT TEACHERS
         for (int i = 0; i < numTeachers; i++) {
+            LinkedList<Integer> coords = this.room.findRandomEmptySpace(); // TODO Not sure how we want to init teacher and students
+
+            int x = coords.get(0);
+            int y = coords.get(1);
             JSONObject c = new JSONObject();
             c.put("role", 1); // 1 for teacher
             String id = "Teacher" + (i+1);
             c.put("id", id);
+            c.put("posX", x);
+            c.put("posY", y);
             s.add(new Sprite(c));
         }
         // INIT STUDENTS
         for (int i = 0; i < numStudents; i++) {
+            LinkedList<Integer> coords = this.room.findRandomEmptySpace();
+            int x = coords.get(0);
+            int y = coords.get(1);
             JSONObject c = new JSONObject();
             c.put("role", 0); // 0 for student
             String id = "Student" + (i+1);
             c.put("id", id);
+            c.put("posX", x);
+            c.put("posY", y);
             s.add(new Sprite(c));
+        }
+        // add sprites to Room
+        for (Sprite sprite : s) {
+            if (sprite.role == 0) this.room.addStudent(sprite);
+            if (sprite.role == 1) this.room.addTeacher(sprite);
         }
         return s;
     }
@@ -46,9 +61,23 @@ public class Classroom {
         this.spriteList.add(new Sprite(config));
     }
 
-    public void init() {
+    // TODO Potential bug, make sure rugs, chairs, etc have the same count in the room printout as in the config
+    public void initRoom() {
         // creates a new room for the classroom
         this.room = new Room(this.config);
+        // Adds tables, then rugs, then chairs
+        for (int i = 0; i < config.getInt("numTables"); i++) {
+            // if it fails to add a table, don't add more tables
+            if(!this.addTable()) break;
+        }
+        // rugs
+        for (int i = 0; i < config.getInt("numRugs"); i++) {
+            if(!this.addRug()) break;
+        }
+        // chairs
+        for (int i = 0; i < config.getInt("numChairs"); i++) {
+            if (!this.addChair()) break;
+        }
 
     }
 
@@ -64,25 +93,28 @@ public class Classroom {
         }
     }
 
-    public void addTable() {
-        LinkedList<Integer> availSpaces = new LinkedList<>();
+    public boolean addTable() {
+        LinkedList<LinkedList<Integer>> availSpaces = new LinkedList<>();
+
         Integer counter = 0;
         for (int x = 0; x < this.roomSizeX; x++) {
             for (int y = 0; y < this.roomSizeY; y++) {
+                LinkedList<Integer> coords = new LinkedList<>();
                 boolean spaceAvailable = true;
                 if (x >= 2 && x < this.roomSizeX - 2 && y >= 2 && y < this.roomSizeY - 2) { // out of bounds detection, also -2 because of walls and it's a 3x3 thing. If a 1x1, do -1 instead of 2 and no need for inner loops
                     // checks surrounding tiles
                     for (int x0 = x - 1; x0 <= x+1; x0++) {
                         for (int y0 = y - 1; y0 <= y+1; y0++) {
-
                             if (this.room.getLayout()[x0][y0] != 'x') {spaceAvailable = false;}
+                            coords.add(0, x);
+                            coords.add(1, y);
                         }
                     }
                 } else {
                     spaceAvailable = false;
                 }
                 if (spaceAvailable) {
-                    availSpaces.add(counter);
+                    availSpaces.add(coords);
                 }
                 counter++;
             }
@@ -91,26 +123,70 @@ public class Classroom {
 
         if (availSpaces.size() == 0) {
             System.out.println("NO locations for table");
-            return;
+            return false;
         }
 
-        int xCoord = availSpaces.get((int) Math.floor(Math.random() * availSpaces.size())) % this.roomSizeX;
-        int yCoord = availSpaces.get((int) Math.floor(Math.random() * availSpaces.size())) / this.roomSizeY; // integer division!! floors naturally
-        this.room.addTable(xCoord, yCoord);
+        LinkedList<Integer> coord = availSpaces.get((int) Math.floor(Math.random() * availSpaces.size()));
+        return this.room.addTable(coord.get(0), coord.get(1));
     }
 
-    public void addTable(int x, int y) {
-        this.room.addTable(x,y);
+    public boolean addTable(int x, int y) {
+        return this.room.addTable(x,y);
     }
 
-    public void addChair(int x,int y) { // TODO <- this for the other add functions
-        this.room.addChair(x,y);
+    public boolean addChair() {
+        LinkedList<LinkedList<Integer>> availSpaces = new LinkedList<>();
+
+        for (int x = 0; x < this.roomSizeX; x++) {
+            for (int y = 0; y < this.roomSizeY; y++) {
+                LinkedList<Integer> coords = new LinkedList<>();
+                boolean spaceAvailable = true;
+                if (x >= 1 && x < this.roomSizeX - 1 && y >= 1 && y < this.roomSizeY - 1) { // out of bounds detection, also -1 because of walls
+                    if (this.room.getLayout()[x][y] != 'x') {spaceAvailable = false;}
+                    coords.add(0, x);
+                    coords.add(1, y);
+                } else {
+                    spaceAvailable = false;
+                }
+                if (spaceAvailable) {
+                    availSpaces.add(coords);
+                }
+            }
+        }
+
+        LinkedList<Integer> coord = availSpaces.get((int) Math.floor(Math.random() * availSpaces.size()));
+        return this.room.addChair(coord.get(0), coord.get(1));
+    }
+
+    public boolean addRug() {
+        LinkedList<LinkedList<Integer>> availSpaces = new LinkedList<>();
+
+        for (int x = 0; x < this.roomSizeX; x++) {
+            for (int y = 0; y < this.roomSizeY; y++) {
+                LinkedList<Integer> coords = new LinkedList<>();
+                boolean spaceAvailable = true;
+                if (x >= 1 && x < this.roomSizeX - 1 && y >= 1 && y < this.roomSizeY - 1) { // out of bounds detection, also -2 because of walls and it's a 3x3 thing. If a 1x1, do -1 instead of 2 and no need for inner loops
+                    if (this.room.getLayout()[x][y] != 'x') {spaceAvailable = false;}
+                    coords.add(0, x);
+                    coords.add(1, y);
+                } else {
+                    spaceAvailable = false;
+                }
+                if (spaceAvailable) {
+                    availSpaces.add(coords);
+                }
+            }
+        }
+
+        LinkedList<Integer> coord = availSpaces.get((int) Math.floor(Math.random() * availSpaces.size()));
+        return this.room.addRug(coord.get(0), coord.get(1));
+    }
+
+    public boolean addChair(int x,int y) { // TODO <- this for the other add functions
+        return this.room.addChair(x,y);
     }
 
 
-    /*
-    *  Look at addTable() if wondering about collision handling
-    *
-    * */
+
 
 }

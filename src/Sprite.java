@@ -18,11 +18,14 @@ class Sprite {
         boolean isBusy = false;
         this.mood = "content";
         this.description = "idle";
+        this.posX = config.getInt("posX");
+        this.posY = config.getInt("posY");
     }
 
     public boolean setPosition(int x, int y) {
         try {
             if (x > 0 && x < config.getInt("RoomSizeX") && y > 0 && y < config.getInt("RoomSizeY")) {
+                // TODO collision detection, maybe needs to be done at a higher level
                 this.posX = x;
                 this.posY = y;
                 return true;
