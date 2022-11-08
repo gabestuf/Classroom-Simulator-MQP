@@ -46,10 +46,10 @@ func _generate_perimeter() -> void:
 				_tile_map.set_cell(x,y, 9)
 			else:
 				_tile_map.set_cell(x,y, 10)
-				_tile_map.set_cell(0,9, 4)
-				_tile_map.set_cell(11,9, 5)
-				_tile_map.set_cell(0,0, 6)
-				_tile_map.set_cell(11,0, 7)
+				_tile_map.set_cell(0,9, 12)
+				_tile_map.set_cell(11,9, 13)
+				_tile_map.set_cell(0,0, 14)
+				_tile_map.set_cell(11,0, 15)
 	for x in range(1, size.x - 1):
 		for y in [0, size.y-1]:
 			if y == 0:
@@ -63,6 +63,8 @@ func _generate_inner() -> void:
 			var cell = get_random_tile(ground_probability)
 			_tile_map.set_cell(x,y,11)
 			_tilemap2.set_cell(x,y,_pick_random_texture(Cell.OBSTACLE))
+			_tilemap2.set_cell(1,1,5)
+			_tilemap2.set_cell(10,1,5)
 
 func get_random_tile(probability: float) -> int:
 	return _pick_random_texture(Cell.GROUND) if _rng.randf() < probability else _pick_random_texture(Cell.OBSTACLE)
@@ -75,7 +77,7 @@ func _pick_random_texture(cell_type:int) -> int:
 		else:
 			interval = Vector2(3,3)
 	elif cell_type == Cell.GROUND:
-		interval = Vector2(2,2)
+			interval = Vector2(2,2)
 	elif cell_type == Cell.OBSTACLE:
-		interval = Vector2(0,3)
+			interval = Vector2(0,4)
 	return _rng.randi_range(interval.x, interval.y)

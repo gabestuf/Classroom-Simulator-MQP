@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/topleftcorner.png-28576e733a4d500cc1df6928d422593a.stex"
+path="res://.import/teacher_sprites_template.png-781c331a8f7571069293cf6654c26b25.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tilesets/topleftcorner.png"
-dest_files=[ "res://.import/topleftcorner.png-28576e733a4d500cc1df6928d422593a.stex" ]
+source_file="res://Tilesets/teacher_sprites_template.png"
+dest_files=[ "res://.import/teacher_sprites_template.png-781c331a8f7571069293cf6654c26b25.stex" ]
 
 [params]
 
