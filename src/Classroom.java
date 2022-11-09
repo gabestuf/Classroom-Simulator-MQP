@@ -199,25 +199,24 @@ public class Classroom {
 	}
 	
     //render helper function for rendering individual frames 
-	public void renderHelper(Room a) {
-		for(int i = 0; i < a.sizeX; i++) {
-			String row = ""; 
-			for(int j = 0; j < a.sizeY; j++) {
-				row = row + a.getRoomLayout()[i][j] + " ";
-			}
-			System.out.println(row);
+    public void renderHelper(Room a) {
+	for(int i = 0; i < a.sizeX; i++) {
+		String row = ""; 
+		for(int j = 0; j < a.sizeY; j++) {
+			row = row + a.getRoomLayout()[i][j] + " ";
 		}
+		System.out.println(row);
 	}
+    }
 	
     //renders a simulation consisting of multiple frames
-	public void renderSimulation(Event a) {
-		int frameCount = 0;
-		for(Room r: a.getFrames()) {
-			System.out.printf("Render of Room, Frame: %d \n", frameCount);
-			renderHelper(r);
-			frameCount++;
-		}
+    public void renderSimulation(Event a) {
+	int frameCount = 0;
+	for(Room r: a.getFrames()) {
+		System.out.printf("Render of Room, Frame: %d \n", frameCount);
+		renderHelper(r);
+		frameCount++;
 	}
-
-
+    }
+	
 }
