@@ -14,6 +14,19 @@ public class Room {
 
         this.layout = loadDemoRoom();
     }
+    
+    public Room(int sizex, int sizey) {
+		this.sizeX = sizex;
+		this.sizeY = sizey;
+		this.layout = loadDemoRoom();
+	}
+	
+	//Re-write this contructor as it will return errors given an empty list 
+	public Room(char[][] room) {
+		this.sizeX = room.length;
+		this.sizeY = room[0].length;
+		this.layout = loadRoom(room);
+	}
 
     public char[][] loadDemoRoom() {
         char[][] temp = new char[10][10];
@@ -30,6 +43,16 @@ public class Room {
         return temp;
     }
 
+    public char[][] loadRoom(char[][] r) {
+		char[][] temp = new char[sizeX][sizeY];
+		for(int i = 0; i < sizeX; i++) { 
+			for(int j = 0; j < sizeY; j++) {
+				temp[i][j] = r[i][j];
+			}
+		}
+		return temp;
+	}
+    
     public char[][] getLayout(){
         return this.layout;
     }
@@ -137,4 +160,13 @@ public class Room {
         System.out.println("No empty spaces left :(");
         return null;
     }
+    
+    public void moveObject(int x1, int y1, int x2, int y2){
+		char[][] temp = getRoomLayout();
+		char obj = temp[y1][x1];
+		//System.out.println(obj);
+		temp[y2][x2] = obj;
+		temp[y1][x1] = 'x';
+		//System.out.println(obj);
+	}
 }
