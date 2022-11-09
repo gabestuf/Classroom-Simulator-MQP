@@ -192,7 +192,7 @@ public class Classroom {
 		for(int i = 0; i < a.sizeX; i++) {
 			String row = ""; 
 			for(int j = 0; j < a.sizeY; j++) {
-				row = row + a.getRoomLayout()[i][j] + " ";
+				row = row + a.getLayout()[i][j] + " ";
 			}
 			System.out.println(row);
 		}
@@ -203,7 +203,7 @@ public class Classroom {
 	for(int i = 0; i < a.sizeX; i++) {
 		String row = ""; 
 		for(int j = 0; j < a.sizeY; j++) {
-			row = row + a.getRoomLayout()[i][j] + " ";
+			row = row + a.getLayout()[i][j] + " ";
 		}
 		System.out.println(row);
 	}
