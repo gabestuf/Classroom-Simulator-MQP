@@ -162,7 +162,7 @@ public class Room {
     }
     
     public void moveObject(int x1, int y1, int x2, int y2){
-		char[][] temp = getRoomLayout();
+		char[][] temp = getLayout();
 		char obj = temp[y1][x1];
 		//System.out.println(obj);
 		temp[y2][x2] = obj;

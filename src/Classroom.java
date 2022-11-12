@@ -17,7 +17,6 @@ public class Classroom {
         this.roomSizeY = config.getInt("RoomSizeY");
         initRoom();
         this.spriteList = initSprites(config.getInt("numTeachers"), config.getInt("numStudents"));
-
     }
 
     public ArrayList<Sprite> initSprites(int numTeachers, int numStudents) {
