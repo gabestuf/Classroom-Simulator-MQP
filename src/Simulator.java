@@ -17,6 +17,7 @@ public class Simulator {
         // Creates random room with elements from the CONFIG.json
         Classroom classroom = new Classroom(CONFIG);
 
+        classroom.jsonToEvent("studentMakesMess");
         // TODO write a function that adds a chair randomly next to a table
 
         // And render like this

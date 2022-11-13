@@ -4,11 +4,12 @@ import java.util.LinkedList;
 
 public class Classroom {
 
-    Room room;
+    Room room; // Holds static room object data
     int roomSizeX;
     int roomSizeY;
     JSONObject config;
     ArrayList<Sprite> spriteList;
+    ArrayList<Event> allEvents;
 
     public Classroom (JSONObject config)  {
         this.config = config;
@@ -48,11 +49,6 @@ public class Classroom {
             c.put("posY", y);
             s.add(new Sprite(c));
         }
-        // add sprites to Room
-        for (Sprite sprite : s) {
-            if (sprite.role == 0) this.room.addStudent(sprite);
-            if (sprite.role == 1) this.room.addTeacher(sprite);
-        }
         return s;
     }
 
@@ -60,7 +56,6 @@ public class Classroom {
         this.spriteList.add(new Sprite(config));
     }
 
-    // TODO Potential bug, make sure rugs, chairs, etc have the same count in the room printout as in the config
     public void initRoom() {
         // creates a new room for the classroom
         this.room = new Room(this.config);
@@ -129,10 +124,6 @@ public class Classroom {
         return this.room.addTable(coord.get(0), coord.get(1));
     }
 
-    public boolean addTable(int x, int y) {
-        return this.room.addTable(x,y);
-    }
-
     public boolean addChair() {
         LinkedList<LinkedList<Integer>> availSpaces = new LinkedList<>();
 
@@ -181,41 +172,49 @@ public class Classroom {
         return this.room.addRug(coord.get(0), coord.get(1));
     }
 
-    public boolean addChair(int x,int y) { // TODO <- this for the other add functions
-        return this.room.addChair(x,y);
+    //renders a room with println in console
+    public void render(Room a) {
+        System.out.println("Render of Room: ");
+        for(int i = 0; i < a.sizeX; i++) {
+            String row = "";
+            for(int j = 0; j < a.sizeY; j++) {
+                row = row + a.getLayout()[i][j] + " ";
+            }
+            System.out.println(row);
+        }
     }
 
-    //renders a room with println in console 
-    public void render(Room a) {
-		System.out.println("Render of Room: ");
-		for(int i = 0; i < a.sizeX; i++) {
-			String row = ""; 
-			for(int j = 0; j < a.sizeY; j++) {
-				row = row + a.getLayout()[i][j] + " ";
-			}
-			System.out.println(row);
-		}
-	}
-	
-    //render helper function for rendering individual frames 
-    public void renderHelper(Room a) {
-	for(int i = 0; i < a.sizeX; i++) {
-		String row = ""; 
-		for(int j = 0; j < a.sizeY; j++) {
-			row = row + a.getLayout()[i][j] + " ";
-		}
-		System.out.println(row);
-	}
+    public void generateEventList() {
+        int numEvents = this.config.getInt("numEvents");
+        JSONObject allEventsJSON = this.config.getJSONArray("STORYEVENTS").getJSONObject(0);
+        ArrayList<Event> eventList;
+
+
     }
-	
-    //renders a simulation consisting of multiple frames
-    public void renderSimulation(Event a) {
-	int frameCount = 0;
-	for(Room r: a.getFrames()) {
-		System.out.printf("Render of Room, Frame: %d \n", frameCount);
-		renderHelper(r);
-		frameCount++;
-	}
+//    public void recursiveEvents(JSONObject eventsToPullFrom, ArrayList<Event> eventList, int numEvents) {
+//        // Check to make sure eventList is not full, then pick a random event from eventsToPullFrom
+//        if (eventList.size() < numEvents) {
+//            eventsToPullFrom
+//        }
+//    }
+
+    public void addRandomEvent() {
+
+        for (String key : this.config.getJSONArray("STORYEVENTS").getJSONObject(0).keySet()) {
+            System.out.println(key);
+        }
     }
-	
+
+    public Event jsonToEvent(String eventName) {
+        // JSONObject storyevents = this.config.getJSONArray("STORYEVENTS").getJSONObject(0);
+        JSONObject event = this.config.getJSONArray("STORYEVENTS").getJSONObject(0).getJSONObject(eventName);
+        return new Event(event, this.spriteList, this.config.getInt("numStudents"), this.config.getInt("numTeachers"));
+//        for(String key : storyevents.keySet()) {
+////          System.out.println(storyevents.getJSONObject(key));
+//            Event e = new Event(storyevents.getJSONObject(key), this.spriteList, this.config.getInt("numStudents"), this.config.getInt("numTeachers"));
+//
+//        }
+
+    }
+
 }

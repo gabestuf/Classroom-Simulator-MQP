@@ -68,7 +68,6 @@ public class Room {
                 }
             }
         }
-
         // Set coords to table
         for(int i = x-1; i <= x+1; i++) {
             for(int j = y-1; j <= y+1; j++) {
@@ -113,23 +112,6 @@ public class Room {
         }
     }
 
-    public void addStudent(Sprite s){
-        // TODO out of bounds detection, also this code is just copied from addDoor
-        int x = s.posX;
-        int y = s.posY;
-        if (this.layout[x][y] == 'x') {
-            this.layout[x][y] = 'S';
-        }
-    }
-
-    public void addTeacher(Sprite t) {
-        int x = t.posX;
-        int y = t.posY;
-        if (this.layout[x][y] == 'x') {
-            this.layout[x][y] = 'T';
-        }
-    }
-
     public LinkedList<Integer> findFirstEmptySpace() {
         LinkedList<Integer> arr = new LinkedList<>();
         for(int x = 0; x < this.sizeX; x++) {
@@ -160,7 +142,7 @@ public class Room {
         System.out.println("No empty spaces left :(");
         return null;
     }
-    
+
     public void moveObject(int x1, int y1, int x2, int y2){
 		char[][] temp = getLayout();
 		char obj = temp[y1][x1];
