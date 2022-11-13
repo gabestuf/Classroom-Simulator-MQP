@@ -2,5 +2,8 @@
   "RoomSizeX": 10,
   "RoomSizeY": 10,
   "numStudents": 6,
-  "numTeachers": 1
+  "numTeachers": 1,
+  "numTables": 1,
+  "numChairs": 4,
+  "numRugs": 1
 }
