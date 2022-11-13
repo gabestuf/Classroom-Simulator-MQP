@@ -46,7 +46,7 @@
       "description": ["tells students to calm down", "tells students to stop"]
     },
     "importance": [5, 10],
-    "nextEvents": ["Student2ecomesIdle"]
+    "nextEvents": ["StudentBecomesIdle"]
   },
   "studentsGather": {
     "name": "studentsGather",
@@ -59,8 +59,8 @@
     "importance": [3, 9],
     "nextEvents": []
   },
-  "Student2ecomesIdle": {
-    "name": "Student2ecomesIdle",
+  "StudentBecomesIdle": {
+    "name": "StudentBecomesIdle",
     "charactersInvolved": ["Student1"],
     "Student1": {
       "mood": ["calm"],
@@ -98,7 +98,7 @@
       "position": ["corner"],
       "description": ["student get put in corner"]
     },
-    "nextEvents": ["Student2ecomesIdle", "studentsGather"]
+    "nextEvents": ["StudentBecomesIdle", "studentsGather"]
   },
   "studentHappy": {
     "name": "studentHappy",
