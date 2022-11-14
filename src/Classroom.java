@@ -9,7 +9,7 @@ public class Classroom {
     int roomSizeY;
     JSONObject config;
     ArrayList<Sprite> spriteList;
-    ArrayList<Event> allEvents;
+    ArrayList<Event> allEvents = new ArrayList<>();
 
     public Classroom (JSONObject config)  {
         this.config = config;
