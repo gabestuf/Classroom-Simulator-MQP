@@ -208,7 +208,7 @@ public class Classroom {
     public Event jsonToEvent(String eventName) {
         // JSONObject storyevents = this.config.getJSONArray("STORYEVENTS").getJSONObject(0);
         JSONObject event = this.config.getJSONArray("STORYEVENTS").getJSONObject(0).getJSONObject(eventName);
-        return new Event(event, this.spriteList, this.config.getInt("numStudents"), this.config.getInt("numTeachers"));
+        return new Event(event, this.spriteList, this.config.getInt("numStudents"), this.config.getInt("numTeachers"), this.room);
 //        for(String key : storyevents.keySet()) {
 ////          System.out.println(storyevents.getJSONObject(key));
 //            Event e = new Event(storyevents.getJSONObject(key), this.spriteList, this.config.getInt("numStudents"), this.config.getInt("numTeachers"));
