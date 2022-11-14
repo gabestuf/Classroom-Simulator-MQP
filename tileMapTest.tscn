@@ -701,7 +701,7 @@ format = 1
 position = Vector2( 80, 48 )
 frames = SubResource( 27 )
 animation = "Student"
-frame = 15
+frame = 23
 speed_scale = 0.05
 playing = true
 
