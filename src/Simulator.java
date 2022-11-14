@@ -14,14 +14,31 @@ public class Simulator {
         CONFIG.append("STORYEVENTS", STORYEVENTS);
 
         // Init Classroom
-        // Creates random room with elements from the CONFIG.json
-        Classroom classroom = new Classroom(CONFIG);
+        // Creates random room with elements from the CONFIG.json and also storey events json
+
+        Classroom classroom = new Classroom(CONFIG,STORYEVENTS);
+
+        // call generate event list to fill the Event list inside class room
+        classroom.generateEventList();
+
+        //Create a log class with class room instance
+        Log log = new Log(classroom);
+        // get hte json object out of classroom object.
+        JSONObject jsonObj = log.getJSONFromClassRoom();
+        System.out.println("Below is the json generated \n");
+
+        //print the json object tot he console in string format.
+        System.out.println(jsonObj.toString());
+        System.out.println();
 
         classroom.jsonToEvent("studentMakesMess");
         // TODO write a function that adds a chair randomly next to a table
 
+
         // And render like this
         classroom.renderRoom();
+
+
 
     }
 }
