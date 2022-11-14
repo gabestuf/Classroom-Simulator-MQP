@@ -701,14 +701,14 @@ format = 1
 position = Vector2( 80, 48 )
 frames = SubResource( 27 )
 animation = "Student"
-frame = 16
-speed_scale = 0.5
+frame = 15
+speed_scale = 0.05
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
 position = Vector2( 240, 48 )
 frames = SubResource( 76 )
 animation = "Teacher"
-frame = 9
+frame = 16
 speed_scale = 0.75
 playing = true
