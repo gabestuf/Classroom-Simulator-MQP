@@ -10,11 +10,9 @@ public class Log {
     public Classroom classRoom;
 
     public Log(Classroom cr) {
-        this.STORYEVENTS = cr.STORYEVENTS;
-        classRoom = cr;
+        this.STORYEVENTS = cr.config.getJSONArray("STORYEVENTS").getJSONObject(0);
+        this.classRoom = cr;
     }
-
-
 
     public void processStoryEvents() {
         System.out.println("STORYEVENTS processing start \n");
