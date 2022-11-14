@@ -14,8 +14,10 @@ public class Event{
 	ArrayList<Sprite> activeSpriteList = new ArrayList<>();
 	int numStudents;
 	int numTeachers;
+	Room room;
 
-	public Event(JSONObject jsonEvent, ArrayList<Sprite> spriteList, int numStudents, int numTeachers) {
+	public Event(JSONObject jsonEvent, ArrayList<Sprite> spriteList, int numStudents, int numTeachers, Room r) {
+		this.room = r;
 		this.name = jsonEvent.getString("name");
 		this.charactersInvolved = jsonStringCharsInvolvedArray(jsonEvent.getJSONArray("charactersInvolved"));
 		this.spriteList = spriteList;
@@ -54,6 +56,7 @@ public class Event{
 			System.err.printf("Not enough students for this event: %s", this.name);
 			return;
 		}
+
 		// add a random student and teacher id of the student / teacher that will be active in this event.
 		ArrayList<Integer> sidList = new ArrayList<>();
 		ArrayList<Integer> tidList = new ArrayList<>();
@@ -73,10 +76,46 @@ public class Event{
 		}
 
 		System.out.println(this.name + this.activeSpriteList);
-
 	}
+
 	public void createFrames() {
 		setCharacters();
   		// TODO update sprite locations
+
+
+	}
+
+	//
+	public void moveSprite(Sprite s, int finalX, int finalY) {
+		// taking sprites current position,
+		// update coordinates up to (+1,+1) or (-1, -1)
+		
+		// s is a sprite. posX and posY are it's current position
+		s.posX = 0;
+		s.posY = 0;
+
+		// finalX and finalY is the final x,y coordinates 
+		finalX = 2;
+		finalY = 2;
+
+		int updatedX = 0;
+		if ( finalX > s.posX) {
+			updatedX = s.posX + 1;
+		}
+		if ( finalX < s.posX) {
+			updatedX = s.posX - 1;
+		}
+		int updatedY = s.posY + 1;
+
+		// COLLISION
+		if (this.room.getLayout()[updatedX][updatedY] == 'x') { // Check if the position is valid 
+
+		} else { // This position is NOT valid, come up with a way to search nearby positions for an empty square. 
+			
+		}
+
+		// OUTPUT
+		s.posX = 1;
+		s.posY = 1;
 	}
 }
