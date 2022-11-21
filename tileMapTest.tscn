@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://tileMapTest.gd" type="Script" id=1]
 [ext_resource path="res://TileSetPictures/window.png" type="Texture" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Tilesets/table.png" type="Texture" id=16]
 [ext_resource path="res://Tilesets/student_sprite_template.png" type="Texture" id=17]
 [ext_resource path="res://Tilesets/teacher_sprites_template.png" type="Texture" id=18]
+[ext_resource path="res://Tilesets/RyanSprite.png" type="Texture" id=19]
 
 [sub_resource type="TileSet" id=1]
 0/name = "window.png 0"
@@ -684,6 +685,62 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="AtlasTexture" id=101]
+atlas = ExtResource( 19 )
+region = Rect2( 9, 10, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=102]
+atlas = ExtResource( 19 )
+region = Rect2( 31, 10, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=103]
+atlas = ExtResource( 19 )
+region = Rect2( 53, 10, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=104]
+atlas = ExtResource( 19 )
+region = Rect2( 75, 10, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=105]
+atlas = ExtResource( 19 )
+region = Rect2( 9, 42, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=106]
+atlas = ExtResource( 19 )
+region = Rect2( 31, 42, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=107]
+atlas = ExtResource( 19 )
+region = Rect2( 53, 42, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=108]
+atlas = ExtResource( 19 )
+region = Rect2( 75, 42, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=109]
+atlas = ExtResource( 19 )
+region = Rect2( 9, 74, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=110]
+atlas = ExtResource( 19 )
+region = Rect2( 31, 74, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=111]
+atlas = ExtResource( 19 )
+region = Rect2( 53, 74, 22, 32 )
+
+[sub_resource type="AtlasTexture" id=112]
+atlas = ExtResource( 19 )
+region = Rect2( 75, 74, 22, 32 )
+
+[sub_resource type="SpriteFrames" id=113]
+animations = [ {
+"frames": [ SubResource( 101 ), SubResource( 102 ), SubResource( 103 ), SubResource( 104 ), SubResource( 105 ), SubResource( 106 ), SubResource( 107 ), SubResource( 108 ), SubResource( 109 ), SubResource( 110 ), SubResource( 111 ), SubResource( 112 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
 [node name="TestWorld" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -701,7 +758,7 @@ format = 1
 position = Vector2( 80, 48 )
 frames = SubResource( 27 )
 animation = "Student"
-frame = 19
+frame = 6
 speed_scale = 0.05
 playing = true
 
@@ -709,6 +766,12 @@ playing = true
 position = Vector2( 240, 48 )
 frames = SubResource( 76 )
 animation = "Teacher"
-frame = 15
+frame = 13
 speed_scale = 0.75
+playing = true
+
+[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
+position = Vector2( 79, 109 )
+frames = SubResource( 113 )
+frame = 5
 playing = true
