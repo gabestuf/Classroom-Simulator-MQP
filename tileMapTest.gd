@@ -13,7 +13,9 @@ enum Cell {
 	OUTER
 }
 
-export var inner_size := Vector2(10,8)
+var tiles = [["w", "w", "w", "w", "w", "w", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "r", "r", "c", "x", "x", "w"], ["w", "r", "r", "x", "c", "x", "w"], ["w", "x", "x", "x", "x", "x", "w"], ["w", "w", "w", "w", "w", "w", "w"]]
+#for now hardcoding these, will eventually use x and y from json file
+export var inner_size := Vector2(6,5)
 export var perimiter_size := Vector2(1,1)
 export(float, 0, 1) var ground_probability := 0.1
 export(float, 0, 1) var window_probability := 0.2
@@ -46,25 +48,34 @@ func _generate_perimeter() -> void:
 				_tile_map.set_cell(x,y, 9)
 			else:
 				_tile_map.set_cell(x,y, 10)
-				_tile_map.set_cell(0,9, 12)
-				_tile_map.set_cell(11,9, 13)
-				_tile_map.set_cell(0,0, 14)
-				_tile_map.set_cell(11,0, 15)
 	for x in range(1, size.x - 1):
 		for y in [0, size.y-1]:
 			if y == 0:
 				_tile_map.set_cell(x,y, _pick_random_texture(Cell.OUTER))
 			else:
 				_tile_map.set_cell(x,y, 8)
+	#again may not want these hardcoded in the future but for now it's fine
+	_tile_map.set_cell(0,6, 12)
+	_tile_map.set_cell(7,6, 13)
+	_tile_map.set_cell(0,0, 14)
+	_tile_map.set_cell(7,0, 15)
+	
 
 func _generate_inner() -> void:
+	var tile = null
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
-			var cell = get_random_tile(ground_probability)
+			#set the wood floor on the bottom of the entire inner section
 			_tile_map.set_cell(x,y,11)
-			_tilemap2.set_cell(x,y,_pick_random_texture(Cell.OBSTACLE))
-			_tilemap2.set_cell(1,1,5)
-			_tilemap2.set_cell(10,1,5)
+			#set the "obstacles" above it
+			tile = tiles[x][y]
+			match tile:
+				"x": _tilemap2.set_cell(x, y, 7)
+				"t": _tilemap2.set_cell(x, y, 4)
+				"r": _tilemap2.set_cell(x, y, 3)
+				"c": _tilemap2.set_cell(x, y, 1)
+				_: print("idk")
+
 
 func get_random_tile(probability: float) -> int:
 	return _pick_random_texture(Cell.GROUND) if _rng.randf() < probability else _pick_random_texture(Cell.OBSTACLE)
