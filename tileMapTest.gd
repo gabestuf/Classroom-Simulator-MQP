@@ -22,10 +22,12 @@ const CONFIGJSON = {
 
 #not sure what the acual code is but this is what i did:
 #w = wall
-#x = sprite
+#x = floor
 #t = table
 #r = rug
 #c = chair
+#d = door
+#wi = window
 var tiles = [["w", "w", "w", "w", "w", "w", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "r", "r", "c", "x", "x", "w"], ["w", "r", "r", "x", "c", "x", "w"], ["w", "x", "x", "x", "x", "x", "w"], ["w", "w", "w", "w", "w", "w", "w"]]
 #for now hardcoding these, will eventually use x and y from json file
 export var inner_size := Vector2(6,5)
@@ -87,11 +89,12 @@ func _generate_inner() -> void:
 			#set the "obstacles" above it
 			tile = tiles[x][y]
 			match tile:
-				"x": _tilemap2.set_cell(x, y, 7)
+				#x will be a transparent tile eventually, overlayed over the floor
+				#"x": _tilemap2.set_cell(x, y, 7)
 				"t": _tilemap2.set_cell(x, y, 4)
 				"r": _tilemap2.set_cell(x, y, 3)
 				"c": _tilemap2.set_cell(x, y, 1)
-				_: print("idk")
+				_: print("a perimeter block I think")
 
 
 func get_random_tile(probability: float) -> int:
@@ -109,8 +112,8 @@ func _pick_random_texture(cell_type:int) -> int:
 	elif cell_type == Cell.OBSTACLE:
 			interval = Vector2(0,4)
 	return _rng.randi_range(interval.x, interval.y)
-	
-	
+
+
 # Navigation Test
 onready var nav_2d : Navigation2D = $Navigation2D
 onready var line_2d : Line2D = $Line2D
