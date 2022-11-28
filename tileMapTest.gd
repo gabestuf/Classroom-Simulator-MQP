@@ -13,6 +13,12 @@ enum Cell {
 	OUTER
 }
 
+#not sure what the acual code is but this is what i did:
+#w = wall
+#x = sprite
+#t = table
+#r = rug
+#c = chair
 var tiles = [["w", "w", "w", "w", "w", "w", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "r", "r", "c", "x", "x", "w"], ["w", "r", "r", "x", "c", "x", "w"], ["w", "x", "x", "x", "x", "x", "w"], ["w", "w", "w", "w", "w", "w", "w"]]
 #for now hardcoding these, will eventually use x and y from json file
 export var inner_size := Vector2(6,5)
