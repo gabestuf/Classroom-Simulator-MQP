@@ -4,13 +4,20 @@ class_name TestWorld
 signal started
 signal finished
 
-onready var _tile_map : TileMap = $BorderFloorMap
-onready var _tilemap2 : TileMap = $ObjectObstaclesMap
+onready var _tile_map : TileMap = $Navigation2D/BorderFloorMap
+onready var _tilemap2 : TileMap = $Navigation2D/ObjectObstaclesMap
 
 enum Cell {
 	OBSTACLE
 	GROUND
 	OUTER
+}
+# TODO import json
+# https://www.youtube.com/watch?v=L9Zekkb4ZXc&ab_channel=johnnygossdev
+# example json
+const CONFIGJSON = {
+	"RoomSizeX": 10,
+	"RoomSizeY": 8,
 }
 
 #not sure what the acual code is but this is what i did:
@@ -23,7 +30,7 @@ var tiles = [["w", "w", "w", "w", "w", "w", "w"], ["w", "x", "t", "t", "t", "x",
 #for now hardcoding these, will eventually use x and y from json file
 export var inner_size := Vector2(6,5)
 export var perimiter_size := Vector2(1,1)
-export(float, 0, 1) var ground_probability := 0.1
+export(float, 0, 1) var ground_probability := 0.9
 export(float, 0, 1) var window_probability := 0.2
 
 var size = inner_size + 2 * perimiter_size
@@ -54,6 +61,10 @@ func _generate_perimeter() -> void:
 				_tile_map.set_cell(x,y, 9)
 			else:
 				_tile_map.set_cell(x,y, 10)
+				_tile_map.set_cell(0,9, 12) # what do these 4 set_cells do? - Gabe
+				_tile_map.set_cell(11,9, 13)
+				_tile_map.set_cell(0,0, 14)
+				_tile_map.set_cell(11,0, 15)
 	for x in range(1, size.x - 1):
 		for y in [0, size.y-1]:
 			if y == 0:
@@ -98,3 +109,26 @@ func _pick_random_texture(cell_type:int) -> int:
 	elif cell_type == Cell.OBSTACLE:
 			interval = Vector2(0,4)
 	return _rng.randi_range(interval.x, interval.y)
+	
+	
+# Navigation Test
+onready var nav_2d : Navigation2D = $Navigation2D
+onready var line_2d : Line2D = $Line2D
+onready var character : AnimatedSprite = $AnimatedSprite5
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Only run this function if event is left click
+	if not event is InputEventMouseButton:
+		return
+	if event.button_index != BUTTON_LEFT or not event.pressed:
+		return
+	
+	# get mouse position
+	var new_path : = nav_2d.get_simple_path(character.global_position, event.position)
+	print(event.global_position)
+	line_2d.points = new_path
+	character.path = new_path 
+	
+	
+	
+	
