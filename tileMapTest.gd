@@ -6,6 +6,14 @@ signal finished
 
 onready var _tile_map : TileMap = $BorderFloorMap
 onready var _tilemap2 : TileMap = $ObjectObstaclesMap
+onready var AS1: AnimatedSprite = $AnimatedSprite
+onready var AS2: AnimatedSprite = $AnimatedSprite2
+onready var AS3: AnimatedSprite = $AnimatedSprite3
+onready var AS4: AnimatedSprite = $AnimatedSprite4
+onready var AS5: AnimatedSprite = $AnimatedSprite5
+onready var AS6: AnimatedSprite = $AnimatedSprite6
+onready var AS7: AnimatedSprite = $AnimatedSprite7
+onready var AS8: AnimatedSprite = $AnimatedSprite8
 
 enum Cell {
 	OBSTACLE
@@ -13,14 +21,29 @@ enum Cell {
 	OUTER
 }
 
+export (String, FILE, "*.json") var file_path : String
 export var inner_size := Vector2(10,8)
 export var perimiter_size := Vector2(1,1)
 export(float, 0, 1) var ground_probability := 0.1
 export(float, 0, 1) var window_probability := 0.2
+export(float, 0, 1) var table_probability := 0.2
+export(float, 0, 1) var rug_probability := 0.8
 
 var size = inner_size + 2 * perimiter_size
 
 var _rng = RandomNumberGenerator.new()
+
+#func load_json(file_json) -> Dictionary:
+#	"""Parses a JSON File and returns it as a dictionary."""
+#
+#	var file = File.new()
+#	assert file.file_exists(file_json)
+#	file.open(file_json, file.READ)
+
+var tilemapArr = ["w", "w", "w", "w", "w", "w", "w", "w", "x", "t", "t", "t", "x", "w", "w", "x", "t", "t", "t", "x", "w", "w", "x", "t", "t", "t", "x", "w", "w", "r", "r", "c", "x", "x", "w", "w", "r", "r", "x", "c", "x", "w", "w", "x", "x", "x", "x", "x", "w", "w", "w", "w", "w", "w", "w", "w"]
+
+func tileGenerate() -> void:
+	print(tilemapArr[1])
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,6 +60,8 @@ func generate() -> void:
 	emit_signal("started")
 	_generate_perimeter()
 	_generate_inner()
+	_generate_objects()
+	_generate_rugs()
 	emit_signal("finished")
 
 func _generate_perimeter() -> void:
@@ -60,11 +85,24 @@ func _generate_perimeter() -> void:
 func _generate_inner() -> void:
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
-			var cell = get_random_tile(ground_probability)
 			_tile_map.set_cell(x,y,11)
+			var cell = get_random_tile(ground_probability)
+
+func _generate_objects() -> void:
+	for x in range(2, size.x-2):
+		for y in range (2, size.y-4):
+			var cell = get_random_tile(ground_probability)
 			_tilemap2.set_cell(x,y,_pick_random_texture(Cell.OBSTACLE))
 			_tilemap2.set_cell(1,1,5)
 			_tilemap2.set_cell(10,1,5)
+			_tilemap2.set_cell(1,6,7)
+
+func _generate_rugs() -> void:
+	for x in range(7, size.x-1):
+		for y in range (6, size.y-1):
+			var cell = get_random_tile(rug_probability)
+			_tilemap2.set_cellv(Vector2(x,7),3)
+			_tilemap2.set_cellv(Vector2(x,8),3)
 
 func get_random_tile(probability: float) -> int:
 	return _pick_random_texture(Cell.GROUND) if _rng.randf() < probability else _pick_random_texture(Cell.OBSTACLE)
@@ -79,5 +117,8 @@ func _pick_random_texture(cell_type:int) -> int:
 	elif cell_type == Cell.GROUND:
 			interval = Vector2(2,2)
 	elif cell_type == Cell.OBSTACLE:
-			interval = Vector2(0,4)
+		if _rng.randf() < table_probability:
+			interval = Vector2(4,4)
+		else:
+			interval = Vector2(1,2)
 	return _rng.randi_range(interval.x, interval.y)
