@@ -13,21 +13,15 @@ _global_script_classes=[ {
 "class": "TestWorld",
 "language": "GDScript",
 "path": "res://tileMapTest.gd"
-}, {
-"base": "Node2D",
-"class": "world",
-"language": "GDScript",
-"path": "res://TileMap.gd"
 } ]
 _global_script_class_icons={
-"TestWorld": "",
-"world": ""
+"TestWorld": ""
 }
 
 [application]
 
 config/name="Classroom Simulator"
-run/main_scene="res://TilemapTest.tscn"
+run/main_scene="res://tileMapTest.tscn"
 config/icon="res://icon.png"
 
 [display]

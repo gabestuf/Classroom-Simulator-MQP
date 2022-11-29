@@ -1,4 +1,4 @@
-[gd_scene load_steps=228 format=2]
+[gd_scene load_steps=233 format=2]
 
 [ext_resource path="res://tileMapTest.gd" type="Script" id=1]
 [ext_resource path="res://TileSetPictures/window.png" type="Texture" id=2]
@@ -25,9 +25,17 @@
 [ext_resource path="res://Tilesets/Sprites/teacher0.png" type="Texture" id=23]
 [ext_resource path="res://Tilesets/Tiles/big_carpet.png" type="Texture" id=24]
 [ext_resource path="res://Tilesets/Sprites/EmilySpriteAlt.png" type="Texture" id=25]
-[ext_resource path="res://audio/classroom_ambiance.wav" type="AudioStream" id=26]
-[ext_resource path="res://AnimatedSprite3.gd" type="Script" id=27]
 [ext_resource path="res://AnimatedSprite5.gd" type="Script" id=28]
+
+[sub_resource type="NavigationPolygon" id=530]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
+
+[sub_resource type="NavigationPolygon" id=531]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
 
 [sub_resource type="TileSet" id=1]
 0/name = "window.png 0"
@@ -52,6 +60,7 @@
 2/tile_mode = 0
 2/occluder_offset = Vector2( 0, 0 )
 2/navigation_offset = Vector2( 0, 0 )
+2/navigation = SubResource( 531 )
 2/shape_offset = Vector2( 0, 0 )
 2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 2/shape_one_way = false
@@ -122,6 +131,7 @@
 11/tile_mode = 0
 11/occluder_offset = Vector2( 0, 0 )
 11/navigation_offset = Vector2( 0, 0 )
+11/navigation = SubResource( 530 )
 11/shape_offset = Vector2( 0, 0 )
 11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 11/shape_one_way = false
@@ -185,6 +195,16 @@
 15/shapes = [  ]
 15/z_index = 0
 
+[sub_resource type="NavigationPolygon" id=532]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
+
+[sub_resource type="NavigationPolygon" id=533]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
+
 [sub_resource type="TileSet" id=2]
 1/name = "chair.png 1"
 1/texture = ExtResource( 14 )
@@ -208,6 +228,7 @@
 3/tile_mode = 0
 3/occluder_offset = Vector2( 0, 0 )
 3/navigation_offset = Vector2( 0, 0 )
+3/navigation = SubResource( 532 )
 3/shape_offset = Vector2( 0, 0 )
 3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 3/shape_one_way = false
@@ -250,6 +271,7 @@
 6/tile_mode = 0
 6/occluder_offset = Vector2( 0, 0 )
 6/navigation_offset = Vector2( 0, 0 )
+6/navigation = SubResource( 533 )
 6/shape_offset = Vector2( 0, 0 )
 6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 6/shape_one_way = false
@@ -1103,604 +1125,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="NavigationPolygon" id=271]
-vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
-
-[sub_resource type="NavigationPolygon" id=270]
-vertices = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 ) ]
-
-[sub_resource type="TileSet" id=1]
-0/name = "window.png 0"
-0/texture = ExtResource( 2 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
-2/name = "carpet.png 2"
-2/texture = ExtResource( 3 )
-2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 0, 0, 32, 32 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 0, 0 )
-2/navigation_offset = Vector2( 0, 0 )
-2/navigation = SubResource( 270 )
-2/shape_offset = Vector2( 0, 0 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape_one_way = false
-2/shape_one_way_margin = 0.0
-2/shapes = [  ]
-2/z_index = 0
-3/name = "wall.png 3"
-3/texture = ExtResource( 5 )
-3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 0, 0, 32, 32 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 0, 0 )
-3/navigation_offset = Vector2( 0, 0 )
-3/shape_offset = Vector2( 0, 0 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape_one_way = false
-3/shape_one_way_margin = 0.0
-3/shapes = [  ]
-3/z_index = 0
-8/name = "bottomwall.png 8"
-8/texture = ExtResource( 9 )
-8/tex_offset = Vector2( 0, 0 )
-8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 0, 0, 32, 32 )
-8/tile_mode = 0
-8/occluder_offset = Vector2( 0, 0 )
-8/navigation_offset = Vector2( 0, 0 )
-8/shape_offset = Vector2( 0, 0 )
-8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-8/shape_one_way = false
-8/shape_one_way_margin = 0.0
-8/shapes = [  ]
-8/z_index = 0
-9/name = "leftwall.png 9"
-9/texture = ExtResource( 10 )
-9/tex_offset = Vector2( 0, 0 )
-9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 0, 0, 32, 32 )
-9/tile_mode = 0
-9/occluder_offset = Vector2( 0, 0 )
-9/navigation_offset = Vector2( 0, 0 )
-9/shape_offset = Vector2( 0, 0 )
-9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape_one_way = false
-9/shape_one_way_margin = 0.0
-9/shapes = [  ]
-9/z_index = 0
-10/name = "rightwall.png 10"
-10/texture = ExtResource( 11 )
-10/tex_offset = Vector2( 0, 0 )
-10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 0, 0, 32, 32 )
-10/tile_mode = 0
-10/occluder_offset = Vector2( 0, 0 )
-10/navigation_offset = Vector2( 0, 0 )
-10/shape_offset = Vector2( 0, 0 )
-10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-10/shape_one_way = false
-10/shape_one_way_margin = 0.0
-10/shapes = [  ]
-10/z_index = 0
-11/name = "Floor.png 11"
-11/texture = ExtResource( 12 )
-11/tex_offset = Vector2( 0, 0 )
-11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 0, 0, 32, 32 )
-11/tile_mode = 0
-11/occluder_offset = Vector2( 0, 0 )
-11/navigation_offset = Vector2( 0, 0 )
-11/navigation = SubResource( 271 )
-11/shape_offset = Vector2( 0, 0 )
-11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-11/shape_one_way = false
-11/shape_one_way_margin = 0.0
-11/shapes = [  ]
-11/z_index = 0
-12/name = "bottom_left_corner.png 12"
-12/texture = ExtResource( 7 )
-12/tex_offset = Vector2( 0, 0 )
-12/modulate = Color( 1, 1, 1, 1 )
-12/region = Rect2( 0, 0, 32, 32 )
-12/tile_mode = 0
-12/occluder_offset = Vector2( 0, 0 )
-12/navigation_offset = Vector2( 0, 0 )
-12/shape_offset = Vector2( 0, 0 )
-12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-12/shape_one_way = false
-12/shape_one_way_margin = 0.0
-12/shapes = [  ]
-12/z_index = 0
-13/name = "bottom_right_corner.png 13"
-13/texture = ExtResource( 8 )
-13/tex_offset = Vector2( 0, 0 )
-13/modulate = Color( 1, 1, 1, 1 )
-13/region = Rect2( 0, 0, 32, 32 )
-13/tile_mode = 0
-13/occluder_offset = Vector2( 0, 0 )
-13/navigation_offset = Vector2( 0, 0 )
-13/shape_offset = Vector2( 0, 0 )
-13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-13/shape_one_way = false
-13/shape_one_way_margin = 0.0
-13/shapes = [  ]
-13/z_index = 0
-14/name = "top_left_corner.png 14"
-14/texture = ExtResource( 6 )
-14/tex_offset = Vector2( 0, 0 )
-14/modulate = Color( 1, 1, 1, 1 )
-14/region = Rect2( 0, 0, 32, 32 )
-14/tile_mode = 0
-14/occluder_offset = Vector2( 0, 0 )
-14/navigation_offset = Vector2( 0, 0 )
-14/shape_offset = Vector2( 0, 0 )
-14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-14/shape_one_way = false
-14/shape_one_way_margin = 0.0
-14/shapes = [  ]
-14/z_index = 0
-15/name = "top_right_corner.png 15"
-15/texture = ExtResource( 4 )
-15/tex_offset = Vector2( 0, 0 )
-15/modulate = Color( 1, 1, 1, 1 )
-15/region = Rect2( 0, 0, 32, 32 )
-15/tile_mode = 0
-15/occluder_offset = Vector2( 0, 0 )
-15/navigation_offset = Vector2( 0, 0 )
-15/shape_offset = Vector2( 0, 0 )
-15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-15/shape_one_way = false
-15/shape_one_way_margin = 0.0
-15/shapes = [  ]
-15/z_index = 0
-
-[sub_resource type="ConvexPolygonShape2D" id=238]
-points = PoolVector2Array( 11.6687, 7.9002, 21.4936, 8.03478, 24.5891, 14.0912, 24.1853, 19.7439, 18.8018, 22.1665, 11.8032, 22.3011, 7.63102, 19.6093, 7.63102, 12.88 )
-
-[sub_resource type="NavigationPolygon" id=242]
-vertices = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 ) ]
-
-[sub_resource type="ConvexPolygonShape2D" id=239]
-points = PoolVector2Array( 26.0615, 15.722, 25.9836, 18.3702, 23.0239, 21.6414, 8.45911, 21.7972, 5.0321, 19.3827, 4.87633, 11.0488, 9.0822, 7.93337, 22.1671, 7.7776, 25.9836, 10.8152 )
-
-[sub_resource type="ConvexPolygonShape2D" id=240]
-points = PoolVector2Array( 28.3202, 25.2826, 3.64572, 25.2954, 1.49605, 17.4445, 30.6568, 17.0706 )
-
-[sub_resource type="NavigationPolygon" id=244]
-vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
-
-[sub_resource type="TileSet" id=2]
-1/name = "chair.png 1"
-1/texture = ExtResource( 14 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 0, 32, 32 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shape_offset = Vector2( 0, 0 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 238 )
-1/shape_one_way = false
-1/shape_one_way_margin = 1.0
-1/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 238 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-1/z_index = 1
-3/name = "carpet.png 3"
-3/texture = ExtResource( 15 )
-3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 0, 0, 32, 32 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 0, 0 )
-3/navigation_offset = Vector2( 0, 0 )
-3/navigation = SubResource( 242 )
-3/shape_offset = Vector2( 0, 0 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape_one_way = false
-3/shape_one_way_margin = 0.0
-3/shapes = [  ]
-3/z_index = 0
-4/name = "table.png 4"
-4/texture = ExtResource( 16 )
-4/tex_offset = Vector2( 0, 0 )
-4/modulate = Color( 1, 1, 1, 1 )
-4/region = Rect2( 0, 0, 32, 32 )
-4/tile_mode = 0
-4/occluder_offset = Vector2( 0, 0 )
-4/navigation_offset = Vector2( 0, 0 )
-4/shape_offset = Vector2( 0, 0 )
-4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-4/shape = SubResource( 239 )
-4/shape_one_way = false
-4/shape_one_way_margin = 1.0
-4/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 239 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-4/z_index = 1
-5/name = "Bush.png 5"
-5/texture = ExtResource( 13 )
-5/tex_offset = Vector2( 0, 0 )
-5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 0, 0, 32, 32 )
-5/tile_mode = 0
-5/occluder_offset = Vector2( 0, 0 )
-5/navigation_offset = Vector2( 0, 0 )
-5/shape_offset = Vector2( 0, 0 )
-5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-5/shape = SubResource( 240 )
-5/shape_one_way = false
-5/shape_one_way_margin = 1.0
-5/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 240 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-5/z_index = 0
-6/name = "Floor.png 6"
-6/texture = ExtResource( 12 )
-6/tex_offset = Vector2( 0, 0 )
-6/modulate = Color( 1, 1, 1, 1 )
-6/region = Rect2( 0, 0, 32, 32 )
-6/tile_mode = 0
-6/occluder_offset = Vector2( 0, 0 )
-6/navigation_offset = Vector2( 0, 0 )
-6/navigation = SubResource( 244 )
-6/shape_offset = Vector2( 0, 0 )
-6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-6/shape_one_way = false
-6/shape_one_way_margin = 0.0
-6/shapes = [  ]
-6/z_index = 0
-7/name = "student_sprite_template.png 7"
-7/texture = ExtResource( 17 )
-7/tex_offset = Vector2( 0, 0 )
-7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 12, 10, 18, 30 )
-7/tile_mode = 0
-7/occluder_offset = Vector2( 0, 0 )
-7/navigation_offset = Vector2( 0, 0 )
-7/shape_offset = Vector2( 0, 0 )
-7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-7/shape_one_way = false
-7/shape_one_way_margin = 0.0
-7/shapes = [  ]
-7/z_index = 0
-8/name = "student_sprite_template.png 8"
-8/texture = ExtResource( 17 )
-8/tex_offset = Vector2( 0, 0 )
-8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 35, 10, 15, 30 )
-8/tile_mode = 0
-8/occluder_offset = Vector2( 0, 0 )
-8/navigation_offset = Vector2( 0, 0 )
-8/shape_offset = Vector2( 0, 0 )
-8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-8/shape_one_way = false
-8/shape_one_way_margin = 0.0
-8/shapes = [  ]
-8/z_index = 0
-9/name = "student_sprite_template.png 9"
-9/texture = ExtResource( 17 )
-9/tex_offset = Vector2( 0, 0 )
-9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 56, 10, 17, 30 )
-9/tile_mode = 0
-9/occluder_offset = Vector2( 0, 0 )
-9/navigation_offset = Vector2( 0, 0 )
-9/shape_offset = Vector2( 0, 0 )
-9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape_one_way = false
-9/shape_one_way_margin = 0.0
-9/shapes = [  ]
-9/z_index = 0
-10/name = "student_sprite_template.png 10"
-10/texture = ExtResource( 17 )
-10/tex_offset = Vector2( 0, 0 )
-10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 79, 10, 15, 30 )
-10/tile_mode = 0
-10/occluder_offset = Vector2( 0, 0 )
-10/navigation_offset = Vector2( 0, 0 )
-10/shape_offset = Vector2( 0, 0 )
-10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-10/shape_one_way = false
-10/shape_one_way_margin = 0.0
-10/shapes = [  ]
-10/z_index = 0
-11/name = "student_sprite_template.png 11"
-11/texture = ExtResource( 17 )
-11/tex_offset = Vector2( 0, 0 )
-11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 100, 10, 16, 30 )
-11/tile_mode = 0
-11/occluder_offset = Vector2( 0, 0 )
-11/navigation_offset = Vector2( 0, 0 )
-11/shape_offset = Vector2( 0, 0 )
-11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-11/shape_one_way = false
-11/shape_one_way_margin = 0.0
-11/shapes = [  ]
-11/z_index = 0
-12/name = "student_sprite_template.png 12"
-12/texture = ExtResource( 17 )
-12/tex_offset = Vector2( 0, 0 )
-12/modulate = Color( 1, 1, 1, 1 )
-12/region = Rect2( 123, 10, 15, 30 )
-12/tile_mode = 0
-12/occluder_offset = Vector2( 0, 0 )
-12/navigation_offset = Vector2( 0, 0 )
-12/shape_offset = Vector2( 0, 0 )
-12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-12/shape_one_way = false
-12/shape_one_way_margin = 0.0
-12/shapes = [  ]
-12/z_index = 0
-13/name = "student_sprite_template.png 13"
-13/texture = ExtResource( 17 )
-13/tex_offset = Vector2( 0, 0 )
-13/modulate = Color( 1, 1, 1, 1 )
-13/region = Rect2( 144, 10, 16, 30 )
-13/tile_mode = 0
-13/occluder_offset = Vector2( 0, 0 )
-13/navigation_offset = Vector2( 0, 0 )
-13/shape_offset = Vector2( 0, 0 )
-13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-13/shape_one_way = false
-13/shape_one_way_margin = 0.0
-13/shapes = [  ]
-13/z_index = 0
-14/name = "student_sprite_template.png 14"
-14/texture = ExtResource( 17 )
-14/tex_offset = Vector2( 0, 0 )
-14/modulate = Color( 1, 1, 1, 1 )
-14/region = Rect2( 167, 10, 16, 29 )
-14/tile_mode = 0
-14/occluder_offset = Vector2( 0, 0 )
-14/navigation_offset = Vector2( 0, 0 )
-14/shape_offset = Vector2( 0, 0 )
-14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-14/shape_one_way = false
-14/shape_one_way_margin = 0.0
-14/shapes = [  ]
-14/z_index = 0
-15/name = "student_sprite_template.png 15"
-15/texture = ExtResource( 17 )
-15/tex_offset = Vector2( 0, 0 )
-15/modulate = Color( 1, 1, 1, 1 )
-15/region = Rect2( 11, 44, 19, 29 )
-15/tile_mode = 0
-15/occluder_offset = Vector2( 0, 0 )
-15/navigation_offset = Vector2( 0, 0 )
-15/shape_offset = Vector2( 0, 0 )
-15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-15/shape_one_way = false
-15/shape_one_way_margin = 0.0
-15/shapes = [  ]
-15/z_index = 0
-16/name = "student_sprite_template.png 16"
-16/texture = ExtResource( 17 )
-16/tex_offset = Vector2( 0, 0 )
-16/modulate = Color( 1, 1, 1, 1 )
-16/region = Rect2( 34, 44, 17, 29 )
-16/tile_mode = 0
-16/occluder_offset = Vector2( 0, 0 )
-16/navigation_offset = Vector2( 0, 0 )
-16/shape_offset = Vector2( 0, 0 )
-16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-16/shape_one_way = false
-16/shape_one_way_margin = 0.0
-16/shapes = [  ]
-16/z_index = 0
-17/name = "student_sprite_template.png 17"
-17/texture = ExtResource( 17 )
-17/tex_offset = Vector2( 0, 0 )
-17/modulate = Color( 1, 1, 1, 1 )
-17/region = Rect2( 55, 44, 19, 29 )
-17/tile_mode = 0
-17/occluder_offset = Vector2( 0, 0 )
-17/navigation_offset = Vector2( 0, 0 )
-17/shape_offset = Vector2( 0, 0 )
-17/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-17/shape_one_way = false
-17/shape_one_way_margin = 0.0
-17/shapes = [  ]
-17/z_index = 0
-18/name = "student_sprite_template.png 18"
-18/texture = ExtResource( 17 )
-18/tex_offset = Vector2( 0, 0 )
-18/modulate = Color( 1, 1, 1, 1 )
-18/region = Rect2( 78, 44, 17, 29 )
-18/tile_mode = 0
-18/occluder_offset = Vector2( 0, 0 )
-18/navigation_offset = Vector2( 0, 0 )
-18/shape_offset = Vector2( 0, 0 )
-18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-18/shape_one_way = false
-18/shape_one_way_margin = 0.0
-18/shapes = [  ]
-18/z_index = 0
-19/name = "student_sprite_template.png 19"
-19/texture = ExtResource( 17 )
-19/tex_offset = Vector2( 0, 0 )
-19/modulate = Color( 1, 1, 1, 1 )
-19/region = Rect2( 100, 44, 17, 29 )
-19/tile_mode = 0
-19/occluder_offset = Vector2( 0, 0 )
-19/navigation_offset = Vector2( 0, 0 )
-19/shape_offset = Vector2( 0, 0 )
-19/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-19/shape_one_way = false
-19/shape_one_way_margin = 0.0
-19/shapes = [  ]
-19/z_index = 0
-20/name = "student_sprite_template.png 20"
-20/texture = ExtResource( 17 )
-20/tex_offset = Vector2( 0, 0 )
-20/modulate = Color( 1, 1, 1, 1 )
-20/region = Rect2( 123, 44, 16, 29 )
-20/tile_mode = 0
-20/occluder_offset = Vector2( 0, 0 )
-20/navigation_offset = Vector2( 0, 0 )
-20/shape_offset = Vector2( 0, 0 )
-20/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-20/shape_one_way = false
-20/shape_one_way_margin = 0.0
-20/shapes = [  ]
-20/z_index = 0
-21/name = "student_sprite_template.png 21"
-21/texture = ExtResource( 17 )
-21/tex_offset = Vector2( 0, 0 )
-21/modulate = Color( 1, 1, 1, 1 )
-21/region = Rect2( 144, 44, 17, 29 )
-21/tile_mode = 0
-21/occluder_offset = Vector2( 0, 0 )
-21/navigation_offset = Vector2( 0, 0 )
-21/shape_offset = Vector2( 0, 0 )
-21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-21/shape_one_way = false
-21/shape_one_way_margin = 0.0
-21/shapes = [  ]
-21/z_index = 0
-22/name = "student_sprite_template.png 22"
-22/texture = ExtResource( 17 )
-22/tex_offset = Vector2( 0, 0 )
-22/modulate = Color( 1, 1, 1, 1 )
-22/region = Rect2( 167, 44, 17, 29 )
-22/tile_mode = 0
-22/occluder_offset = Vector2( 0, 0 )
-22/navigation_offset = Vector2( 0, 0 )
-22/shape_offset = Vector2( 0, 0 )
-22/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-22/shape_one_way = false
-22/shape_one_way_margin = 0.0
-22/shapes = [  ]
-22/z_index = 0
-
 [node name="TestWorld" type="Node2D"]
 script = ExtResource( 1 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 80, 48 )
-z_index = 1
-frames = SubResource( 27 )
-animation = "Student"
-frame = 6
-speed_scale = 0.05
-playing = true
-
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
-position = Vector2( 240, 48 )
-z_index = 1
-frames = SubResource( 76 )
-animation = "Teacher"
-frame = 21
-speed_scale = 0.75
-playing = true
-
-[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
-position = Vector2( 79, 109 )
-z_index = 1
-frames = SubResource( 113 )
-frame = 19
-speed_scale = 0.5
-playing = true
-script = ExtResource( 25 )
-
-[node name="AnimatedSprite4" type="AnimatedSprite" parent="."]
-z_index = 1
-frames = SubResource( 138 )
-
-[node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
-position = Vector2( 208, 51.418 )
-scale = Vector2( 0.727273, 0.727273 )
-frames = SubResource( 163 )
-frame = 8
-speed_scale = 0.2
-playing = true
-position = Vector2( 227, 110 )
-z_index = 1
-frames = SubResource( 269 )
-script = ExtResource( 27 )
-
-[node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
-position = Vector2( 144.875, 51.418 )
-scale = Vector2, 0.678571, 0.737259 )
-z_index = 1
-frames = SubResource( 187 )
-frame = 5
-frame = 15
-speed_scale = 1.5
-playing = true
-
-[node name="AnimatedSprite7" type="AnimatedSprite" parent="."]
-position = Vector2( 176, 51.418 )
-scale = Vector2( 0.727273, 0.727273 )
-z_index = 1
-frames = SubResource( 212 )
-frame = 16
-frame = 1
-playing = true
-
-[node name="AnimatedSprite8" type="AnimatedSprite" parent="."]
-position = Vector2( 112, 51.418 )
-scale = Vector2( 0.678571, 0.737259 )
-position = Vector2( 184, 48 )
-z_index = 1
-frames = SubResource( 237 )
-frame = 6
-frame = 6
-playing = true
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 304, 48 )
-frames = SubResource( 454 )
-
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
-position = Vector2( 240, 51.418 )
-scale = Vector2( 0.727273, 0.727273 )
-frames = SubResource( 479 )
-frame = 17
-playing = true
-
-[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
-position = Vector2( 80, 51.418 )
-scale = Vector2( 0.727273, 0.727273 )
-frames = SubResource( 504 )
-frame = 19
-playing = true
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
@@ -1720,8 +1146,61 @@ bake_navigation = true
 format = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 24 )
 volume_db = -13.432
 autoplay = true
 
 [node name="Line2D" type="Line2D" parent="."]
+
+[node name="AnimatedSprite4" type="AnimatedSprite" parent="."]
+position = Vector2( 271.313, 51.418 )
+scale = Vector2( 0.789773, 0.772485 )
+frames = SubResource( 529 )
+frame = 5
+playing = true
+
+[node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
+position = Vector2( 208, 51.418 )
+scale = Vector2( 0.727273, 0.727273 )
+frames = SubResource( 163 )
+frame = 2
+speed_scale = 0.2
+playing = true
+script = ExtResource( 28 )
+
+[node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
+position = Vector2( 144.875, 51.418 )
+scale = Vector2( 0.678571, 0.737259 )
+frames = SubResource( 187 )
+speed_scale = 1.5
+playing = true
+
+[node name="AnimatedSprite7" type="AnimatedSprite" parent="."]
+position = Vector2( 176, 51.418 )
+scale = Vector2( 0.727273, 0.727273 )
+frames = SubResource( 212 )
+frame = 12
+playing = true
+
+[node name="AnimatedSprite8" type="AnimatedSprite" parent="."]
+position = Vector2( 112, 51.418 )
+scale = Vector2( 0.678571, 0.737259 )
+frames = SubResource( 237 )
+frame = 11
+playing = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 304, 48 )
+frames = SubResource( 454 )
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+position = Vector2( 240, 51.418 )
+scale = Vector2( 0.727273, 0.727273 )
+frames = SubResource( 479 )
+frame = 22
+playing = true
+
+[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
+position = Vector2( 80, 51.418 )
+scale = Vector2( 0.727273, 0.727273 )
+frames = SubResource( 504 )
+playing = true
