@@ -6,21 +6,64 @@ signal finished
 
 onready var _tile_map : TileMap = $BorderFloorMap
 onready var _tilemap2 : TileMap = $ObjectObstaclesMap
+onready var AS1: AnimatedSprite = $AnimatedSprite
+onready var AS2: AnimatedSprite = $AnimatedSprite2
+onready var AS3: AnimatedSprite = $AnimatedSprite3
+onready var AS4: AnimatedSprite = $AnimatedSprite4
+onready var AS5: AnimatedSprite = $AnimatedSprite5
+onready var AS6: AnimatedSprite = $AnimatedSprite6
+onready var AS7: AnimatedSprite = $AnimatedSprite7
+onready var AS8: AnimatedSprite = $AnimatedSprite8
+onready var _tile_map : TileMap = $Navigation2D/BorderFloorMap
+onready var _tilemap2 : TileMap = $Navigation2D/ObjectObstaclesMap
 
 enum Cell {
 	OBSTACLE
 	GROUND
 	OUTER
 }
+# TODO import json
+# https://www.youtube.com/watch?v=L9Zekkb4ZXc&ab_channel=johnnygossdev
+# example json
+const CONFIGJSON = {
+	"RoomSizeX": 10,
+	"RoomSizeY": 8,
+}
 
+export (String, FILE, "*.json") var file_path : String
 export var inner_size := Vector2(10,8)
+#not sure what the acual code is but this is what i did:
+#w = wall
+#x = floor
+#t = table
+#r = rug
+#c = chair
+#d = door
+#wi = window
+var tiles = [["w", "w", "w", "w", "w", "w", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "r", "r", "c", "x", "x", "w"], ["w", "r", "r", "x", "c", "x", "w"], ["w", "x", "x", "x", "x", "x", "w"], ["w", "w", "w", "w", "w", "w", "w"]]
+#for now hardcoding these, will eventually use x and y from json file
+export var inner_size := Vector2(6,5)
 export var perimiter_size := Vector2(1,1)
-export(float, 0, 1) var ground_probability := 0.1
+export(float, 0, 1) var ground_probability := 0.9
 export(float, 0, 1) var window_probability := 0.2
+export(float, 0, 1) var table_probability := 0.2
+export(float, 0, 1) var rug_probability := 0.8
 
 var size = inner_size + 2 * perimiter_size
 
 var _rng = RandomNumberGenerator.new()
+
+#func load_json(file_json) -> Dictionary:
+#	"""Parses a JSON File and returns it as a dictionary."""
+#
+#	var file = File.new()
+#	assert file.file_exists(file_json)
+#	file.open(file_json, file.READ)
+
+var tilemapArr = ["w", "w", "w", "w", "w", "w", "w", "w", "x", "t", "t", "t", "x", "w", "w", "x", "t", "t", "t", "x", "w", "w", "x", "t", "t", "t", "x", "w", "w", "r", "r", "c", "x", "x", "w", "w", "r", "r", "x", "c", "x", "w", "w", "x", "x", "x", "x", "x", "w", "w", "w", "w", "w", "w", "w", "w"]
+
+func tileGenerate() -> void:
+	print(tilemapArr[1])
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,6 +80,8 @@ func generate() -> void:
 	emit_signal("started")
 	_generate_perimeter()
 	_generate_inner()
+	_generate_objects()
+	_generate_rugs()
 	emit_signal("finished")
 
 func _generate_perimeter() -> void:
@@ -46,7 +91,7 @@ func _generate_perimeter() -> void:
 				_tile_map.set_cell(x,y, 9)
 			else:
 				_tile_map.set_cell(x,y, 10)
-				_tile_map.set_cell(0,9, 12)
+				_tile_map.set_cell(0,9, 12) # what do these 4 set_cells do? - Gabe
 				_tile_map.set_cell(11,9, 13)
 				_tile_map.set_cell(0,0, 14)
 				_tile_map.set_cell(11,0, 15)
@@ -56,15 +101,47 @@ func _generate_perimeter() -> void:
 				_tile_map.set_cell(x,y, _pick_random_texture(Cell.OUTER))
 			else:
 				_tile_map.set_cell(x,y, 8)
+	#again may not want these hardcoded in the future but for now it's fine
+	_tile_map.set_cell(0,6, 12)
+	_tile_map.set_cell(7,6, 13)
+	_tile_map.set_cell(0,0, 14)
+	_tile_map.set_cell(7,0, 15)
+	
 
 func _generate_inner() -> void:
+	var tile = null
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
-			var cell = get_random_tile(ground_probability)
 			_tile_map.set_cell(x,y,11)
+			var cell = get_random_tile(ground_probability)
+
+func _generate_objects() -> void:
+	for x in range(2, size.x-2):
+		for y in range (2, size.y-4):
+			var cell = get_random_tile(ground_probability)
 			_tilemap2.set_cell(x,y,_pick_random_texture(Cell.OBSTACLE))
 			_tilemap2.set_cell(1,1,5)
 			_tilemap2.set_cell(10,1,5)
+			_tilemap2.set_cell(1,6,7)
+
+func _generate_rugs() -> void:
+	for x in range(7, size.x-1):
+		for y in range (6, size.y-1):
+			var cell = get_random_tile(rug_probability)
+			_tilemap2.set_cellv(Vector2(x,7),3)
+			_tilemap2.set_cellv(Vector2(x,8),3)
+			#set the wood floor on the bottom of the entire inner section
+			_tile_map.set_cell(x,y,11)
+			#set the "obstacles" above it
+			tile = tiles[x][y]
+			match tile:
+				#x will be a transparent tile eventually, overlayed over the floor
+				#"x": _tilemap2.set_cell(x, y, 7)
+				"t": _tilemap2.set_cell(x, y, 4)
+				"r": _tilemap2.set_cell(x, y, 3)
+				"c": _tilemap2.set_cell(x, y, 1)
+				_: print("a perimeter block I think")
+
 
 func get_random_tile(probability: float) -> int:
 	return _pick_random_texture(Cell.GROUND) if _rng.randf() < probability else _pick_random_texture(Cell.OBSTACLE)
@@ -79,5 +156,31 @@ func _pick_random_texture(cell_type:int) -> int:
 	elif cell_type == Cell.GROUND:
 			interval = Vector2(2,2)
 	elif cell_type == Cell.OBSTACLE:
-			interval = Vector2(0,4)
+		if _rng.randf() < table_probability:
+			interval = Vector2(4,4)
+		else:
+			interval = Vector2(1,2)
 	return _rng.randi_range(interval.x, interval.y)
+
+
+# Navigation Test
+onready var nav_2d : Navigation2D = $Navigation2D
+onready var line_2d : Line2D = $Line2D
+onready var character : AnimatedSprite = $AnimatedSprite5
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Only run this function if event is left click
+	if not event is InputEventMouseButton:
+		return
+	if event.button_index != BUTTON_LEFT or not event.pressed:
+		return
+	
+	# get mouse position
+	var new_path : = nav_2d.get_simple_path(character.global_position, event.position)
+	print(event.global_position)
+	line_2d.points = new_path
+	character.path = new_path 
+	
+	
+	
+	
