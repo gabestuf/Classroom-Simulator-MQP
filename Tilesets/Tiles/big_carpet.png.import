@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NPC1Spritesheet.png-496e237b7c36f7a82d8eec5cc692add2.stex"
+path="res://.import/big_carpet.png-af59b1d8e663f3b49d5def2ef6c85e1a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NPC1/NPC1Spritesheet.png"
-dest_files=[ "res://.import/NPC1Spritesheet.png-496e237b7c36f7a82d8eec5cc692add2.stex" ]
+source_file="res://Tilesets/Tiles/big_carpet.png"
+dest_files=[ "res://.import/big_carpet.png-af59b1d8e663f3b49d5def2ef6c85e1a.stex" ]
 
 [params]
 
