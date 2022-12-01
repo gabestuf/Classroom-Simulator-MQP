@@ -86,19 +86,19 @@ func _generate_perimeter() -> void:
 				if(tiles[x][y] == "w"):
 					_tile_map.set_cell(x,y, 9)
 				elif(tiles[x][y] == "wi"):
-					_tile_map.set_cell(x,y,16)
+					_tile_map.set_cell(x,y,0)
 			else:
 				if(tiles[x][y] == "w"):
 					_tile_map.set_cell(x,y, 10)
 				elif(tiles[x][y] == "wi"):
-					_tile_map.set_cell(x,y,16)
+					_tile_map.set_cell(x,y,0)
 	for x in range(1, size.x - 1):
 		for y in [0, size.y-1]:
 			if y == 0:
 				if(tiles[x][y] == "w"):
 					_tile_map.set_cell(x,y, 3)
 				elif(tiles[x][y] == "wi"):
-					_tile_map.set_cell(x, y, 16)
+					_tile_map.set_cell(x, y, 0)
 					
 			else:
 				_tile_map.set_cell(x,y, 8)
