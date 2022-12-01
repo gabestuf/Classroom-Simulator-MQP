@@ -28,7 +28,7 @@ const CONFIGJSON = {
 #c = chair
 #d = door
 #wi = window
-var tiles = [["w", "w", "w", "w", "w", "w", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "r", "r", "c", "x", "x", "w"], ["w", "r", "r", "x", "c", "x", "w"], ["w", "x", "x", "x", "x", "x", "w"], ["w", "w", "w", "w", "w", "w", "w"]]
+var tiles = [["w", "w", "w", "wi", "w", "w", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["wi", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "r", "r", "c", "x", "x", "w"], ["w", "r", "r", "x", "c", "x", "w"], ["w", "x", "x", "x", "x", "x", "w"], ["w", "w", "w", "w", "w", "w", "w"]]
 #for now hardcoding these, will eventually use x and y from json file
 export var inner_size := Vector2(6,5)
 export var perimiter_size := Vector2(1,1)
@@ -57,20 +57,28 @@ func generate() -> void:
 	emit_signal("finished")
 
 func _generate_perimeter() -> void:
+	var tile = null
 	for x in [0, size.x - 1]:
 		for y in range(0, size.y):
+			tile = tiles[x][y]
 			if x == 0:
-				_tile_map.set_cell(x,y, 9)
+				if(tiles[x][y] == "w"):
+					_tile_map.set_cell(x,y, 9)
+				elif(tiles[x][y] == "wi"):
+					_tile_map.set_cell(x,y,16)
 			else:
-				_tile_map.set_cell(x,y, 10)
-				_tile_map.set_cell(0,9, 12) # what do these 4 set_cells do? - Gabe
-				_tile_map.set_cell(11,9, 13)
-				_tile_map.set_cell(0,0, 14)
-				_tile_map.set_cell(11,0, 15)
+				if(tiles[x][y] == "w"):
+					_tile_map.set_cell(x,y, 10)
+				elif(tiles[x][y] == "wi"):
+					_tile_map.set_cell(x,y,16)
 	for x in range(1, size.x - 1):
 		for y in [0, size.y-1]:
 			if y == 0:
-				_tile_map.set_cell(x,y, _pick_random_texture(Cell.OUTER))
+				if(tiles[x][y] == "w"):
+					_tile_map.set_cell(x,y, 3)
+				elif(tiles[x][y] == "wi"):
+					_tile_map.set_cell(x, y, 16)
+					
 			else:
 				_tile_map.set_cell(x,y, 8)
 	#again may not want these hardcoded in the future but for now it's fine
@@ -94,7 +102,6 @@ func _generate_inner() -> void:
 				"t": _tilemap2.set_cell(x, y, 4)
 				"r": _tilemap2.set_cell(x, y, 3)
 				"c": _tilemap2.set_cell(x, y, 1)
-				_: print("a perimeter block I think")
 
 
 func get_random_tile(probability: float) -> int:
@@ -104,7 +111,8 @@ func _pick_random_texture(cell_type:int) -> int:
 	var interval := Vector2()
 	if cell_type == Cell.OUTER:
 		if _rng.randf() < window_probability:
-			interval = Vector2(0,0)
+			#window!
+			interval = Vector2(16,16)
 		else:
 			interval = Vector2(3,3)
 	elif cell_type == Cell.GROUND:

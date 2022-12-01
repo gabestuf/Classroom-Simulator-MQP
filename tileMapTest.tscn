@@ -1,4 +1,4 @@
-[gd_scene load_steps=210 format=2]
+[gd_scene load_steps=213 format=2]
 
 [ext_resource path="res://tileMapTest.gd" type="Script" id=1]
 [ext_resource path="res://TileSetPictures/window.png" type="Texture" id=2]
@@ -444,11 +444,28 @@ region = Rect2( 132, 66, 22, 33 )
 atlas = ExtResource( 20 )
 region = Rect2( 154, 66, 22, 33 )
 
+[sub_resource type="AtlasTexture" id=272]
+atlas = ExtResource( 21 )
+region = Rect2( 31, 3, 22, 36 )
+
+[sub_resource type="AtlasTexture" id=273]
+atlas = ExtResource( 21 )
+region = Rect2( 31, 39, 22, 36 )
+
+[sub_resource type="AtlasTexture" id=274]
+atlas = ExtResource( 21 )
+region = Rect2( 31, 75, 22, 36 )
+
 [sub_resource type="SpriteFrames" id=269]
 animations = [ {
 "frames": [ SubResource( 245 ), SubResource( 246 ), SubResource( 247 ), SubResource( 248 ), SubResource( 249 ), SubResource( 250 ), SubResource( 251 ), SubResource( 252 ), SubResource( 253 ), SubResource( 254 ), SubResource( 255 ), SubResource( 256 ), SubResource( 257 ), SubResource( 258 ), SubResource( 259 ), SubResource( 260 ), SubResource( 261 ), SubResource( 262 ), SubResource( 263 ), SubResource( 264 ), SubResource( 265 ), SubResource( 266 ), SubResource( 267 ), SubResource( 268 ) ],
 "loop": true,
 "name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 272 ), SubResource( 273 ), SubResource( 274 ) ],
+"loop": true,
+"name": "run right",
 "speed": 5.0
 } ]
 
@@ -771,20 +788,6 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 ) ]
 
 [sub_resource type="TileSet" id=1]
-0/name = "window.png 0"
-0/texture = ExtResource( 2 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
 2/name = "carpet.png 2"
 2/texture = ExtResource( 3 )
 2/tex_offset = Vector2( 0, 0 )
@@ -927,6 +930,29 @@ outlines = [ PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 ) ]
 15/shape_one_way_margin = 0.0
 15/shapes = [  ]
 15/z_index = 0
+16/name = "window.png 16"
+16/texture = ExtResource( 2 )
+16/tex_offset = Vector2( 0, 0 )
+16/modulate = Color( 1, 1, 1, 1 )
+16/region = Rect2( 0, 0, 32, 32 )
+16/tile_mode = 1
+16/autotile/bitmask_mode = 0
+16/autotile/bitmask_flags = [  ]
+16/autotile/icon_coordinate = Vector2( 0, 0 )
+16/autotile/tile_size = Vector2( 32, 32 )
+16/autotile/spacing = 0
+16/autotile/occluder_map = [  ]
+16/autotile/navpoly_map = [  ]
+16/autotile/priority_map = [  ]
+16/autotile/z_index_map = [  ]
+16/occluder_offset = Vector2( 0, 0 )
+16/navigation_offset = Vector2( 0, 0 )
+16/shape_offset = Vector2( 0, 0 )
+16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+16/shape_one_way = false
+16/shape_one_way_margin = 0.0
+16/shapes = [  ]
+16/z_index = 0
 
 [sub_resource type="ConvexPolygonShape2D" id=238]
 points = PoolVector2Array( 11.6687, 7.9002, 21.4936, 8.03478, 24.5891, 14.0912, 24.1853, 19.7439, 18.8018, 22.1665, 11.8032, 22.3011, 7.63102, 19.6093, 7.63102, 12.88 )
@@ -1274,7 +1300,7 @@ position = Vector2( 80, 48 )
 z_index = 1
 frames = SubResource( 27 )
 animation = "Student"
-frame = 6
+frame = 8
 speed_scale = 0.05
 playing = true
 
@@ -1283,7 +1309,7 @@ position = Vector2( 240, 48 )
 z_index = 1
 frames = SubResource( 76 )
 animation = "Teacher"
-frame = 21
+frame = 10
 speed_scale = 0.75
 playing = true
 
@@ -1291,7 +1317,7 @@ playing = true
 position = Vector2( 79, 109 )
 z_index = 1
 frames = SubResource( 113 )
-frame = 19
+frame = 21
 speed_scale = 0.5
 playing = true
 script = ExtResource( 25 )
@@ -1304,13 +1330,15 @@ frames = SubResource( 138 )
 position = Vector2( 227, 110 )
 z_index = 1
 frames = SubResource( 269 )
+animation = "run right"
+frame = 1
+playing = true
 script = ExtResource( 27 )
 
 [node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
 position = Vector2( 152, 104 )
 z_index = 1
 frames = SubResource( 187 )
-frame = 15
 speed_scale = 1.5
 playing = true
 
@@ -1318,14 +1346,14 @@ playing = true
 position = Vector2( 128, 40 )
 z_index = 1
 frames = SubResource( 212 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="AnimatedSprite8" type="AnimatedSprite" parent="."]
 position = Vector2( 184, 48 )
 z_index = 1
 frames = SubResource( 237 )
-frame = 6
+frame = 7
 playing = true
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
@@ -1351,3 +1379,6 @@ volume_db = -13.432
 autoplay = true
 
 [node name="Line2D" type="Line2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 1
