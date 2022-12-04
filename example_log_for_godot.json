@@ -1,4 +1,6 @@
 {
+  "roomSizeX": 7,
+  "roomSizeY": 8,
   "tilemap": ["w", "w", "w", "w", "w", "w", "w", "w", "x", "t", "t", "t", "x", "w", "w", "x", "t", "t", "t", "x", "w", "w", "x", "t", "t", "t", "x", "w", "w", "r", "r", "c", "x", "x", "w", "w", "r", "r", "x", "c", "x", "w", "w", "x", "x", "x", "x", "x", "w", "w", "w", "w", "w", "w", "w", "w"],
   "EventList": [
     {
