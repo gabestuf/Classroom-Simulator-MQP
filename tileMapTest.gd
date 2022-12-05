@@ -15,6 +15,8 @@ onready var AS6: AnimatedSprite = $AnimatedSprite6
 onready var AS7: AnimatedSprite = $AnimatedSprite7
 onready var AS8: AnimatedSprite = $AnimatedSprite8
 
+var i = 0
+
 #tilemaps
 onready var _tile_map : TileMap = $Navigation2D/BorderFloorMap
 onready var _tilemap2 : TileMap = $Navigation2D/ObjectObstaclesMap
