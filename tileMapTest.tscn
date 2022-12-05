@@ -768,6 +768,46 @@ animations = [ {
 "loop": true,
 "name": "default",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 382 ), SubResource( 390 ), SubResource( 382 ), SubResource( 398 ), SubResource( 382 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 386 ), SubResource( 394 ), SubResource( 386 ), SubResource( 402 ), SubResource( 386 ) ],
+"loop": true,
+"name": "down left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 387 ), SubResource( 395 ), SubResource( 387 ), SubResource( 403 ), SubResource( 387 ) ],
+"loop": true,
+"name": "down right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 385 ), SubResource( 393 ), SubResource( 385 ), SubResource( 401 ), SubResource( 385 ) ],
+"loop": true,
+"name": "left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 383 ), SubResource( 391 ), SubResource( 383 ), SubResource( 399 ), SubResource( 383 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 384 ), SubResource( 392 ), SubResource( 384 ), SubResource( 400 ), SubResource( 384 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 388 ), SubResource( 396 ), SubResource( 388 ), SubResource( 404 ), SubResource( 388 ) ],
+"loop": true,
+"name": "up left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 389 ), SubResource( 397 ), SubResource( 389 ), SubResource( 405 ), SubResource( 389 ) ],
+"loop": true,
+"name": "up right",
+"speed": 5.0
 } ]
 
 [sub_resource type="AtlasTexture" id=406]
@@ -1079,6 +1119,46 @@ animations = [ {
 "frames": [ SubResource( 455 ), SubResource( 456 ), SubResource( 457 ), SubResource( 458 ), SubResource( 459 ), SubResource( 460 ), SubResource( 461 ), SubResource( 462 ), SubResource( 463 ), SubResource( 464 ), SubResource( 465 ), SubResource( 466 ), SubResource( 467 ), SubResource( 468 ), SubResource( 469 ), SubResource( 470 ), SubResource( 471 ), SubResource( 472 ), SubResource( 473 ), SubResource( 474 ), SubResource( 475 ), SubResource( 476 ), SubResource( 477 ), SubResource( 478 ) ],
 "loop": true,
 "name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 455 ), SubResource( 463 ), SubResource( 455 ), SubResource( 471 ), SubResource( 455 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 459 ), SubResource( 467 ), SubResource( 459 ), SubResource( 475 ), SubResource( 459 ) ],
+"loop": true,
+"name": "down left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 460 ), SubResource( 468 ), SubResource( 460 ), SubResource( 476 ), SubResource( 460 ) ],
+"loop": true,
+"name": "down right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 458 ), SubResource( 466 ), SubResource( 458 ), SubResource( 474 ), SubResource( 458 ) ],
+"loop": true,
+"name": "left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 456 ), SubResource( 464 ), SubResource( 456 ), SubResource( 472 ), SubResource( 456 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 457 ), SubResource( 465 ), SubResource( 457 ), SubResource( 473 ), SubResource( 457 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 461 ), SubResource( 469 ), SubResource( 461 ), SubResource( 477 ), SubResource( 461 ) ],
+"loop": true,
+"name": "up left",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 462 ), SubResource( 470 ), SubResource( 462 ), SubResource( 478 ), SubResource( 462 ) ],
+"loop": true,
+"name": "up right",
 "speed": 5.0
 } ]
 
