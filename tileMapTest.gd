@@ -37,10 +37,10 @@ export (String, FILE, "*.json") var file_path : String
 #c = chair
 #d = door
 #wi = window
-var tiles = [["w", "w", "w", "wi", "w", "w", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["wi", "x", "t", "t", "t", "x", "w"], ["w", "x", "t", "t", "t", "x", "w"], ["w", "r", "r", "c", "x", "x", "w"], ["w", "r", "r", "x", "c", "x", "w"], ["w", "x", "x", "x", "x", "x", "w"], ["w", "w", "w", "w", "w", "w", "w"]]
+var tiles = [["w", "w", "w", "wil", "w", "w", "w"], ["w", "b", "x", "c", "c", "x", "w"], ["wi", "x", "c", "t", "x", "c", "w"], ["w", "x", "c", "x", "x", "c", "w"], ["w", "x", "x", "c", "x", "x", "w"], ["w", "st", "x", "x", "r", "r", "w"], ["bks", "c", "x", "x", "r", "r", "w"], ["w", "w", "w", "w", "bks", "bks", "w"]]
 #for now hardcoding these, will eventually use x and y from json file
-export var inner_size := Vector2(10,8)
-#export var inner_size := Vector2(6,5)
+#export var inner_size := Vector2(10,8)
+export var inner_size := Vector2(6,5)
 export var perimiter_size := Vector2(1,1)
 export(float, 0, 1) var ground_probability := 0.9
 export(float, 0, 1) var window_probability := 0.2
@@ -85,13 +85,15 @@ func _generate_perimeter() -> void:
 			if x == 0:
 				if(tiles[x][y] == "w"):
 					_tile_map.set_cell(x,y, 9)
-				elif(tiles[x][y] == "wi"):
-					_tile_map.set_cell(x,y,0)
+				elif(tiles[x][y] == "wil"):
+					_tile_map.set_cell(x,y,16)
 			else:
 				if(tiles[x][y] == "w"):
 					_tile_map.set_cell(x,y, 10)
 				elif(tiles[x][y] == "wi"):
 					_tile_map.set_cell(x,y,0)
+				elif(tiles[x][y] == "bks"):
+					_tile_map.set_cell(x,y,18)
 	for x in range(1, size.x - 1):
 		for y in [0, size.y-1]:
 			if y == 0:
@@ -99,20 +101,22 @@ func _generate_perimeter() -> void:
 					_tile_map.set_cell(x,y, 3)
 				elif(tiles[x][y] == "wi"):
 					_tile_map.set_cell(x, y, 0)
+				elif(tiles[x][y] == "bks"):
+					_tile_map.set_cell(x,y,17)
 					
 			else:
 				_tile_map.set_cell(x,y, 8)
 # again may not want these hardcoded in the future but for now it's fine
-#	_tile_map.set_cell(0,6, 12)
-#	_tile_map.set_cell(7,6, 13)
-#	_tile_map.set_cell(0,0, 14)
-#	_tile_map.set_cell(7,0, 15)
-# what do these 4 set_cells do? - Gabe # They are the four corner tiles - Ryan
-	_tile_map.set_cell(0,9, 12)
-	_tile_map.set_cell(11,9, 13)
+	_tile_map.set_cell(0,6, 12)
+	_tile_map.set_cell(7,6, 13)
 	_tile_map.set_cell(0,0, 14)
-	_tile_map.set_cell(11,0, 15)
-	
+	_tile_map.set_cell(7,0, 15)
+# what do these 4 set_cells do? - Gabe # They are the four corner tiles - Ryan
+#	_tile_map.set_cell(0,9, 12)
+#	_tile_map.set_cell(11,9, 13)
+#	_tile_map.set_cell(0,0, 14)
+#	_tile_map.set_cell(11,0, 15)
+#
 
 func _generate_inner() -> void:
 	var tile = null
@@ -122,29 +126,33 @@ func _generate_inner() -> void:
 			var cell = get_random_tile(ground_probability)
 
 func _generate_objects() -> void:
-	for x in range(2, size.x-2):
-		for y in range (2, size.y-4):
+	for x in range(1, size.x-1):
+		for y in range (1, size.y-1):
 			var cell = get_random_tile(ground_probability)
-			_tilemap2.set_cell(x,y,_pick_random_texture(Cell.OBSTACLE))
-			_tilemap2.set_cell(1,1,5)
-#			_tilemap2.set_cell(10,1,5)
-			_tilemap2.set_cell(1,6,7)
+			tile = tiles[x][y]
+			match tile:
+#			_tilemap2.set_cell(x,y,_pick_random_texture(Cell.OBSTACLE))
+#			_tilemap2.set_cell(1,1,5)
+#			_tilemap2.set_cell(6,1,5)
+				"b": _tilemap2.set_cell(x, y, 5)
+				"st": _tilemap2.set_cell(x, y, 4)
+				"t": _tilemap2.set_cell(x, y, 8)
+				"c": _tilemap2.set_cell(x, y, 1)
+			#big rug hardcode for now
+#			_tilemap2.set_cell(1,3,7)
 
 func _generate_rugs() -> void:
-	for x in range(7, size.x-1):
-		for y in range (6, size.y-1):
+	for x in range(1, size.x-1):
+		for y in range (1, size.y-1):
 			var cell = get_random_tile(rug_probability)
-			_tilemap2.set_cellv(Vector2(x,7),3)
-			_tilemap2.set_cellv(Vector2(x,8),3)
+#			_tilemap2.set_cellv(Vector2(x,7),3)
+#			_tilemap2.set_cellv(Vector2(x,8),3)
 			#set the "obstacles" above it
 			tile = tiles[x][y]
 			match tile:
 				#x will be a transparent tile eventually, overlayed over the floor
 				#"x": _tilemap2.set_cell(x, y, 7)
-				"t": _tilemap2.set_cell(x, y, 4)
 				"r": _tilemap2.set_cell(x, y, 3)
-				"c": _tilemap2.set_cell(x, y, 1)
-
 
 func get_random_tile(probability: float) -> int:
 	return _pick_random_texture(Cell.GROUND) if _rng.randf() < probability else _pick_random_texture(Cell.OBSTACLE)

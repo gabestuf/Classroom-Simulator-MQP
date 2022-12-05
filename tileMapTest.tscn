@@ -1,4 +1,4 @@
-[gd_scene load_steps=233 format=2]
+[gd_scene load_steps=238 format=2]
 
 [ext_resource path="res://tileMapTest.gd" type="Script" id=1]
 [ext_resource path="res://TileSetPictures/window.png" type="Texture" id=2]
@@ -25,7 +25,12 @@
 [ext_resource path="res://Tilesets/Sprites/teacher0.png" type="Texture" id=23]
 [ext_resource path="res://Tilesets/Tiles/big_carpet.png" type="Texture" id=24]
 [ext_resource path="res://Tilesets/Sprites/EmilySpriteAlt.png" type="Texture" id=25]
+[ext_resource path="res://audio/classroom_ambiance.wav" type="AudioStream" id=26]
+[ext_resource path="res://Tilesets/Tiles/big_table.png" type="Texture" id=27]
 [ext_resource path="res://AnimatedSprite5.gd" type="Script" id=28]
+[ext_resource path="res://Tilesets/Tiles/window - left wall.png" type="Texture" id=29]
+[ext_resource path="res://Tilesets/Tiles/bookshelf-right.png" type="Texture" id=30]
+[ext_resource path="res://Tilesets/Tiles/bookshelf.png" type="Texture" id=31]
 
 [sub_resource type="NavigationPolygon" id=530]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -194,6 +199,48 @@ outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
 15/shape_one_way_margin = 0.0
 15/shapes = [  ]
 15/z_index = 0
+16/name = "window - left wall.png 16"
+16/texture = ExtResource( 29 )
+16/tex_offset = Vector2( 0, 0 )
+16/modulate = Color( 1, 1, 1, 1 )
+16/region = Rect2( 0, 0, 32, 32 )
+16/tile_mode = 0
+16/occluder_offset = Vector2( 0, 0 )
+16/navigation_offset = Vector2( 0, 0 )
+16/shape_offset = Vector2( 0, 0 )
+16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+16/shape_one_way = false
+16/shape_one_way_margin = 0.0
+16/shapes = [  ]
+16/z_index = 0
+17/name = "bookshelf.png 17"
+17/texture = ExtResource( 31 )
+17/tex_offset = Vector2( 0, 0 )
+17/modulate = Color( 1, 1, 1, 1 )
+17/region = Rect2( 0, 0, 32, 32 )
+17/tile_mode = 0
+17/occluder_offset = Vector2( 0, 0 )
+17/navigation_offset = Vector2( 0, 0 )
+17/shape_offset = Vector2( 0, 0 )
+17/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+17/shape_one_way = false
+17/shape_one_way_margin = 0.0
+17/shapes = [  ]
+17/z_index = 0
+18/name = "bookshelf-right.png 18"
+18/texture = ExtResource( 30 )
+18/tex_offset = Vector2( 0, 0 )
+18/modulate = Color( 1, 1, 1, 1 )
+18/region = Rect2( 0, 0, 32, 32 )
+18/tile_mode = 0
+18/occluder_offset = Vector2( 0, 0 )
+18/navigation_offset = Vector2( 0, 0 )
+18/shape_offset = Vector2( 0, 0 )
+18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+18/shape_one_way = false
+18/shape_one_way_margin = 0.0
+18/shapes = [  ]
+18/z_index = 0
 
 [sub_resource type="NavigationPolygon" id=532]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -292,6 +339,20 @@ outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
 7/shape_one_way_margin = 0.0
 7/shapes = [  ]
 7/z_index = 0
+8/name = "big_table.png 8"
+8/texture = ExtResource( 27 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 64, 64 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
 
 [sub_resource type="AtlasTexture" id=505]
 atlas = ExtResource( 20 )
@@ -1146,62 +1207,64 @@ bake_navigation = true
 format = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 26 )
 volume_db = -13.432
 autoplay = true
 
 [node name="Line2D" type="Line2D" parent="."]
 
 [node name="AnimatedSprite4" type="AnimatedSprite" parent="."]
-position = Vector2( 271.313, 51.418 )
+position = Vector2( 112, 168 )
 scale = Vector2( 0.789773, 0.772485 )
 frames = SubResource( 529 )
-frame = 7
+frame = 9
 playing = true
 
 [node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
-position = Vector2( 208, 51.418 )
+position = Vector2( 144, 104 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 163 )
-frame = 23
+frame = 18
 speed_scale = 0.2
 playing = true
 script = ExtResource( 28 )
 
 [node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
-position = Vector2( 144.875, 51.418 )
+position = Vector2( 48, 136 )
 scale = Vector2( 0.678571, 0.737259 )
 frames = SubResource( 187 )
-frame = 15
+frame = 18
 speed_scale = 1.5
 playing = true
 
 [node name="AnimatedSprite7" type="AnimatedSprite" parent="."]
-position = Vector2( 176, 51.418 )
+position = Vector2( 80, 168 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 212 )
-frame = 14
+frame = 16
 playing = true
 
 [node name="AnimatedSprite8" type="AnimatedSprite" parent="."]
-position = Vector2( 112, 51.418 )
+position = Vector2( 80, 72 )
 scale = Vector2( 0.678571, 0.737259 )
 frames = SubResource( 237 )
-frame = 13
+frame = 15
 playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 304, 48 )
+position = Vector2( 208, 40 )
 frames = SubResource( 454 )
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
-position = Vector2( 240, 51.418 )
+position = Vector2( 112, 72 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 479 )
+frame = 2
 playing = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
-position = Vector2( 80, 51.418 )
+position = Vector2( 48, 104 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 504 )
-frame = 2
+frame = 4
 playing = true
