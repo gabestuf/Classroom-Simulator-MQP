@@ -4,6 +4,7 @@ class_name TestWorld
 signal started
 signal finished
 
+onready var AS0: 13123
 onready var AS1: AnimatedSprite = $AnimatedSprite
 onready var AS2: AnimatedSprite = $AnimatedSprite2
 onready var AS3: AnimatedSprite = $AnimatedSprite3
