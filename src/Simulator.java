@@ -1,4 +1,5 @@
 import org.json.JSONArray;
+
 import org.json.JSONObject;
 
 public class Simulator {
@@ -6,17 +7,15 @@ public class Simulator {
     public static void main (String[] args) {
 
         //Init Config
-
         JSONReader jsonReader = new JSONReader();
-        JSONObject STORYEVENTS = jsonReader.readJSONFile("res/STORYEVENTS.json");
-        JSONObject CONFIG = jsonReader.readJSONFile("res/CONFIG.json");
-
+        JSONObject STORYEVENTS = jsonReader.readJSONFile("./res/STORYEVENTS.json");
+        JSONObject CONFIG = jsonReader.readJSONFile("./res/CONFIG.json");
+        
         CONFIG.append("STORYEVENTS", STORYEVENTS);
-
         // Init Classroom
         // Creates random room with elements from the CONFIG.json and also storey events json
 
-        Classroom classroom = new Classroom(CONFIG,STORYEVENTS);
+        Classroom classroom = new Classroom(CONFIG);
 
         // call generate event list to fill the Event list inside class room
         classroom.generateEventList();
