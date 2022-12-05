@@ -4,6 +4,7 @@ class_name TestWorld
 signal started
 signal finished
 
+#sprites 
 onready var AS1: AnimatedSprite = $AnimatedSprite
 onready var AS2: AnimatedSprite = $AnimatedSprite2
 onready var AS3: AnimatedSprite = $AnimatedSprite3
@@ -12,14 +13,12 @@ onready var AS5: AnimatedSprite = $AnimatedSprite5
 onready var AS6: AnimatedSprite = $AnimatedSprite6
 onready var AS7: AnimatedSprite = $AnimatedSprite7
 onready var AS8: AnimatedSprite = $AnimatedSprite8
+
+#tilemaps
 onready var _tile_map : TileMap = $Navigation2D/BorderFloorMap
 onready var _tilemap2 : TileMap = $Navigation2D/ObjectObstaclesMap
 
-enum Cell {
-	OBSTACLE
-	GROUND
-	OUTER
-}
+
 # TODO import json
 # https://www.youtube.com/watch?v=L9Zekkb4ZXc&ab_channel=johnnygossdev
 # example json
@@ -29,7 +28,8 @@ const CONFIGJSON = {
 }
 
 export (String, FILE, "*.json") var file_path : String
-#not sure what the acual code is but this is what i did:
+
+#Please keep updating this if you add to the array
 #w = wall
 #x = floor
 #t = table
@@ -37,19 +37,19 @@ export (String, FILE, "*.json") var file_path : String
 #c = chair
 #d = door
 #wi = window
+#wil = left window
+#b = bush ?
+#bks = bookshelf ?
 var tiles = [["w", "w", "w", "wil", "w", "w", "w"], ["w", "b", "x", "c", "c", "x", "w"], ["wi", "x", "c", "t", "x", "c", "w"], ["w", "x", "c", "x", "x", "c", "w"], ["w", "x", "x", "c", "x", "x", "w"], ["w", "st", "x", "x", "r", "r", "w"], ["bks", "c", "x", "x", "r", "r", "w"], ["w", "w", "w", "w", "bks", "bks", "w"]]
+
 #for now hardcoding these, will eventually use x and y from json file
 #export var inner_size := Vector2(10,8)
 export var inner_size := Vector2(6,5)
 export var perimiter_size := Vector2(1,1)
-export(float, 0, 1) var ground_probability := 0.9
-export(float, 0, 1) var window_probability := 0.2
-export(float, 0, 1) var table_probability := 0.2
-export(float, 0, 1) var rug_probability := 0.8
 var tile = []
 var size = inner_size + 2 * perimiter_size
 
-var _rng = RandomNumberGenerator.new()
+#var _rng = RandomNumberGenerator.new()
 
 #func load_json(file_json) -> Dictionary:
 #	"""Parses a JSON File and returns it as a dictionary."""
@@ -60,7 +60,7 @@ var _rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_rng.randomize()
+	#_rng.randomize()
 	setup()
 	generate()
 
@@ -123,12 +123,12 @@ func _generate_inner() -> void:
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
 			_tile_map.set_cell(x,y,11)
-			var cell = get_random_tile(ground_probability)
+			#var cell = get_random_tile(ground_probability)
 
 func _generate_objects() -> void:
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
-			var cell = get_random_tile(ground_probability)
+			#var cell = get_random_tile(ground_probability)
 			tile = tiles[x][y]
 			match tile:
 #			_tilemap2.set_cell(x,y,_pick_random_texture(Cell.OBSTACLE))
@@ -144,7 +144,7 @@ func _generate_objects() -> void:
 func _generate_rugs() -> void:
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
-			var cell = get_random_tile(rug_probability)
+			#var cell = get_random_tile(rug_probability)
 #			_tilemap2.set_cellv(Vector2(x,7),3)
 #			_tilemap2.set_cellv(Vector2(x,8),3)
 			#set the "obstacles" above it
@@ -154,25 +154,25 @@ func _generate_rugs() -> void:
 				#"x": _tilemap2.set_cell(x, y, 7)
 				"r": _tilemap2.set_cell(x, y, 3)
 
-func get_random_tile(probability: float) -> int:
-	return _pick_random_texture(Cell.GROUND) if _rng.randf() < probability else _pick_random_texture(Cell.OBSTACLE)
+#func get_random_tile(probability: float) -> int:
+#	return _pick_random_texture(Cell.GROUND) if _rng.randf() < probability else _pick_random_texture(Cell.OBSTACLE)
 
-func _pick_random_texture(cell_type:int) -> int:
-	var interval := Vector2()
-	if cell_type == Cell.OUTER:
-		if _rng.randf() < window_probability:
-			#window!
-			interval = Vector2(16,16)
-		else:
-			interval = Vector2(3,3)
-	elif cell_type == Cell.GROUND:
-			interval = Vector2(2,2)
-	elif cell_type == Cell.OBSTACLE:
-		if _rng.randf() < table_probability:
-			interval = Vector2(4,4)
-		else:
-			interval = Vector2(1,2)
-	return _rng.randi_range(interval.x, interval.y)
+#func _pick_random_texture(cell_type:int) -> int:
+#	var interval := Vector2()
+#	if cell_type == Cell.OUTER:
+#		if _rng.randf() < window_probability:
+#			#window!
+#			interval = Vector2(16,16)
+#		else:
+#			interval = Vector2(3,3)
+#	elif cell_type == Cell.GROUND:
+#			interval = Vector2(2,2)
+#	elif cell_type == Cell.OBSTACLE:
+#		if _rng.randf() < table_probability:
+#			interval = Vector2(4,4)
+#		else:
+#			interval = Vector2(1,2)
+#	return _rng.randi_range(interval.x, interval.y)
 
 
 # Navigation Test
