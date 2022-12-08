@@ -1337,11 +1337,7 @@ autoplay = true
 position = Vector2( 112, 168 )
 scale = Vector2( 0.789773, 0.772485 )
 frames = SubResource( 529 )
-<<<<<<< HEAD
-frame = 18
-=======
 frame = 3
->>>>>>> 04023726267656629637fb8c710f1068818a2cad
 playing = true
 
 [node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
@@ -1357,11 +1353,7 @@ script = ExtResource( 28 )
 position = Vector2( 48, 136 )
 scale = Vector2( 0.678571, 0.737259 )
 frames = SubResource( 187 )
-<<<<<<< HEAD
-frame = 8
-=======
 frame = 10
->>>>>>> 04023726267656629637fb8c710f1068818a2cad
 speed_scale = 1.5
 playing = true
 
@@ -1369,11 +1361,7 @@ playing = true
 position = Vector2( 80, 168 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 212 )
-<<<<<<< HEAD
-frame = 1
-=======
 frame = 10
->>>>>>> 04023726267656629637fb8c710f1068818a2cad
 playing = true
 
 [node name="AnimatedSprite8" type="AnimatedSprite" parent="."]
@@ -1392,20 +1380,12 @@ animation = "up left"
 position = Vector2( 112, 72 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 479 )
-<<<<<<< HEAD
-frame = 11
-=======
 frame = 20
->>>>>>> 04023726267656629637fb8c710f1068818a2cad
 playing = true
 
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
 position = Vector2( 48, 104 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 504 )
-<<<<<<< HEAD
-frame = 15
-=======
 frame = 22
->>>>>>> 04023726267656629637fb8c710f1068818a2cad
 playing = true
