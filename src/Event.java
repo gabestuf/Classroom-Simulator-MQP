@@ -108,7 +108,7 @@ public class Event{
 		int updatedY = s.posY + 1;
 
 		// COLLISION
-		if (this.room.getLayout()[updatedX][updatedY] == 'x') { // Check if the position is valid 
+		if (this.room.getLayout()[updatedX][updatedY] == 'f') { // Check if the position is valid
 
 		} else { // This position is NOT valid, come up with a way to search nearby positions for an empty square. 
 			

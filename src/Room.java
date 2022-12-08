@@ -32,7 +32,7 @@ public class Room {
         char[][] temp = new char[10][10];
         for(int i = 0; i < this.sizeX; i++) {
             for(int j = 0; j < this.sizeY; j++) {
-                temp[i][j] = 'x';
+                temp[i][j] = 'f';
                 if(i == 0 || i == this.sizeY-1) {
                     temp[i][j] = 'w';
                 }else if(j == 0 || j == this.sizeX-1) {
@@ -63,7 +63,7 @@ public class Room {
         // Check for collision
         for(int i = x-1; i <= x+1; i++) {
             for(int j = y-1; j <= y+1; j++) {
-                if (this.layout[i][j] != 'x') {
+                if (this.layout[i][j] != 'f') {
                     return false;
                 }
             }
@@ -80,7 +80,7 @@ public class Room {
 
     public boolean addChair(int x, int y){
         // TODO out of bounds detection
-        if(this.layout[x][y] == 'x'){
+        if(this.layout[x][y] == 'f'){
             this.layout[x][y] = 'c';
         }
         else {
@@ -103,7 +103,7 @@ public class Room {
     }
 
     public boolean addRug(int x, int y) {
-        if (this.layout[x][y] == 'x') {
+        if (this.layout[x][y] == 'f') {
             this.layout[x][y] = 'r';
             return true;
         } else {
@@ -116,7 +116,7 @@ public class Room {
         LinkedList<Integer> arr = new LinkedList<>();
         for(int x = 0; x < this.sizeX; x++) {
             for (int y = 0; y < this.sizeY; y++) {
-                if (this.layout[x][y] == 'x') {
+                if (this.layout[x][y] == 'f') {
                     arr.add(0,x);
                     arr.add(1,y);
                     return arr;
@@ -131,7 +131,7 @@ public class Room {
         for(int x = 0; x < this.sizeX; x++) {
             for (int y = 0; y < this.sizeY; y++) {
                 LinkedList<Integer> arr = new LinkedList<>();
-                if (this.layout[x][y] == 'x') {
+                if (this.layout[x][y] == 'f' || this.layout[x][y] == 'r') {
                     arr.add(0, x);
                     arr.add(1, y);
                     coordList.add(arr);
@@ -148,7 +148,7 @@ public class Room {
 		char obj = temp[y1][x1];
 		//System.out.println(obj);
 		temp[y2][x2] = obj;
-		temp[y1][x1] = 'x';
+		temp[y1][x1] = 'f';
 		//System.out.println(obj);
 	}
 }

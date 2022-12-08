@@ -3,7 +3,7 @@ import java.util.*;
 public class BFS {
     // This method takes in a 2d array of strings, a starting location, and an
     // ending location, and uses breadth first search to find the shortest path
-    // between the two points. The path can only follow nodes marked "x" and
+    // between the two points. The path can only follow nodes marked "f" and
     // must avoid other nodes. It returns a list of coordinates which is the
     // path from start location to end location.
     public static List<int[]> shortestPath(String[][] grid, int[] start, int[] end) {
@@ -57,8 +57,8 @@ public class BFS {
                         continue;
                     }
 
-                    // Make sure we are only visiting nodes marked "x"
-                    if (!grid[x][y].equals("x")) {
+                    // Make sure we are only visiting nodes marked "f"
+                    if (!grid[x][y].equals("f")) {
                         continue;
                     }
 
@@ -84,52 +84,4 @@ public class BFS {
         return Collections.emptyList();
     }
 
-    public static void main(String[] args) {
-        // Let's test our shortestPath method with the following grid:
-        //
-        //  x - x x - -
-        //  x x - - x x
-        //  - x - - x -
-        //  x x - x - -
-        //  - - x x - x
-        //  x x - x - x
-        //
-        // And the start and end locations: (0, 0) and (5, 5)
-        String[][] grid = {
-                {"x", "-", "x", "x", "-", "-"},
-                {"x", "x", "-", "-", "x", "x"},
-                {"-", "x", "-", "-", "x", "-"},
-                {"x", "x", "-", "x", "-", "-"},
-                {"-", "-", "x", "x", "-", "x"},
-                {"x", "x", "-", "x", "-", "x"},
-        };
-        int[] start = {0, 0};
-        int[] end = {3, 1};
-
-        // The expected output is the list: [(0, 0), (1, 0), (2, 0), (3, 1), (4, 2), (5, 3), (5, 4), (5, 5)]
-        List<int[]> expected = Arrays.asList(
-                new int[]{0, 0},
-                new int[]{1, 0},
-                new int[]{1, 1},
-                new int[]{2, 1},
-                new int[]{3, 1}
-        );
-
-        List<int[]> result = shortestPath(grid, start, end);
-
-        // Check if the result matches the expected output
-        for (int[] coords : result) {
-            for (int i : coords) {
-                System.out.println(i);
-            }
-        }
-
-        if (result.equals(expected)) {
-            System.out.println("The shortest path was found successfully!");
-        } else {
-            System.out.println("Error: the shortest path was not found correctly.");
-            System.out.println("Expected: " + expected);
-            System.out.println("Result: " + result);
-        }
-    }
 }

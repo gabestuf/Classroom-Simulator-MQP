@@ -26,6 +26,11 @@ public class Classroom {
         for (int i = 0; i < numTeachers; i++) {
             LinkedList<Integer> coords = this.room.findRandomEmptySpace(); // TODO Not sure how we want to init teacher and students
 
+            if (coords == null) {
+                System.out.print("Error, cannot place sprite");
+                return null;
+            }
+
             int x = coords.get(0);
             int y = coords.get(1);
             JSONObject c = new JSONObject();
@@ -99,7 +104,7 @@ public class Classroom {
                     // checks surrounding tiles
                     for (int x0 = x - 1; x0 <= x+1; x0++) {
                         for (int y0 = y - 1; y0 <= y+1; y0++) {
-                            if (this.room.getLayout()[x0][y0] != 'x') {spaceAvailable = false;}
+                            if (this.room.getLayout()[x0][y0] != 'f') {spaceAvailable = false;}
                             coords.add(0, x);
                             coords.add(1, y);
                         }
@@ -132,7 +137,7 @@ public class Classroom {
                 LinkedList<Integer> coords = new LinkedList<>();
                 boolean spaceAvailable = true;
                 if (x >= 1 && x < this.roomSizeX - 1 && y >= 1 && y < this.roomSizeY - 1) { // out of bounds detection, also -1 because of walls
-                    if (this.room.getLayout()[x][y] != 'x') {spaceAvailable = false;}
+                    if (this.room.getLayout()[x][y] != 'f') {spaceAvailable = false;}
                     coords.add(0, x);
                     coords.add(1, y);
                 } else {
@@ -156,7 +161,7 @@ public class Classroom {
                 LinkedList<Integer> coords = new LinkedList<>();
                 boolean spaceAvailable = true;
                 if (x >= 1 && x < this.roomSizeX - 1 && y >= 1 && y < this.roomSizeY - 1) { // out of bounds detection, also -2 because of walls and it's a 3x3 thing. If a 1x1, do -1 instead of 2 and no need for inner loops
-                    if (this.room.getLayout()[x][y] != 'x') {spaceAvailable = false;}
+                    if (this.room.getLayout()[x][y] != 'f') {spaceAvailable = false;}
                     coords.add(0, x);
                     coords.add(1, y);
                 } else {
