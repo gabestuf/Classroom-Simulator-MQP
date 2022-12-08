@@ -4,9 +4,8 @@ class_name TestWorld
 signal started
 signal finished
 
-onready var AS0: 13123
 #sprites 
-onready var AS1: AnimatedSprite = $AnimatedSprite
+onready var teacher: AnimatedSprite = $AnimatedSprite
 onready var AS2: AnimatedSprite = $AnimatedSprite2
 onready var AS3: AnimatedSprite = $AnimatedSprite3
 onready var AS4: AnimatedSprite = $AnimatedSprite4
@@ -15,12 +14,37 @@ onready var AS6: AnimatedSprite = $AnimatedSprite6
 onready var AS7: AnimatedSprite = $AnimatedSprite7
 onready var AS8: AnimatedSprite = $AnimatedSprite8
 
-var i = 0
-
 #tilemaps
 onready var _tile_map : TileMap = $Navigation2D/BorderFloorMap
 onready var _tilemap2 : TileMap = $Navigation2D/ObjectObstaclesMap
 
+#bottom map
+var borderTileMap = {
+	"window" : 0,
+	"carpet" : 2,
+	"topWall" : 3,
+	"bottom" : 8,
+	"leftWall" : 9,
+	"rightWall" : 10,
+	"floor" : 11,
+	"bottomLeft" : 12,
+	"bottomRight" : 13,
+	"topLeft" : 14,
+	"topRight" : 15,
+	"leftWindow" : 16,
+	"bookshelf" : 17,
+	"rightBookshelf" : 18
+}
+#top map
+var objectTileMap = {
+	"chair" : 1,
+	"carpet" : 3,
+	"table" : 4,
+	"bush" : 5,
+	"floor" : 6,
+	"bigCarpet" : 7,
+	"bigTable" : 8
+}
 
 # TODO import json
 # https://www.youtube.com/watch?v=L9Zekkb4ZXc&ab_channel=johnnygossdev
@@ -34,7 +58,7 @@ export (String, FILE, "*.json") var file_path : String
 
 #Please keep updating this if you add to the array
 #w = wall
-#x = floor
+#f = floor
 #t = table
 #r = rug
 #c = chair
@@ -43,7 +67,7 @@ export (String, FILE, "*.json") var file_path : String
 #wil = left window
 #b = bush ?
 #bks = bookshelf ?
-var tiles = [["w", "w", "w", "wil", "w", "w", "w"], ["w", "b", "x", "c", "c", "x", "w"], ["wi", "x", "c", "t", "x", "c", "w"], ["w", "x", "c", "x", "x", "c", "w"], ["w", "x", "x", "c", "x", "x", "w"], ["w", "st", "x", "x", "r", "r", "w"], ["bks", "c", "x", "x", "r", "r", "w"], ["w", "w", "w", "w", "bks", "bks", "w"]]
+var tiles = [["w", "w", "w", "wil", "w", "w", "w"], ["w", "b", "f", "c", "c", "f", "w"], ["wi", "f", "c", "t", "f", "c", "w"], ["w", "f", "c", "f", "f", "c", "w"], ["w", "f", "f", "c", "f", "f", "w"], ["w", "st", "f", "f", "r", "r", "w"], ["bks", "c", "f", "f", "r", "r", "w"], ["w", "w", "w", "w", "bks", "bks", "w"]]
 
 #for now hardcoding these, will eventually use x and y from json file
 #export var inner_size := Vector2(10,8)
@@ -81,39 +105,40 @@ func generate() -> void:
 	emit_signal("finished")
 
 func _generate_perimeter() -> void:
-# Left and Right Walls
+	# Left and Right Walls
 	for x in [0, size.x - 1]:
 		for y in range(0, size.y):
 			tile = tiles[x][y]
 			if x == 0:
 				if(tiles[x][y] == "w"):
-					_tile_map.set_cell(x,y, 9)
+					_tile_map.set_cell(x,y, borderTileMap.leftWall)
 				elif(tiles[x][y] == "wil"):
-					_tile_map.set_cell(x,y,16)
+					_tile_map.set_cell(x,y,borderTileMap.leftWindow)
 			else:
 				if(tiles[x][y] == "w"):
-					_tile_map.set_cell(x,y, 10)
+					_tile_map.set_cell(x,y, borderTileMap.rightWall)
 				elif(tiles[x][y] == "wi"):
-					_tile_map.set_cell(x,y,0)
+					_tile_map.set_cell(x,y, borderTileMap.window)
 				elif(tiles[x][y] == "bks"):
-					_tile_map.set_cell(x,y,18)
+					_tile_map.set_cell(x,y,borderTileMap.rightBookshelf)
+	#top and bottom walls
 	for x in range(1, size.x - 1):
 		for y in [0, size.y-1]:
 			if y == 0:
 				if(tiles[x][y] == "w"):
-					_tile_map.set_cell(x,y, 3)
+					_tile_map.set_cell(x,y, borderTileMap.topWall)
 				elif(tiles[x][y] == "wi"):
-					_tile_map.set_cell(x, y, 0)
+					_tile_map.set_cell(x, y, borderTileMap.window)
 				elif(tiles[x][y] == "bks"):
-					_tile_map.set_cell(x,y,17)
+					_tile_map.set_cell(x,y,borderTileMap.bookshelf)
 					
 			else:
-				_tile_map.set_cell(x,y, 8)
+				_tile_map.set_cell(x,y, borderTileMap.bottom)
 # again may not want these hardcoded in the future but for now it's fine
-	_tile_map.set_cell(0,6, 12)
-	_tile_map.set_cell(7,6, 13)
-	_tile_map.set_cell(0,0, 14)
-	_tile_map.set_cell(7,0, 15)
+	_tile_map.set_cell(0,6, borderTileMap.bottomLeft)
+	_tile_map.set_cell(7,6, borderTileMap.bottomRight)
+	_tile_map.set_cell(0,0, borderTileMap.topLeft)
+	_tile_map.set_cell(7,0, borderTileMap.topRight)
 # what do these 4 set_cells do? - Gabe # They are the four corner tiles - Ryan
 #	_tile_map.set_cell(0,9, 12)
 #	_tile_map.set_cell(11,9, 13)
@@ -125,7 +150,7 @@ func _generate_inner() -> void:
 	var tile = null
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
-			_tile_map.set_cell(x,y,11)
+			_tile_map.set_cell(x,y,borderTileMap.floor)
 			#var cell = get_random_tile(ground_probability)
 
 func _generate_objects() -> void:
@@ -137,46 +162,22 @@ func _generate_objects() -> void:
 #			_tilemap2.set_cell(x,y,_pick_random_texture(Cell.OBSTACLE))
 #			_tilemap2.set_cell(1,1,5)
 #			_tilemap2.set_cell(6,1,5)
-				"b": _tilemap2.set_cell(x, y, 5)
-				"st": _tilemap2.set_cell(x, y, 4)
-				"t": _tilemap2.set_cell(x, y, 8)
-				"c": _tilemap2.set_cell(x, y, 1)
+				"b": _tilemap2.set_cell(x, y, objectTileMap.bush)
+				"st": _tilemap2.set_cell(x, y, objectTileMap.carpet)
+				"t": _tilemap2.set_cell(x, y, objectTileMap.bigTable)
+				"c": _tilemap2.set_cell(x, y, objectTileMap.chair)
 			#big rug hardcode for now
-#			_tilemap2.set_cell(1,3,7)
+			#_tilemap2.set_cell(1,3,objectTileMap.bigCarpet)
 
 func _generate_rugs() -> void:
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
-			#var cell = get_random_tile(rug_probability)
-#			_tilemap2.set_cellv(Vector2(x,7),3)
-#			_tilemap2.set_cellv(Vector2(x,8),3)
 			#set the "obstacles" above it
 			tile = tiles[x][y]
 			match tile:
 				#x will be a transparent tile eventually, overlayed over the floor
 				#"x": _tilemap2.set_cell(x, y, 7)
-				"r": _tilemap2.set_cell(x, y, 3)
-
-#func get_random_tile(probability: float) -> int:
-#	return _pick_random_texture(Cell.GROUND) if _rng.randf() < probability else _pick_random_texture(Cell.OBSTACLE)
-
-#func _pick_random_texture(cell_type:int) -> int:
-#	var interval := Vector2()
-#	if cell_type == Cell.OUTER:
-#		if _rng.randf() < window_probability:
-#			#window!
-#			interval = Vector2(16,16)
-#		else:
-#			interval = Vector2(3,3)
-#	elif cell_type == Cell.GROUND:
-#			interval = Vector2(2,2)
-#	elif cell_type == Cell.OBSTACLE:
-#		if _rng.randf() < table_probability:
-#			interval = Vector2(4,4)
-#		else:
-#			interval = Vector2(1,2)
-#	return _rng.randi_range(interval.x, interval.y)
-
+				"r": _tilemap2.set_cell(x, y, objectTileMap.carpet)
 
 # Navigation Test
 onready var nav_2d : Navigation2D = $Navigation2D
