@@ -131,7 +131,6 @@ func _generate_perimeter() -> void:
 					_tile_map.set_cell(x, y, borderTileMap.window)
 				elif(tiles[x][y] == "bks"):
 					_tile_map.set_cell(x,y,borderTileMap.bookshelf)
-					
 			else:
 				_tile_map.set_cell(x,y, borderTileMap.bottom)
 # again may not want these hardcoded in the future but for now it's fine
@@ -150,18 +149,14 @@ func _generate_inner() -> void:
 	var tile = null
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
+			#generate the entire inner as floor to be overlayed on the other tilemap
 			_tile_map.set_cell(x,y,borderTileMap.floor)
-			#var cell = get_random_tile(ground_probability)
 
 func _generate_objects() -> void:
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
-			#var cell = get_random_tile(ground_probability)
 			tile = tiles[x][y]
 			match tile:
-#			_tilemap2.set_cell(x,y,_pick_random_texture(Cell.OBSTACLE))
-#			_tilemap2.set_cell(1,1,5)
-#			_tilemap2.set_cell(6,1,5)
 				"b": _tilemap2.set_cell(x, y, objectTileMap.bush)
 				"st": _tilemap2.set_cell(x, y, objectTileMap.carpet)
 				"t": _tilemap2.set_cell(x, y, objectTileMap.bigTable)
@@ -175,8 +170,8 @@ func _generate_rugs() -> void:
 			#set the "obstacles" above it
 			tile = tiles[x][y]
 			match tile:
-				#x will be a transparent tile eventually, overlayed over the floor
-				#"x": _tilemap2.set_cell(x, y, 7)
+				#f will be a transparent tile eventually, overlayed over the floor
+				#"f": _tilemap2.set_cell(x, y, )
 				"r": _tilemap2.set_cell(x, y, objectTileMap.carpet)
 
 # Navigation Test
