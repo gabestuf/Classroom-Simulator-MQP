@@ -20,7 +20,6 @@ onready var _tilemap2 : TileMap = $Navigation2D/ObjectObstaclesMap
 
 #bottom map
 var borderTileMap = {
-	"window" : 0,
 	"carpet" : 2,
 	"topWall" : 3,
 	"bottom" : 8,
@@ -33,7 +32,10 @@ var borderTileMap = {
 	"topRight" : 15,
 	"leftWindow" : 16,
 	"bookshelf" : 17,
-	"rightBookshelf" : 18
+	"rightBookshelf" : 18,
+	"window" : 19,
+	"door" : 20,
+	"rightdoor": 21
 }
 #top map
 var objectTileMap = {
@@ -67,7 +69,7 @@ export (String, FILE, "*.json") var file_path : String
 #wil = left window
 #b = bush ?
 #bks = bookshelf ?
-var tiles = [["w", "w", "w", "wil", "w", "w", "w"], ["w", "b", "f", "c", "c", "f", "w"], ["wi", "f", "c", "t", "f", "c", "w"], ["w", "f", "c", "f", "f", "c", "w"], ["w", "f", "f", "c", "f", "f", "w"], ["w", "st", "f", "f", "r", "r", "w"], ["bks", "c", "f", "f", "r", "r", "w"], ["w", "w", "w", "w", "bks", "bks", "w"]]
+var tiles = [["w", "w", "w", "wil", "w", "w", "w"], ["w", "b", "f", "c", "c", "f", "w"], ["wi", "f", "c", "t", "f", "c", "w"], ["w", "f", "c", "f", "f", "c", "w"], ["w", "f", "f", "c", "f", "f", "w"], ["w", "st", "f", "f", "r", "r", "w"], ["bks", "c", "f", "f", "r", "r", "w"], ["w", "w", "w", "do", "bks", "bks", "w"]]
 
 #for now hardcoding these, will eventually use x and y from json file
 #export var inner_size := Vector2(10,8)
@@ -121,6 +123,8 @@ func _generate_perimeter() -> void:
 					_tile_map.set_cell(x,y, borderTileMap.window)
 				elif(tiles[x][y] == "bks"):
 					_tile_map.set_cell(x,y,borderTileMap.rightBookshelf)
+				elif(tiles[x][y] == "do"):
+					_tile_map.set_cell(x,y,borderTileMap.rightdoor)
 	#top and bottom walls
 	for x in range(1, size.x - 1):
 		for y in [0, size.y-1]:
@@ -163,7 +167,7 @@ func _generate_objects() -> void:
 #			_tilemap2.set_cell(1,1,5)
 #			_tilemap2.set_cell(6,1,5)
 				"b": _tilemap2.set_cell(x, y, objectTileMap.bush)
-				"st": _tilemap2.set_cell(x, y, objectTileMap.carpet)
+				"st": _tilemap2.set_cell(x, y, objectTileMap.table)
 				"t": _tilemap2.set_cell(x, y, objectTileMap.bigTable)
 				"c": _tilemap2.set_cell(x, y, objectTileMap.chair)
 			#big rug hardcode for now
@@ -191,7 +195,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	# get mouse position
-	var new_path : = nav_2d.get_simple_path(AS5.global_position, event.position)
+	var new_path : = nav_2d.get_simple_path(teacher.global_position, event.position)
 	print(event.global_position)
 	line_2d.points = new_path
-	AS5.path = new_path 
+	teacher.path = new_path 
