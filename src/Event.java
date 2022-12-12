@@ -1,9 +1,6 @@
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Event{
 	
@@ -81,41 +78,24 @@ public class Event{
 	public void createFrames() {
 		setCharacters();
   		// TODO update sprite locations
-
-
+		for (Sprite sprite : this.spriteList) {
+			// update their position
+		}
 	}
 
-	//
-	public void moveSprite(Sprite s, int finalX, int finalY) {
-		// taking sprites current position,
-		// update coordinates up to (+1,+1) or (-1, -1)
-		
+
+	public Sprite moveSprite(Sprite s, int finalX, int finalY) {
+
 		// s is a sprite. posX and posY are it's current position
-		s.posX = 0;
-		s.posY = 0;
+		int[] startPosition = {s.posX, s.posY};
+		int[] endPosition = {finalX, finalY};
+		BFS bfs = new BFS();
 
-		// finalX and finalY is the final x,y coordinates 
-		finalX = 2;
-		finalY = 2;
+		// get updated coordinates
+		int[] nextCoordinates = bfs.shortestPath(this.room.getLayout(), startPosition, endPosition).get(0);
 
-		int updatedX = 0;
-		if ( finalX > s.posX) {
-			updatedX = s.posX + 1;
-		}
-		if ( finalX < s.posX) {
-			updatedX = s.posX - 1;
-		}
-		int updatedY = s.posY + 1;
+		s.setPosition(nextCoordinates[0], nextCoordinates[1]);
 
-		// COLLISION
-		if (this.room.getLayout()[updatedX][updatedY] == 'f') { // Check if the position is valid
-
-		} else { // This position is NOT valid, come up with a way to search nearby positions for an empty square. 
-			
-		}
-
-		// OUTPUT
-		s.posX = 1;
-		s.posY = 1;
+		return s;
 	}
 }

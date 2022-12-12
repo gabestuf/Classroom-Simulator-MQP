@@ -10,17 +10,19 @@ class Sprite {
     String mood;
     String description;
     JSONObject config;
+    boolean isBusy;
 
     public Sprite(JSONObject config) {
         this.config = config;
         this.role = config.getInt("role");
         this.id = config.getString("id");
-        boolean isBusy = false;
         this.mood = "content";
         this.description = "idle";
         this.posX = config.getInt("posX");
         this.posY = config.getInt("posY");
     }
+
+
 
     public boolean setPosition(int x, int y) {
         try {
@@ -29,14 +31,12 @@ class Sprite {
                 this.posX = x;
                 this.posY = y;
                 return true;
-            } else {
-                return false;
             }
         } catch (
                 Exception e) {
             System.out.println(e);
-            return false;
         }
+        return false;
     }
 
     // I think it overrides by default but just in case

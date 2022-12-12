@@ -6,7 +6,7 @@ public class BFS {
     // between the two points. The path can only follow nodes marked "f" and
     // must avoid other nodes. It returns a list of coordinates which is the
     // path from start location to end location.
-    public static List<int[]> shortestPath(String[][] grid, int[] start, int[] end) {
+    public static List<int[]> shortestPath(char[][] grid, int[] start, int[] end) {
         // We will use a queue to keep track of which nodes we need to visit next
         // in our breadth first search.
         Queue<int[]> queue = new LinkedList<>();
@@ -58,7 +58,7 @@ public class BFS {
                     }
 
                     // Make sure we are only visiting nodes marked "f"
-                    if (!grid[x][y].equals("f")) {
+                    if (Character.compare(grid[x][y], 'f') == 0) {
                         continue;
                     }
 
