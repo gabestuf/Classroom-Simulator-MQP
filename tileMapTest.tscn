@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=2]
+[gd_scene load_steps=176 format=2]
 
 [ext_resource path="res://tileMapTest.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Tiles/window.png" type="Texture" id=2]
@@ -34,6 +34,14 @@
 [ext_resource path="res://AnimatedSpriteTeacher.gd" type="Script" id=32]
 [ext_resource path="res://Tilesets/Tiles/door - right.png" type="Texture" id=33]
 [ext_resource path="res://Tilesets/Tiles/door.png" type="Texture" id=34]
+[ext_resource path="res://AnimatedSprite3.gd" type="Script" id=35]
+[ext_resource path="res://Label.gd" type="Script" id=36]
+[ext_resource path="res://Label2.gd" type="Script" id=37]
+[ext_resource path="res://Label3.gd" type="Script" id=38]
+[ext_resource path="res://Label4.gd" type="Script" id=39]
+[ext_resource path="res://Label5.gd" type="Script" id=40]
+[ext_resource path="res://Label6.gd" type="Script" id=41]
+[ext_resource path="res://Label7.gd" type="Script" id=42]
 
 [sub_resource type="NavigationPolygon" id=530]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -861,6 +869,11 @@ animations = [ {
 "name": "down right",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 570 ), SubResource( 558 ), SubResource( 571 ), SubResource( 558 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 567 ), SubResource( 568 ), SubResource( 567 ), SubResource( 569 ), SubResource( 567 ) ],
 "loop": true,
 "name": "left",
@@ -1102,6 +1115,11 @@ frames = SubResource( 529 )
 speed_scale = 0.5
 playing = true
 
+[node name="Label7" type="Label" parent="AnimatedSprite4"]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 42 )
+
 [node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
 position = Vector2( 144, 104 )
 scale = Vector2( 0.727273, 0.727273 )
@@ -1112,6 +1130,11 @@ speed_scale = 0.2
 playing = true
 script = ExtResource( 28 )
 
+[node name="Label6" type="Label" parent="AnimatedSprite5"]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 41 )
+
 [node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
 position = Vector2( 48, 136 )
 scale = Vector2( 0.678571, 0.737259 )
@@ -1119,6 +1142,11 @@ frames = SubResource( 187 )
 frame = 3
 speed_scale = 0.2
 playing = true
+
+[node name="Label5" type="Label" parent="AnimatedSprite6"]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 40 )
 
 [node name="AnimatedSprite7" type="AnimatedSprite" parent="."]
 position = Vector2( 80, 168 )
@@ -1129,6 +1157,11 @@ frame = 1
 speed_scale = 0.2
 playing = true
 
+[node name="Label4" type="Label" parent="AnimatedSprite7"]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 39 )
+
 [node name="AnimatedSprite8" type="AnimatedSprite" parent="."]
 position = Vector2( 80, 72 )
 scale = Vector2( 0.678571, 0.737259 )
@@ -1138,11 +1171,16 @@ frame = 3
 speed_scale = 0.2
 playing = true
 
+[node name="Label" type="Label" parent="AnimatedSprite8"]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 36 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 208, 40 )
 frames = SubResource( 454 )
-animation = "down"
-frame = 1
+animation = "idle"
+frame = 3
 playing = true
 script = ExtResource( 32 )
 
@@ -1155,6 +1193,11 @@ frame = 3
 speed_scale = 0.5
 playing = true
 
+[node name="Label2" type="Label" parent="AnimatedSprite2"]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 37 )
+
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
 position = Vector2( 48, 104 )
 scale = Vector2( 0.727273, 0.727273 )
@@ -1162,3 +1205,9 @@ frames = SubResource( 504 )
 frame = 3
 speed_scale = 0.2
 playing = true
+script = ExtResource( 35 )
+
+[node name="Label3" type="Label" parent="AnimatedSprite3"]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 38 )
