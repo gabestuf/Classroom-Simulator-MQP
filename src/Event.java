@@ -11,10 +11,10 @@ public class Event{
 	ArrayList<Sprite> activeSpriteList = new ArrayList<>();
 	int numStudents;
 	int numTeachers;
-	Room room;
+	Classroom classroom;
 
-	public Event(JSONObject jsonEvent, ArrayList<Sprite> spriteList, int numStudents, int numTeachers, Room r) {
-		this.room = r;
+	public Event(JSONObject jsonEvent, ArrayList<Sprite> spriteList, int numStudents, int numTeachers, Classroom c) {
+		this.classroom = c;
 		this.name = jsonEvent.getString("name");
 		this.charactersInvolved = jsonStringCharsInvolvedArray(jsonEvent.getJSONArray("charactersInvolved"));
 		this.spriteList = spriteList;
@@ -76,26 +76,33 @@ public class Event{
 	}
 
 	public void createFrames() {
+
+		// Updates this.spriteList
 		setCharacters();
-  		// TODO update sprite locations
-		for (Sprite sprite : this.spriteList) {
-			// update their position
+
+		boolean allSpritesAtFinalPositions = true;
+
+		while (allSpritesAtFinalPositions) {
+			// debug current location, delete in build
+			System.out.println("\nBEFORE\n");
+			for (Sprite sprite : this.activeSpriteList) {
+				System.out.println(sprite);
+			}
+  			// TODO update sprite locations
+
+			for (Sprite sprite : this.activeSpriteList) {
+				// update their position
+				if(!sprite.moveToward(1,1)) {
+					allSpritesAtFinalPositions = false;
+				}
+			}
+
+			// final location, delete in build
+			System.out.println("\nAFTER\n");
+			for (Sprite sprite : this.activeSpriteList) {
+				System.out.println(sprite);
+			}
+			allSpritesAtFinalPositions = true;
 		}
-	}
-
-
-	public Sprite moveSprite(Sprite s, int finalX, int finalY) {
-
-		// s is a sprite. posX and posY are it's current position
-		int[] startPosition = {s.posX, s.posY};
-		int[] endPosition = {finalX, finalY};
-		BFS bfs = new BFS();
-
-		// get updated coordinates
-		int[] nextCoordinates = bfs.shortestPath(this.room.getLayout(), startPosition, endPosition).get(0);
-
-		s.setPosition(nextCoordinates[0], nextCoordinates[1]);
-
-		return s;
 	}
 }

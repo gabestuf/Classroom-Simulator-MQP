@@ -39,7 +39,7 @@ public class Classroom {
             c.put("id", id);
             c.put("posX", x);
             c.put("posY", y);
-            s.add(new Sprite(c));
+            s.add(new Sprite(c, this));
         }
         // INIT STUDENTS
         for (int i = 0; i < numStudents; i++) {
@@ -52,13 +52,13 @@ public class Classroom {
             c.put("id", id);
             c.put("posX", x);
             c.put("posY", y);
-            s.add(new Sprite(c));
+            s.add(new Sprite(c, this));
         }
         return s;
     }
 
     public void addSprite (JSONObject config) {
-        this.spriteList.add(new Sprite(config));
+        this.spriteList.add(new Sprite(config, this));
     }
 
     public void initRoom() {
@@ -77,7 +77,6 @@ public class Classroom {
         for (int i = 0; i < config.getInt("numChairs"); i++) {
             if (!this.addChair()) break;
         }
-
     }
 
     public void renderRoom() {
@@ -193,15 +192,7 @@ public class Classroom {
         int numEvents = this.config.getInt("numEvents");
         JSONObject allEventsJSON = this.config.getJSONArray("STORYEVENTS").getJSONObject(0);
         ArrayList<Event> eventList;
-
-
     }
-//    public void recursiveEvents(JSONObject eventsToPullFrom, ArrayList<Event> eventList, int numEvents) {
-//        // Check to make sure eventList is not full, then pick a random event from eventsToPullFrom
-//        if (eventList.size() < numEvents) {
-//            eventsToPullFrom
-//        }
-//    }
 
     public void addRandomEvent() {
 
@@ -213,13 +204,7 @@ public class Classroom {
     public Event jsonToEvent(String eventName) {
         // JSONObject storyevents = this.config.getJSONArray("STORYEVENTS").getJSONObject(0);
         JSONObject event = this.config.getJSONArray("STORYEVENTS").getJSONObject(0).getJSONObject(eventName);
-        return new Event(event, this.spriteList, this.config.getInt("numStudents"), this.config.getInt("numTeachers"), this.room);
-//        for(String key : storyevents.keySet()) {
-////          System.out.println(storyevents.getJSONObject(key));
-//            Event e = new Event(storyevents.getJSONObject(key), this.spriteList, this.config.getInt("numStudents"), this.config.getInt("numTeachers"));
-//
-//        }
-
+        return new Event(event, this.spriteList, this.config.getInt("numStudents"), this.config.getInt("numTeachers"), this);
     }
 
 }

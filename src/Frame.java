@@ -1,4 +1,7 @@
 public class Frame {
-    String event;
-    Sprite[] spriteList;
+    Classroom classroom;
+
+    public void displayClassroom() {
+        this.classroom.renderRoom();
+    }
 }

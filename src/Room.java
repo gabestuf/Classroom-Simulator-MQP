@@ -21,10 +21,10 @@ public class Room {
 		this.layout = loadDemoRoom();
 	}
 	
-	//Re-write this contructor as it will return errors given an empty list 
+
 	public Room(char[][] room) {
 		this.sizeX = room.length;
-		this.sizeY = room[0].length;
+		this.sizeY = room.length > 0 ? room[0].length : null;
 		this.layout = loadRoom(room);
 	}
 

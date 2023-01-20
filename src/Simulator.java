@@ -23,19 +23,19 @@ public class Simulator {
 
         //Create a log class with class room instance
         Log log = new Log(classroom);
-        // get hte json object out of classroom object.
+        // get the json object out of classroom object.
         JSONObject jsonObj = log.getJSONFromClassRoom();
-        System.out.println("Below is the json generated \n");
+        //System.out.println("Below is the json generated \n");
 
-        //print the json object tot he console in string format.
-        System.out.println(jsonObj.toString());
-        System.out.println();
+        //print the json object to the console in string format.
+        //System.out.println(jsonObj.toString());
+        //System.out.println();
 
         classroom.jsonToEvent("studentMakesMess");
         // TODO write a function that adds a chair randomly next to a table
 
         // And render like this
-        classroom.renderRoom();
+        //classroom.renderRoom();
 
     }
 }
