@@ -7,9 +7,9 @@ var path : = PoolVector2Array() setget set_path
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	position = Vector2(145,105)
+	position = Vector2(208,105)
 	# Set the animation to play
-	play("default")
+	play("idle")
 	set_process(false)
 
 
