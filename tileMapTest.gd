@@ -143,7 +143,6 @@ func _generate_perimeter() -> void:
 #	_tile_map.set_cell(11,9, 13)
 #	_tile_map.set_cell(0,0, 14)
 #	_tile_map.set_cell(11,0, 15)
-#
 
 func _generate_inner() -> void:
 	var tile = null
