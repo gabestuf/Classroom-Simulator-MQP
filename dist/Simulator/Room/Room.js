@@ -220,7 +220,15 @@ class Room {
         return strArr;
     }
     toJSON() {
-        return this.toStringArray();
+        let roomArr = [];
+        for (let y = 0; y < this.RoomArray.length; y++) {
+            let row = [];
+            for (let x = 0; x < this.RoomArray[0].length; x++) {
+                row.push(this.RoomArray[y][x].toString());
+            }
+            roomArr.push(row);
+        }
+        return roomArr;
     }
     render() {
         // Prints room to console

@@ -41,7 +41,26 @@ app.get("/render-room", (req: Request, res: Response) => {
 app.get("/render-room/:config", (req: Request, res: Response) => {
   // http://localhost:3001/renderRoom/{"roomSizeX": 9, "roomSizeY": 7, "numStudents": 2, "numTeachers": 1, "numChairs": 4, "numTables": 2, "numRugs": 1, "seed": 25}
   try {
-    const config = JSON.parse(req.params.config);
+    const cfg = JSON.parse(req.params.config);
+    // create new ClassroomConfig, so we can check if the datatype matches
+    const config = new ClassroomConfig({
+      seed: cfg.seed,
+      roomSizeX: cfg.roomSizeX,
+      roomSizeY: cfg.roomSizeY,
+      numStudents: cfg.numStudents,
+      numTeachers: cfg.numTeachers,
+      numChairs: cfg.numChairs,
+      numTables: cfg.numTables,
+      numRugs: cfg.numRugs,
+    });
+
+    if (!config.isValid()) {
+      res.json({
+        status: "FAILED",
+        message: "The config you entered is not valid. Please refer to the README",
+      });
+    }
+
     if (config instanceof ClassroomConfig) {
       const room = new Room(config);
       res.json({
@@ -75,39 +94,59 @@ app.post("/render-room", (req, res) => {
     },
     body: {
       config: {
-        roomSizeX: 9,
-        roomSizeY: 7,
-        numStudents: 2,
-        numTeachers: 1,
-        numChairs: 4,
-        numTables: 2,
-        numRugs: 1,
-        seed: 2 
+        "roomSizeX": 9,
+        "roomSizeY": 7,
+        "numStudents": 2,
+        "numTeachers": 1,
+        "numChairs": 4,
+        "numTables": 2,
+        "numRugs": 1,
+        "seed": 2 
       }
     }
   }
   */
-  const config = req.body.config;
-  try {
-    if (config instanceof ClassroomConfig) {
-      const room = new Room(config);
-      // room.render();
-      // const p = shortestPath(room, new Coordinate(1, 1), new Coordinate(1, 1));
-      // console.log(p);
+  const cfg = req.body.config;
+  // create new ClassroomConfig, so we can check if the datatype matches
+  const config = new ClassroomConfig({
+    seed: cfg.seed,
+    roomSizeX: cfg.roomSizeX,
+    roomSizeY: cfg.roomSizeY,
+    numStudents: cfg.numStudents,
+    numTeachers: cfg.numTeachers,
+    numChairs: cfg.numChairs,
+    numTables: cfg.numTables,
+    numRugs: cfg.numRugs,
+  });
 
-      res.json({
-        status: "SUCCESS",
-        message: `rendered a room with seed ${config.seed}`,
-        body: {
-          room: room.toJSON(),
-        },
-      });
-    } else {
-      res.json({
-        status: "FAILED",
-        message: "Unable to read config, make sure it matches ClassroomConfig",
-      });
-    }
+  if (!config.isValid()) {
+    res.json({
+      status: "FAILED",
+      message: "The config you entered is not valid. Please refer to the README",
+    });
+  }
+
+  try {
+    // if (config instanceof ClassroomConfig) {
+    const room = new Room(config);
+    // room.render();
+    // const p = shortestPath(room, new Coordinate(1, 1), new Coordinate(1, 1));
+    // console.log(p);
+
+    res.json({
+      status: "SUCCESS",
+      message: `rendered a room with seed ${config.seed}`,
+      body: {
+        room: room.toJSON(),
+      },
+    });
+    // }
+    // else {
+    //   res.json({
+    //     status: "FAILED",
+    //     message: "Unable to read config, make sure it matches ClassroomConfig",
+    //   });
+    // }
   } catch (e) {
     res.json({
       status: "FAILED",

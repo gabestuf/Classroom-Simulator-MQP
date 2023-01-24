@@ -11,5 +11,13 @@ class ClassroomConfig {
         this.numTables = JSONConfig.numRugs;
         this.seed = JSONConfig.seed;
     }
+    isValid() {
+        for (const property of Object.values(this)) {
+            if (property === null || property === undefined) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 exports.default = ClassroomConfig;

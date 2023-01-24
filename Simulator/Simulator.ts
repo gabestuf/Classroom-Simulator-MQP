@@ -7,8 +7,8 @@ import util from "util";
 
 interface JSONFinal {
   config: ClassroomConfig | null;
-  room: string[];
-  initClassroom: string[];
+  room: string[][];
+  initClassroom: string[][];
   frames: ClassroomJSON[];
 }
 

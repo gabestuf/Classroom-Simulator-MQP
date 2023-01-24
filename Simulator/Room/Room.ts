@@ -246,7 +246,17 @@ class Room {
   }
 
   toJSON() {
-    return this.toStringArray();
+    let roomArr: string[][] = [];
+
+    for (let y = 0; y < this.RoomArray.length; y++) {
+      let row: string[] = [];
+      for (let x = 0; x < this.RoomArray[0].length; x++) {
+        row.push(this.RoomArray[y][x].toString());
+      }
+      roomArr.push(row);
+    }
+
+    return roomArr;
   }
 
   render(): void {

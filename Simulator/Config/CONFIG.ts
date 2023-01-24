@@ -27,7 +27,16 @@ class ClassroomConfig implements iConfig {
     this.numChairs = JSONConfig.numChairs;
     this.numRugs = JSONConfig.numRugs;
     this.numTables = JSONConfig.numRugs;
-    this.seed = JSONConfig.seed
+    this.seed = JSONConfig.seed;
+  }
+
+  isValid() {
+    for (const property of Object.values(this)) {
+      if (property === null || property === undefined) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 

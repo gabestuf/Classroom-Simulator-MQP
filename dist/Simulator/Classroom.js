@@ -161,11 +161,10 @@ class Classroom {
         return clone;
     }
     toStringArray() {
-        let strArr = [...this.room.toStringArray()];
+        let strArr = [...this.room.toJSON()];
         //TODO add sprites on top
         for (const sprite of this.spriteList) {
-            const rowStr = strArr[sprite.pos.y];
-            strArr[sprite.pos.y] = rowStr.substring(0, sprite.pos.x) + sprite.toString() + rowStr.substring(sprite.pos.x + 1);
+            strArr[sprite.pos.y][sprite.pos.x] = sprite.toString();
         }
         return strArr;
     }
