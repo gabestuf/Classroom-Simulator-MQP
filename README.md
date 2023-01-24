@@ -4,7 +4,7 @@
 
 ## Description
 
-The goal of this project is to be able to generate the initial scenarios from an API and eventually generate frames that can be sent as a JSON body to a client.
+The goal of this server is to be able to generate the initial scenarios from an API and eventually generate frames that can be sent as a JSON body to a client.
 
 ## How to Use
 
