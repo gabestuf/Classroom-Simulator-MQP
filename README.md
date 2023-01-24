@@ -21,17 +21,19 @@ This should function as a REST API that provides useful JSON that can be used by
 | POST   | /renderRoom                              | will render a semi random room with parameters in config.[^1] Config is sent in the request body as {config: config} | Room          |
 | GET    | /classroom-simulation/random/singleEvent | runs a single random event with random config, mostly for testing. Right now there are only 2 available events.      | classroomJSON |
 
-[^1]: The config is a JSON Object that looks like this: `
-{
-roomSizeX: number,
-roomSizeY: number,
-numStudents: number,
-numTeachers: number,
-numChairs: number,
-numTables: number,
-numRugs: number,
-seed: number
-}`
+[^1]:
+    The config is a JSON Object that looks like this: `
+    {
+    roomSizeX: number,
+    roomSizeY: number,
+    numStudents: number,
+    numTeachers: number,
+    numChairs: number,
+    numTables: number,
+    numRugs: number,
+    seed: number
+
+## }`
 
 ### How to use the data
 
@@ -76,6 +78,8 @@ seed: number
 > This will be the main format for data
 > .
 
+---
+
 ## BUGs / Testing :
 
 - [ ] Figure out why multiple of the same frames are being printed
@@ -91,6 +95,8 @@ seed: number
 - [ ] write a simulation method which applies one new event
 - [ ] write simulation method which continues to render a certain amount of events, randomly
 - [ ] create a front-end to edit the ClassroomConfig, maybe to edit/add events as well
+
+---
 
 ## Changelog:
 
