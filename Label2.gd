@@ -9,3 +9,5 @@ func _ready():
 	image_node.texture = load("res://Tilesets/Emotions/angryMild.png")
 	# Add the TextureRect node as a child of the Label node
 	add_child(image_node)
+	#set the position of the emote to above the sprite's head
+	rect_position = Vector2(-15,-42)
