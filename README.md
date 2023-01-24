@@ -41,9 +41,7 @@ This will run two terminals concurrently. One compiles the typescript code into 
     numChairs: number,
     numTables: number,
     numRugs: number,
-    seed: number
-
-## }`
+    seed: number}`
 
 ### How to use the data
 
