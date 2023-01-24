@@ -31,9 +31,7 @@ This should function as a REST API that provides useful JSON that can be used by
     numChairs: number,
     numTables: number,
     numRugs: number,
-    seed: number
-
-## }`
+    seed: number}`
 
 ### How to use the data
 
