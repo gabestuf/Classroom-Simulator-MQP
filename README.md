@@ -14,6 +14,10 @@ Make sure [Node](https://nodejs.org/en/) v18 is installed. You can check with
 
 > `node --version`
 
+Install the dependencies with
+
+> `npm install`
+
 Run the app with the 'dev' script (see scripts in package.json)
 
 > `npm run dev`
@@ -90,7 +94,7 @@ This will run two terminals concurrently. One compiles the typescript code into 
 ## BUGs / Testing :
 
 - [ ] Figure out why multiple of the same frames are being printed
-- [ ] Make sure BFS works
+- [x] Make sure BFS works
 - [ ] Make sure all Routes work
 
 ## //TODO

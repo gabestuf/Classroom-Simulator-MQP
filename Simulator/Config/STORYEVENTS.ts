@@ -33,6 +33,7 @@ interface iStoryEvent {
   charactersInvolved: iUpdatedSprite[];
   nextEvents: string[];
 }
+
 export interface iUpdatedSprite {
   name: string;
   mood: string[];

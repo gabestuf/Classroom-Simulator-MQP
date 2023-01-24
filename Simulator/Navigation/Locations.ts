@@ -35,8 +35,8 @@ class ClassroomLocation {
           }
         }
         return coordinateList;
-      case "table":
-        return classroom.room.findAllTables();
+      // case "table":
+      //   return classroom.room.findAllTables();
       case "chair":
         return classroom.room.findAllChairs();
       case "rug":
