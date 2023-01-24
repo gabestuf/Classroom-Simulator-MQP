@@ -1,4 +1,2 @@
+.env
 node_modules
-obj.txt
-obj.json
-ObjectJSON.json
