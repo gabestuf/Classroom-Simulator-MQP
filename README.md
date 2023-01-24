@@ -4,11 +4,21 @@
 
 ## Description
 
-The goal of this server is to be able to generate the initial scenarios from an API and eventually generate frames that can be sent as a JSON body to a client.
+The goal of this server is to be able to generate the initial scenarios from an API and eventually generate frames that can be sent as a JSON body to a client. This should function as a REST API that provides useful JSON that can be used by the Classroom Simulator MQP. The JSON should be able to be read by our front-end, which will render the information. The information will be acquired through http requests and can be semi random based on parameters.
 
 ## How to Use
 
-This should function as a REST API that provides useful JSON that can be used by the Classroom Simulator MQP. The JSON should be able to be read by our front-end, which will render the information. The information will be acquired through http requests and can be semi random based on parameters.
+### Locally
+
+Make sure [Node](https://nodejs.org/en/) v18 is installed. You can check with
+
+> `node --version`
+
+Run the app with the 'dev' script (see scripts in package.json)
+
+> `npm run dev`
+
+This will run two terminals concurrently. One compiles the typescript code into javascript and builds it in the /dist folder. The other is node running the compiled index.js, which is the express app. The typescript is compiled on save. Default port is 3000, or you can make a .env with PORT=number. Send requests to http://localhost:port/ on your local machine.
 
 ---
 
