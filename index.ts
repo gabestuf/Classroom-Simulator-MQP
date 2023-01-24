@@ -1,10 +1,9 @@
-import { CONNREFUSED } from "dns";
 import dotenv from "dotenv";
 dotenv.config();
 import express, { Express, Request, Response } from "express";
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 let cors = require("cors");
 const path = require("path");
 app.use(cors());
@@ -15,12 +14,8 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // Classroom logic
-import Classroom from "./Simulator/Classroom";
 import ClassroomConfig from "./Simulator/Config/CONFIG";
-import shortestPath from "./Simulator/Navigation/BFS";
-import Coordinate from "./Simulator/Navigation/Coordinate";
 import Room from "./Simulator/Room/Room";
-import { Floor } from "./Simulator/Room/Tiles";
 import Simulator from "./Simulator/Simulator";
 
 // const sim = new Simulator(config)

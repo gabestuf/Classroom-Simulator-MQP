@@ -8,8 +8,8 @@ class Mood {
             this.name = name_;
         }
         else {
-            console.log("error");
-            throw Error(`This mood cannot be created, unavailable name entered. Here is a list of the available mood names currently: ${moodList}`);
+            const errstr = `This mood cannot be created, unavailable name entered. Here is a list of the available mood names currently: ${moodList}`;
+            throw Error(errstr);
         }
     }
 }

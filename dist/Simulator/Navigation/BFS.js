@@ -13,17 +13,11 @@ const shortestPath = (room, startPos, endPos) => {
     let path = [];
     // check if startPos is valid
     if (!(room.RoomArray[startPos.y][startPos.x] instanceof Tiles_1.Floor) && !(room.RoomArray[startPos.y][startPos.x] instanceof Tiles_1.Rug) && !(room.RoomArray[startPos.y][startPos.x] instanceof Tiles_1.Chair)) {
-        console.log("Start: ", startPos);
-        console.log("End: ", endPos);
-        console.log(room.RoomArray[startPos.y][startPos.x]);
         console.error("No available path, start position invalid");
         return [];
     }
     // check if endPos is valid
     if (!(room.RoomArray[endPos.y][endPos.x] instanceof Tiles_1.Floor) && !(room.RoomArray[endPos.y][endPos.x] instanceof Tiles_1.Rug) && !(room.RoomArray[endPos.y][endPos.x] instanceof Tiles_1.Chair)) {
-        console.log("Start: ", startPos);
-        console.log("End: ", endPos);
-        console.log(room.RoomArray[startPos.y][startPos.x]);
         console.error("No available path, end position is not valid");
         return [];
     }
@@ -50,7 +44,7 @@ function bfs(room, startPos, endPos) {
     const start = [startPos.x, startPos.y];
     const end = [endPos.x, endPos.y];
     const grid = convertRoomArray(room.RoomArray);
-    // // TODO DELETE THIS IS FOR TESTING
+    // // TODO COMMENT OUT, THIS IS FOR TESTING
     // // LOGGING grid
     // room.render()
     // let str = ""

@@ -7,7 +7,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 let cors = require("cors");
 const path = require("path");
 app.use(cors());
@@ -15,6 +15,7 @@ const bodyParser = require("express").json;
 app.use(bodyParser());
 app.use(express_1.default.static("public"));
 app.use(express_1.default.json());
+// Classroom logic
 const CONFIG_1 = __importDefault(require("./Simulator/Config/CONFIG"));
 const Room_1 = __importDefault(require("./Simulator/Room/Room"));
 const Simulator_1 = __importDefault(require("./Simulator/Simulator"));

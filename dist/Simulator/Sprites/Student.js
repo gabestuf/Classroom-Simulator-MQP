@@ -13,10 +13,10 @@ class Student {
         this.currentDescription = "";
     }
     moveTowardHeading(room) {
-        // BFS -> 
+        // BFS ->
         /*
-        this.pos = bfs(2dArray, startPosition, endPosition) -> Array of Coordinates
-        */
+            this.pos = bfs(2dArray, startPosition, endPosition) -> Array of Coordinates
+            */
     }
     updateHeadingByLocation(newLoc) {
         this.heading = newLoc.chooseRandomPosition();
@@ -29,7 +29,7 @@ class Student {
             name: this.name,
             pos: [this.pos.x, this.pos.y],
             mood: this.mood.name,
-            description: this.currentDescription
+            description: this.currentDescription,
         };
         return newjson;
     }
