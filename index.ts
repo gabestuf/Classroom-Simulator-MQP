@@ -18,9 +18,6 @@ import ClassroomConfig from "./Simulator/Config/CONFIG";
 import Room from "./Simulator/Room/Room";
 import Simulator from "./Simulator/Simulator";
 
-// const sim = new Simulator(config)
-// sim.generate()
-
 app.get("/", (req: Request, res: Response) => {
   res.send("MQP API");
 });

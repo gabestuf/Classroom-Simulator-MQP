@@ -8,6 +8,25 @@ The goal of this server is to be able to generate the initial scenarios from an 
 
 ## How to Use
 
+### Getting Branch to local machine:
+
+_Make sure changes are saved on current branch_
+
+Switch to branch server:
+
+> git checkout server
+
+If this is your first time pulling the branch `git checkout server` might not work:
+
+1. Fetch all remote branches
+   > git fetch origin
+2. List branches available for checkout
+   > git branch -a
+3. Pull changes from a remote branch
+   > git checkout -b server origin/server
+
+For more information, visit [here](https://www.freecodecamp.org/news/git-checkout-remote-branch-tutorial/)
+
 ### Locally
 
 Make sure [Node](https://nodejs.org/en/) v18 is installed. You can check with
