@@ -89,9 +89,31 @@ var size = inner_size + 2 * perimiter_size
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#_rng.randomize()
+	http()
 	setup()
 	generate()
+
+func http() -> void:
+	#create httpRequest object and add it as a child
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	
+	#connect the request to it's completion signal
+	http_request.connect("request_completed", self, "_on_request_completed")
+	
+	#create request, check for error
+	var error = http_request.request("https://classroom-simulator-server.vercel.app/render-room")
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+
+var JSONDict
+
+#function is called when httprequest is complete
+func _on_request_completed(result, response_code, headers, body):
+	#get json and print it out
+	var json = JSON.parse(body.get_string_from_utf8())
+	JSONDict = json.result
+	print(JSONDict)
 
 func setup() -> void:
 	var map_size_px = size * _tile_map.cell_size
