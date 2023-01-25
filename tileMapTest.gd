@@ -48,17 +48,7 @@ var objectTileMap = {
 	"bigTable" : 8
 }
 
-# TODO import json
-# https://www.youtube.com/watch?v=L9Zekkb4ZXc&ab_channel=johnnygossdev
-# example json
-const CONFIGJSON = {
-	"RoomSizeX": 10,
-	"RoomSizeY": 8,
-}
-
-export (String, FILE, "*.json") var file_path : String
-
-#Please keep updating this if you add to the array
+#tiles:
 #w = wall
 #f = floor
 #t = table
@@ -69,29 +59,32 @@ export (String, FILE, "*.json") var file_path : String
 #wil = left window
 #b = bush ?
 #bks = bookshelf ?
-var tiles = [["w", "w", "w", "wil", "w", "w", "w"], ["w", "b", "f", "c", "c", "f", "w"], ["wi", "f", "c", "t", "f", "c", "w"], ["w", "f", "c", "f", "f", "c", "w"], ["w", "f", "f", "c", "f", "f", "w"], ["w", "st", "f", "f", "r", "r", "w"], ["bks", "c", "f", "f", "r", "r", "w"], ["w", "w", "w", "do", "bks", "bks", "w"]]
+#S = student/sprite
+var tiles
 
-#for now hardcoding these, will eventually use x and y from json file
-#export var inner_size := Vector2(10,8)
-export var inner_size := Vector2(6,5)
-export var perimiter_size := Vector2(1,1)
+#perimiter is always 1 tile around the entire room
+var perimiter_size := Vector2(1,1)
+var inner_size
+
+#used to add tiles to the tilemap
 var tile = []
-var size = inner_size + 2 * perimiter_size
 
-#var _rng = RandomNumberGenerator.new()
+#size of tile map
+var size
 
-#func load_json(file_json) -> Dictionary:
-#	"""Parses a JSON File and returns it as a dictionary."""
-#
-#	var file = File.new()
-#	assert file.file_exists(file_json)
-#	file.open(file_json, file.READ)
+#json dictionary
+var JSONDict
+
+#room size x and y
+var roomSizeX
+var roomSizeY
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	http()
-	setup()
-	generate()
+	#calling these from http so that they run in order without async
+	#setup()
+	#generate()
 
 func http() -> void:
 	#create httpRequest object and add it as a child
@@ -102,23 +95,39 @@ func http() -> void:
 	http_request.connect("request_completed", self, "_on_request_completed")
 	
 	#create request, check for error
-	var error = http_request.request("https://classroom-simulator-server.vercel.app/render-room")
+	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent")
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
-
-var JSONDict
+	print("here")
+	
 
 #function is called when httprequest is complete
 func _on_request_completed(result, response_code, headers, body):
-	#get json and print it out
+	#get json and store as a dict
 	var json = JSON.parse(body.get_string_from_utf8())
 	JSONDict = json.result
 	print(JSONDict)
+	
+	#gets the room layout and room size from json
+	var jsonTiles = JSONDict.get("body").get("classroomJSON").get("room")
+	roomSizeX = JSONDict.get("body").get("classroomJSON").get("config").get("roomSizeX")
+	roomSizeY = JSONDict.get("body").get("classroomJSON").get("config").get("roomSizeY")
+	
+	#set inner size to correct dimensions
+	inner_size = Vector2(roomSizeY-2, roomSizeX-2)
+	#set the tiles to be used in the rest of the program
+	tiles = jsonTiles
+	#set the size
+	size = inner_size + 2 * perimiter_size
+	#calling setup here so that there's no async
+	setup()
 
 func setup() -> void:
 	var map_size_px = size * _tile_map.cell_size
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, map_size_px)
 	OS.set_window_size(2*map_size_px)
+	#calling generate here so there's no async
+	generate()
 
 func generate() -> void:
 	emit_signal("started")
@@ -159,16 +168,11 @@ func _generate_perimeter() -> void:
 					_tile_map.set_cell(x,y,borderTileMap.bookshelf)
 			else:
 				_tile_map.set_cell(x,y, borderTileMap.bottom)
-# again may not want these hardcoded in the future but for now it's fine
-	_tile_map.set_cell(0,6, borderTileMap.bottomLeft)
-	_tile_map.set_cell(7,6, borderTileMap.bottomRight)
+	#corners
+	_tile_map.set_cell(0,roomSizeX - 1, borderTileMap.bottomLeft)
+	_tile_map.set_cell(roomSizeY - 1,roomSizeX - 1, borderTileMap.bottomRight)
 	_tile_map.set_cell(0,0, borderTileMap.topLeft)
-	_tile_map.set_cell(7,0, borderTileMap.topRight)
-# what do these 4 set_cells do? - Gabe # They are the four corner tiles - Ryan
-#	_tile_map.set_cell(0,9, 12)
-#	_tile_map.set_cell(11,9, 13)
-#	_tile_map.set_cell(0,0, 14)
-#	_tile_map.set_cell(11,0, 15)
+	_tile_map.set_cell(roomSizeY - 1,0, borderTileMap.topRight)
 
 func _generate_inner() -> void:
 	var tile = null
@@ -183,8 +187,8 @@ func _generate_objects() -> void:
 			tile = tiles[x][y]
 			match tile:
 				"b": _tilemap2.set_cell(x, y, objectTileMap.bush)
-				"st": _tilemap2.set_cell(x, y, objectTileMap.table)
-				"t": _tilemap2.set_cell(x, y, objectTileMap.bigTable)
+				"t": _tilemap2.set_cell(x, y, objectTileMap.table)
+				#"T": _tilemap2.set_cell(x, y, objectTileMap.bigTable)
 				"c": _tilemap2.set_cell(x, y, objectTileMap.chair)
 			#big rug hardcode for now
 			#_tilemap2.set_cell(1,3,objectTileMap.bigCarpet)
