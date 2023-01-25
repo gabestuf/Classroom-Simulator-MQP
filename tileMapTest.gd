@@ -14,6 +14,18 @@ onready var AS6: AnimatedSprite = $AnimatedSprite6
 onready var AS7: AnimatedSprite = $AnimatedSprite7
 onready var AS8: AnimatedSprite = $AnimatedSprite8
 
+#number of students that have been placed
+var numStudents = 0
+#number of teachers that have been placed
+var numTeachers = 0
+#total num of students on the tilemap
+var totalStudents
+#total num of teacheers on the tilemap
+var totalTeachers
+
+#sprite positions will be stored here
+var spritePos = {}
+
 #tilemaps
 onready var _tile_map : TileMap = $Navigation2D/BorderFloorMap
 onready var _tilemap2 : TileMap = $Navigation2D/ObjectObstaclesMap
@@ -60,6 +72,7 @@ var objectTileMap = {
 #b = bush ?
 #bks = bookshelf ?
 #S = student/sprite
+#T = teacher
 var tiles
 
 #perimiter is always 1 tile around the entire room
@@ -98,7 +111,6 @@ func http() -> void:
 	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent")
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
-	print("here")
 	
 
 #function is called when httprequest is complete
@@ -106,12 +118,14 @@ func _on_request_completed(result, response_code, headers, body):
 	#get json and store as a dict
 	var json = JSON.parse(body.get_string_from_utf8())
 	JSONDict = json.result
-	print(JSONDict)
 	
 	#gets the room layout and room size from json
-	var jsonTiles = JSONDict.get("body").get("classroomJSON").get("room")
+	var jsonTiles = JSONDict.get("body").get("classroomJSON").get("initClassroom")
+	print(jsonTiles)
 	roomSizeX = JSONDict.get("body").get("classroomJSON").get("config").get("roomSizeX")
 	roomSizeY = JSONDict.get("body").get("classroomJSON").get("config").get("roomSizeY")
+	totalTeachers = JSONDict.get("body").get("classroomJSON").get("config").get("numTeachers")
+	totalStudents = JSONDict.get("body").get("classroomJSON").get("config").get("numStudents")
 	
 	#set inner size to correct dimensions
 	inner_size = Vector2(roomSizeY-2, roomSizeX-2)
@@ -135,6 +149,7 @@ func generate() -> void:
 	_generate_inner()
 	_generate_objects()
 	_generate_rugs()
+	_generate_sprites()
 	emit_signal("finished")
 
 func _generate_perimeter() -> void:
@@ -175,7 +190,6 @@ func _generate_perimeter() -> void:
 	_tile_map.set_cell(roomSizeY - 1,0, borderTileMap.topRight)
 
 func _generate_inner() -> void:
-	var tile = null
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
 			#generate the entire inner as floor to be overlayed on the other tilemap
@@ -188,7 +202,15 @@ func _generate_objects() -> void:
 			match tile:
 				"b": _tilemap2.set_cell(x, y, objectTileMap.bush)
 				"t": _tilemap2.set_cell(x, y, objectTileMap.table)
-				#"T": _tilemap2.set_cell(x, y, objectTileMap.bigTable)
+				#get x and y coordinates for sprites, put them in spritePos dictionary
+				"T": if numTeachers < totalTeachers:
+					spritePos["teacher " + str(numTeachers + 1) + " pos"] = Vector2((x*32)+16, (y*32)+16)
+					#teacher.position = Vector2((x*32)+16, (y*32)+16)
+					numTeachers += 1
+				"S": if numStudents < totalStudents:
+					spritePos["student " + str(numStudents + 1) + " pos"] = Vector2((x*32)+16, (y*32)+16)
+					#teacher.position = Vector2((x*32)+16, (y*32)+16)
+					numStudents += 1
 				"c": _tilemap2.set_cell(x, y, objectTileMap.chair)
 			#big rug hardcode for now
 			#_tilemap2.set_cell(1,3,objectTileMap.bigCarpet)
@@ -219,3 +241,28 @@ func _unhandled_input(event: InputEvent) -> void:
 	print(event.global_position)
 	line_2d.points = new_path
 	teacher.path = new_path 
+	
+func _generate_sprites() -> void:
+	#get positions from spritePos dictionary and hide all other not needed sprites
+	#this works but is so so ugly
+	
+	#we only have 1 teacher sprite 
+	if totalTeachers >= 1: teacher.position = spritePos.get("teacher 1 pos")
+	else: teacher.hide()
+	
+	#we have 7 student sprites
+	if totalStudents >= 1: AS2.position = spritePos.get("student 1 pos")
+	else: AS2.hide()
+	if totalStudents >= 2: AS3.position = spritePos.get("student 2 pos")
+	else: AS3.hide()
+	if totalStudents >= 3: AS4.position = spritePos.get("student 3 pos")
+	else: AS4.hide()
+	if totalStudents >= 4: AS5.position = spritePos.get("student 4 pos")
+	else: AS5.hide()
+	if totalStudents >= 5: AS6.position = spritePos.get("student 5 pos")
+	else: AS6.hide()
+	if totalStudents >= 6: AS7.position = spritePos.get("student 6 pos")
+	else: AS7.hide()
+	if totalStudents >= 7: AS8.position = spritePos.get("student 7 pos")
+	else: AS8.hide()
+	
