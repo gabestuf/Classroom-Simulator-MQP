@@ -167,6 +167,34 @@ app.get("/classroom-simulation/random/singleEvent", (req, res) => {
         });
     }
 });
+app.get("/classroom-simulation/random/:num", (req, res) => {
+    try {
+        const numEvents = parseInt(req.params.num);
+        console.log(numEvents);
+        if (Number.isNaN(numEvents) || numEvents > 20) {
+            res.json({
+                status: "FAILED",
+                message: "Request failed. There is a cap at 20 events currently.\nIt is also possible that an invalid number/string was passed as an arguement",
+            });
+        }
+        const sim = new Simulator_1.default(genRandomConfig(), numEvents);
+        sim.generateRandomEvents(numEvents);
+        res.json({
+            status: "SUCCESS",
+            message: "Successfully generated a random event",
+            body: {
+                classroomJSON: sim.finalJSON,
+            },
+        });
+    }
+    catch (e) {
+        console.error(e);
+        res.json({
+            status: "FAILED",
+            message: `There was an error with your request ${e}`,
+        });
+    }
+});
 function genRandomConfig() {
     const numS = Math.floor(Math.random() * 4) + 2;
     return new CONFIG_1.default({

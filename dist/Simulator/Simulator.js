@@ -49,5 +49,10 @@ class Simulator {
             this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
         }
     }
+    generateRandomEvents(numEvents) {
+        for (let i = 0; i < numEvents; i++) {
+            this.generateOneRandomEvent();
+        }
+    }
 }
 exports.default = Simulator;

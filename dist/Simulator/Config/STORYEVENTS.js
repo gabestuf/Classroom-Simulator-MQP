@@ -60,42 +60,6 @@ const StoryEventsJSON = [
         nextEvents: [],
     },
 ];
-
-// Sample Storyline 
-const StoryEvents2JSON = [
-    {
-        name: "studentTantrum",
-        charactersInvolved: [
-            {
-                name: "Student1",
-                mood: ["sad", "angry"],
-                pos: ["current", "corner"],
-                description: ["breaks toy", "draws on object", "student spills food"],
-            },
-        ],
-        nextEvents: ["twoStudentsFight"],
-    },
-    {
-        name: "twoStudentsFight",
-        charactersInvolved: [
-            {
-                name: "Student1",
-                mood: ["angry", "sad"],
-                pos: ["Student1"],
-                description: ["fights", "tumbles", "argues"],
-            },
-            {
-                name: "Student2",
-                mood: ["angry", "sad"],
-                pos: ["Student1"],
-                description: ["fights", "tumbles", "argues"],
-            },
-        ],
-        nextEvents: [],
-    },
-];
-
-
 class StoryEvents {
     constructor() {
         this.eventList = this.convertJSON(StoryEventsJSON);
