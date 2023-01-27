@@ -238,10 +238,35 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# get mouse position
 	var new_path : = nav_2d.get_simple_path(teacher.global_position, event.position)
-	print(event.global_position)
-	line_2d.points = new_path
-	teacher.path = new_path 
+	#get angle between teacher and where teacher is going
+	var initAngle = teacher.global_position.angle_to_point(event.position) * 180/PI
+	#for some reason angles are weird so this helps
+	if initAngle < 0:
+		initAngle = 180 + (180 - abs(initAngle))
 	
+	#for each general direction play that animation
+	#this is going to be ugly :(
+	if initAngle <= 22.5 or initAngle > 337.5:
+		teacher.play("left")
+	elif initAngle > 22.5 and initAngle <= 67.5:
+		teacher.play("up left")
+	elif initAngle > 67.5 and initAngle <= 112.5:
+		teacher.play("up")
+	elif initAngle > 112.5 and initAngle <= 157.5:
+		teacher.play("up right")
+	elif initAngle > 157.5 and initAngle <= 202.5:
+		teacher.play("right")
+	elif initAngle > 202.5 and initAngle <= 247.5:
+		teacher.play("down right")
+	elif initAngle > 247.5 and initAngle <= 292.5:
+		teacher.play("down")
+	elif initAngle > 292.5 and initAngle <= 337.5:
+		teacher.play("down left")
+	#yep it's ugly but it works
+	
+	line_2d.points = new_path
+	teacher.path = new_path
+
 func _generate_sprites() -> void:
 	#get positions from spritePos dictionary and hide all other not needed sprites
 	#this works but is so so ugly
