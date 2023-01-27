@@ -19,8 +19,6 @@ app.use(express_1.default.json());
 const CONFIG_1 = __importDefault(require("./Simulator/Config/CONFIG"));
 const Room_1 = __importDefault(require("./Simulator/Room/Room"));
 const Simulator_1 = __importDefault(require("./Simulator/Simulator"));
-// const sim = new Simulator(config)
-// sim.generate()
 app.get("/", (req, res) => {
     res.send("MQP API");
 });

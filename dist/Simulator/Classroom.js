@@ -80,6 +80,10 @@ class Classroom {
             // for each sprite, update position toward sprite.heading
             for (const sprite of this.spriteList) {
                 if (sprite.heading instanceof Coordinate_1.default) {
+                    // First check if sprite is already at its destination. If so, set heading === null
+                    if (sprite.heading.x === sprite.pos.x && sprite.heading.y === sprite.pos.y) {
+                        sprite.heading === null;
+                    }
                     const path = (0, BFS_1.default)(this.room, sprite.pos, sprite.heading);
                     if (path.length === 0) {
                         throw new Error("There was no viable path for the sprite to get to its destination");
