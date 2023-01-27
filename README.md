@@ -119,8 +119,8 @@ This will run two terminals concurrently. One compiles the typescript code into 
 
 ## //TODO
 
-- [ ] Find all the todos in the code and complete them
-- [ ] Refactor storyevents json
+- [ ] Complete TODO
+- [ ] Refactor StoryEvents.json
 - [ ] create more routes depending on client needs
 - [ ] test http requests in Godot
 - [ ] write a simulation method which applies one new event
