@@ -171,10 +171,10 @@ app.get("/classroom-simulation/random/:num", (req, res) => {
     try {
         const numEvents = parseInt(req.params.num);
         console.log(numEvents);
-        if (Number.isNaN(numEvents) || numEvents > 20) {
+        if (Number.isNaN(numEvents) || numEvents > 20 || numEvents < 1) {
             res.json({
                 status: "FAILED",
-                message: "Request failed. There is a cap at 20 events currently.\nIt is also possible that an invalid number/string was passed as an arguement",
+                message: "Request failed. There is a cap at 20 events currently. \n Need at least 1 event.\nIt is also possible that an invalid number/string was passed as an arguement",
             });
         }
         const sim = new Simulator_1.default(genRandomConfig(), numEvents);
