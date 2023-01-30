@@ -14,6 +14,18 @@ onready var AS6: AnimatedSprite = $AnimatedSprite6
 onready var AS7: AnimatedSprite = $AnimatedSprite7
 onready var AS8: AnimatedSprite = $AnimatedSprite8
 
+#number of students that have been placed
+var numStudents = 0
+#number of teachers that have been placed
+var numTeachers = 0
+#total num of students on the tilemap
+var totalStudents
+#total num of teacheers on the tilemap
+var totalTeachers
+
+#sprite positions will be stored here
+var spritePos = {}
+
 #tilemaps
 onready var _tile_map : TileMap = $Navigation2D/BorderFloorMap
 onready var _tilemap2 : TileMap = $Navigation2D/ObjectObstaclesMap
@@ -48,17 +60,7 @@ var objectTileMap = {
 	"bigTable" : 8
 }
 
-# TODO import json
-# https://www.youtube.com/watch?v=L9Zekkb4ZXc&ab_channel=johnnygossdev
-# example json
-const CONFIGJSON = {
-	"RoomSizeX": 10,
-	"RoomSizeY": 8,
-}
-
-export (String, FILE, "*.json") var file_path : String
-
-#Please keep updating this if you add to the array
+#tiles:
 #w = wall
 #f = floor
 #t = table
@@ -69,34 +71,77 @@ export (String, FILE, "*.json") var file_path : String
 #wil = left window
 #b = bush ?
 #bks = bookshelf ?
-var tiles = [["w", "w", "w", "wil", "w", "w", "w"], ["w", "b", "f", "c", "c", "f", "w"], ["wi", "f", "c", "t", "f", "c", "w"], ["w", "f", "c", "f", "f", "c", "w"], ["w", "f", "f", "c", "f", "f", "w"], ["w", "st", "f", "f", "r", "r", "w"], ["bks", "c", "f", "f", "r", "r", "w"], ["w", "w", "w", "do", "bks", "bks", "w"]]
+#S = student/sprite
+#T = teacher
+var tiles
 
-#for now hardcoding these, will eventually use x and y from json file
-#export var inner_size := Vector2(10,8)
-export var inner_size := Vector2(6,5)
-export var perimiter_size := Vector2(1,1)
+#perimiter is always 1 tile around the entire room
+var perimiter_size := Vector2(1,1)
+var inner_size
+
+#used to add tiles to the tilemap
 var tile = []
-var size = inner_size + 2 * perimiter_size
 
-#var _rng = RandomNumberGenerator.new()
+#size of tile map
+var size
 
-#func load_json(file_json) -> Dictionary:
-#	"""Parses a JSON File and returns it as a dictionary."""
-#
-#	var file = File.new()
-#	assert file.file_exists(file_json)
-#	file.open(file_json, file.READ)
+#json dictionary
+var JSONDict
+
+#room size x and y
+var roomSizeX
+var roomSizeY
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#_rng.randomize()
+	http()
+	#calling these from http so that they run in order without async
+	#setup()
+	#generate()
+
+func http() -> void:
+	#create httpRequest object and add it as a child
+	var http_request = HTTPRequest.new()
+	add_child(http_request)
+	
+	#connect the request to it's completion signal
+	http_request.connect("request_completed", self, "_on_request_completed")
+	
+	#create request, check for error
+	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent")
+	if error != OK:
+		push_error("An error occurred in the HTTP request.")
+	
+
+#function is called when httprequest is complete
+func _on_request_completed(result, response_code, headers, body):
+	#get json and store as a dict
+	var json = JSON.parse(body.get_string_from_utf8())
+	JSONDict = json.result
+	
+	#gets the room layout and room size from json
+	var jsonTiles = JSONDict.get("body").get("classroomJSON").get("initClassroom")
+	print(jsonTiles)
+	roomSizeX = JSONDict.get("body").get("classroomJSON").get("config").get("roomSizeX")
+	roomSizeY = JSONDict.get("body").get("classroomJSON").get("config").get("roomSizeY")
+	totalTeachers = JSONDict.get("body").get("classroomJSON").get("config").get("numTeachers")
+	totalStudents = JSONDict.get("body").get("classroomJSON").get("config").get("numStudents")
+	
+	#set inner size to correct dimensions
+	inner_size = Vector2(roomSizeY-2, roomSizeX-2)
+	#set the tiles to be used in the rest of the program
+	tiles = jsonTiles
+	#set the size
+	size = inner_size + 2 * perimiter_size
+	#calling setup here so that there's no async
 	setup()
-	generate()
 
 func setup() -> void:
 	var map_size_px = size * _tile_map.cell_size
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, map_size_px)
 	OS.set_window_size(2*map_size_px)
+	#calling generate here so there's no async
+	generate()
 
 func generate() -> void:
 	emit_signal("started")
@@ -104,6 +149,7 @@ func generate() -> void:
 	_generate_inner()
 	_generate_objects()
 	_generate_rugs()
+	_generate_sprites()
 	emit_signal("finished")
 
 func _generate_perimeter() -> void:
@@ -137,19 +183,13 @@ func _generate_perimeter() -> void:
 					_tile_map.set_cell(x,y,borderTileMap.bookshelf)
 			else:
 				_tile_map.set_cell(x,y, borderTileMap.bottom)
-# again may not want these hardcoded in the future but for now it's fine
-	_tile_map.set_cell(0,6, borderTileMap.bottomLeft)
-	_tile_map.set_cell(7,6, borderTileMap.bottomRight)
+	#corners
+	_tile_map.set_cell(0,roomSizeX - 1, borderTileMap.bottomLeft)
+	_tile_map.set_cell(roomSizeY - 1,roomSizeX - 1, borderTileMap.bottomRight)
 	_tile_map.set_cell(0,0, borderTileMap.topLeft)
-	_tile_map.set_cell(7,0, borderTileMap.topRight)
-# what do these 4 set_cells do? - Gabe # They are the four corner tiles - Ryan
-#	_tile_map.set_cell(0,9, 12)
-#	_tile_map.set_cell(11,9, 13)
-#	_tile_map.set_cell(0,0, 14)
-#	_tile_map.set_cell(11,0, 15)
+	_tile_map.set_cell(roomSizeY - 1,0, borderTileMap.topRight)
 
 func _generate_inner() -> void:
-	var tile = null
 	for x in range(1, size.x-1):
 		for y in range (1, size.y-1):
 			#generate the entire inner as floor to be overlayed on the other tilemap
@@ -161,8 +201,16 @@ func _generate_objects() -> void:
 			tile = tiles[x][y]
 			match tile:
 				"b": _tilemap2.set_cell(x, y, objectTileMap.bush)
-				"st": _tilemap2.set_cell(x, y, objectTileMap.table)
-				"t": _tilemap2.set_cell(x, y, objectTileMap.bigTable)
+				"t": _tilemap2.set_cell(x, y, objectTileMap.table)
+				#get x and y coordinates for sprites, put them in spritePos dictionary
+				"T": if numTeachers < totalTeachers:
+					spritePos["teacher " + str(numTeachers + 1) + " pos"] = Vector2((x*32)+16, (y*32)+16)
+					#teacher.position = Vector2((x*32)+16, (y*32)+16)
+					numTeachers += 1
+				"S": if numStudents < totalStudents:
+					spritePos["student " + str(numStudents + 1) + " pos"] = Vector2((x*32)+16, (y*32)+16)
+					#teacher.position = Vector2((x*32)+16, (y*32)+16)
+					numStudents += 1
 				"c": _tilemap2.set_cell(x, y, objectTileMap.chair)
 			#big rug hardcode for now
 			#_tilemap2.set_cell(1,3,objectTileMap.bigCarpet)
@@ -190,6 +238,56 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# get mouse position
 	var new_path : = nav_2d.get_simple_path(teacher.global_position, event.position)
-	print(event.global_position)
+	#get angle between teacher and where teacher is going
+	var initAngle = teacher.global_position.angle_to_point(event.position) * 180/PI
+	#for some reason angles are weird so this helps
+	if initAngle < 0:
+		initAngle = 180 + (180 - abs(initAngle))
+	
+	#for each general direction play that animation
+	#this is going to be ugly :(
+	if initAngle <= 22.5 or initAngle > 337.5:
+		teacher.play("left")
+	elif initAngle > 22.5 and initAngle <= 67.5:
+		teacher.play("up left")
+	elif initAngle > 67.5 and initAngle <= 112.5:
+		teacher.play("up")
+	elif initAngle > 112.5 and initAngle <= 157.5:
+		teacher.play("up right")
+	elif initAngle > 157.5 and initAngle <= 202.5:
+		teacher.play("right")
+	elif initAngle > 202.5 and initAngle <= 247.5:
+		teacher.play("down right")
+	elif initAngle > 247.5 and initAngle <= 292.5:
+		teacher.play("down")
+	elif initAngle > 292.5 and initAngle <= 337.5:
+		teacher.play("down left")
+	#yep it's ugly but it works
+	
 	line_2d.points = new_path
-	teacher.path = new_path 
+	teacher.path = new_path
+
+func _generate_sprites() -> void:
+	#get positions from spritePos dictionary and hide all other not needed sprites
+	#this works but is so so ugly
+	
+	#we only have 1 teacher sprite 
+	if totalTeachers >= 1: teacher.position = spritePos.get("teacher 1 pos")
+	else: teacher.hide()
+	
+	#we have 7 student sprites
+	if totalStudents >= 1: AS2.position = spritePos.get("student 1 pos")
+	else: AS2.hide()
+	if totalStudents >= 2: AS3.position = spritePos.get("student 2 pos")
+	else: AS3.hide()
+	if totalStudents >= 3: AS4.position = spritePos.get("student 3 pos")
+	else: AS4.hide()
+	if totalStudents >= 4: AS5.position = spritePos.get("student 4 pos")
+	else: AS5.hide()
+	if totalStudents >= 5: AS6.position = spritePos.get("student 5 pos")
+	else: AS6.hide()
+	if totalStudents >= 6: AS7.position = spritePos.get("student 6 pos")
+	else: AS7.hide()
+	if totalStudents >= 7: AS8.position = spritePos.get("student 7 pos")
+	else: AS8.hide()
+	
