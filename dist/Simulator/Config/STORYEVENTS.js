@@ -61,7 +61,7 @@ const StoryEventsJSON = [
     },
 ];
 
-// Sample Storyline 
+// Sample Storyline #2 Tantrum (Sad Emoji)
 const StoryEvents2JSON = [
     {
         name: "studentTantrum",
@@ -70,7 +70,7 @@ const StoryEvents2JSON = [
                 name: "Student1",
                 mood: ["sad", "angry"],
                 pos: ["current", "corner"],
-                description: ["breaks toy", "draws on object", "student spills food"],
+                description: ["cry emoji", "student spills food"],
             },
         ],
         nextEvents: ["twoStudentsFight"],
@@ -92,6 +92,39 @@ const StoryEvents2JSON = [
             },
         ],
         nextEvents: [],
+    },
+];
+//storyline #3, order swapped 
+const StoryEvents3JSON = [
+    {
+        name: "twoStudentsFight",
+        charactersInvolved: [
+            {
+                name: "Student1",
+                mood: ["angry", "sad"],
+                pos: ["Student1"],
+                description: ["fights", "tumbles", "argues"],
+            },
+            {
+                name: "Student2",
+                mood: ["angry", "sad"],
+                pos: ["Student1"],
+                description: ["fights", "tumbles", "argues"],
+            },
+        ],
+        nextEvents: [],
+    },
+    {
+        name: "studentMakesMess",
+        charactersInvolved: [
+            {
+                name: "Student1",
+                mood: ["happy", "angry"],
+                pos: ["current", "corner", "wall"],
+                description: ["breaks toy", "draws on object", "student spills food"],
+            },
+        ],
+        nextEvents: ["twoStudentsFight"],
     },
 ];
 
