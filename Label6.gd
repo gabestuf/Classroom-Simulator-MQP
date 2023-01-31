@@ -8,6 +8,7 @@ var curr_emote
 
 func _ready():
 	
+	rect_size = Vector2(200,50)
 	#create a timer, add timer as a child of the label
 	var _timer = Timer.new()
 	add_child(_timer)
