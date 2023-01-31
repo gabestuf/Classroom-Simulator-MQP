@@ -113,7 +113,7 @@ const StoryEvents3JSON = [
                 description: ["fights", "tumbles", "argues"],
             },
         ],
-        nextEvents: [],
+        nextEvents: ["studentMakesMess"],
     },
     {
         name: "studentMakesMess",
@@ -125,7 +125,7 @@ const StoryEvents3JSON = [
                 description: ["breaks toy", "draws on object", "student spills food"],
             },
         ],
-        nextEvents: ["twoStudentsFight"],
+        nextEvents: [""],
     },
 ];
 
