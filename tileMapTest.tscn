@@ -1179,6 +1179,7 @@ script = ExtResource( 36 )
 position = Vector2( 208, 40 )
 frames = SubResource( 454 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 32 )
 

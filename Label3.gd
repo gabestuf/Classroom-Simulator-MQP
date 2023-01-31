@@ -21,6 +21,7 @@ func _ready():
 	
 	# Set the text of the label to an empty string
 	text = ""
+	rect_position = Vector2(-15,-42)
 	# Create a new TextureRect node
 	image_node = TextureRect.new()
 	
