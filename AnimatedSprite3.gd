@@ -5,3 +5,6 @@ func _ready():
 	position = Vector2(208,175)
 	# Set the animation to play
 	play("default")
+
+func _on_CollisionShape2D_body_entered(body):
+	print("Collision detected!")

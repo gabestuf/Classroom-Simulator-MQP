@@ -12,6 +12,8 @@ func _ready() -> void:
 	play("idle")
 	set_process(false)
 
+func _on_CollisionShape2D_body_entered(body):
+	print("Collision detected!")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
