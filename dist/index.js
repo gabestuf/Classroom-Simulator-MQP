@@ -19,8 +19,6 @@ app.use(express_1.default.json());
 const CONFIG_1 = __importDefault(require("./Simulator/Config/CONFIG"));
 const Room_1 = __importDefault(require("./Simulator/Room/Room"));
 const Simulator_1 = __importDefault(require("./Simulator/Simulator"));
-// const sim = new Simulator(config)
-// sim.generate()
 app.get("/", (req, res) => {
     res.send("MQP API");
 });
@@ -153,6 +151,34 @@ app.get("/classroom-simulation/random/singleEvent", (req, res) => {
         const numEvents = 1;
         const sim = new Simulator_1.default(genRandomConfig(), numEvents);
         sim.generateOneRandomEvent();
+        res.json({
+            status: "SUCCESS",
+            message: "Successfully generated a random event",
+            body: {
+                classroomJSON: sim.finalJSON,
+            },
+        });
+    }
+    catch (e) {
+        console.error(e);
+        res.json({
+            status: "FAILED",
+            message: `There was an error with your request ${e}`,
+        });
+    }
+});
+app.get("/classroom-simulation/random/:num", (req, res) => {
+    try {
+        const numEvents = parseInt(req.params.num);
+        console.log(numEvents);
+        if (Number.isNaN(numEvents) || numEvents > 20 || numEvents < 1) {
+            res.json({
+                status: "FAILED",
+                message: "Request failed. There is a cap at 20 events currently. \n Need at least 1 event.\nIt is also possible that an invalid number/string was passed as an arguement",
+            });
+        }
+        const sim = new Simulator_1.default(genRandomConfig(), numEvents);
+        sim.generateRandomEvents(numEvents);
         res.json({
             status: "SUCCESS",
             message: "Successfully generated a random event",
