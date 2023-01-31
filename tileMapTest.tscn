@@ -1137,11 +1137,7 @@ autoplay = true
 position = Vector2( 112, 168 )
 scale = Vector2( 0.789773, 0.772485 )
 frames = SubResource( 529 )
-<<<<<<< HEAD
 frame = 1
-=======
-frame = 3
->>>>>>> 0f4fa96cdf244f8ea902443035d5d6697b9ca677
 speed_scale = 0.5
 playing = true
 
@@ -1158,7 +1154,6 @@ position = Vector2( 144, 104 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 163 )
 animation = "idle"
-frame = 3
 speed_scale = 0.2
 playing = true
 script = ExtResource( 28 )
@@ -1175,6 +1170,7 @@ shape = SubResource( 601 )
 position = Vector2( 48, 136 )
 scale = Vector2( 0.678571, 0.737259 )
 frames = SubResource( 187 )
+frame = 1
 speed_scale = 0.2
 playing = true
 
@@ -1192,7 +1188,7 @@ position = Vector2( 80, 168 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 212 )
 animation = "idle"
-frame = 2
+frame = 3
 speed_scale = 0.2
 playing = true
 
@@ -1204,6 +1200,7 @@ position = Vector2( 80, 72 )
 scale = Vector2( 0.678571, 0.737259 )
 frames = SubResource( 237 )
 animation = "New Anim"
+frame = 1
 speed_scale = 0.2
 playing = true
 
@@ -1221,7 +1218,6 @@ shape = SubResource( 603 )
 position = Vector2( 208, 40 )
 frames = SubResource( 454 )
 animation = "idle"
-frame = 3
 playing = true
 script = ExtResource( 32 )
 
@@ -1234,10 +1230,6 @@ position = Vector2( 112, 72 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 479 )
 animation = "idle"
-<<<<<<< HEAD
-=======
-frame = 2
->>>>>>> 0f4fa96cdf244f8ea902443035d5d6697b9ca677
 speed_scale = 0.5
 playing = true
 
@@ -1253,6 +1245,7 @@ shape = SubResource( 599 )
 position = Vector2( 48, 104 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 504 )
+frame = 1
 speed_scale = 0.2
 playing = true
 script = ExtResource( 35 )
