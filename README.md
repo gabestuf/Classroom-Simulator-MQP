@@ -47,15 +47,17 @@ This will run two terminals concurrently. One compiles the typescript code into 
 
 ### Here is the current API:
 
-| Method | Route                                    | Description                                                                                                          | Return Type   |
-| ------ | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------- |
-| GET    | /render-room                             | will render a random room with random parameters                                                                     | Room          |
-| GET    | /render-room/config                      | will render a semi random room with parameters in config.[^1]                                                        | Room          |
-| POST   | /render-room                             | will render a semi random room with parameters in config.[^1] Config is sent in the request body as {config: config} | Room          |
-| GET    | /classroom-simulation/random/singleEvent | runs a single random event with random config, mostly for testing. Right now there are only 2 available events.      | classroomJSON |
-| GET    | /classroom-simulation/random/:numEvents  | will render a number of events with a random config.                                                                 | classroomJSON |
+| Method | Route                                          | Description                                                                                                          | Return Type   |
+| ------ | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------- |
+| GET    | /render-room                                   | will render a random room with random parameters                                                                     | Room          |
+| GET    | /render-room/config                            | will render a semi random room with parameters in config.[^1]                                                        | Room          |
+| POST   | /render-room                                   | will render a semi random room with parameters in config.[^1] Config is sent in the request body as {config: config} | Room          |
+| GET    | /classroom-simulation/random/singleEvent       | runs a single random event with random config, mostly for testing. Right now there are only 2 available events.      | classroomJSON |
+| GET    | /classroom-simulation/random/:numEvents        | will render a number of events with a random config.                                                                 | classroomJSON |
+| GET    | /classroom-simulation/random/singleEvent/:seed | will render a single event with a set seed                                                                           | classroomJSON |
 
-[^1]: The config is a JSON Object that looks like this: `
+[^1]:
+    The config is a JSON Object that looks like this: `
 {
 "roomSizeX": number,
 "roomSizeY": number,

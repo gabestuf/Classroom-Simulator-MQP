@@ -62,6 +62,7 @@ const StoryEventsJSON = [
 ];
 
 
+
 // Sample Storyline #2 Tantrum (Sad Emoji)
 const StoryEvents2JSON = [
     {
@@ -128,7 +129,6 @@ const StoryEvents3JSON = [
         nextEvents: [""],
     },
 ];
-
 
 class StoryEvents {
     constructor() {
