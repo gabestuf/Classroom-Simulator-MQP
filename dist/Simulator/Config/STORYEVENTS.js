@@ -126,6 +126,46 @@ const StoryEvents3JSON = [
                 description: ["breaks toy", "draws on object", "student spills food"],
             },
         ],
+        nextEvents: ["studentsGather", "studentsBecomesIdle"],
+    },
+];
+
+//storyline #4, simple gathering and idle
+const StoryEvents4JSON = [
+    {
+        name: "studentsGather",
+        charactersInvolved: [
+            {
+                name: "Student1",
+                mood: ["happy", "sad","neutral"],
+                pos: ["Student1"],
+                description: ["gathering", "lesson"],
+            },
+            {
+                name: "Student2",
+                mood: ["happy", "sad","neutral"],
+                pos: ["Student2"],
+                description: ["gathering", "lesson"],
+            },
+        ],
+        nextEvents: ["studentBecomesIdle"],
+    },
+    {
+        name: "studentBecomesIdle",
+        charactersInvolved: [
+            {
+                name: "Student1",
+                mood: ["happy", "angry","neutral"],
+                pos: ["current", "corner", "wall"],
+                description: ["stands still"],
+            },
+            {
+                name: "Student2",
+                mood: ["happy", "sad","neutral"],
+                pos: ["Student2"],
+                description: ["gathering", "lesson"],
+            },
+        ],
         nextEvents: [""],
     },
 ];
