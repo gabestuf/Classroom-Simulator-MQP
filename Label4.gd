@@ -28,7 +28,7 @@ func _ready():
 	_rng.randomize()
 	num = _rng.randi_range(0, emotes.size() -1)
 	curr_emote = emotes[num]
-	image_node.texture = load("res://Tilesets/Emotions/" + curr_emote + ".png")
+	#image_node.texture = load("res://Tilesets/Emotions/" + curr_emote + ".png")
 	
 	# Add the TextureRect node as a child of the Label node
 	add_child(image_node)
@@ -43,4 +43,8 @@ func _on_Timer_timeout():
 	#get the cooresponding emote from the array
 	curr_emote = emotes[num]
 	#load that emote
-	image_node.texture = load("res://Tilesets/Emotions/" + curr_emote + ".png")
+	#image_node.texture = load("res://Tilesets/Emotions/" + curr_emote + ".png")
+
+func _set_Label(emote):
+	print(emote)
+	image_node.texture = load("res://Tilesets/Emotions/" + emote + ".png")

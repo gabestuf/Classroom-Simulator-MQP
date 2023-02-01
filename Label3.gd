@@ -45,3 +45,7 @@ func _on_Timer_timeout():
 	curr_emote = emotes[num]
 	#load that emote
 	image_node.texture = load("res://Tilesets/Emotions/" + curr_emote + ".png")
+
+func _set_Label(emote):
+	print(emote)
+	image_node.texture = load("res://Tilesets/Emotions/" + emote + ".png")

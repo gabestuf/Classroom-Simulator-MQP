@@ -88,9 +88,14 @@ var size
 #json dictionary
 var JSONDict
 
-#room size x and y
+#room size x and y from json
 var roomSizeX
 var roomSizeY
+
+#list of all frames
+var frames
+#frame that we are currently working on
+var frameNum = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -118,14 +123,17 @@ func _on_request_completed(result, response_code, headers, body):
 	#get json and store as a dict
 	var json = JSON.parse(body.get_string_from_utf8())
 	JSONDict = json.result
+	var classrooomJSON = JSONDict.get("body").get("classroomJSON")
 	
 	#gets the room layout and room size from json
-	var jsonTiles = JSONDict.get("body").get("classroomJSON").get("initClassroom")
-	print(jsonTiles)
-	roomSizeX = JSONDict.get("body").get("classroomJSON").get("config").get("roomSizeX")
-	roomSizeY = JSONDict.get("body").get("classroomJSON").get("config").get("roomSizeY")
-	totalTeachers = JSONDict.get("body").get("classroomJSON").get("config").get("numTeachers")
-	totalStudents = JSONDict.get("body").get("classroomJSON").get("config").get("numStudents")
+	var jsonTiles = classrooomJSON.get("initClassroom")
+	roomSizeX = classrooomJSON.get("config").get("roomSizeX")
+	roomSizeY = classrooomJSON.get("config").get("roomSizeY")
+	totalTeachers = classrooomJSON.get("config").get("numTeachers")
+	totalStudents = classrooomJSON.get("config").get("numStudents")
+	frames = classrooomJSON.get("frames")
+	#print(frames)
+	print(frames[0].get("spriteList")[1].get("mood"))
 	
 	#set inner size to correct dimensions
 	inner_size = Vector2(roomSizeY-2, roomSizeX-2)
@@ -151,6 +159,7 @@ func generate() -> void:
 	_generate_rugs()
 	_generate_sprites()
 	emit_signal("finished")
+	_sprites_move()
 
 func _generate_perimeter() -> void:
 	# Left and Right Walls
@@ -238,6 +247,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# get mouse position
 	var new_path : = nav_2d.get_simple_path(teacher.global_position, event.position)
+	#new_path = [teacher.global_position, event.position]
 	#get angle between teacher and where teacher is going
 	var initAngle = teacher.global_position.angle_to_point(event.position) * 180/PI
 	#for some reason angles are weird so this helps
@@ -272,22 +282,111 @@ func _generate_sprites() -> void:
 	#this works but is so so ugly
 	
 	#we only have 1 teacher sprite 
-	if totalTeachers >= 1: teacher.position = spritePos.get("teacher 1 pos")
+	if totalTeachers >= 1: 
+		teacher.position = spritePos.get("teacher 1 pos")
+		teacher.get_child(0)._set_Label(frames[0].get("spriteList")[0].get("mood"))
 	else: teacher.hide()
 	
 	#we have 7 student sprites
-	if totalStudents >= 1: AS2.position = spritePos.get("student 1 pos")
+	if totalStudents >= 1: 
+		AS2.position = spritePos.get("student 1 pos")
+		AS2.get_child(0)._set_Label(frames[0].get("spriteList")[1].get("mood"))
 	else: AS2.hide()
-	if totalStudents >= 2: AS3.position = spritePos.get("student 2 pos")
+	if totalStudents >= 2: 
+		AS3.position = spritePos.get("student 2 pos")
+		AS3.get_child(0)._set_Label(frames[0].get("spriteList")[2].get("mood"))
 	else: AS3.hide()
-	if totalStudents >= 3: AS4.position = spritePos.get("student 3 pos")
+	if totalStudents >= 3: 
+		AS4.position = spritePos.get("student 3 pos")
+		AS4.get_child(0)._set_Label(frames[0].get("spriteList")[3].get("mood"))
 	else: AS4.hide()
-	if totalStudents >= 4: AS5.position = spritePos.get("student 4 pos")
+	if totalStudents >= 4: 
+		AS5.position = spritePos.get("student 4 pos")
+		AS5.get_child(0)._set_Label(frames[0].get("spriteList")[4].get("mood"))
 	else: AS5.hide()
-	if totalStudents >= 5: AS6.position = spritePos.get("student 5 pos")
+	if totalStudents >= 5: 
+		AS6.position = spritePos.get("student 5 pos")
+		AS6.get_child(0)._set_Label(frames[0].get("spriteList")[5].get("mood"))
 	else: AS6.hide()
-	if totalStudents >= 6: AS7.position = spritePos.get("student 6 pos")
+	if totalStudents >= 6: 
+		AS7.position = spritePos.get("student 6 pos")
+		AS7.get_child(0)._set_Label(frames[0].get("spriteList")[6].get("mood"))
 	else: AS7.hide()
-	if totalStudents >= 7: AS8.position = spritePos.get("student 7 pos")
+	if totalStudents >= 7: 
+		AS8.position = spritePos.get("student 7 pos")
+		AS8.get_child(0)._set_Label(frames[0].get("spriteList")[7].get("mood"))
 	else: AS8.hide()
-	
+
+var spriteName
+var newPath
+
+func _sprites_move() -> void:
+	#while there are frames left
+	while(frameNum < frames.size()):
+		print(frameNum)
+		#for each sprite in the frame
+		for x in frames[frameNum].get("spriteList").size():
+			#get the sprite's name and move the correct sprite accordingly
+			spriteName = frames[frameNum].get("spriteList")[x].get("name")
+			if(spriteName == "Teacher1"):
+				var teacherPos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
+				var newPath = nav_2d.get_simple_path(teacher.global_position,teacherPos)
+				#newPath = [(teacher.global_position), (teacherPos)]
+				line_2d.points = newPath
+				teacher.path = newPath
+			if(spriteName == "Student1"):
+				var student1Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
+				var newPath : = nav_2d.get_simple_path(AS2.global_position,student1Pos)
+				#line_2d.points = newPath
+				print(frames[frameNum].get("spriteList")[x])
+				print(student1Pos)
+				print(AS2.global_position)
+				print(newPath)
+				#newPath = [(AS2.global_position), (student1Pos)]
+				AS2.path = newPath
+			if(spriteName == "Student2"):
+				var student2Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
+				var newPath = nav_2d.get_simple_path(AS3.global_position,student2Pos)
+				#newPath = [(AS3.global_position), (student2Pos)]
+				#line_2d.points = newPath
+				AS3.path = newPath
+			if(spriteName == "Student3"):
+				var student3Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
+				var newPath = nav_2d.get_simple_path(AS4.global_position,student3Pos)
+				#newPath = [(AS4.global_position), (student3Pos)]
+				#line_2d.points = newPath
+				AS4.path = newPath
+			if(spriteName == "Student4"):
+				var student4Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
+				var newPath = nav_2d.get_simple_path(AS5.global_position,student4Pos)
+				#newPath = [(AS5.global_position), (student4Pos)]
+				#line_2d.points = newPath
+				AS5.path = newPath
+			if(spriteName == "Student5"):
+				var student5Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
+				var newPath = nav_2d.get_simple_path(AS6.global_position,student5Pos)
+				#newPath = [(AS6.global_position), (student5Pos)]
+				#line_2d.points = newPath
+				AS6.path = newPath
+			if(spriteName == "Student6"):
+				var student6Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
+				var newPath = nav_2d.get_simple_path(AS7.global_position,student6Pos)
+				#newPath = [(AS7.global_position), (student6Pos)]
+				#line_2d.points = newPath
+				AS7.path = newPath
+			if(spriteName == "Student7"):
+				var student7Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
+				var newPath = nav_2d.get_simple_path(AS8.global_position,student7Pos)
+				#newPath = [(AS8.global_position), (student7Pos)]
+				#line_2d.points = newPath
+				AS8.path = newPath
+		#somehow finish sprite movement before another sprite starts moving
+		frameNum = frameNum + 1
+
+func _switch_emotes() -> void:
+	for x in frames.size():
+		for y in frames[x].get("spriteList").size():
+			spriteName = frames[x].get("spriteList")[y].get("name")
+			print(spriteName)
+			#match(sprite):
+				#"Teacher1":
