@@ -292,6 +292,9 @@ vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 outlines = [ PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 ) ]
 
+[sub_resource type="ConvexPolygonShape2D" id=598]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
 [sub_resource type="NavigationPolygon" id=533]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
@@ -345,9 +348,16 @@ points = PoolVector2Array( 8.32562, 9.77237, 53.6574, 9.29013, 54.1396, 54.6219,
 4/navigation_offset = Vector2( 0, 0 )
 4/shape_offset = Vector2( 0, 0 )
 4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-4/shape_one_way = false
-4/shape_one_way_margin = 0.0
-4/shapes = [  ]
+4/shape = SubResource( 598 )
+4/shape_one_way = true
+4/shape_one_way_margin = 1.0
+4/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": true,
+"one_way_margin": 1.0,
+"shape": SubResource( 598 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 4/z_index = 0
 5/name = "Bush.png 5"
 5/texture = ExtResource( 13 )
@@ -435,6 +445,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=600]
+
 [sub_resource type="AtlasTexture" id=362]
 atlas = ExtResource( 19 )
 region = Rect2( 98, 7, 22, 33 )
@@ -455,6 +467,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=601]
+
 [sub_resource type="AtlasTexture" id=290]
 atlas = ExtResource( 17 )
 region = Rect2( 98, 5, 21, 35 )
@@ -474,6 +488,8 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=602]
 
 [sub_resource type="AtlasTexture" id=382]
 atlas = ExtResource( 22 )
@@ -757,6 +773,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=603]
+
 [sub_resource type="AtlasTexture" id=558]
 atlas = ExtResource( 23 )
 region = Rect2( 9, 3, 23, 36 )
@@ -905,6 +923,9 @@ animations = [ {
 "name": "up right",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=597]
+extents = Vector2( 9, 13 )
 
 [sub_resource type="AtlasTexture" id=455]
 atlas = ExtResource( 25 )
@@ -1067,6 +1088,8 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=599]
+
 [sub_resource type="AtlasTexture" id=484]
 atlas = ExtResource( 18 )
 region = Rect2( 97, 9, 22, 32 )
@@ -1086,6 +1109,8 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 } ]
+
+[sub_resource type="RectangleShape2D" id=596]
 
 [node name="TestWorld" type="Node2D"]
 script = ExtResource( 1 )
@@ -1127,6 +1152,9 @@ margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 42 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite4"]
+shape = SubResource( 600 )
+
 [node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
 position = Vector2( 144, 104 )
 scale = Vector2( 0.727273, 0.727273 )
@@ -1142,6 +1170,9 @@ margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 41 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite5"]
+shape = SubResource( 601 )
+
 [node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
 position = Vector2( 48, 136 )
 scale = Vector2( 0.678571, 0.737259 )
@@ -1156,7 +1187,11 @@ margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 40 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite6"]
+shape = SubResource( 602 )
+
 [node name="AnimatedSprite7" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( 80, 168 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 212 )
@@ -1186,6 +1221,9 @@ margin_right = -18.9474
 margin_bottom = -21.2658
 script = ExtResource( 36 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite8"]
+shape = SubResource( 603 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 208, 40 )
 frames = SubResource( 454 )
@@ -1213,6 +1251,9 @@ margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 37 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2"]
+shape = SubResource( 599 )
+
 [node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
 position = Vector2( 48, 104 )
 scale = Vector2( 0.727273, 0.727273 )
@@ -1226,3 +1267,6 @@ script = ExtResource( 35 )
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 38 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite3"]
+shape = SubResource( 596 )

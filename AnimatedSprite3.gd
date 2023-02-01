@@ -40,4 +40,7 @@ func set_path(value : PoolVector2Array) -> void:
 	if value.size() == 0:
 		return
 	set_process(true)
+
+func _on_CollisionShape2D_body_entered(body):
+	print("Collision detected!")
 		

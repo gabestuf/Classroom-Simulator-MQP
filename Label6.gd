@@ -8,6 +8,7 @@ var curr_emote
 
 func _ready():
 	
+	rect_size = Vector2(200,50)
 	#create a timer, add timer as a child of the label
 	var _timer = Timer.new()
 	add_child(_timer)
@@ -33,7 +34,7 @@ func _ready():
 	# Add the TextureRect node as a child of the Label node
 	add_child(image_node)
 	#set the position of the emote to above the sprite's head
-	rect_position = Vector2(-15,-42)
+	rect_position = Vector2(-7,-25)
 	
 
 func _on_Timer_timeout():
