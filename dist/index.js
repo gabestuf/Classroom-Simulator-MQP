@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const express_1 = __importDefault(require("express"));
+const GenerateRandomNumber_1 = __importDefault(require("./Simulator/Helper Functions/GenerateRandomNumber"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 let cors = require("cors");
@@ -167,6 +168,28 @@ app.get("/classroom-simulation/random/singleEvent", (req, res) => {
         });
     }
 });
+app.get("/classroom-simulation/random/singleEvent/:seed", (req, res) => {
+    const seed = parseInt(req.params.seed);
+    try {
+        const numEvents = 1;
+        const sim = new Simulator_1.default(genRandomConfig(seed || undefined), numEvents);
+        sim.generateOneRandomEvent();
+        res.json({
+            status: "SUCCESS",
+            message: "Successfully generated a random event",
+            body: {
+                classroomJSON: sim.finalJSON,
+            },
+        });
+    }
+    catch (e) {
+        console.error(e);
+        res.json({
+            status: "FAILED",
+            message: `There was an error with your request ${e}`,
+        });
+    }
+});
 app.get("/classroom-simulation/random/:num", (req, res) => {
     try {
         const numEvents = parseInt(req.params.num);
@@ -195,17 +218,17 @@ app.get("/classroom-simulation/random/:num", (req, res) => {
         });
     }
 });
-function genRandomConfig() {
-    const numS = Math.floor(Math.random() * 4) + 2;
+function genRandomConfig(seed = Math.floor(Math.random() * 10000)) {
+    const numS = Math.floor((0, GenerateRandomNumber_1.default)(seed * 6) * 4) + 2;
     return new CONFIG_1.default({
-        roomSizeX: Math.floor(Math.random() * 10) + 5,
-        roomSizeY: Math.floor(Math.random() * 10) + 5,
+        roomSizeX: Math.floor((0, GenerateRandomNumber_1.default)(seed * 2) * 10) + 5,
+        roomSizeY: Math.floor((0, GenerateRandomNumber_1.default)(seed + 3) * 10) + 5,
         numStudents: numS,
-        numTeachers: Math.floor(Math.random() * 1) + 1,
+        numTeachers: Math.floor((0, GenerateRandomNumber_1.default)(seed * 1.5) * 1) + 1,
         numChairs: numS,
-        numTables: Math.floor(Math.random() * 3) + 1,
-        numRugs: Math.floor(Math.random() * 2) + 1,
-        seed: Math.floor(Math.random() * 10000),
+        numTables: Math.floor((0, GenerateRandomNumber_1.default)(seed * 7) * 3) + 1,
+        numRugs: Math.floor((0, GenerateRandomNumber_1.default)(seed * 5) * 2) + 1,
+        seed: seed,
     });
     // return new ClassroomConfig({
     //   roomSizeX: 6,
