@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express, { Express, Request, Response } from "express";
+import seededRandom from "./Simulator/Helper Functions/GenerateRandomNumber";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -54,7 +55,8 @@ app.get("/render-room/:config", (req: Request, res: Response) => {
     if (!config.isValid()) {
       res.json({
         status: "FAILED",
-        message: "The config you entered is not valid. Please refer to the README",
+        message:
+          "The config you entered is not valid. Please refer to the README",
       });
     }
 
@@ -119,7 +121,8 @@ app.post("/render-room", (req, res) => {
   if (!config.isValid()) {
     res.json({
       status: "FAILED",
-      message: "The config you entered is not valid. Please refer to the README",
+      message:
+        "The config you entered is not valid. Please refer to the README",
     });
   }
 
@@ -174,13 +177,38 @@ app.get("/classroom-simulation/random/singleEvent", (req, res) => {
   }
 });
 
-app.get("/classroom-simulation/random/:numEvents", (req, res) => {
+app.get("/classroom-simulation/random/singleEvent/:seed", (req, res) => {
+  const seed = parseInt(req.params.seed);
   try {
-    const numEvents: number = parseInt(req.params.numEvents);
-    if (Number.isNaN(numEvents) || numEvents > 20) {
+    const numEvents = 1;
+    const sim = new Simulator(genRandomConfig(seed || undefined), numEvents);
+    sim.generateOneRandomEvent();
+
+    res.json({
+      status: "SUCCESS",
+      message: "Successfully generated a random event",
+      body: {
+        classroomJSON: sim.finalJSON,
+      },
+    });
+  } catch (e) {
+    console.error(e);
+    res.json({
+      status: "FAILED",
+      message: `There was an error with your request ${e}`,
+    });
+  }
+});
+
+app.get("/classroom-simulation/random/:num", (req, res) => {
+  try {
+    const numEvents: number = parseInt(req.params.num);
+    console.log(numEvents);
+    if (Number.isNaN(numEvents) || numEvents > 20 || numEvents < 1) {
       res.json({
         status: "FAILED",
-        message: "Request failed. There is a cap at 20 events currently.\nIt is also possible that an invalid number/string was passed as an arguement",
+        message:
+          "Request failed. There is a cap at 20 events currently. \n Need at least 1 event.\nIt is also possible that an invalid number/string was passed as an arguement",
       });
     }
     const sim = new Simulator(genRandomConfig(), numEvents);
@@ -202,18 +230,18 @@ app.get("/classroom-simulation/random/:numEvents", (req, res) => {
   }
 });
 
-function genRandomConfig() {
-  const numS = Math.floor(Math.random() * 4) + 2;
+function genRandomConfig(seed = Math.floor(Math.random() * 10000)) {
+  const numS = Math.floor(seededRandom(seed * 6) * 4) + 2;
 
   return new ClassroomConfig({
-    roomSizeX: Math.floor(Math.random() * 10) + 5,
-    roomSizeY: Math.floor(Math.random() * 10) + 5,
+    roomSizeX: Math.floor(seededRandom(seed * 2) * 10) + 5,
+    roomSizeY: Math.floor(seededRandom(seed + 3) * 10) + 5,
     numStudents: numS,
-    numTeachers: Math.floor(Math.random() * 1) + 1,
+    numTeachers: Math.floor(seededRandom(seed * 1.5) * 1) + 1,
     numChairs: numS,
-    numTables: Math.floor(Math.random() * 3) + 1,
-    numRugs: Math.floor(Math.random() * 2) + 1,
-    seed: Math.floor(Math.random() * 10000),
+    numTables: Math.floor(seededRandom(seed * 7) * 3) + 1,
+    numRugs: Math.floor(seededRandom(seed * 5) * 2) + 1,
+    seed: seed,
   });
 
   // return new ClassroomConfig({

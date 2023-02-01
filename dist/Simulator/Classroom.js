@@ -44,17 +44,19 @@ class Classroom {
                 update classroom sprite with the new data
             */
         for (const eventSprite of event.spriteList) {
+            let hasMatch = false;
             for (const sprite of this.spriteList) {
                 if (eventSprite.name === sprite.name) {
                     // If there's a match, set sprite data to eventSprite data
                     sprite.currentDescription = eventSprite.currentDescription;
                     sprite.heading = eventSprite.heading;
                     sprite.mood = eventSprite.mood;
+                    hasMatch = true;
                 }
-                // else {
-                //     // there is no match,
-                //     throw new Error(`No Sprite with same ID in event and classroom. Event sprite ID: ${eventSprite.name}, classroom sprite ID: ${sprite.name} `)
-                // }
+            }
+            if (!hasMatch) {
+                // there is no match,
+                throw new Error(`No Sprite with same ID in event and classroom. Event sprite ID: ${eventSprite.name}`);
             }
         }
         // Save initial classroom
@@ -86,7 +88,8 @@ class Classroom {
                     }
                     const path = (0, BFS_1.default)(this.room, sprite.pos, sprite.heading);
                     if (path.length === 0) {
-                        throw new Error("There was no viable path for the sprite to get to its destination");
+                        const errString = `There was no viable path for the sprite to get to its destination: Here is some info about what might have caused the error: \n This sprite: ${sprite}\n This room: ${this.room.toString()}`;
+                        throw new Error(errString);
                     }
                     // path is a list of coordinates.
                     // UPDATE SPRITE LOCATION
