@@ -33,7 +33,8 @@ func _ready():
 	# Add the TextureRect node as a child of the Label node
 	add_child(image_node)
 	#set the position of the emote to above the sprite's head
-	rect_position = Vector2(-15,-42)
+	rect_position = Vector2(-7,-25)
+	#rect_position = Vector2(-15,-42)
 	
 
 func _on_Timer_timeout():

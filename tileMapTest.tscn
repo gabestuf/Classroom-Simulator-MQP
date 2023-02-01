@@ -1,4 +1,4 @@
-[gd_scene load_steps=182 format=2]
+[gd_scene load_steps=189 format=2]
 
 [ext_resource path="res://tileMapTest.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Tiles/window.png" type="Texture" id=2]
@@ -924,9 +924,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=597]
-extents = Vector2( 9, 13 )
-
 [sub_resource type="AtlasTexture" id=455]
 atlas = ExtResource( 25 )
 region = Rect2( 9, 6, 22, 34 )
@@ -1143,6 +1140,7 @@ autoplay = true
 position = Vector2( 112, 168 )
 scale = Vector2( 0.789773, 0.772485 )
 frames = SubResource( 529 )
+frame = 2
 speed_scale = 0.5
 playing = true
 script = ExtResource( 45 )
@@ -1241,7 +1239,7 @@ position = Vector2( 112, 72 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 479 )
 animation = "idle"
-frame = 3
+frame = 1
 speed_scale = 0.5
 playing = true
 script = ExtResource( 44 )

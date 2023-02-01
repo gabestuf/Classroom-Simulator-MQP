@@ -247,6 +247,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# get mouse position
 	var new_path : = nav_2d.get_simple_path(teacher.global_position, event.position)
+	print(new_path)
 	#new_path = [teacher.global_position, event.position]
 	#get angle between teacher and where teacher is going
 	var initAngle = teacher.global_position.angle_to_point(event.position) * 180/PI
@@ -337,11 +338,10 @@ func _sprites_move() -> void:
 			if(spriteName == "Student1"):
 				var student1Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				var newPath : = nav_2d.get_simple_path(AS2.global_position,student1Pos)
-				#line_2d.points = newPath
-				print(frames[frameNum].get("spriteList")[x])
-				print(student1Pos)
 				print(AS2.global_position)
+				print(student1Pos)
 				print(newPath)
+				#line_2d.points = newPath
 				#newPath = [(AS2.global_position), (student1Pos)]
 				AS2.path = newPath
 			if(spriteName == "Student2"):
