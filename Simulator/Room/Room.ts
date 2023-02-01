@@ -41,7 +41,7 @@ class Room {
   generateRoomAdditional() {
     // add tables
     for (let i = 0; i < this.RoomCfg.numTables; i++) {
-      const newCoord: Coordinate = this.findRandomEmptySpace();
+      const newCoord: Coordinate = this.findRandomEmptySpaceNoEdges();
       this.RoomArray[newCoord.y][newCoord.x] = new Table(newCoord);
     }
     // add rug
@@ -62,12 +62,12 @@ class Room {
           this.RoomArray[newCoord.y][newCoord.x] = new Chair(newCoord);
         } else {
           // there's a table but no available spaces around it, have to copy some logic here
-          const newCoord: Coordinate = this.findRandomEmptySpace();
+          const newCoord: Coordinate = this.findRandomEmptySpaceNoEdges();
           this.RoomArray[newCoord.y][newCoord.x] = new Chair(newCoord);
         }
       } else {
         // if there are no tables or spaces by tables available, add a chair in a random location
-        const newCoord: Coordinate = this.findRandomEmptySpace();
+        const newCoord: Coordinate = this.findRandomEmptySpaceNoEdges();
         this.RoomArray[newCoord.y][newCoord.x] = new Chair(newCoord);
       }
     }
@@ -179,6 +179,27 @@ class Room {
       for (const tile of row) {
         if (tile instanceof Floor) {
           coordinateList.push(tile.pos);
+        }
+      }
+    }
+    if (coordinateList.length === 0) {
+      throw new Error("Error, findRandomEmptySpace returned null, most likely room is too small to accomodate all sprites.");
+    }
+
+    return coordinateList[Math.floor(seededRandom(this.RoomCfg.seed) * coordinateList.length)];
+  }
+
+  findRandomEmptySpaceNoEdges(): Coordinate {
+    // same as findRandomEmptySpace but no coordinates against the wall
+    let coordinateList: Coordinate[] = [];
+    // we want to get all positions where there is floor
+    for (const row of this.RoomArray) {
+      for (const tile of row) {
+        if (tile instanceof Floor) {
+          // additional check if tile.pos is close to a wall
+          if (tile.pos.x > 2 && tile.pos.x < this.RoomArray.length - 2 && tile.pos.y > 2 && this.RoomArray.length - 2) {
+            coordinateList.push(tile.pos);
+          }
         }
       }
     }
