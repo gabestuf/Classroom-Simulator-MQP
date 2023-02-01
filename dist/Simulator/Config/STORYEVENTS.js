@@ -34,7 +34,7 @@ const StoryEventsJSON = [
         charactersInvolved: [
             {
                 name: "Student1",
-                mood: ["happy", "angry"],
+                mood: ["neutral", "angry"],
                 pos: ["current", "corner", "wall"],
                 description: ["breaks toy", "draws on object", "student spills food"],
             },
@@ -69,7 +69,7 @@ const StoryEvents2JSON = [
         charactersInvolved: [
             {
                 name: "Student1",
-                mood: ["sad", "angry"],
+                mood: ["sad", "angry", "neutral"],
                 pos: ["current", "corner"],
                 description: ["cry emoji", "student spills food"],
             },
