@@ -322,6 +322,7 @@ var spriteName
 var newPath
 
 func _sprites_move() -> void:
+	yield(get_tree().create_timer(3), "timeout")
 	#while there are frames left
 	while(frameNum < frames.size()):
 		print(frameNum)
