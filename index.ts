@@ -55,8 +55,7 @@ app.get("/render-room/:config", (req: Request, res: Response) => {
     if (!config.isValid()) {
       res.json({
         status: "FAILED",
-        message:
-          "The config you entered is not valid. Please refer to the README",
+        message: "The config you entered is not valid. Please refer to the README",
       });
     }
 
@@ -121,8 +120,7 @@ app.post("/render-room", (req, res) => {
   if (!config.isValid()) {
     res.json({
       status: "FAILED",
-      message:
-        "The config you entered is not valid. Please refer to the README",
+      message: "The config you entered is not valid. Please refer to the README",
     });
   }
 
@@ -207,8 +205,7 @@ app.get("/classroom-simulation/random/:num", (req, res) => {
     if (Number.isNaN(numEvents) || numEvents > 20 || numEvents < 1) {
       res.json({
         status: "FAILED",
-        message:
-          "Request failed. There is a cap at 20 events currently. \n Need at least 1 event.\nIt is also possible that an invalid number/string was passed as an arguement",
+        message: "Request failed. There is a cap at 20 events currently. \n Need at least 1 event.\nIt is also possible that an invalid number/string was passed as an arguement",
       });
     }
     const sim = new Simulator(genRandomConfig(), numEvents);
@@ -234,8 +231,8 @@ function genRandomConfig(seed = Math.floor(Math.random() * 10000)) {
   const numS = Math.floor(seededRandom(seed * 6) * 4) + 2;
 
   return new ClassroomConfig({
-    roomSizeX: Math.floor(seededRandom(seed * 2) * 10) + 5,
-    roomSizeY: Math.floor(seededRandom(seed + 3) * 10) + 5,
+    roomSizeX: Math.floor(seededRandom(seed * 2) * 10) + 8,
+    roomSizeY: Math.floor(seededRandom(seed + 3) * 10) + 8,
     numStudents: numS,
     numTeachers: Math.floor(seededRandom(seed * 1.5) * 1) + 1,
     numChairs: numS,
