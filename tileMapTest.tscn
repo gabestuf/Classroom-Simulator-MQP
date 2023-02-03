@@ -1136,16 +1136,16 @@ autoplay = true
 
 [node name="Line2D" type="Line2D" parent="."]
 
-[node name="AnimatedSprite4" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite4" type="AnimatedSprite" parent="." groups=["Sprites"]]
 position = Vector2( 112, 168 )
 scale = Vector2( 0.789773, 0.772485 )
 frames = SubResource( 529 )
-frame = 3
+frame = 1
 speed_scale = 0.5
 playing = true
 script = ExtResource( 45 )
 
-[node name="Label7" type="Label" parent="AnimatedSprite4"]
+[node name="Label7" type="Label" parent="AnimatedSprite4" groups=["Emotes"]]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 42 )
@@ -1153,17 +1153,17 @@ script = ExtResource( 42 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite4"]
 shape = SubResource( 600 )
 
-[node name="AnimatedSprite5" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite5" type="AnimatedSprite" parent="." groups=["Sprites"]]
 position = Vector2( 144, 104 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 163 )
 animation = "idle"
-frame = 1
+frame = 3
 speed_scale = 0.2
 playing = true
 script = ExtResource( 28 )
 
-[node name="Label6" type="Label" parent="AnimatedSprite5"]
+[node name="Label6" type="Label" parent="AnimatedSprite5" groups=["Emotes"]]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 41 )
@@ -1171,16 +1171,15 @@ script = ExtResource( 41 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite5"]
 shape = SubResource( 601 )
 
-[node name="AnimatedSprite6" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite6" type="AnimatedSprite" parent="." groups=["Sprites"]]
 position = Vector2( 48, 136 )
 scale = Vector2( 0.678571, 0.737259 )
 frames = SubResource( 187 )
-frame = 2
 speed_scale = 0.2
 playing = true
 script = ExtResource( 48 )
 
-[node name="Label5" type="Label" parent="AnimatedSprite6"]
+[node name="Label5" type="Label" parent="AnimatedSprite6" groups=["Emotes"]]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 40 )
@@ -1188,30 +1187,30 @@ script = ExtResource( 40 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite6"]
 shape = SubResource( 602 )
 
-[node name="AnimatedSprite7" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite7" type="AnimatedSprite" parent="." groups=["Sprites"]]
 visible = false
 position = Vector2( 80, 168 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 212 )
 animation = "idle"
+frame = 2
 speed_scale = 0.2
 playing = true
 script = ExtResource( 46 )
 
-[node name="Label4" type="Label" parent="AnimatedSprite7"]
+[node name="Label4" type="Label" parent="AnimatedSprite7" groups=["Emotes"]]
 script = ExtResource( 39 )
 
-[node name="AnimatedSprite8" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite8" type="AnimatedSprite" parent="." groups=["Sprites"]]
 position = Vector2( 80, 72 )
 scale = Vector2( 0.678571, 0.737259 )
 frames = SubResource( 237 )
 animation = "New Anim"
-frame = 2
 speed_scale = 0.2
 playing = true
 script = ExtResource( 47 )
 
-[node name="Label" type="Label" parent="AnimatedSprite8"]
+[node name="Label" type="Label" parent="AnimatedSprite8" groups=["Emotes"]]
 margin_left = -58.9474
 margin_top = -35.2658
 margin_right = -18.9474
@@ -1221,30 +1220,29 @@ script = ExtResource( 36 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite8"]
 shape = SubResource( 603 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." groups=["Sprites"]]
 position = Vector2( 208, 40 )
 frames = SubResource( 454 )
 animation = "idle"
-frame = 3
+frame = 2
 playing = true
 script = ExtResource( 32 )
 
-[node name="Label0" type="Label" parent="AnimatedSprite"]
+[node name="Label0" type="Label" parent="AnimatedSprite" groups=["Emotes"]]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 43 )
 
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="." groups=["Sprites"]]
 position = Vector2( 112, 72 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 479 )
 animation = "idle"
-frame = 2
 speed_scale = 0.5
 playing = true
 script = ExtResource( 44 )
 
-[node name="Label2" type="Label" parent="AnimatedSprite2"]
+[node name="Label2" type="Label" parent="AnimatedSprite2" groups=["Emotes"]]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 37 )
@@ -1252,16 +1250,15 @@ script = ExtResource( 37 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2"]
 shape = SubResource( 599 )
 
-[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite3" type="AnimatedSprite" parent="." groups=["Sprites"]]
 position = Vector2( 48, 104 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 504 )
-frame = 2
 speed_scale = 0.2
 playing = true
 script = ExtResource( 35 )
 
-[node name="Label3" type="Label" parent="AnimatedSprite3"]
+[node name="Label3" type="Label" parent="AnimatedSprite3" groups=["Emotes"]]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 38 )

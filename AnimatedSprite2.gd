@@ -1,7 +1,9 @@
 extends AnimatedSprite
 
-var speed : = 200.0
+var speed : = 100.0
 var path : = PoolVector2Array() setget set_path 
+
+signal sprite_finished
 
 #https://www.youtube.com/watch?v=0fPOt0Jw52s&ab_channel=GDQuest
 
@@ -33,7 +35,7 @@ func move_along_path(distance:float) -> void:
 		distance -= distance_to_next
 		starting_point = path[0]
 		path.remove(0)
-		
+
 
 func set_path(value : PoolVector2Array) -> void:
 	path = value

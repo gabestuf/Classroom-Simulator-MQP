@@ -159,7 +159,7 @@ func generate() -> void:
 	_generate_rugs()
 	_generate_sprites()
 	emit_signal("finished")
-	_sprites_move()
+	#_sprites_move()
 
 func _generate_perimeter() -> void:
 	# Left and Right Walls
@@ -317,12 +317,20 @@ func _generate_sprites() -> void:
 		AS8.position = spritePos.get("student 7 pos")
 		AS8.get_child(0)._set_Label(frames[0].get("spriteList")[7].get("mood"))
 	else: AS8.hide()
+	print("here")
+	emit_signal("generation finished", _sprites_move())
 
 var spriteName
 var newPath
 
 func _sprites_move() -> void:
-	yield(get_tree().create_timer(3), "timeout")
+	print("hiiiiiii")
+	#this allows the sprites to load before this function loads
+	#THIS IS TEMPORARY
+	#apparently it takes .017 seconds for the sprites to load? idk 
+	yield(get_tree().create_timer(.017), "timeout")
+	
+	
 	#while there are frames left
 	while(frameNum < frames.size()):
 		print(frameNum)
@@ -332,57 +340,89 @@ func _sprites_move() -> void:
 			spriteName = frames[frameNum].get("spriteList")[x].get("name")
 			if(spriteName == "Teacher1"):
 				var teacherPos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
-				var newPath = nav_2d.get_simple_path(teacher.global_position,teacherPos)
-				#newPath = [(teacher.global_position), (teacherPos)]
-				line_2d.points = newPath
-				teacher.path = newPath
+				if teacherPos != teacher.global_position:
+					var newPath = nav_2d.get_simple_path(teacher.global_position,teacherPos)
+					#newPath = [(teacher.global_position), (teacherPos)]
+					line_2d.points = newPath
+					teacher.path = newPath
+					print("teacher")
+					yield(teacher, "animation_finished")
+					print("teacher")
 			if(spriteName == "Student1"):
 				var student1Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
-				var newPath : = nav_2d.get_simple_path(AS2.global_position,student1Pos)
-				print(AS2.global_position)
-				print(student1Pos)
-				print(newPath)
-				#line_2d.points = newPath
-				#newPath = [(AS2.global_position), (student1Pos)]
-				AS2.path = newPath
+				if student1Pos != AS2.global_position:
+					var newPath : = nav_2d.get_simple_path(AS2.global_position,student1Pos)
+					#line_2d.points = newPath
+					#newPath = [(AS2.global_position), (student1Pos)]
+					AS2.path = newPath
+					print("1")
+					yield(AS2, "animation_finished")
+					print("1")
 			if(spriteName == "Student2"):
 				var student2Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
-				var newPath = nav_2d.get_simple_path(AS3.global_position,student2Pos)
-				#newPath = [(AS3.global_position), (student2Pos)]
-				#line_2d.points = newPath
-				AS3.path = newPath
+				if student2Pos != AS3.global_position:
+					var newPath = nav_2d.get_simple_path(AS3.global_position,student2Pos)
+					#newPath = [(AS3.global_position), (student2Pos)]
+					#line_2d.points = newPath
+					AS3.path = newPath
+					print("2")
+					yield(AS3, "animation_finished")
+					print("2")
 			if(spriteName == "Student3"):
 				var student3Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
-				var newPath = nav_2d.get_simple_path(AS4.global_position,student3Pos)
-				#newPath = [(AS4.global_position), (student3Pos)]
-				#line_2d.points = newPath
-				AS4.path = newPath
+				if student3Pos != AS4.global_position:
+					var newPath = nav_2d.get_simple_path(AS4.global_position,student3Pos)
+					#newPath = [(AS4.global_position), (student3Pos)]
+					#line_2d.points = newPath
+					AS4.path = newPath
+					print("3")
+					yield(AS4, "animation_finished")
+					print("3")
 			if(spriteName == "Student4"):
 				var student4Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
-				var newPath = nav_2d.get_simple_path(AS5.global_position,student4Pos)
-				#newPath = [(AS5.global_position), (student4Pos)]
-				#line_2d.points = newPath
-				AS5.path = newPath
+				if student4Pos != AS5.global_position:
+					var newPath = nav_2d.get_simple_path(AS5.global_position,student4Pos)
+					#newPath = [(AS5.global_position), (student4Pos)]
+					#line_2d.points = newPath
+					AS5.path = newPath
+					print("4")
+					yield(AS5, "animation_finished")
+					print("4")
 			if(spriteName == "Student5"):
 				var student5Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
-				var newPath = nav_2d.get_simple_path(AS6.global_position,student5Pos)
-				#newPath = [(AS6.global_position), (student5Pos)]
-				#line_2d.points = newPath
-				AS6.path = newPath
+				if student5Pos != AS6.global_position:
+					var newPath = nav_2d.get_simple_path(AS6.global_position,student5Pos)
+					#newPath = [(AS6.global_position), (student5Pos)]
+					#line_2d.points = newPath
+					AS6.path = newPath
+					print("5")
+					yield(AS6, "animation_finished")
+					print("5")
 			if(spriteName == "Student6"):
 				var student6Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
-				var newPath = nav_2d.get_simple_path(AS7.global_position,student6Pos)
-				#newPath = [(AS7.global_position), (student6Pos)]
-				#line_2d.points = newPath
-				AS7.path = newPath
+				if student6Pos != AS7.global_position:
+					var newPath = nav_2d.get_simple_path(AS7.global_position,student6Pos)
+					#newPath = [(AS7.global_position), (student6Pos)]
+					#line_2d.points = newPath
+					AS7.path = newPath
+					print("6")
+					yield(AS7, "animation_finished")
+					print("6")
 			if(spriteName == "Student7"):
 				var student7Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
-				var newPath = nav_2d.get_simple_path(AS8.global_position,student7Pos)
-				#newPath = [(AS8.global_position), (student7Pos)]
-				#line_2d.points = newPath
-				AS8.path = newPath
+				if student7Pos != AS8.global_position:
+					var newPath = nav_2d.get_simple_path(AS8.global_position,student7Pos)
+					#newPath = [(AS8.global_position), (student7Pos)]
+					#line_2d.points = newPath
+					AS8.path = newPath
+					print("7")
+					yield(AS8, "animation_finished")
+					print("7")
 		#somehow finish sprite movement before another sprite starts moving
 		frameNum = frameNum + 1
+
+func stupid() -> void:
+	print("this is stupid")
 
 func _switch_emotes() -> void:
 	for x in frames.size():

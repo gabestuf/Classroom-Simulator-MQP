@@ -1,6 +1,6 @@
 extends AnimatedSprite
 
-var speed : = 200.0
+var speed : = 100.0
 var path : = PoolVector2Array() setget set_path 
 
 #https://www.youtube.com/watch?v=0fPOt0Jw52s&ab_channel=GDQuest

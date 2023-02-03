@@ -34,7 +34,6 @@ func _ready():
 	add_child(image_node)
 	#set the position of the emote to above the sprite's head
 	rect_position = Vector2(-7,-25)
-	
 
 func _on_Timer_timeout():
 	_rng.randomize()
