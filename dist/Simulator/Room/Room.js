@@ -9,10 +9,10 @@ const GenerateRandomNumber_1 = __importDefault(require("../Helper Functions/Gene
 class Room {
     constructor(cfg) {
         this.RoomCfg = cfg;
-        this.RoomArray = this.generateRoom(cfg.roomSizeX, cfg.roomSizeY);
-        this.generateRoomAdditional();
+        this.RoomArray = this.generateRoomFloor(cfg.roomSizeX, cfg.roomSizeY);
+        this.generateRoomElements();
     }
-    generateRoom(sizeX, sizeY) {
+    generateRoomFloor(sizeX, sizeY) {
         let newRoom = new Array();
         // Generate Walls & Floors
         for (let y = 0; y < sizeY; y++) {
@@ -32,10 +32,10 @@ class Room {
         }
         return newRoom;
     }
-    generateRoomAdditional() {
+    generateRoomElements() {
         // add tables
         for (let i = 0; i < this.RoomCfg.numTables; i++) {
-            const newCoord = this.findRandomEmptySpace();
+            const newCoord = this.findRandomEmptySpaceNoEdges();
             this.RoomArray[newCoord.y][newCoord.x] = new Tiles_1.Table(newCoord);
         }
         // add rug
@@ -56,13 +56,13 @@ class Room {
                 }
                 else {
                     // there's a table but no available spaces around it, have to copy some logic here
-                    const newCoord = this.findRandomEmptySpace();
+                    const newCoord = this.findRandomEmptySpaceNoEdges();
                     this.RoomArray[newCoord.y][newCoord.x] = new Tiles_1.Chair(newCoord);
                 }
             }
             else {
                 // if there are no tables or spaces by tables available, add a chair in a random location
-                const newCoord = this.findRandomEmptySpace();
+                const newCoord = this.findRandomEmptySpaceNoEdges();
                 this.RoomArray[newCoord.y][newCoord.x] = new Tiles_1.Chair(newCoord);
             }
         }
@@ -163,6 +163,25 @@ class Room {
             for (const tile of row) {
                 if (tile instanceof Tiles_1.Floor) {
                     coordinateList.push(tile.pos);
+                }
+            }
+        }
+        if (coordinateList.length === 0) {
+            throw new Error("Error, findRandomEmptySpace returned null, most likely room is too small to accomodate all sprites.");
+        }
+        return coordinateList[Math.floor((0, GenerateRandomNumber_1.default)(this.RoomCfg.seed) * coordinateList.length)];
+    }
+    findRandomEmptySpaceNoEdges() {
+        // same as findRandomEmptySpace but no coordinates against the wall
+        let coordinateList = [];
+        // we want to get all positions where there is floor
+        for (const row of this.RoomArray) {
+            for (const tile of row) {
+                if (tile instanceof Tiles_1.Floor) {
+                    // additional check if tile.pos is close to a wall
+                    if (tile.pos.x > 2 && tile.pos.x < this.RoomArray.length - 2 && tile.pos.y > 2 && this.RoomArray.length - 2) {
+                        coordinateList.push(tile.pos);
+                    }
                 }
             }
         }

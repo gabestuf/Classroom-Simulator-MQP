@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
-import express, { Express, Request, Response } from "express";
-import seededRandom from "./Simulator/Helper Functions/GenerateRandomNumber";
+import express, { Request, Response } from "express";
+import genRandomConfig from "./Simulator/Config/GenRandomConfig";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -19,6 +19,20 @@ import ClassroomConfig from "./Simulator/Config/CONFIG";
 import Room from "./Simulator/Room/Room";
 import Simulator from "./Simulator/Simulator";
 
+const testCFG = new ClassroomConfig({
+  roomSizeX: 5,
+  roomSizeY: 5,
+  numStudents: 1,
+  numTeachers: 1,
+  numChairs: 0,
+  numTables: 0,
+  numRugs: 0,
+  seed: 1,
+});
+
+const room = new Room(testCFG);
+room.generateRoomFloor(testCFG.roomSizeX, testCFG.roomSizeY);
+console.log(room.toString());
 app.get("/", (req: Request, res: Response) => {
   res.send("MQP API");
 });
@@ -226,32 +240,6 @@ app.get("/classroom-simulation/random/:num", (req, res) => {
     });
   }
 });
-
-function genRandomConfig(seed = Math.floor(Math.random() * 10000)) {
-  const numS = Math.floor(seededRandom(seed * 6) * 4) + 2;
-
-  return new ClassroomConfig({
-    roomSizeX: Math.floor(seededRandom(seed * 2) * 10) + 8,
-    roomSizeY: Math.floor(seededRandom(seed + 3) * 10) + 8,
-    numStudents: numS,
-    numTeachers: Math.floor(seededRandom(seed * 1.5) * 1) + 1,
-    numChairs: numS,
-    numTables: Math.floor(seededRandom(seed * 7) * 3) + 1,
-    numRugs: Math.floor(seededRandom(seed * 5) * 2) + 1,
-    seed: seed,
-  });
-
-  // return new ClassroomConfig({
-  //   roomSizeX: 6,
-  //   roomSizeY: 7,
-  //   numStudents: 2,
-  //   numTeachers: 1,
-  //   numChairs: 4,
-  //   numTables: 1,
-  //   numRugs: 1,
-  //   seed: 1,
-  // });
-}
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

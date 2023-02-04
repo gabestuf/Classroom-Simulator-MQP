@@ -11,11 +11,11 @@ class Room {
 
   constructor(cfg: ClassroomConfig) {
     this.RoomCfg = cfg;
-    this.RoomArray = this.generateRoom(cfg.roomSizeX, cfg.roomSizeY);
-    this.generateRoomAdditional();
+    this.RoomArray = this.generateRoomFloor(cfg.roomSizeX, cfg.roomSizeY);
+    this.generateRoomElements();
   }
 
-  generateRoom(sizeX: number, sizeY: number): Array<Array<iTile>> {
+  generateRoomFloor(sizeX: number, sizeY: number): Array<Array<iTile>> {
     let newRoom = new Array<Array<iTile>>();
     // Generate Walls & Floors
     for (let y: number = 0; y < sizeY; y++) {
@@ -38,7 +38,7 @@ class Room {
     return newRoom;
   }
 
-  generateRoomAdditional() {
+  generateRoomElements() {
     // add tables
     for (let i = 0; i < this.RoomCfg.numTables; i++) {
       const newCoord: Coordinate = this.findRandomEmptySpaceNoEdges();
@@ -249,6 +249,7 @@ class Room {
       }
       str += "\n";
     }
+
     return str;
   }
 

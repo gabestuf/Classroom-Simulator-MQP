@@ -34,142 +34,32 @@ const StoryEventsJSON = [
         charactersInvolved: [
             {
                 name: "Student1",
-                mood: ["neutral", "angry"],
-                pos: ["current", "corner", "wall"],
-                description: ["breaks toy", "draws on object", "student spills food"],
-            },
-        ],
-        nextEvents: ["twoStudentsFight"],
-    },
-    {
-        name: "twoStudentsFight",
-        charactersInvolved: [
-            {
-                name: "Student1",
-                mood: ["angry", "sad"],
-                pos: ["Student1"],
-                description: ["fights", "tumbles", "argues"],
-            },
-            {
-                name: "Student2",
-                mood: ["angry", "sad"],
-                pos: ["Student1"],
-                description: ["fights", "tumbles", "argues"],
-            },
-        ],
-        nextEvents: [],
-    },
-];
-
-
-
-// Sample Storyline #2 Tantrum (Sad Emoji)
-const StoryEvents2JSON = [
-    {
-        name: "studentTantrum",
-        charactersInvolved: [
-            {
-                name: "Student1",
-                mood: ["sad", "angry", "neutral"],
-                pos: ["current", "corner"],
-                description: ["cry emoji", "student spills food"],
-            },
-        ],
-        nextEvents: ["twoStudentsFight"],
-    },
-    {
-        name: "twoStudentsFight",
-        charactersInvolved: [
-            {
-                name: "Student1",
-                mood: ["angry", "sad"],
-                pos: ["Student1"],
-                description: ["fights", "tumbles", "argues"],
-            },
-            {
-                name: "Student2",
-                mood: ["angry", "sad"],
-                pos: ["Student1"],
-                description: ["fights", "tumbles", "argues"],
-            },
-        ],
-        nextEvents: [],
-    },
-];
-//storyline #3, order swapped 
-const StoryEvents3JSON = [
-    {
-        name: "twoStudentsFight",
-        charactersInvolved: [
-            {
-                name: "Student1",
-                mood: ["angry", "sad"],
-                pos: ["Student1"],
-                description: ["fights", "tumbles", "argues"],
-            },
-            {
-                name: "Student2",
-                mood: ["angry", "sad"],
-                pos: ["Student1"],
-                description: ["fights", "tumbles", "argues"],
-            },
-        ],
-        nextEvents: ["studentMakesMess"],
-    },
-    {
-        name: "studentMakesMess",
-        charactersInvolved: [
-            {
-                name: "Student1",
                 mood: ["happy", "angry"],
                 pos: ["current", "corner", "wall"],
                 description: ["breaks toy", "draws on object", "student spills food"],
             },
         ],
-        nextEvents: ["studentsGather", "studentsBecomesIdle"],
+        nextEvents: ["twoStudentsFight"],
     },
-];
-
-//storyline #4, simple gathering and idle
-const StoryEvents4JSON = [
     {
-        name: "studentsGather",
+        name: "twoStudentsFight",
         charactersInvolved: [
             {
                 name: "Student1",
-                mood: ["happy", "sad","neutral"],
+                mood: ["angry", "sad"],
                 pos: ["Student1"],
-                description: ["gathering", "lesson"],
+                description: ["fights", "tumbles", "argues"],
             },
             {
                 name: "Student2",
-                mood: ["happy", "sad","neutral"],
-                pos: ["Student2"],
-                description: ["gathering", "lesson"],
+                mood: ["angry", "sad"],
+                pos: ["Student1"],
+                description: ["fights", "tumbles", "argues"],
             },
         ],
-        nextEvents: ["studentBecomesIdle"],
-    },
-    {
-        name: "studentBecomesIdle",
-        charactersInvolved: [
-            {
-                name: "Student1",
-                mood: ["happy", "angry","neutral"],
-                pos: ["current", "corner", "wall"],
-                description: ["stands still"],
-            },
-            {
-                name: "Student2",
-                mood: ["happy", "sad","neutral"],
-                pos: ["Student2"],
-                description: ["gathering", "lesson"],
-            },
-        ],
-        nextEvents: [""],
+        nextEvents: [],
     },
 ];
-
 class StoryEvents {
     constructor() {
         this.eventList = this.convertJSON(StoryEventsJSON);

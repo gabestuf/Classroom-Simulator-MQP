@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const express_1 = __importDefault(require("express"));
-const GenerateRandomNumber_1 = __importDefault(require("./Simulator/Helper Functions/GenerateRandomNumber"));
+const GenRandomConfig_1 = __importDefault(require("./Simulator/Config/GenRandomConfig"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 let cors = require("cors");
@@ -20,11 +20,24 @@ app.use(express_1.default.json());
 const CONFIG_1 = __importDefault(require("./Simulator/Config/CONFIG"));
 const Room_1 = __importDefault(require("./Simulator/Room/Room"));
 const Simulator_1 = __importDefault(require("./Simulator/Simulator"));
+const testCFG = new CONFIG_1.default({
+    roomSizeX: 5,
+    roomSizeY: 5,
+    numStudents: 1,
+    numTeachers: 1,
+    numChairs: 0,
+    numTables: 0,
+    numRugs: 0,
+    seed: 1,
+});
+const room = new Room_1.default(testCFG);
+room.generateRoomFloor(testCFG.roomSizeX, testCFG.roomSizeY);
+console.log(room.toString());
 app.get("/", (req, res) => {
     res.send("MQP API");
 });
 app.get("/render-room", (req, res) => {
-    const config = genRandomConfig();
+    const config = (0, GenRandomConfig_1.default)();
     const room = new Room_1.default(config);
     res.json({
         status: "SUCCESS",
@@ -150,7 +163,7 @@ app.post("/render-room", (req, res) => {
 app.get("/classroom-simulation/random/singleEvent", (req, res) => {
     try {
         const numEvents = 1;
-        const sim = new Simulator_1.default(genRandomConfig(), numEvents);
+        const sim = new Simulator_1.default((0, GenRandomConfig_1.default)(), numEvents);
         sim.generateOneRandomEvent();
         res.json({
             status: "SUCCESS",
@@ -172,7 +185,7 @@ app.get("/classroom-simulation/random/singleEvent/:seed", (req, res) => {
     const seed = parseInt(req.params.seed);
     try {
         const numEvents = 1;
-        const sim = new Simulator_1.default(genRandomConfig(seed || undefined), numEvents);
+        const sim = new Simulator_1.default((0, GenRandomConfig_1.default)(seed || undefined), numEvents);
         sim.generateOneRandomEvent();
         res.json({
             status: "SUCCESS",
@@ -200,7 +213,7 @@ app.get("/classroom-simulation/random/:num", (req, res) => {
                 message: "Request failed. There is a cap at 20 events currently. \n Need at least 1 event.\nIt is also possible that an invalid number/string was passed as an arguement",
             });
         }
-        const sim = new Simulator_1.default(genRandomConfig(), numEvents);
+        const sim = new Simulator_1.default((0, GenRandomConfig_1.default)(), numEvents);
         sim.generateRandomEvents(numEvents);
         res.json({
             status: "SUCCESS",
@@ -218,29 +231,6 @@ app.get("/classroom-simulation/random/:num", (req, res) => {
         });
     }
 });
-function genRandomConfig(seed = Math.floor(Math.random() * 10000)) {
-    const numS = Math.floor((0, GenerateRandomNumber_1.default)(seed * 6) * 4) + 2;
-    return new CONFIG_1.default({
-        roomSizeX: Math.floor((0, GenerateRandomNumber_1.default)(seed * 2) * 10) + 5,
-        roomSizeY: Math.floor((0, GenerateRandomNumber_1.default)(seed + 3) * 10) + 5,
-        numStudents: numS,
-        numTeachers: Math.floor((0, GenerateRandomNumber_1.default)(seed * 1.5) * 1) + 1,
-        numChairs: numS,
-        numTables: Math.floor((0, GenerateRandomNumber_1.default)(seed * 7) * 3) + 1,
-        numRugs: Math.floor((0, GenerateRandomNumber_1.default)(seed * 5) * 2) + 1,
-        seed: seed,
-    });
-    // return new ClassroomConfig({
-    //   roomSizeX: 6,
-    //   roomSizeY: 7,
-    //   numStudents: 2,
-    //   numTeachers: 1,
-    //   numChairs: 4,
-    //   numTables: 1,
-    //   numRugs: 1,
-    //   seed: 1,
-    // });
-}
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });
