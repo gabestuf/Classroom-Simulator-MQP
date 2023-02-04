@@ -1,4 +1,4 @@
-[gd_scene load_steps=189 format=2]
+[gd_scene load_steps=191 format=2]
 
 [ext_resource path="res://tileMapTest.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Tiles/window.png" type="Texture" id=2]
@@ -48,6 +48,8 @@
 [ext_resource path="res://AnimatedSprite7.gd" type="Script" id=46]
 [ext_resource path="res://AnimatedSprite8.gd" type="Script" id=47]
 [ext_resource path="res://AnimatedSprite6.gd" type="Script" id=48]
+[ext_resource path="res://BorderFloorMap.gd" type="Script" id=49]
+[ext_resource path="res://ObjectObstaclesMap.gd" type="Script" id=50]
 
 [sub_resource type="NavigationPolygon" id=530]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -1120,6 +1122,7 @@ cell_size = Vector2( 32, 32 )
 collision_use_kinematic = true
 bake_navigation = true
 format = 1
+script = ExtResource( 49 )
 
 [node name="ObjectObstaclesMap" type="TileMap" parent="Navigation2D"]
 tile_set = SubResource( 2 )
@@ -1128,6 +1131,7 @@ show_collision = true
 collision_use_kinematic = true
 bake_navigation = true
 format = 1
+script = ExtResource( 50 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 26 )
@@ -1158,7 +1162,7 @@ position = Vector2( 144, 104 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 163 )
 animation = "idle"
-frame = 3
+frame = 1
 speed_scale = 0.2
 playing = true
 script = ExtResource( 28 )
@@ -1175,6 +1179,7 @@ shape = SubResource( 601 )
 position = Vector2( 48, 136 )
 scale = Vector2( 0.678571, 0.737259 )
 frames = SubResource( 187 )
+frame = 2
 speed_scale = 0.2
 playing = true
 script = ExtResource( 48 )
@@ -1193,7 +1198,6 @@ position = Vector2( 80, 168 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 212 )
 animation = "idle"
-frame = 2
 speed_scale = 0.2
 playing = true
 script = ExtResource( 46 )
@@ -1206,6 +1210,7 @@ position = Vector2( 80, 72 )
 scale = Vector2( 0.678571, 0.737259 )
 frames = SubResource( 237 )
 animation = "New Anim"
+frame = 2
 speed_scale = 0.2
 playing = true
 script = ExtResource( 47 )
@@ -1224,7 +1229,7 @@ shape = SubResource( 603 )
 position = Vector2( 208, 40 )
 frames = SubResource( 454 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 script = ExtResource( 32 )
 
@@ -1254,6 +1259,7 @@ shape = SubResource( 599 )
 position = Vector2( 48, 104 )
 scale = Vector2( 0.727273, 0.727273 )
 frames = SubResource( 504 )
+frame = 2
 speed_scale = 0.2
 playing = true
 script = ExtResource( 35 )

@@ -47,4 +47,7 @@ func _on_Timer_timeout():
 
 func _set_Label(emote):
 	print(emote)
-	image_node.texture = load("res://Tilesets/Emotions/" + emote + ".png")
+	if emote == "angry":
+		image_node.texture = load("res://Tilesets/Emotions/angryStrong.png")
+	else:
+		image_node.texture = load("res://Tilesets/Emotions/" + emote + ".png")

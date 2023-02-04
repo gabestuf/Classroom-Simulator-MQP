@@ -30,49 +30,9 @@ var spritePos = {}
 onready var _tile_map : TileMap = $Navigation2D/BorderFloorMap
 onready var _tilemap2 : TileMap = $Navigation2D/ObjectObstaclesMap
 
-#bottom map
-var borderTileMap = {
-	"carpet" : 2,
-	"topWall" : 3,
-	"bottom" : 8,
-	"leftWall" : 9,
-	"rightWall" : 10,
-	"floor" : 11,
-	"bottomLeft" : 12,
-	"bottomRight" : 13,
-	"topLeft" : 14,
-	"topRight" : 15,
-	"leftWindow" : 16,
-	"bookshelf" : 17,
-	"rightBookshelf" : 18,
-	"window" : 19,
-	"door" : 20,
-	"rightdoor": 21
-}
-#top map
-var objectTileMap = {
-	"chair" : 1,
-	"carpet" : 3,
-	"table" : 4,
-	"bush" : 5,
-	"floor" : 6,
-	"bigCarpet" : 7,
-	"bigTable" : 8
-}
-
-#tiles:
-#w = wall
-#f = floor
-#t = table
-#r = rug
-#c = chair
-#d = door
-#wi = window
-#wil = left window
-#b = bush ?
-#bks = bookshelf ?
-#S = student/sprite
-#T = teacher
+#tiles: 
+#w = wall, f = floor, t = table, r = rug, c = chair, d = door, wi = window, wil = left window
+#b = bush, bks = bookshelf, S = student/sprite, T = teacher
 var tiles
 
 #perimiter is always 1 tile around the entire room
@@ -100,9 +60,6 @@ var frameNum = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	http()
-	#calling these from http so that they run in order without async
-	#setup()
-	#generate()
 
 func http() -> void:
 	#create httpRequest object and add it as a child
@@ -116,7 +73,6 @@ func http() -> void:
 	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent")
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
-	
 
 #function is called when httprequest is complete
 func _on_request_completed(result, response_code, headers, body):
@@ -132,8 +88,6 @@ func _on_request_completed(result, response_code, headers, body):
 	totalTeachers = classrooomJSON.get("config").get("numTeachers")
 	totalStudents = classrooomJSON.get("config").get("numStudents")
 	frames = classrooomJSON.get("frames")
-	#print(frames)
-	print(frames[0].get("spriteList")[1].get("mood"))
 	
 	#set inner size to correct dimensions
 	inner_size = Vector2(roomSizeY-2, roomSizeX-2)
@@ -153,86 +107,11 @@ func setup() -> void:
 
 func generate() -> void:
 	emit_signal("started")
-	_generate_perimeter()
-	_generate_inner()
-	_generate_objects()
-	_generate_rugs()
+	_tile_map._generate_perimeter(tiles, size, roomSizeX, roomSizeY)
+	_tile_map._generate_inner(size)
+	_tilemap2._generate_objects(tiles, size)
 	_generate_sprites()
 	emit_signal("finished")
-	#_sprites_move()
-
-func _generate_perimeter() -> void:
-	# Left and Right Walls
-	for x in [0, size.x - 1]:
-		for y in range(0, size.y):
-			tile = tiles[x][y]
-			if x == 0:
-				if(tiles[x][y] == "w"):
-					_tile_map.set_cell(x,y, borderTileMap.leftWall)
-				elif(tiles[x][y] == "wil"):
-					_tile_map.set_cell(x,y,borderTileMap.leftWindow)
-			else:
-				if(tiles[x][y] == "w"):
-					_tile_map.set_cell(x,y, borderTileMap.rightWall)
-				elif(tiles[x][y] == "wi"):
-					_tile_map.set_cell(x,y, borderTileMap.window)
-				elif(tiles[x][y] == "bks"):
-					_tile_map.set_cell(x,y,borderTileMap.rightBookshelf)
-				elif(tiles[x][y] == "do"):
-					_tile_map.set_cell(x,y,borderTileMap.rightdoor)
-	#top and bottom walls
-	for x in range(1, size.x - 1):
-		for y in [0, size.y-1]:
-			if y == 0:
-				if(tiles[x][y] == "w"):
-					_tile_map.set_cell(x,y, borderTileMap.topWall)
-				elif(tiles[x][y] == "wi"):
-					_tile_map.set_cell(x, y, borderTileMap.window)
-				elif(tiles[x][y] == "bks"):
-					_tile_map.set_cell(x,y,borderTileMap.bookshelf)
-			else:
-				_tile_map.set_cell(x,y, borderTileMap.bottom)
-	#corners
-	_tile_map.set_cell(0,roomSizeX - 1, borderTileMap.bottomLeft)
-	_tile_map.set_cell(roomSizeY - 1,roomSizeX - 1, borderTileMap.bottomRight)
-	_tile_map.set_cell(0,0, borderTileMap.topLeft)
-	_tile_map.set_cell(roomSizeY - 1,0, borderTileMap.topRight)
-
-func _generate_inner() -> void:
-	for x in range(1, size.x-1):
-		for y in range (1, size.y-1):
-			#generate the entire inner as floor to be overlayed on the other tilemap
-			_tile_map.set_cell(x,y,borderTileMap.floor)
-
-func _generate_objects() -> void:
-	for x in range(1, size.x-1):
-		for y in range (1, size.y-1):
-			tile = tiles[x][y]
-			match tile:
-				"b": _tilemap2.set_cell(x, y, objectTileMap.bush)
-				"t": _tilemap2.set_cell(x, y, objectTileMap.table)
-				#get x and y coordinates for sprites, put them in spritePos dictionary
-				"T": if numTeachers < totalTeachers:
-					spritePos["teacher " + str(numTeachers + 1) + " pos"] = Vector2((x*32)+16, (y*32)+16)
-					#teacher.position = Vector2((x*32)+16, (y*32)+16)
-					numTeachers += 1
-				"S": if numStudents < totalStudents:
-					spritePos["student " + str(numStudents + 1) + " pos"] = Vector2((x*32)+16, (y*32)+16)
-					#teacher.position = Vector2((x*32)+16, (y*32)+16)
-					numStudents += 1
-				"c": _tilemap2.set_cell(x, y, objectTileMap.chair)
-			#big rug hardcode for now
-			#_tilemap2.set_cell(1,3,objectTileMap.bigCarpet)
-
-func _generate_rugs() -> void:
-	for x in range(1, size.x-1):
-		for y in range (1, size.y-1):
-			#set the "obstacles" above it
-			tile = tiles[x][y]
-			match tile:
-				#f will be a transparent tile eventually, overlayed over the floor
-				#"f": _tilemap2.set_cell(x, y, )
-				"r": _tilemap2.set_cell(x, y, objectTileMap.carpet)
 
 # Navigation Test
 onready var nav_2d : Navigation2D = $Navigation2D
@@ -247,8 +126,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# get mouse position
 	var new_path : = nav_2d.get_simple_path(teacher.global_position, event.position)
-	print(new_path)
-	#new_path = [teacher.global_position, event.position]
+	
 	#get angle between teacher and where teacher is going
 	var initAngle = teacher.global_position.angle_to_point(event.position) * 180/PI
 	#for some reason angles are weird so this helps
@@ -256,7 +134,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		initAngle = 180 + (180 - abs(initAngle))
 	
 	#for each general direction play that animation
-	#this is going to be ugly :(
 	if initAngle <= 22.5 or initAngle > 337.5:
 		teacher.play("left")
 	elif initAngle > 22.5 and initAngle <= 67.5:
@@ -273,15 +150,26 @@ func _unhandled_input(event: InputEvent) -> void:
 		teacher.play("down")
 	elif initAngle > 292.5 and initAngle <= 337.5:
 		teacher.play("down left")
-	#yep it's ugly but it works
 	
 	line_2d.points = new_path
 	teacher.path = new_path
 
 func _generate_sprites() -> void:
+	#get x and y coordinates for sprites, put them in spritePos dictionary
+	for x in range(1, size.x-1):
+		for y in range (1, size.y-1):
+			tile = tiles[x][y]
+			match tile:
+				"T": if numTeachers < totalTeachers:
+					spritePos["teacher " + str(numTeachers + 1) + " pos"] = Vector2((x*32)+16, (y*32)+16)
+					#teacher.position = Vector2((x*32)+16, (y*32)+16)
+					numTeachers += 1
+				"S": if numStudents < totalStudents:
+					spritePos["student " + str(numStudents + 1) + " pos"] = Vector2((x*32)+16, (y*32)+16)
+					#teacher.position = Vector2((x*32)+16, (y*32)+16)
+					numStudents += 1
+
 	#get positions from spritePos dictionary and hide all other not needed sprites
-	#this works but is so so ugly
-	
 	#we only have 1 teacher sprite 
 	if totalTeachers >= 1: 
 		teacher.position = spritePos.get("teacher 1 pos")
@@ -322,112 +210,85 @@ func _generate_sprites() -> void:
 
 var spriteName
 var newPath
+var currEmote
 
 func _sprites_move() -> void:
-	print("hiiiiiii")
 	#this allows the sprites to load before this function loads
 	#THIS IS TEMPORARY
 	#apparently it takes .017 seconds for the sprites to load? idk 
 	yield(get_tree().create_timer(.017), "timeout")
 	
-	
 	#while there are frames left
 	while(frameNum < frames.size()):
-		print(frameNum)
 		#for each sprite in the frame
 		for x in frames[frameNum].get("spriteList").size():
 			#get the sprite's name and move the correct sprite accordingly
+			#also set their emote
 			spriteName = frames[frameNum].get("spriteList")[x].get("name")
 			if(spriteName == "Teacher1"):
 				var teacherPos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if teacherPos != teacher.global_position:
-					var newPath = nav_2d.get_simple_path(teacher.global_position,teacherPos)
-					#newPath = [(teacher.global_position), (teacherPos)]
+					newPath = nav_2d.get_simple_path(teacher.global_position,teacherPos)
 					line_2d.points = newPath
 					teacher.path = newPath
-					print("teacher")
+					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
+					teacher.get_child(0)._set_Label(currEmote)
 					yield(teacher, "animation_finished")
-					print("teacher")
 			if(spriteName == "Student1"):
 				var student1Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student1Pos != AS2.global_position:
-					var newPath : = nav_2d.get_simple_path(AS2.global_position,student1Pos)
-					#line_2d.points = newPath
-					#newPath = [(AS2.global_position), (student1Pos)]
+					newPath = nav_2d.get_simple_path(AS2.global_position,student1Pos)
 					AS2.path = newPath
-					print("1")
+					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
+					AS2.get_child(0)._set_Label(currEmote)
 					yield(AS2, "animation_finished")
-					print("1")
 			if(spriteName == "Student2"):
 				var student2Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student2Pos != AS3.global_position:
-					var newPath = nav_2d.get_simple_path(AS3.global_position,student2Pos)
-					#newPath = [(AS3.global_position), (student2Pos)]
-					#line_2d.points = newPath
+					newPath = nav_2d.get_simple_path(AS3.global_position,student2Pos)
 					AS3.path = newPath
-					print("2")
+					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
+					AS3.get_child(0)._set_Label(currEmote)
 					yield(AS3, "animation_finished")
-					print("2")
 			if(spriteName == "Student3"):
 				var student3Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student3Pos != AS4.global_position:
-					var newPath = nav_2d.get_simple_path(AS4.global_position,student3Pos)
-					#newPath = [(AS4.global_position), (student3Pos)]
-					#line_2d.points = newPath
+					newPath = nav_2d.get_simple_path(AS4.global_position,student3Pos)
 					AS4.path = newPath
-					print("3")
+					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
+					AS4.get_child(0)._set_Label(currEmote)
 					yield(AS4, "animation_finished")
-					print("3")
 			if(spriteName == "Student4"):
 				var student4Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student4Pos != AS5.global_position:
-					var newPath = nav_2d.get_simple_path(AS5.global_position,student4Pos)
-					#newPath = [(AS5.global_position), (student4Pos)]
-					#line_2d.points = newPath
+					newPath = nav_2d.get_simple_path(AS5.global_position,student4Pos)
 					AS5.path = newPath
-					print("4")
+					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
+					AS5.get_child(0)._set_Label(currEmote)
 					yield(AS5, "animation_finished")
-					print("4")
 			if(spriteName == "Student5"):
 				var student5Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student5Pos != AS6.global_position:
-					var newPath = nav_2d.get_simple_path(AS6.global_position,student5Pos)
-					#newPath = [(AS6.global_position), (student5Pos)]
-					#line_2d.points = newPath
+					newPath = nav_2d.get_simple_path(AS6.global_position,student5Pos)
 					AS6.path = newPath
-					print("5")
+					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
+					AS6.get_child(0)._set_Label(currEmote)
 					yield(AS6, "animation_finished")
-					print("5")
 			if(spriteName == "Student6"):
 				var student6Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student6Pos != AS7.global_position:
-					var newPath = nav_2d.get_simple_path(AS7.global_position,student6Pos)
-					#newPath = [(AS7.global_position), (student6Pos)]
-					#line_2d.points = newPath
+					newPath = nav_2d.get_simple_path(AS7.global_position,student6Pos)
 					AS7.path = newPath
-					print("6")
+					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
+					AS7.get_child(0)._set_Label(currEmote)
 					yield(AS7, "animation_finished")
-					print("6")
 			if(spriteName == "Student7"):
 				var student7Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student7Pos != AS8.global_position:
-					var newPath = nav_2d.get_simple_path(AS8.global_position,student7Pos)
-					#newPath = [(AS8.global_position), (student7Pos)]
-					#line_2d.points = newPath
+					newPath = nav_2d.get_simple_path(AS8.global_position,student7Pos)
 					AS8.path = newPath
-					print("7")
+					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
+					AS8.get_child(0)._set_Label(currEmote)
 					yield(AS8, "animation_finished")
-					print("7")
 		#somehow finish sprite movement before another sprite starts moving
 		frameNum = frameNum + 1
-
-func stupid() -> void:
-	print("this is stupid")
-
-func _switch_emotes() -> void:
-	for x in frames.size():
-		for y in frames[x].get("spriteList").size():
-			spriteName = frames[x].get("spriteList")[y].get("name")
-			print(spriteName)
-			#match(sprite):
-				#"Teacher1":
