@@ -127,29 +127,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	# get mouse position
 	var new_path : = nav_2d.get_simple_path(teacher.global_position, event.position)
 	
-	#get angle between teacher and where teacher is going
-	var initAngle = teacher.global_position.angle_to_point(event.position) * 180/PI
-	#for some reason angles are weird so this helps
-	if initAngle < 0:
-		initAngle = 180 + (180 - abs(initAngle))
-	
-	#for each general direction play that animation
-	if initAngle <= 22.5 or initAngle > 337.5:
-		teacher.play("left")
-	elif initAngle > 22.5 and initAngle <= 67.5:
-		teacher.play("up left")
-	elif initAngle > 67.5 and initAngle <= 112.5:
-		teacher.play("up")
-	elif initAngle > 112.5 and initAngle <= 157.5:
-		teacher.play("up right")
-	elif initAngle > 157.5 and initAngle <= 202.5:
-		teacher.play("right")
-	elif initAngle > 202.5 and initAngle <= 247.5:
-		teacher.play("down right")
-	elif initAngle > 247.5 and initAngle <= 292.5:
-		teacher.play("down")
-	elif initAngle > 292.5 and initAngle <= 337.5:
-		teacher.play("down left")
+	_path_angles(teacher.global_position, event.position, teacher)
 	
 	line_2d.points = new_path
 	teacher.path = new_path
@@ -229,7 +207,7 @@ func _sprites_move() -> void:
 				var teacherPos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if teacherPos != teacher.global_position:
 					newPath = nav_2d.get_simple_path(teacher.global_position,teacherPos)
-					line_2d.points = newPath
+					_path_angles(teacher.global_position, teacherPos, teacher)
 					teacher.path = newPath
 					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
 					teacher.get_child(0)._set_Label(currEmote)
@@ -238,57 +216,97 @@ func _sprites_move() -> void:
 				var student1Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student1Pos != AS2.global_position:
 					newPath = nav_2d.get_simple_path(AS2.global_position,student1Pos)
+					_path_angles(AS2.global_position, student1Pos, AS2)
 					AS2.path = newPath
 					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
 					AS2.get_child(0)._set_Label(currEmote)
 					yield(AS2, "animation_finished")
+					AS2.play("idle")
 			if(spriteName == "Student2"):
 				var student2Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student2Pos != AS3.global_position:
 					newPath = nav_2d.get_simple_path(AS3.global_position,student2Pos)
+					_path_angles(AS3.global_position, student2Pos, AS3)
 					AS3.path = newPath
 					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
 					AS3.get_child(0)._set_Label(currEmote)
 					yield(AS3, "animation_finished")
+					AS3.play("idle")
 			if(spriteName == "Student3"):
 				var student3Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student3Pos != AS4.global_position:
 					newPath = nav_2d.get_simple_path(AS4.global_position,student3Pos)
+					_path_angles(AS4.global_position, student3Pos, AS4)
 					AS4.path = newPath
 					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
 					AS4.get_child(0)._set_Label(currEmote)
 					yield(AS4, "animation_finished")
+					AS4.play("idle")
 			if(spriteName == "Student4"):
 				var student4Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student4Pos != AS5.global_position:
 					newPath = nav_2d.get_simple_path(AS5.global_position,student4Pos)
+					_path_angles(AS5.global_position, student4Pos, AS5)
 					AS5.path = newPath
 					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
 					AS5.get_child(0)._set_Label(currEmote)
 					yield(AS5, "animation_finished")
+					AS5.play("idle")
 			if(spriteName == "Student5"):
 				var student5Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student5Pos != AS6.global_position:
 					newPath = nav_2d.get_simple_path(AS6.global_position,student5Pos)
+					_path_angles(AS6.global_position, student5Pos, AS6)
 					AS6.path = newPath
 					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
 					AS6.get_child(0)._set_Label(currEmote)
 					yield(AS6, "animation_finished")
+					AS6.play("idle")
 			if(spriteName == "Student6"):
 				var student6Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student6Pos != AS7.global_position:
 					newPath = nav_2d.get_simple_path(AS7.global_position,student6Pos)
+					_path_angles(AS7.global_position, student6Pos, AS7)
 					AS7.path = newPath
 					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
 					AS7.get_child(0)._set_Label(currEmote)
 					yield(AS7, "animation_finished")
+					AS7.play("idle")
 			if(spriteName == "Student7"):
 				var student7Pos = Vector2(frames[frameNum].get("spriteList")[x].get("pos")[1]*32+16, frames[frameNum].get("spriteList")[x].get("pos")[0]*32+16)
 				if student7Pos != AS8.global_position:
 					newPath = nav_2d.get_simple_path(AS8.global_position,student7Pos)
+					_path_angles(AS8.global_position, student7Pos, AS8)
 					AS8.path = newPath
 					currEmote = frames[frameNum].get("spriteList")[x].get("mood")
 					AS8.get_child(0)._set_Label(currEmote)
 					yield(AS8, "animation_finished")
+					AS8.play("idle")
 		#somehow finish sprite movement before another sprite starts moving
 		frameNum = frameNum + 1
+
+func _path_angles(point1, point2, sprite) -> void:
+	#get angle between teacher and where teacher is going
+	var initAngle = point1.angle_to_point(point2) * 180/PI
+	#for some reason angles are weird so this helps
+	if initAngle < 0:
+		initAngle = 180 + (180 - abs(initAngle))
+		
+	#for each general direction play that animation
+	if initAngle <= 22.5 or initAngle > 337.5:
+		sprite.play("left")
+	elif initAngle > 22.5 and initAngle <= 67.5:
+		sprite.play("up left")
+	elif initAngle > 67.5 and initAngle <= 112.5:
+		sprite.play("up")
+	elif initAngle > 112.5 and initAngle <= 157.5:
+		sprite.play("up right")
+	elif initAngle > 157.5 and initAngle <= 202.5:
+		sprite.play("right")
+	elif initAngle > 202.5 and initAngle <= 247.5:
+		sprite.play("down right")
+	elif initAngle > 247.5 and initAngle <= 292.5:
+		sprite.play("down")
+	elif initAngle > 292.5 and initAngle <= 337.5:
+		sprite.play("down left")
+	
