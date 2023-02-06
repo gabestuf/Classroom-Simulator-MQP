@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Classroom Simulator"
-run/main_scene="res://Classroom/Classroom.tscn"
+run/main_scene="res://Classroom.tscn"
 
 [display]
 

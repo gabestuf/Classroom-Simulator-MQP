@@ -10,9 +10,15 @@ var RugSprite = load("res://Sprites/Static/Rug.tscn") # Load the rug scene
 var StudentSprite = load("res://Sprites/Kinematic/StudentSprite.tscn") # Load the Student scene
 var TeacherSprite = load("res://Sprites/Kinematic/TeacherSprite.tscn") # Load the Teacher scene
 
-var StudentSpriteTextures = [preload("res://Tilesets/Sprites/AidanSprite.png"), preload("res://Tilesets/Sprites/EmilySprite.png"), preload("res://Tilesets/Sprites/EmilySpriteAlt.png"), preload("res://Tilesets/Sprites/GabeSprite.png"),
-preload("res://Tilesets/Sprites/JonSprite.png"), preload("res://Tilesets/Sprites/MarySprite.png"), preload("res://Tilesets/Sprites/RyanSprite.png")]
-var TeacherSpriteTextures = [preload("res://Tilesets/Sprites/Teacher0.png")]
+var StudentSpriteTextures = [
+	preload("res://Images/Sprites/Students/AidanSprite.png"), 
+	preload("res://Images/Sprites/Students/EmilySprite.png"), 
+	preload("res://Images/Sprites/Students/GabeSprite.png"),
+	preload("res://Images/Sprites/Students/JonSprite.png"), 
+	preload("res://Images/Sprites/Students/MarySprite.png"), 
+	preload("res://Images/Sprites/Students/RyanSprite.png"),
+	preload("res://Images/Sprites/Students/EmilySpriteAlt.png")]
+var TeacherSpriteTextures = [preload("res://Images/Sprites/Teachers/Teacher0.png")]
 
 var borderTileMap = {
 	"carpet" : 2,

@@ -14,7 +14,7 @@ func _ready():
 	# Create a new TextureRect node
 	image_node = TextureRect.new()
 	
-	image_node.texture = load("res://Tilesets/Emotions/neutral.png")
+	image_node.texture = load("res://Images/Emotes/neutral.png")
 	
 	# Add the TextureRect node as a child of the Label node
 	add_child(image_node)
@@ -27,7 +27,7 @@ func _set_Label(emote):
 		emote = "angryStrong"
 		
 	if emote in emotes:
-		image_node.texture = load("res://Tilesets/Emotions/" + emote + ".png")
+		image_node.texture = load("res://Images/Emotes/" + emote + ".png")
 		return true
 	else:
 		print("Error, emote does not exist: ", emote)
