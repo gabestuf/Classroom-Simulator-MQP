@@ -1,16 +1,16 @@
-###Classroom Simulator Refactor
+# Classroom Simulator Refactor
 
 I've been refactoring the godot project, it's missing some features from the current version, but it can somewhat run events from the json. It's also a lot less code!! (23 .gd files, ~ 1600 lines, to 4 .gd files, 4 .gd files, 361 lines)
 
 *NOTE: we definitely do not have to keep all of this if y'all already had alternatives, especially for the animations. However I hope at least some of this was helpful.*
 
-##Description
+## Description
 
 The big things were dynamically loading the sprites and textures based on the JSON, getting navigation to work, simplifying and removing copy & pasted code, and setting up a new way to do the animations (which I'm not sure about, would like your opinion).
 
 This is on it's own repo until we agree on what to keep or change because I didn't want to create a new branch because I'm lazy: https://github.com/gabestuf/Classroom_Sim_Refactor
 
-##Here's most of what I've been working on:
+## Here's most of what I've been working on:
 
 Creating the rooms: 
 - generates floors and walls
