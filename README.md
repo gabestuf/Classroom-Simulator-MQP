@@ -1,4 +1,4 @@
-#Classroom Simulator Refactor
+###Classroom Simulator Refactor
 
 I've been refactoring the godot project, it's missing some features from the current version, but it can somewhat run events from the json. It's also a lot less code!! (23 .gd files, ~ 1600 lines, to 4 .gd files, 4 .gd files, 361 lines)
 
