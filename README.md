@@ -1,31 +1,46 @@
-**Classroom Simulator MQP 2022-2023**
+#Classroom Simulator Refactor
 
-This branch is for godotTesting.
+I've been refactoring the godot project, it's missing some features from the current version, but it can somewhat run events from the json. It's also a lot less code!! (23 .gd files, ~ 1600 lines, to 4 .gd files, 4 .gd files, 361 lines)
 
-Requirements:
- - Collision Handling?
- - Able to pause on certain frames?
+*NOTE: we definitely do not have to keep all of this if y'all already had alternatives, especially for the animations. However I hope at least some of this was helpful.*
 
-**Members**
+##Description
 
-**Description**
-The goal is to help teachers learn about interactions with students through a classroom simulation. We are creating the front end for a classroom simulation web app.
+The big things were dynamically loading the sprites and textures based on the JSON, getting navigation to work, simplifying and removing copy & pasted code, and setting up a new way to do the animations (which I'm not sure about, would like your opinion).
 
+This is on it's own repo until we agree on what to keep or change because I didn't want to create a new branch because I'm lazy: https://github.com/gabestuf/Classroom_Sim_Refactor
 
-**Godot Notes and log**
-- For 2d Pixel images, go to import & set preset to 2d pixel, then set as default for texture
-- created a tileset folder 
-- Created a new scene by creating the root node (2d scene) and renaming it to World. This adds World.tscn which I saved in the home directory (res://)
-- You can now drag sprites (pngs) into the world and they will become children of World Node. Children aspects such as location are relative to World Node.
-- We need to set a default view engine, press play btn & it says no main scene has been defined. Select World as main scene (linking camera to World)
-- Now need to set project settings to work with pixel art game, using 32 pxl textures, Settings>Display>Window>Width=320, Height=180 (this will also make the window very small. Set Test Width & Height (1280x720) & Stretch>Mode to 2d to scale this.
+##Here's most of what I've been working on:
 
+Creating the rooms: 
+- generates floors and walls
+- generates tables, rugs, and chairs as sprites which can have collisions attached to them (they currently don't but that's more of a design choice)
+- other room objects such as doors, windows, bookshelves etc generation is going to be moved to the backend generation for consistency
 
-_Changelog Nov 28_
-Gabe
--Starting working on getting navigation to work with Navigation2D. Right now, clicking on a space in the map will get my character to move to that location, with a nice debug line. However, collisions and avoidance is not working because of something to do with there being 2 different tile maps. If I take the ground layer out, then the navigation can't see the ground and will not be able to walk on normal floor tiles, meaning it gets stuck a lot. With the ground in, it ignores the obstacle tilemap. 
--Edited my character so it lined up correctly, will probably have to do with other characters at some point. 
--Added ambiant classroom background (placeholder) noise playing in loop
--Experimented with an Animated2dSprite thing and animation trees, nothing implemented yet
+Navigation:
+- Using built in Navigation2DServer API to calculate paths
+- New "Navigation" node which basically just acts as a wrapper and spreads out some of the logic, tilemaps and sprites are children of this node
 
-Should still look generally the same, plus clicking for movement. In the future the clicking will be replaced by just giving the sprites coordinates.
+Sprites:
+- Sprites are now there own scenes
+- There is only one sprite script
+- Sprites are instantiated based on how many sprites are needed specified in the JSON, this includes textures, mood, position. 
+- Sprites are KinematicBody2D's which have the following children: 
+- - Sprite (Where the texture is set)
+- - NavigationAgent2D (Handles navigation)
+- - CollisionShape2D (Handles collisions)
+- - AnimationPlayer (Used to create animations - more info below)
+- - AnimationTree (Handles switching animations)
+- - EmotionLabel (Displays current emotion)
+
+Animations: 
+- Cropped texture maps to all be the same size (So every frame starts at the same x,y location). This allows keyframing based on a position of an image instead of a part of the image itself. This allows me to set different sprite textures for each sprite while using the same animations.
+- Set up animations for walking in the different directions and Idle in the cardinal directions. 
+- Began setting up animation tree for cardinal directions
+- Goal: store a normalized vector in Sprite.gd which will switch the animation tree based on vector direction
+- Emotion label displays emotion of sprites based on the current event in the json. 
+- Goal: the emotion label switches as soon as the animation starts, it would make more sense in some cases for the label to switch once the sprite has reached it's location, for instance, in twoStudentsFight, the students are shown angry before they actually move toward each other. 
+
+Random:
+- A tick occurs 4x a second, if the current frame is finished, a new one occurs at the next tick
+- Pathfinding in back-end is pretty much useless. Godot does a much better job. This will also allow us to use less frames. One idea is to break up movement by setting new positions in different frames (backend) or in the same frame if sprites move at the same time. Right now, when a new event triggers, all sprites begin responding immediately. 
