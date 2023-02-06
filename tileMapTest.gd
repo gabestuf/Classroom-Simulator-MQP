@@ -163,8 +163,8 @@ func generate() -> void:
 
 func _generate_perimeter() -> void:
 	# Left and Right Walls
-	for x in [0, size.x - 1]:
-		for y in range(0, size.y):
+	for x in range(roomSizeX):
+		for y in range(roomSizeY):
 			tile = tiles[x][y]
 			if x == 0:
 				if(tiles[x][y] == "w"):
@@ -209,17 +209,8 @@ func _generate_objects() -> void:
 		for y in range (1, size.y-1):
 			tile = tiles[x][y]
 			match tile:
-				"b": _tilemap2.set_cell(x, y, objectTileMap.bush)
 				"t": _tilemap2.set_cell(x, y, objectTileMap.table)
 				#get x and y coordinates for sprites, put them in spritePos dictionary
-				"T": if numTeachers < totalTeachers:
-					spritePos["teacher " + str(numTeachers + 1) + " pos"] = Vector2((x*32)+16, (y*32)+16)
-					#teacher.position = Vector2((x*32)+16, (y*32)+16)
-					numTeachers += 1
-				"S": if numStudents < totalStudents:
-					spritePos["student " + str(numStudents + 1) + " pos"] = Vector2((x*32)+16, (y*32)+16)
-					#teacher.position = Vector2((x*32)+16, (y*32)+16)
-					numStudents += 1
 				"c": _tilemap2.set_cell(x, y, objectTileMap.chair)
 			#big rug hardcode for now
 			#_tilemap2.set_cell(1,3,objectTileMap.bigCarpet)

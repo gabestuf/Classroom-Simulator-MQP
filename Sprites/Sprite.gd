@@ -1,0 +1,46 @@
+extends KinematicBody2D
+
+# Sprite information
+var spriteName = null
+var currentMood = "neutral"
+# Pathfinding
+onready var navAgent := $NavigationAgent2D
+onready var maxSpeed: float = 100
+var velocity := Vector2.ZERO
+var _path : Array = []
+# animations
+onready var animation_player = $AnimationPlayer
+onready var animation_tree = $AnimationTree
+onready var emotion_label : Label = $EmotionLabel
+
+func _physics_process(delta: float) -> void:
+	
+	if _path.size() > 0:
+		var current_pos = global_position
+		var target = navAgent.get_next_location()
+		velocity = current_pos.direction_to(target) * maxSpeed
+		navAgent.set_velocity(velocity)
+		
+		if current_pos.distance_to(target) < 1:
+			_path.remove(0)
+			if _path.size():
+				navAgent.set_target_location(_path[0])
+
+func setMood(mood: String):
+	if emotion_label._set_Label(mood):
+		currentMood = mood
+	else:
+		print("Error setting mood: ", mood)
+			
+		
+func get_agent_rid() -> RID:
+	return navAgent.get_navigation_map()
+
+func navigate(path: Array) -> void:
+	_path = path 
+	if path.size():
+		navAgent.set_target_location(path[0])
+
+func _on_NavigationAgent2D_velocity_computed(safe_velocity):
+	var velocity = move_and_slide(safe_velocity)
+

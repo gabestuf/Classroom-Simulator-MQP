@@ -10,18 +10,24 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "Classroom",
+"language": "GDScript",
+"path": "res://Classroom.gd"
+}, {
+"base": "Node2D",
 "class": "TestWorld",
 "language": "GDScript",
 "path": "res://tileMapTest.gd"
 } ]
 _global_script_class_icons={
+"Classroom": "",
 "TestWorld": ""
 }
 
 [application]
 
 config/name="Classroom Simulator"
-run/main_scene="res://tileMapTest.tscn"
+run/main_scene="res://Classroom.tscn"
 config/icon="res://icon.png"
 
 [display]

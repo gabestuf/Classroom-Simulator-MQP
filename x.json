@@ -1,0 +1,143 @@
+{
+  "status": "SUCCESS",
+  "message": "Successfully generated a random event",
+  "body": {
+    "classroomJSON": {
+      "config": { "roomSizeX": 10, "roomSizeY": 10, "numStudents": 3, "numTeachers": 1, "numChairs": 3, "numRugs": 1, "numTables": 1, "seed": 3 },
+      "room": [
+        ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
+        ["w", "f", "f", "f", "f", "f", "f", "f", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "f", "f", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "f", "f", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "f", "f", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "c", "c", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "r", "t", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "c", "f", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "f", "f", "f", "w"],
+        ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w"]
+      ],
+      "initClassroom": [
+        ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w"],
+        ["w", "f", "f", "f", "f", "f", "f", "f", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "f", "f", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "f", "f", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "f", "f", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "S", "S", "f", "w"],
+        ["w", "f", "T", "f", "f", "f", "r", "t", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "S", "f", "f", "w"],
+        ["w", "f", "f", "f", "f", "f", "f", "f", "f", "w"],
+        ["w", "w", "w", "w", "w", "w", "w", "w", "w", "w"]
+      ],
+      "frames": [
+        {
+          "currentEvent": "idle",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [7, 5], "mood": "neutral", "description": "" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        },
+        {
+          "currentEvent": "studentMakesMess",
+          "spriteList": [
+            { "name": "Teacher1", "pos": [2, 6], "mood": "neutral", "description": "" },
+            { "name": "Student1", "pos": [6, 7], "mood": "neutral", "description": "" },
+            { "name": "Student2", "pos": [1, 2], "mood": "neutral", "description": "draws on object" },
+            { "name": "Student3", "pos": [6, 5], "mood": "neutral", "description": "" }
+          ]
+        }
+      ]
+    }
+  }
+}
