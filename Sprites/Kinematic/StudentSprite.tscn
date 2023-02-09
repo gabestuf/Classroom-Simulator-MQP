@@ -343,7 +343,7 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 593 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
-parameters/Walk/blend_position = Vector2( 0, 0 )
+parameters/Walk/blend_position = Vector2( -0.00150979, 0.000964403 )
 
 [node name="EmotionLabel" type="Label" parent="."]
 margin_right = 40.0

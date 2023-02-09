@@ -47,11 +47,10 @@ func http() -> void:
 	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent")
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
-	
 
 func _init_on_test(): 
 	# running this request: https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent/13
-	var json = JSON.parse('{"status":"SUCCESS","message":"Successfully generated a random event","body":{"classroomJSON":{"config":{"roomSizeX":13,"roomSizeY":14,"numStudents":4,"numTeachers":1,"numChairs":4,"numRugs":1,"numTables":1,"seed":13},"room":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","c","r","f","f","w"],["w","f","f","f","f","f","f","c","t","f","f","f","w"],["w","f","f","f","f","f","f","c","c","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"initClassroom":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","S","r","f","f","w"],["w","f","f","f","f","f","f","S","t","f","f","f","w"],["w","f","f","f","f","f","f","S","S","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","T","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"frames":[{"currentEvent":"idle","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"neutral","description":""},{"name":"Student3","pos":[2,2],"mood":"neutral","description":""},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]},{"currentEvent":"twoStudentsFight","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"sad","description":"fights"},{"name":"Student3","pos":[7,8],"mood":"angry","description":"fights"},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]}]}}}')
+	var json = JSON.parse('{"status":"SUCCESS","message":"Successfully generated a random event","body":{"classroomJSON":{"config":{"roomSizeX":13,"roomSizeY":14,"numStudents":4,"numTeachers":1,"numChairs":4,"numRugs":1,"numTables":1,"seed":13},"room":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","c","r","f","f","w"],["w","f","f","f","f","f","f","c","t","f","f","f","w"],["w","f","f","f","f","f","f","c","c","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"initClassroom":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","S","r","f","f","w"],["w","f","f","f","f","f","f","S","t","f","f","f","w"],["w","f","f","f","f","f","f","S","S","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","T","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"frames":[{"currentEvent":"idle","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"neutral","description":""},{"name":"Student3","pos":[2,11],"mood":"neutral","description":""},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]},{"currentEvent":"twoStudentsFight","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"sad","description":"fights"},{"name":"Student3","pos":[5,155],"mood":"angry","description":"fights"},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]}]}}}')
 	var JSONDict = json.result
 	
 	classroomJSON = JSONDict.get("body").get("classroomJSON")
@@ -66,7 +65,7 @@ func _init_on_test():
 	size = Vector2(classroomConfig.get("roomSizeX"), classroomConfig.get("roomSizeY"))
 	#calling setup here so that there's no async
 	setup()
-	
+
 #function is called when httprequest is complete
 func _on_request_completed(result, response_code, headers, body):
 	#get json and store as a dict
@@ -143,12 +142,6 @@ func _run_next_frame():
 					# set mood
 		# remove the frame from the frame list
 		frames.remove(0)
-		
-
-	
-   
-
-  
 	
 func _on_Timer_timeout(): # 1 tick is .25 seconds atm
 	_run_next_frame()

@@ -1,13 +1,11 @@
 extends Label
 
 var emotes = ["angryMild", "angryRegular", "angryStrong", "happy", "neutral", "sad", "tired"]
-var _rng = RandomNumberGenerator.new()
 var image_node = null
 var num
 var curr_emote
 
 func _ready():
-	
 
 	# Set the text of the label to an empty string
 	text = ""
@@ -23,7 +21,7 @@ func _ready():
 
 func _set_Label(emote):
 	# TODO, rng for the 3 different angry emotes
-	if "Angry" in emote or "angry" in emote:
+	if "angry" in emote:
 		emote = "angryStrong"
 		
 	if emote in emotes:

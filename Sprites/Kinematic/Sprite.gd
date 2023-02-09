@@ -3,6 +3,7 @@ extends KinematicBody2D
 # Sprite information
 var spriteName = null
 var currentMood = "neutral"
+# TODO var description = ""
 # Pathfinding
 onready var navAgent := $NavigationAgent2D
 onready var maxSpeed: float = 100
@@ -36,15 +37,13 @@ func _physics_process(delta: float) -> void:
 			if _path.size():
 				navAgent.set_target_location(_path[0])
 """
-
 func setMood(mood: String):
 	if emotion_label._set_Label(mood):
 		currentMood = mood
 		print("Set mood of ", spriteName, " to ", mood)
 	else:
 		print("Error setting mood: ", mood)
-			
-		
+
 func get_agent_rid() -> RID:
 	return navAgent.get_navigation_map()
 
@@ -62,7 +61,6 @@ func set_path(value : PoolVector2Array) -> void:
 	if value.size() == 0:
 		return
 	set_process(true)
-
 
 func move_along_path(distance:float) -> void:
 	# go through each point in path array and moving character position
