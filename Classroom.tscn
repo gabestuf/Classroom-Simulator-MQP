@@ -367,10 +367,10 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 21/shapes = [  ]
 21/z_index = 0
 
-[node name="Classroom" type="Node2D"]
+[node name="Classroom" type="YSort"]
 script = ExtResource( 1 )
 
-[node name="Navigation" type="YSort" parent="."]
+[node name="Navigation" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
 [node name="RoomTileMap" type="TileMap" parent="Navigation"]

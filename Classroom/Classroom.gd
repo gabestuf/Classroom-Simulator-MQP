@@ -44,7 +44,7 @@ func http() -> void:
 	http_request.connect("request_completed", self, "_on_request_completed")
 	
 	#create request, check for error
-	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent/13")
+	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent")
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 	
@@ -137,11 +137,19 @@ func _run_next_frame():
 						continue
 					
 					var path = Navigation2DServer.map_get_path(sprite.get_agent_rid(), sprite.global_position, target_pos, false)
-					sprite.navigate(path)
-					print(sprite.spriteName, " is moving to ", path[path.size() - 1])
+					sprite.set_path(path)
+					# sprite.navigate(path)
+					# print(sprite.spriteName, " is moving to ", path[path.size() - 1])
 					# set mood
 		# remove the frame from the frame list
 		frames.remove(0)
+		
+
+	
+   
+
+  
 	
 func _on_Timer_timeout(): # 1 tick is .25 seconds atm
 	_run_next_frame()
+	# print("")

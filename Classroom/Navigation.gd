@@ -1,6 +1,8 @@
 extends Node2D
 
 onready var room_tilemap = $RoomTileMap
+onready var navigation = $"."
+
 
 var spriteList = []
 var TableSprite = load("res://Sprites/Static/Table.tscn") # Load the teacher scene
@@ -135,5 +137,11 @@ func _gen_animated_sprites(classroomJSON) -> void:
 				studentCount = 0
 			else:
 				studentCount += 1
-
-
+				
+				
+func _unhandled_input(event: InputEvent) -> void:
+	# Only run this function if event is left click
+	if not event is InputEventMouseButton:
+		return
+	if event.button_index != BUTTON_LEFT or not event.pressed:
+		return
