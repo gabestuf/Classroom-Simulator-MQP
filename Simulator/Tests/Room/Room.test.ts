@@ -20,4 +20,9 @@ describe("Testing the functions of the class 'Room'", () => {
     room.generateRoomFloor(testCFG.roomSizeX, testCFG.roomSizeY);
     expect(room.toString()).toBe("\nwwwww\nwfffw\nwfffw\nwfffw\nwwwww\n");
   });
+
+  test("testing generating a room of the correct size Y", function () {
+    const room = new Room(testCFG);
+    expect(room.RoomArray.length).toBe(5);
+  });
 });

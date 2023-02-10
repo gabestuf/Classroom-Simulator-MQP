@@ -26,6 +26,7 @@ class Room {
         // check for wall space
         if (x === 0 || y === 0 || x === sizeX - 1 || y === sizeY - 1) {
           row.push(new Wall(newCoord));
+          // TODO add windows ONLY to top wall
         }
         // else place floor
         else {
@@ -173,6 +174,8 @@ class Room {
   }
 
   findRandomEmptySpace(): Coordinate {
+    // Looks for empty floor spaces and gets their coordinates
+    // a random coordinate is picked from this list of coordinates
     let coordinateList: Coordinate[] = [];
     // we want to get all positions where there is floor
     for (const row of this.RoomArray) {
@@ -183,6 +186,7 @@ class Room {
       }
     }
     if (coordinateList.length === 0) {
+      // There were no empty spaces found
       throw new Error("Error, findRandomEmptySpace returned null, most likely room is too small to accomodate all sprites.");
     }
 

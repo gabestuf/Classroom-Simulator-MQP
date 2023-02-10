@@ -18,13 +18,6 @@ class Student {
     this.currentDescription = "";
   }
 
-  moveTowardHeading(room: Room) {
-    // BFS ->
-    /* 
-        this.pos = bfs(2dArray, startPosition, endPosition) -> Array of Coordinates
-        */
-  }
-
   updateHeadingByLocation(newLoc: classroomLocation) {
     this.heading = newLoc.chooseRandomPosition();
   }

@@ -5,7 +5,6 @@ import Classroom from "../Classroom";
 import shuffleArray from "../Helper Functions/ShuffleArray";
 import iSprite from "../Sprites/iSprite";
 import Mood from "../Sprites/Emotions/Moods";
-import Coordinate from "../Navigation/Coordinate";
 import ClassroomLocation from "../Navigation/Locations";
 import seededRandom from "../Helper Functions/GenerateRandomNumber";
 

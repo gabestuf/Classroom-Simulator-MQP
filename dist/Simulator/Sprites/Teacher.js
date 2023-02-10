@@ -12,9 +12,6 @@ class Teacher {
         this.mood = new Moods_1.default("neutral");
         this.currentDescription = "";
     }
-    moveTowardHeading(room) {
-        // do BFS 
-    }
     updateHeadingByLocation(newLoc) {
         this.heading = newLoc.chooseRandomPosition();
     }
@@ -26,7 +23,7 @@ class Teacher {
             name: this.name,
             pos: [this.pos.x, this.pos.y],
             mood: this.mood.name,
-            description: this.currentDescription
+            description: this.currentDescription,
         };
         return newjson;
     }

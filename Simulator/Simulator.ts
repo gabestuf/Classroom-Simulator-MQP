@@ -3,7 +3,6 @@ import Classroom, { ClassroomJSON } from "./Classroom";
 import ClassroomConfig from "./Config/CONFIG";
 import StoryEvents from "./Config/STORYEVENTS";
 import seededRandom from "./Helper Functions/GenerateRandomNumber";
-import util from "util";
 
 interface JSONFinal {
   config: ClassroomConfig | null;

@@ -12,12 +12,6 @@ class Student {
         this.mood = new Moods_1.default("neutral");
         this.currentDescription = "";
     }
-    moveTowardHeading(room) {
-        // BFS ->
-        /*
-            this.pos = bfs(2dArray, startPosition, endPosition) -> Array of Coordinates
-            */
-    }
     updateHeadingByLocation(newLoc) {
         this.heading = newLoc.chooseRandomPosition();
     }
