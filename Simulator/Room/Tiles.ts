@@ -70,6 +70,46 @@ class Chair implements iTile {
   }
 }
 
-// TODO add a door tile, window tile, bookshelf tile
+class Door implements iTile {
+  id: string;
+  pos: Coordinate;
 
-export { Wall, Rug, Floor, Table, Chair };
+  constructor(pos_: Coordinate) {
+    this.id = "d";
+    this.pos = pos_;
+  }
+
+  toString(): string {
+    return this.id;
+  }
+}
+
+class Window implements iTile {
+  id: string;
+  pos: Coordinate;
+
+  constructor(pos_: Coordinate) {
+    this.id = "i";
+    this.pos = pos_;
+  }
+
+  toString(): string {
+    return this.id;
+  }
+}
+
+class Bookshelf implements iTile {
+  id: string;
+  pos: Coordinate;
+
+  constructor(pos_: Coordinate) {
+    this.id = "b";
+    this.pos = pos_;
+  }
+
+  toString(): string {
+    return this.id;
+  }
+}
+
+export { Wall, Rug, Floor, Table, Chair, Door, Window, Bookshelf };
