@@ -1,4 +1,4 @@
-import { Wall, Floor, Table, Rug, Chair } from "./Tiles";
+import { Wall, Floor, Table, Rug, Chair, Window, Door, Bookshelf } from "./Tiles";
 import iTile from "./iTile";
 import Coordinate from "../Navigation/Coordinate";
 import iSprite from "../Sprites/iSprite";
@@ -25,8 +25,14 @@ class Room {
         const newCoord: Coordinate = new Coordinate(x, y);
         // check for wall space
         if (x === 0 || y === 0 || x === sizeX - 1 || y === sizeY - 1) {
-          row.push(new Wall(newCoord));
-          // TODO add windows ONLY to top wall
+          // Add windows to top wall
+          // Right now every 3rd window idk why
+          if (y === 0 && x > 1 && x < newRoom.length - 1 && x % 3 === 1) {
+            row.push(new Window(newCoord));
+          } else {
+            // add Walls if not window
+            row.push(new Wall(newCoord));
+          }
         }
         // else place floor
         else {
@@ -34,6 +40,22 @@ class Room {
         }
       }
       newRoom.push(row);
+    }
+
+    // and a door in a random location on one of the lower walls
+    const wallRNG = seededRandom(this.RoomCfg.seed + 1);
+    if (wallRNG > 0.6666) {
+      // Left wall
+      const pos = Math.floor(seededRandom(this.RoomCfg.seed * 1.45) * (newRoom.length - 2) + 1); // Should get a random number from 1 to newRoom.length - 1
+      newRoom[newRoom[0].length - 1][pos];
+    } else if (wallRNG <= 0.6666 && wallRNG > 0.3333) {
+      // Right wall
+      const pos = Math.floor(seededRandom(this.RoomCfg.seed * 1.45) * (newRoom.length - 2) + 1); // Should get a random number from 1 to newRoom.length - 1
+      newRoom[newRoom[0].length - 1][pos];
+    } else {
+      // Bottom wall
+      const pos = Math.floor(seededRandom(this.RoomCfg.seed * 1.45) * (newRoom[0].length - 2) + 1);
+      newRoom[pos][newRoom.length - 1];
     }
 
     return newRoom;
