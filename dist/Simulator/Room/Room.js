@@ -21,7 +21,15 @@ class Room {
                 const newCoord = new Coordinate_1.default(x, y);
                 // check for wall space
                 if (x === 0 || y === 0 || x === sizeX - 1 || y === sizeY - 1) {
-                    row.push(new Tiles_1.Wall(newCoord));
+                    // Add windows to top wall
+                    // Right now every 3rd window idk why
+                    if (y === 0 && x > 1 && x < newRoom.length - 1 && x % 3 === 1) {
+                        row.push(new Tiles_1.Window(newCoord));
+                    }
+                    else {
+                        // add Walls if not window
+                        row.push(new Tiles_1.Wall(newCoord));
+                    }
                 }
                 // else place floor
                 else {
@@ -29,6 +37,23 @@ class Room {
                 }
             }
             newRoom.push(row);
+        }
+        // and a door in a random location on one of the lower walls
+        const wallRNG = (0, GenerateRandomNumber_1.default)(this.RoomCfg.seed + 1);
+        if (wallRNG > 0.6666) {
+            // Left wall
+            const pos = Math.floor((0, GenerateRandomNumber_1.default)(this.RoomCfg.seed * 1.45) * (newRoom.length - 2) + 1); // Should get a random number from 1 to newRoom.length - 1
+            newRoom[pos][newRoom[0].length - 1] = new Tiles_1.Door(new Coordinate_1.default(newRoom[0].length - 1, pos));
+        }
+        else if (wallRNG <= 0.6666 && wallRNG > 0.3333) {
+            // Right wall
+            const pos = Math.floor((0, GenerateRandomNumber_1.default)(this.RoomCfg.seed * 1.45) * (newRoom.length - 2) + 1); // Should get a random number from 1 to newRoom.length - 1
+            newRoom[pos][newRoom[0].length - 1] = new Tiles_1.Door(new Coordinate_1.default(newRoom[0].length - 1, pos));
+        }
+        else {
+            // Bottom wall
+            const pos = Math.floor((0, GenerateRandomNumber_1.default)(this.RoomCfg.seed * 1.45) * (newRoom[0].length - 2) + 1);
+            newRoom[newRoom.length - 1][pos] = new Tiles_1.Door(new Coordinate_1.default(pos, newRoom.length - 1));
         }
         return newRoom;
     }
@@ -157,6 +182,8 @@ class Room {
         return rugCoordList;
     }
     findRandomEmptySpace() {
+        // Looks for empty floor spaces and gets their coordinates
+        // a random coordinate is picked from this list of coordinates
         let coordinateList = [];
         // we want to get all positions where there is floor
         for (const row of this.RoomArray) {
@@ -167,6 +194,7 @@ class Room {
             }
         }
         if (coordinateList.length === 0) {
+            // There were no empty spaces found
             throw new Error("Error, findRandomEmptySpace returned null, most likely room is too small to accomodate all sprites.");
         }
         return coordinateList[Math.floor((0, GenerateRandomNumber_1.default)(this.RoomCfg.seed) * coordinateList.length)];

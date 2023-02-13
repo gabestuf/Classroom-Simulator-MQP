@@ -47,15 +47,15 @@ class Room {
     if (wallRNG > 0.6666) {
       // Left wall
       const pos = Math.floor(seededRandom(this.RoomCfg.seed * 1.45) * (newRoom.length - 2) + 1); // Should get a random number from 1 to newRoom.length - 1
-      newRoom[newRoom[0].length - 1][pos];
+      newRoom[pos][newRoom[0].length - 1] = new Door(new Coordinate(newRoom[0].length - 1, pos));
     } else if (wallRNG <= 0.6666 && wallRNG > 0.3333) {
       // Right wall
       const pos = Math.floor(seededRandom(this.RoomCfg.seed * 1.45) * (newRoom.length - 2) + 1); // Should get a random number from 1 to newRoom.length - 1
-      newRoom[newRoom[0].length - 1][pos];
+      newRoom[pos][newRoom[0].length - 1] = new Door(new Coordinate(newRoom[0].length - 1, pos));
     } else {
       // Bottom wall
       const pos = Math.floor(seededRandom(this.RoomCfg.seed * 1.45) * (newRoom[0].length - 2) + 1);
-      newRoom[pos][newRoom.length - 1];
+      newRoom[newRoom.length - 1][pos] = new Door(new Coordinate(pos, newRoom.length - 1));
     }
 
     return newRoom;

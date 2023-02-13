@@ -47,50 +47,23 @@ app.get("/render-room", (req, res) => {
         },
     });
 });
-app.get("/render-room/:config", (req, res) => {
-    // http://localhost:3001/renderRoom/{"roomSizeX": 9, "roomSizeY": 7, "numStudents": 2, "numTeachers": 1, "numChairs": 4, "numTables": 2, "numRugs": 1, "seed": 25}
-    try {
-        const cfg = JSON.parse(req.params.config);
-        // create new ClassroomConfig, so we can check if the datatype matches
-        const config = new CONFIG_1.default({
-            seed: cfg.seed,
-            roomSizeX: cfg.roomSizeX,
-            roomSizeY: cfg.roomSizeY,
-            numStudents: cfg.numStudents,
-            numTeachers: cfg.numTeachers,
-            numChairs: cfg.numChairs,
-            numTables: cfg.numTables,
-            numRugs: cfg.numRugs,
-        });
-        if (!config.isValid()) {
-            res.json({
-                status: "FAILED",
-                message: "The config you entered is not valid. Please refer to the README",
-            });
-        }
-        if (config instanceof CONFIG_1.default) {
-            const room = new Room_1.default(config);
-            res.json({
-                status: "SUCCESS",
-                message: `rendered a room with seed ${config.seed}`,
-                body: {
-                    room: room.toJSON(),
-                },
-            });
-        }
-        else {
-            res.json({
-                status: "FAILED",
-                message: "Unable to read config, make sure it matches ClassroomConfig",
-            });
-        }
-    }
-    catch (e) {
+app.get("/render-room/:seed", (req, res) => {
+    const seed = parseInt(req.params.seed);
+    if (Number.isNaN(seed)) {
         res.json({
             status: "FAILED",
-            message: `There was an error with your request: ${e}`,
+            message: `failed to render a room with seed ${seed}; bad seed`,
         });
     }
+    const config = (0, GenRandomConfig_1.default)(seed);
+    const room = new Room_1.default(config);
+    res.json({
+        status: "SUCCESS",
+        message: `rendered a room with seed ${config.seed}`,
+        body: {
+            room: room.toJSON(),
+        },
+    });
 });
 app.post("/render-room", (req, res) => {
     // request would look something like: (fetch api as example)
