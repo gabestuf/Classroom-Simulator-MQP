@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/classroom_ambiance.wav-44ee2b87bd700efa1220434cbc76c01e.sample"
+path="res://.import/classroom_ambiance.wav-2730a01b710d86af2bb8f34a32eb0f25.sample"
 
 [deps]
 
-source_file="res://Audio/background/classroom_ambiance.wav"
-dest_files=[ "res://.import/classroom_ambiance.wav-44ee2b87bd700efa1220434cbc76c01e.sample" ]
+source_file="res://audio/background/classroom_ambiance.wav"
+dest_files=[ "res://.import/classroom_ambiance.wav-2730a01b710d86af2bb8f34a32eb0f25.sample" ]
 
 [params]
 
