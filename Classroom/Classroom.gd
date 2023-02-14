@@ -1,12 +1,9 @@
 extends Node2D
 class_name Classroom
 
-signal started
-signal finished
-
 #tilemaps
-onready var _Nav2D = $Navigation
-onready var _RoomTileMap = $Navigation/RoomTileMap
+onready var _Nav2D = $EventHandler
+onready var _RoomTileMap = $EventHandler/RoomTileMap
 
 var tiles
 
@@ -26,14 +23,14 @@ var frameNum = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# http()
+	http()
 	#calling these from http so that they run in order without async
 	#setup()
 	# setup calls generate()
 	
 	# init on test for testing purposes, does not require http request, in prod, comment this out and uncomment http()
 	print("Classroom ready")
-	_init_on_test()
+	# _init_on_test()
 
 func http() -> void:
 	#create httpRequest object and add it as a child
@@ -52,7 +49,6 @@ func _init_on_test():
 	# running this request: https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent/13
 	var json = JSON.parse('{"status":"SUCCESS","message":"Successfully generated a random event","body":{"classroomJSON":{"config":{"roomSizeX":13,"roomSizeY":14,"numStudents":4,"numTeachers":1,"numChairs":4,"numRugs":1,"numTables":1,"seed":13},"room":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","c","r","f","f","w"],["w","f","f","f","f","f","f","c","t","f","f","f","w"],["w","f","f","f","f","f","f","c","c","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"initClassroom":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","S","r","f","f","w"],["w","f","f","f","f","f","f","S","t","f","f","f","w"],["w","f","f","f","f","f","f","S","S","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","T","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"frames":[{"currentEvent":"idle","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"neutral","description":""},{"name":"Student3","pos":[2,11],"mood":"neutral","description":""},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]},{"currentEvent":"twoStudentsFight","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"sad","description":"fights"},{"name":"Student3","pos":[5,155],"mood":"angry","description":"fights"},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]}]}}}')
 	var JSONDict = json.result
-	
 	classroomJSON = JSONDict.get("body").get("classroomJSON")
 	classroomConfig = classroomJSON.get("config")
 	#gets the room layout and room size from json
@@ -67,7 +63,11 @@ func _init_on_test():
 	setup()
 
 #function is called when httprequest is complete
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
 func _on_request_completed(result, response_code, headers, body):
+	
 	#get json and store as a dict
 	var json = JSON.parse(body.get_string_from_utf8())
 	var JSONDict = json.result
@@ -92,10 +92,8 @@ func setup() -> void:
 	generate()
 
 func generate() -> void:
-	emit_signal("started")
 	# First, lets generate the room tile map and place the sprites in starting locations
 	_Nav2D._init_tiles(classroomJSON)
-	emit_signal("finished")
 
 func _run_next_frame():
 	# Runs every tick, right now 4x a second
@@ -105,11 +103,9 @@ func _run_next_frame():
 	if not frames.size():
 		return
 	
-	var isFrameFinished : bool = true
 	# check if all sprites are finished moving
 	for sprite in _Nav2D.spriteList:
 		if sprite._path.size():
-			isFrameFinished = false
 			return
 	# Todo, add some space between events, maybe have it calculate an rng variable and only runs if rng is over x percent
 	# pseudocode:

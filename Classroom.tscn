@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Classroom/Classroom.gd" type="Script" id=1]
-[ext_resource path="res://Classroom/Navigation.gd" type="Script" id=2]
+[ext_resource path="res://Classroom/EventHandler.gd" type="Script" id=2]
 [ext_resource path="res://Images/Tiles/Floor.png" type="Texture" id=3]
 [ext_resource path="res://Images/Tiles/leftwall.png" type="Texture" id=4]
 [ext_resource path="res://Images/Tiles/bottomwall.png" type="Texture" id=5]
@@ -370,10 +370,10 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [node name="Classroom" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Navigation" type="YSort" parent="."]
+[node name="EventHandler" type="YSort" parent="."]
 script = ExtResource( 2 )
 
-[node name="RoomTileMap" type="TileMap" parent="Navigation"]
+[node name="RoomTileMap" type="TileMap" parent="EventHandler"]
 tile_set = SubResource( 599 )
 cell_size = Vector2( 32, 32 )
 show_collision = true
@@ -382,8 +382,8 @@ collision_bounce = 0.01
 bake_navigation = true
 format = 1
 
-[node name="Timer" type="Timer" parent="Navigation"]
+[node name="Timer" type="Timer" parent="EventHandler"]
 wait_time = 2.0
 autostart = true
 
-[connection signal="timeout" from="Navigation/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="EventHandler/Timer" to="." method="_on_Timer_timeout"]
