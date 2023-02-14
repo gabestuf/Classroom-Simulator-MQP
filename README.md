@@ -1,6 +1,6 @@
 # MQP API
 
-[Currently Hosted Here](https://mqp-express.vercel.app/)
+[Currently Hosted Here](https://classroom-simulator-server.vercel.app/)
 
 ## Description
 
@@ -58,7 +58,8 @@ This will run two terminals concurrently. One compiles the typescript code into 
 | GET    | /classroom-simulation/singleEvent/:eventName       | will render a specified single event                                                                                 | classroomJSON |
 | GET    | /classroom-simulation/singleEvent/:eventName/:seed | will render a specified single event and also a given seed                                                           | classroomJSON |
 
-[^1]: The config is a JSON Object that looks like this: `
+[^1]:
+    The config is a JSON Object that looks like this: `
 {
 "roomSizeX": number,
 "roomSizeY": number,
