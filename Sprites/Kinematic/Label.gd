@@ -4,6 +4,8 @@ var emotes = ["angryMild", "angryRegular", "angryStrong", "happy", "neutral", "s
 var image_node = null
 var num
 var curr_emote
+var rng := RandomNumberGenerator.new()
+var json_desc = {}
 
 func _ready():
 
@@ -21,12 +23,21 @@ func _ready():
 
 func _set_Label(emote):
 	# TODO, rng for the 3 different angry emotes
-	if "angry" in emote:
-		emote = "angryStrong"
-		
+	if emote == "angry":
+		var random_num = rng.randi_range(0, emotes.size() - 4)
+		emote = emotes[random_num]
 	if emote in emotes:
 		image_node.texture = load("res://Images/Emotes/" + emote + ".png")
 		return true
 	else:
 		print("Error, emote does not exist: ", emote)
 		return false
+
+func set_json_desc(data):
+	json_desc = JSON.parse(data)
+	update_desc()
+
+func update_desc():
+	text = ""
+	for key in json_desc:
+		text += str(key) + ": " + str(json_desc[key]) + "\n"

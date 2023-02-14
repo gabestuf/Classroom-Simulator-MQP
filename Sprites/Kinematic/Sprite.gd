@@ -3,7 +3,9 @@ extends KinematicBody2D
 # Sprite information
 var spriteName = null
 var currentMood = "neutral"
-# TODO var description = ""
+# TODO 
+#var currentDesc = ""
+# 
 # Pathfinding
 onready var navAgent := $NavigationAgent2D
 onready var maxSpeed: float = 100
@@ -43,6 +45,13 @@ func setMood(mood: String):
 		print("Set mood of ", spriteName, " to ", mood)
 	else:
 		print("Error setting mood: ", mood)
+
+#func setDesc(desc: String):
+#	if emotion_label._set_Label(desc):
+#		currentDesc = desc
+#		print("Set description of ", spriteName, " to ", desc)
+#	else:
+#		print("Error setting description: ", desc)
 
 func get_agent_rid() -> RID:
 	return navAgent.get_navigation_map()
