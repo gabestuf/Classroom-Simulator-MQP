@@ -9,6 +9,7 @@ class Teacher {
   mood: Mood;
   currentDescription: string;
   heading: Coordinate | null;
+  importance: number; 
 
   constructor(id_: number, initPos_: Coordinate) {
     this.name = `Teacher${id_.toString()}`;
@@ -16,6 +17,7 @@ class Teacher {
     this.heading = null;
     this.mood = new Mood("neutral");
     this.currentDescription = "";
+    this.importance = 0; 
   }
 
   updateHeadingByLocation(newLoc: classroomLocation) {
