@@ -71,8 +71,117 @@ const StoryEventsJSON: iStoryEvent[] = [
         description: ["fights", "tumbles", "argues"],
       },
     ],
+    nextEvents: ["studentSleepy"],
+  },
+  {
+    name: "studentSleepy",
+    charactersInvolved: [
+      {
+        name: "Student1",
+        mood: ["angry", "sad"],
+        pos: ["Student1"],
+        description: ["fights", "tumbles", "argues"],
+      },
+    ],
+    nextEvents: ["studentSick"],
+  },
+  {
+    name: "studentSick",
+    charactersInvolved: [
+      {
+        name: "Student1",
+        mood: ["neutral", "sick"],
+        pos: ["Student1"],
+        description: ["sick", "needs nurse"],
+      },
+    ],
+    nextEvents: ["studentBored"],
+  },
+  {
+    name: "studentBored",
+    charactersInvolved: [
+      {
+        name: "Student1",
+        mood: ["neutral"],
+        pos: ["Student1"],
+        description: ["bored", "nothing to do"],
+      },
+    ],
+    nextEvents: ["teacherGetsTired"],
+  },
+  {
+    name: "teacherGetsTired",
+    charactersInvolved: [
+      {
+        name: "Teacher1",
+        mood: ["neutral", "sick", "tired"],
+        pos: ["Teacher1"],
+        description: ["tired", "bored", "long day"],
+      },
+    ],
+    nextEvents: ["studentEatsSnack"],
+  },
+  {
+    name: "studentEatsSnack",
+    charactersInvolved: [
+      {
+        name: "Student1",
+        mood: ["happy", "neutral"],
+        pos: ["Student1"],
+        description: ["snack time", "student hungry"],
+      },
+    ],
+    nextEvents: ["studentHappy"],
+  },
+  {
+    name: "studentHappy",
+    charactersInvolved: [
+      {
+        name: "Student1",
+        mood: ["happy"],
+        pos: ["Student1"],
+        description: ["happy camper", "student happy", "happy"],
+      },
+    ],
+    nextEvents: ["studentFocused"],
+  },
+  {
+    name: "studentFocused",
+    charactersInvolved: [
+      {
+        name: "Student1",
+        mood: ["happy", "neutral"],
+        pos: ["Student1"],
+        description: ["student learning", "focused", "locked in"],
+      },
+    ],
+    nextEvents: ["studentCries "],
+  },
+  {
+    name: "studentCries",
+    charactersInvolved: [
+      {
+        name: "Student1",
+        mood: ["angry", "sad", "upset"],
+        pos: ["Student1"],
+        description: ["student sad", "student crying", "student upset"],
+      },
+    ],
+    nextEvents: ["studentYells"],
+  },
+  {
+    name: "studentYells",
+    charactersInvolved: [
+      {
+        name: "Student1",
+        mood: ["angry", "sick", "tired"],
+        pos: ["Student1"],
+        description: ["student yells", "loud student"],
+      },
+    ],
     nextEvents: [],
   },
+
 ];
 
 export class StoryEvents {
