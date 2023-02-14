@@ -8,6 +8,7 @@ interface iSprite {
   mood: Mood;
   heading: Coordinate | null;
   currentDescription: string;
+  importance: number
   toString: () => string;
   toJSON: () => {
     name: string;

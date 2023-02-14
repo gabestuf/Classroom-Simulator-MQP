@@ -37,6 +37,7 @@ const StoryEventsJSON = [
                 mood: ["happy", "angry"],
                 pos: ["current", "corner", "wall"],
                 description: ["breaks toy", "draws on object", "student spills food"],
+                importance: 0
             },
         ],
         nextEvents: ["twoStudentsFight"],
@@ -49,12 +50,14 @@ const StoryEventsJSON = [
                 mood: ["angry", "sad"],
                 pos: ["Student1"],
                 description: ["fights", "tumbles", "argues"],
+                importance: 1
             },
             {
                 name: "Student2",
                 mood: ["angry", "sad"],
                 pos: ["Student1"],
                 description: ["fights", "tumbles", "argues"],
+                importance: 0.8
             },
         ],
         nextEvents: ["studentSleepy"],
@@ -67,6 +70,7 @@ const StoryEventsJSON = [
                 mood: ["angry", "sad"],
                 pos: ["Student1"],
                 description: ["fights", "tumbles", "argues"],
+                importance: 0.2
             },
         ],
         nextEvents: ["studentSick"],
@@ -79,6 +83,7 @@ const StoryEventsJSON = [
                 mood: ["neutral", "sick"],
                 pos: ["Student1"],
                 description: ["sick", "needs nurse"],
+                importance: 0.8
             },
         ],
         nextEvents: ["studentBored"],
@@ -91,6 +96,7 @@ const StoryEventsJSON = [
                 mood: ["neutral"],
                 pos: ["Student1"],
                 description: ["bored", "nothing to do"],
+                importance: 0.9
             },
         ],
         nextEvents: ["teacherGetsTired"],
@@ -103,6 +109,7 @@ const StoryEventsJSON = [
                 mood: ["neutral", "sick", "tired"],
                 pos: ["Teacher1"],
                 description: ["tired", "bored", "long day"],
+                importance: 1
             },
         ],
         nextEvents: ["studentEatsSnack"],
@@ -115,6 +122,7 @@ const StoryEventsJSON = [
                 mood: ["happy", "neutral"],
                 pos: ["Student1"],
                 description: ["snack time", "student hungry"],
+                importance: 0
             },
         ],
         nextEvents: ["studentHappy"],
@@ -127,6 +135,7 @@ const StoryEventsJSON = [
                 mood: ["happy"],
                 pos: ["Student1"],
                 description: ["happy camper", "student happy", "happy"],
+                importance: 0.1
             },
         ],
         nextEvents: ["studentFocused"],
@@ -139,6 +148,7 @@ const StoryEventsJSON = [
                 mood: ["happy", "neutral"],
                 pos: ["Student1"],
                 description: ["student learning", "focused", "locked in"],
+                importance: 0.2
             },
         ],
         nextEvents: ["studentCries "],
@@ -151,6 +161,7 @@ const StoryEventsJSON = [
                 mood: ["angry", "sad"],
                 pos: ["Student1"],
                 description: ["student sad", "student crying", "student upset"],
+                importance: 0.4
             },
         ],
         nextEvents: ["studentYells"],
@@ -163,6 +174,7 @@ const StoryEventsJSON = [
                 mood: ["angry", "sick", "tired"],
                 pos: ["Student1"],
                 description: ["student yells", "loud student"],
+                importance: 0.4
             },
         ],
         nextEvents: [],
