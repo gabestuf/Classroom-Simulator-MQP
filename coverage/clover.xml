@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <coverage generated="1676408870661" clover="3.2.0">
   <project timestamp="1676408870661" name="All files">
     <metrics statements="191" coveredstatements="61" conditionals="53" coveredconditionals="11" methods="40" coveredmethods="15" elements="284" coveredelements="87" complexity="0" loc="191" ncloc="191" packages="4" files="5" classes="5"/>
     <package name="Config">
       <metrics statements="13" coveredstatements="9" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <file name="CONFIG.ts" path="/Users/aidanmulcahey/Pictures/Classroom-Simulator-MQP/Simulator/Config/CONFIG.ts">
+=======
+<coverage generated="1676408802950" clover="3.2.0">
+  <project timestamp="1676408802950" name="All files">
+    <metrics statements="191" coveredstatements="61" conditionals="53" coveredconditionals="11" methods="40" coveredmethods="15" elements="284" coveredelements="87" complexity="0" loc="191" ncloc="191" packages="4" files="5" classes="5"/>
+    <package name="Config">
+      <metrics statements="13" coveredstatements="9" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="CONFIG.ts" path="C:\Users\shmok\Documents\VSCode_Projects\Classroom-Simulator-MQP\Simulator\Config\CONFIG.ts">
+>>>>>>> 8fb2349df2a0fdce15366a91e13d852b5bb0dc70
         <metrics statements="13" coveredstatements="9" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="1"/>
         <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
@@ -23,7 +32,11 @@
     </package>
     <package name="Helper Functions">
       <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+<<<<<<< HEAD
       <file name="GenerateRandomNumber.ts" path="/Users/aidanmulcahey/Pictures/Classroom-Simulator-MQP/Simulator/Helper Functions/GenerateRandomNumber.ts">
+=======
+      <file name="GenerateRandomNumber.ts" path="C:\Users\shmok\Documents\VSCode_Projects\Classroom-Simulator-MQP\Simulator\Helper Functions\GenerateRandomNumber.ts">
+>>>>>>> 8fb2349df2a0fdce15366a91e13d852b5bb0dc70
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="4" count="6" type="stmt"/>
         <line num="5" count="6" type="stmt"/>
@@ -37,7 +50,11 @@
     </package>
     <package name="Navigation">
       <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+<<<<<<< HEAD
       <file name="Coordinate.ts" path="/Users/aidanmulcahey/Pictures/Classroom-Simulator-MQP/Simulator/Navigation/Coordinate.ts">
+=======
+      <file name="Coordinate.ts" path="C:\Users\shmok\Documents\VSCode_Projects\Classroom-Simulator-MQP\Simulator\Navigation\Coordinate.ts">
+>>>>>>> 8fb2349df2a0fdce15366a91e13d852b5bb0dc70
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="78" type="stmt"/>
         <line num="6" count="78" type="stmt"/>
@@ -46,7 +63,11 @@
     </package>
     <package name="Room">
       <metrics statements="167" coveredstatements="41" conditionals="50" coveredconditionals="11" methods="34" coveredmethods="10"/>
+<<<<<<< HEAD
       <file name="Room.ts" path="/Users/aidanmulcahey/Pictures/Classroom-Simulator-MQP/Simulator/Room/Room.ts">
+=======
+      <file name="Room.ts" path="C:\Users\shmok\Documents\VSCode_Projects\Classroom-Simulator-MQP\Simulator\Room\Room.ts">
+>>>>>>> 8fb2349df2a0fdce15366a91e13d852b5bb0dc70
         <metrics statements="142" coveredstatements="31" conditionals="50" coveredconditionals="11" methods="18" coveredmethods="4"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -191,7 +212,11 @@
         <line num="312" count="0" type="stmt"/>
         <line num="316" count="1" type="stmt"/>
       </file>
+<<<<<<< HEAD
       <file name="Tiles.ts" path="/Users/aidanmulcahey/Pictures/Classroom-Simulator-MQP/Simulator/Room/Tiles.ts">
+=======
+      <file name="Tiles.ts" path="C:\Users\shmok\Documents\VSCode_Projects\Classroom-Simulator-MQP\Simulator\Room\Tiles.ts">
+>>>>>>> 8fb2349df2a0fdce15366a91e13d852b5bb0dc70
         <metrics statements="25" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="16" coveredmethods="6"/>
         <line num="8" count="27" type="stmt"/>
         <line num="9" count="27" type="stmt"/>

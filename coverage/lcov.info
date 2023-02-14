@@ -1,5 +1,9 @@
 TN:
+<<<<<<< HEAD
 SF:Simulator/Config/CONFIG.ts
+=======
+SF:Simulator\Config\CONFIG.ts
+>>>>>>> 8fb2349df2a0fdce15366a91e13d852b5bb0dc70
 FN:22,(anonymous_0)
 FN:33,(anonymous_1)
 FNF:2
@@ -28,7 +32,11 @@ BRF:3
 BRH:0
 end_of_record
 TN:
+<<<<<<< HEAD
 SF:Simulator/Helper Functions/GenerateRandomNumber.ts
+=======
+SF:Simulator\Helper Functions\GenerateRandomNumber.ts
+>>>>>>> 8fb2349df2a0fdce15366a91e13d852b5bb0dc70
 FN:3,sRandom
 FN:4,(anonymous_1)
 FN:12,seededRandom
@@ -51,7 +59,11 @@ BRF:0
 BRH:0
 end_of_record
 TN:
+<<<<<<< HEAD
 SF:Simulator/Navigation/Coordinate.ts
+=======
+SF:Simulator\Navigation\Coordinate.ts
+>>>>>>> 8fb2349df2a0fdce15366a91e13d852b5bb0dc70
 FN:4,(anonymous_0)
 FNF:1
 FNH:1
@@ -65,7 +77,11 @@ BRF:0
 BRH:0
 end_of_record
 TN:
+<<<<<<< HEAD
 SF:Simulator/Room/Room.ts
+=======
+SF:Simulator\Room\Room.ts
+>>>>>>> 8fb2349df2a0fdce15366a91e13d852b5bb0dc70
 FN:12,(anonymous_1)
 FN:18,(anonymous_2)
 FN:64,(anonymous_3)
@@ -302,7 +318,11 @@ BRF:50
 BRH:11
 end_of_record
 TN:
+<<<<<<< HEAD
 SF:Simulator/Room/Tiles.ts
+=======
+SF:Simulator\Room\Tiles.ts
+>>>>>>> 8fb2349df2a0fdce15366a91e13d852b5bb0dc70
 FN:7,(anonymous_0)
 FN:12,(anonymous_1)
 FN:21,(anonymous_2)
