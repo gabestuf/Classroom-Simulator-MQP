@@ -42,7 +42,9 @@ class Simulator {
   }
 
   initFinalJSON() {
-    const initclassJSON: ClassroomJSON = JSON.parse(JSON.stringify(this.classroom.toJSON("idle")));
+    const initclassJSON: ClassroomJSON = JSON.parse(
+      JSON.stringify(this.classroom.toJSON("idle"))
+    );
     const fJSON: JSONFinal = {
       config: this.config,
       room: this.classroom.room.toJSON(),
@@ -62,7 +64,10 @@ class Simulator {
 
     // 3. Create an event
     const eventNameList = new StoryEvents().getEventNames();
-    let eventName = eventNameList[Math.floor(seededRandom(this.config.seed * 7) * eventNameList.length)];
+    let eventName =
+      eventNameList[
+        Math.floor(seededRandom(this.config.seed * 7) * eventNameList.length)
+      ];
     // this.classroom.render();
     // TODO Make sure to comment out next line, it is for testing specific events
     // eventName = "studentMakesMess";
@@ -74,27 +79,38 @@ class Simulator {
     const classroomFrames = this.classroom.applyEvent(randomEvent);
 
     // 5. Turn classroom List into final json
-    let classroomFramesJSON: ClassroomJSON[] = classroomFrames.map((cl) => JSON.parse(JSON.stringify(cl.toJSON(eventName))));
+    let classroomFramesJSON: ClassroomJSON[] = classroomFrames.map((cl) =>
+      JSON.parse(JSON.stringify(cl.toJSON(eventName)))
+    );
     // console.log(util.inspect(this.finalJSON?.frames, false, null, true /* enable colors */));
 
     if (this.finalJSON !== null) {
       //   console.log("___________________");
       //   console.log(util.inspect(classroomFrames, false, null, true /* enable colors */));
-      this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
+      this.finalJSON.frames = [
+        ...this.finalJSON.frames,
+        ...classroomFramesJSON,
+      ];
     }
   }
 
   generateEvents(eventName: string) {
     const eventNameList = new StoryEvents().getEventNames();
+
     if (eventNameList.indexOf(eventName) > -1) {
       const event = new ClassroomEvent(eventName, this.classroom);
 
       const classroomFrames = this.classroom.applyEvent(event);
 
-      let classroomFramesJSON: ClassroomJSON[] = classroomFrames.map((cl) => JSON.parse(JSON.stringify(cl.toJSON(eventName))));
+      let classroomFramesJSON: ClassroomJSON[] = classroomFrames.map((cl) =>
+        JSON.parse(JSON.stringify(cl.toJSON(eventName)))
+      );
 
       if (this.finalJSON !== null) {
-        this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
+        this.finalJSON.frames = [
+          ...this.finalJSON.frames,
+          ...classroomFramesJSON,
+        ];
       }
     } else {
       const str = `event: '${eventName}' is not in StoryEvents`;

@@ -46,7 +46,10 @@ class Simulator {
         if (this.finalJSON !== null) {
             //   console.log("___________________");
             //   console.log(util.inspect(classroomFrames, false, null, true /* enable colors */));
-            this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
+            this.finalJSON.frames = [
+                ...this.finalJSON.frames,
+                ...classroomFramesJSON,
+            ];
         }
     }
     generateEvents(eventName) {
@@ -56,7 +59,10 @@ class Simulator {
             const classroomFrames = this.classroom.applyEvent(event);
             let classroomFramesJSON = classroomFrames.map((cl) => JSON.parse(JSON.stringify(cl.toJSON(eventName))));
             if (this.finalJSON !== null) {
-                this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
+                this.finalJSON.frames = [
+                    ...this.finalJSON.frames,
+                    ...classroomFramesJSON,
+                ];
             }
         }
         else {

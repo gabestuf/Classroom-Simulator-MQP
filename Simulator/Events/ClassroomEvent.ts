@@ -23,13 +23,23 @@ class ClassroomEvent {
 
   constructor(storyEventName: string, classroom_: Classroom) {
     this.classroom = classroom_;
-    const cfg = this.convertStoryEvent(storyEventName, classroom_.getStudentList(), classroom_.getTeacherList());
+
+    const cfg = this.convertStoryEvent(
+      storyEventName,
+      classroom_.getStudentList(),
+      classroom_.getTeacherList()
+    );
+
     this.name = cfg.name;
     this.spriteList = cfg.spriteList;
     this.nextEvents = cfg.nextEvents;
   }
 
-  convertStoryEvent(eventName: string, classroomStudentList: Student[], classroomTeacherList: Teacher[]): ConvertedEvent {
+  convertStoryEvent(
+    eventName: string,
+    classroomStudentList: Student[],
+    classroomTeacherList: Teacher[]
+  ): ConvertedEvent {
     let newEvent: ConvertedEvent = {
       name: "",
       spriteList: [],
@@ -38,19 +48,31 @@ class ClassroomEvent {
 
     // check if the event exists, if not throw an error
     if (!this.storyEvents.getEventNames().includes(eventName)) {
-      throw new Error(`Unknown event name. No event (key) named ${eventName} appears in StoryEvents.json`);
+      throw new Error(
+        `Unknown event name. No event (key) named ${eventName} appears in StoryEvents.json`
+      );
     }
+
     // get the event from the StoryEvents json
     const tempEvent: StoryEvent = this.storyEvents.getEvent(eventName);
+
     // set the event name
     newEvent.name = tempEvent.name;
+
     // set student list
     // need to know how many students are participating in event
     const numStudents = tempEvent.countStudents();
-    const studentList = this.generateStudentList(numStudents, classroomStudentList);
+    const studentList = this.generateStudentList(
+      numStudents,
+      classroomStudentList
+    );
     // set teacher list
     const numTeachers = tempEvent.countTeachers();
-    const teacherList = this.generateTeacherList(numTeachers, classroomTeacherList);
+    const teacherList = this.generateTeacherList(
+      numTeachers,
+      classroomTeacherList
+    );
+
     // add lists to spritelist
     newEvent.spriteList = [...studentList, ...teacherList];
 
@@ -76,11 +98,30 @@ class ClassroomEvent {
 
       if (sprite.name.includes("Teacher")) {
         const updates = teacherUpdates.pop();
+
         if (updates === undefined) {
-          throw new Error("updates is undefined, teacherUpdates.pop() may have popped an empty list");
+          throw new Error(
+            "updates is undefined, teacherUpdates.pop() may have popped an empty list"
+          );
         } else {
-          sprite.mood = new Mood(updates.mood[Math.floor(seededRandom(this.classroom.config.seed * this.name.length + 1) * updates.mood.length)]);
-          const locationName: string = updates.pos[Math.floor(seededRandom(this.classroom.config.seed + 7) * updates.pos.length)];
+          console.log(updates);
+          sprite.mood = new Mood(
+            updates.mood[
+              Math.floor(
+                seededRandom(this.classroom.config.seed * 3 + 1) *
+                  updates.mood.length
+              )
+            ]
+          );
+
+          const locationName: string =
+            updates.pos[
+              Math.floor(
+                seededRandom(this.classroom.config.seed * 7) *
+                  updates.pos.length
+              )
+            ];
+
           if (locationName.includes("Student")) {
             // If heading for another student, head to a random student that isn't itself
             for (const s of studentList) {
@@ -94,7 +135,10 @@ class ClassroomEvent {
                 sprite.heading = s.pos;
               }
             }
-          } else if (locationName === "current" || locationName.includes("current")) {
+          } else if (
+            locationName === "current" ||
+            locationName.includes("current")
+          ) {
             sprite.heading = sprite.pos;
           } else {
             // remove unwanted update names, such as student, teacher, and current
@@ -105,17 +149,43 @@ class ClassroomEvent {
             const loc = new ClassroomLocation(locationName, this.classroom);
             sprite.heading = loc.chooseRandomPosition();
           }
-          sprite.currentDescription = updates.description[Math.floor(seededRandom(this.classroom.config.seed * 3 + 11) * updates.description.length)];
+
+          sprite.currentDescription =
+            updates.description[
+              Math.floor(
+                seededRandom(this.classroom.config.seed * 3 + 11) *
+                  updates.description.length
+              )
+            ];
         }
       }
 
       if (sprite.name.includes("Student")) {
         const updates = studentUpdates.pop();
         if (updates === undefined) {
-          throw new Error("updates is undefined, studentUpdates.pop() may have popped an empty list");
+          throw new Error(
+            "updates is undefined, studentUpdates.pop() may have popped an empty list"
+          );
         } else {
-          sprite.mood = new Mood(updates.mood[Math.floor(seededRandom(this.classroom.config.seed + this.classroom.config.roomSizeY * 2 + this.classroom.config.numTeachers) * updates.mood.length)]);
-          const locationName: string = updates.pos[Math.floor(seededRandom(this.classroom.config.seed * 7 + this.classroom.config.numRugs) * updates.pos.length)];
+          sprite.mood = new Mood(
+            updates.mood[
+              Math.floor(
+                seededRandom(
+                  this.classroom.config.seed +
+                    this.classroom.config.roomSizeY * 2 +
+                    this.classroom.config.numTeachers
+                ) * updates.mood.length
+              )
+            ]
+          );
+          const locationName: string =
+            updates.pos[
+              Math.floor(
+                seededRandom(
+                  this.classroom.config.seed * 7 + this.classroom.config.numRugs
+                ) * updates.pos.length
+              )
+            ];
 
           if (locationName.includes("Student")) {
             // If heading for another student, head to a random student that isn't itself
@@ -131,7 +201,10 @@ class ClassroomEvent {
                 sprite.heading = s.pos;
               }
             }
-          } else if (locationName === "current" || locationName.includes("current")) {
+          } else if (
+            locationName === "current" ||
+            locationName.includes("current")
+          ) {
             sprite.heading = sprite.pos;
           } else {
             // remove unwanted update names, such as student, teacher, and current
@@ -139,11 +212,27 @@ class ClassroomEvent {
             updates.pos = updates.pos.filter((e) => !e.includes("Student"));
             updates.pos = updates.pos.filter((e) => !e.includes("Teacher"));
 
-            const loc = new ClassroomLocation(updates.pos[Math.floor(seededRandom(this.classroom.config.seed + 40) * updates.pos.length)], this.classroom);
+            const loc = new ClassroomLocation(
+              updates.pos[
+                Math.floor(
+                  seededRandom(this.classroom.config.seed + 40) *
+                    updates.pos.length
+                )
+              ],
+              this.classroom
+            );
             sprite.heading = loc.chooseRandomPosition();
           }
 
-          sprite.currentDescription = updates.description[Math.floor(seededRandom(this.classroom.config.seed + this.classroom.config.roomSizeX * 3) * updates.description.length)];
+          sprite.currentDescription =
+            updates.description[
+              Math.floor(
+                seededRandom(
+                  this.classroom.config.seed +
+                    this.classroom.config.roomSizeX * 3
+                ) * updates.description.length
+              )
+            ];
         }
       }
     }
@@ -153,7 +242,10 @@ class ClassroomEvent {
     return newEvent;
   }
 
-  generateStudentList(numStudents: number, listOfStudents: Student[]): Student[] {
+  generateStudentList(
+    numStudents: number,
+    listOfStudents: Student[]
+  ): Student[] {
     /* This will take Classroom.studentList
            then choose certain students to add to the event 
            The students moods and headings will be updated in the event
@@ -166,7 +258,9 @@ class ClassroomEvent {
     for (let i = 0; i < numStudents; i++) {
       const addStudent = listOfStudents.pop();
       if (addStudent === undefined) {
-        throw new Error("Classroom does not have enough students to play this event. Please consider increasing number of students in the classroom");
+        throw new Error(
+          "Classroom does not have enough students to play this event. Please consider increasing number of students in the classroom"
+        );
       } else {
         participatingStudents.push(addStudent);
       }
@@ -175,7 +269,10 @@ class ClassroomEvent {
     return participatingStudents;
   }
 
-  generateTeacherList(numTeachers: number, listOfTeachers: Teacher[]): Teacher[] {
+  generateTeacherList(
+    numTeachers: number,
+    listOfTeachers: Teacher[]
+  ): Teacher[] {
     let participatingTeachers: Student[] = [];
     // shuffle list
     listOfTeachers = shuffleArray(listOfTeachers);
@@ -183,7 +280,9 @@ class ClassroomEvent {
     for (let i = 0; i < numTeachers; i++) {
       const addTeacher = listOfTeachers.pop();
       if (addTeacher === undefined) {
-        throw new Error("Classroom does not have enough teachers to play this event. Please consider increasing number of teachers in the classroom");
+        throw new Error(
+          "Classroom does not have enough teachers to play this event. Please consider increasing number of teachers in the classroom"
+        );
       } else {
         participatingTeachers.push(addTeacher);
       }

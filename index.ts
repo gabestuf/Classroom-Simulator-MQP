@@ -108,7 +108,8 @@ app.post("/render-room", (req, res) => {
   if (!config.isValid()) {
     res.json({
       status: "FAILED",
-      message: "The config you entered is not valid. Please refer to the README",
+      message:
+        "The config you entered is not valid. Please refer to the README",
     });
   }
 
@@ -193,7 +194,8 @@ app.get("/classroom-simulation/random/:num", (req, res) => {
     if (Number.isNaN(numEvents) || numEvents > 20 || numEvents < 1) {
       res.json({
         status: "FAILED",
-        message: "Request failed. There is a cap at 20 events currently. \n Need at least 1 event.\nIt is also possible that an invalid number/string was passed as an arguement",
+        message:
+          "Request failed. There is a cap at 20 events currently. \n Need at least 1 event.\nIt is also possible that an invalid number/string was passed as an arguement",
       });
     }
     const sim = new Simulator(genRandomConfig(), numEvents);
@@ -217,11 +219,12 @@ app.get("/classroom-simulation/random/:num", (req, res) => {
 
 app.get("/classroom-simulation/singleEvent/:eventName", (req, res) => {
   const eventName = req.params.eventName;
+  eventName.trim();
 
   try {
     const sim = new Simulator(genRandomConfig(), 1);
+
     sim.generateEvents(eventName);
-    console.log("here");
 
     res.json({
       status: "SUCCESS",
