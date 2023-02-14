@@ -67,6 +67,22 @@ class Classroom {
     }
     runEvent() {
         let classroomList = [];
+        for (const sprite of this.spriteList) {
+            if (sprite.heading instanceof Coordinate_1.default) {
+                // First check if sprite is already at its destination. If so, set heading === null
+                if (sprite.heading.x === sprite.pos.x && sprite.heading.y === sprite.pos.y) {
+                    sprite.heading === null;
+                }
+                sprite.pos = sprite.heading;
+                sprite.heading = null;
+            }
+        }
+        // save this instance of the classroom as a json
+        classroomList.push(this.clone());
+        return classroomList;
+    }
+    runEventWPathfinding() {
+        let classroomList = [];
         // This function will loop until all sprites heading = null
         const checkStillMoving = () => {
             for (const sprite of this.spriteList) {
