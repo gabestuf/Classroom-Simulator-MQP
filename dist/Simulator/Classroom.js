@@ -67,6 +67,24 @@ class Classroom {
     }
     runEvent() {
         let classroomList = [];
+        for (const sprite of this.spriteList) {
+            if (sprite.heading instanceof Coordinate_1.default) {
+                // First check if sprite is already at its destination. If so, set heading === null
+                if (sprite.heading.x === sprite.pos.x &&
+                    sprite.heading.y === sprite.pos.y) {
+                    sprite.heading === null;
+                }
+                sprite.pos = sprite.heading;
+                sprite.heading = null;
+            }
+        }
+        // save this instance of the classroom as a json
+        classroomList.push(this.clone());
+        console.log(classroomList);
+        return classroomList;
+    }
+    runEventWPathfinding() {
+        let classroomList = [];
         // This function will loop until all sprites heading = null
         const checkStillMoving = () => {
             for (const sprite of this.spriteList) {
@@ -83,7 +101,8 @@ class Classroom {
             for (const sprite of this.spriteList) {
                 if (sprite.heading instanceof Coordinate_1.default) {
                     // First check if sprite is already at its destination. If so, set heading === null
-                    if (sprite.heading.x === sprite.pos.x && sprite.heading.y === sprite.pos.y) {
+                    if (sprite.heading.x === sprite.pos.x &&
+                        sprite.heading.y === sprite.pos.y) {
                         sprite.heading === null;
                     }
                     const path = (0, BFS_1.default)(this.room, sprite.pos, sprite.heading);
@@ -95,7 +114,8 @@ class Classroom {
                     // UPDATE SPRITE LOCATION
                     // first check if sprite has arrived
                     if (path.length === 1) {
-                        if (sprite.heading.x === path[0].x && sprite.heading.y === path[0].y) {
+                        if (sprite.heading.x === path[0].x &&
+                            sprite.heading.y === path[0].y) {
                             // He has arrived
                             sprite.heading = null;
                         }
@@ -181,7 +201,10 @@ class Classroom {
         //TODO add sprites on top
         for (const sprite of this.spriteList) {
             const rowStr = strArr[sprite.pos.y];
-            strArr[sprite.pos.y] = rowStr.substring(0, sprite.pos.x) + sprite.toString() + rowStr.substring(sprite.pos.x + 1);
+            strArr[sprite.pos.y] =
+                rowStr.substring(0, sprite.pos.x) +
+                    sprite.toString() +
+                    rowStr.substring(sprite.pos.x + 1);
         }
         for (const string of strArr) {
             str += string + "\n";

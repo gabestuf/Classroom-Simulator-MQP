@@ -210,7 +210,58 @@ app.get("/classroom-simulation/random/:num", (req, res) => {
     console.error(e);
     res.json({
       status: "FAILED",
-      message: `There was an error with your request ${e}`,
+      message: `There was an error with your request: ${e}`,
+    });
+  }
+});
+
+app.get("/classroom-simulation/singleEvent/:eventName", (req, res) => {
+  const eventName = req.params.eventName;
+
+  try {
+    const sim = new Simulator(genRandomConfig(), 1);
+    sim.generateEvents(eventName);
+    console.log("here");
+
+    res.json({
+      status: "SUCCESS",
+      message: `Successfully generated a single event: ${eventName}`,
+      body: {
+        classroomJSON: sim.finalJSON,
+      },
+    });
+  } catch (e) {
+    res.json({
+      status: "FAILED",
+      message: `There was an error with your request: ${e}`,
+    });
+  }
+});
+
+app.get("/classroom-simulation/singleEvent/:eventName/:seed", (req, res) => {
+  const eventName = req.params.eventName;
+  const seed = parseInt(req.params.seed);
+
+  try {
+    let config = genRandomConfig();
+    if (!(!seed || Number.isNaN(seed))) {
+      config = genRandomConfig(seed);
+    }
+    const sim = new Simulator(config, 1);
+    sim.generateEvents(eventName);
+    console.log("here");
+
+    res.json({
+      status: "SUCCESS",
+      message: `Successfully generated a single event: ${eventName}`,
+      body: {
+        classroomJSON: sim.finalJSON,
+      },
+    });
+  } catch (e) {
+    res.json({
+      status: "FAILED",
+      message: `There was an error with your request: ${e}`,
     });
   }
 });

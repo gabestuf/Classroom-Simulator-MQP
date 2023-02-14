@@ -49,6 +49,21 @@ class Simulator {
             this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
         }
     }
+    generateEvents(eventName) {
+        const eventNameList = new STORYEVENTS_1.default().getEventNames();
+        if (eventNameList.indexOf(eventName) > -1) {
+            const event = new ClassroomEvent_1.default(eventName, this.classroom);
+            const classroomFrames = this.classroom.applyEvent(event);
+            let classroomFramesJSON = classroomFrames.map((cl) => JSON.parse(JSON.stringify(cl.toJSON(eventName))));
+            if (this.finalJSON !== null) {
+                this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
+            }
+        }
+        else {
+            const str = `event: '${eventName}' is not in StoryEvents`;
+            throw new Error(str);
+        }
+    }
     generateRandomEvents(numEvents) {
         for (let i = 0; i < numEvents; i++) {
             this.generateOneRandomEvent();

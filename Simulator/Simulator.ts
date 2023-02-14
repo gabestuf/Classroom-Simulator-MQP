@@ -3,6 +3,7 @@ import Classroom, { ClassroomJSON } from "./Classroom";
 import ClassroomConfig from "./Config/CONFIG";
 import StoryEvents from "./Config/STORYEVENTS";
 import seededRandom from "./Helper Functions/GenerateRandomNumber";
+import { randomBytes } from "crypto";
 
 interface JSONFinal {
   config: ClassroomConfig | null;
@@ -80,6 +81,24 @@ class Simulator {
       //   console.log("___________________");
       //   console.log(util.inspect(classroomFrames, false, null, true /* enable colors */));
       this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
+    }
+  }
+
+  generateEvents(eventName: string) {
+    const eventNameList = new StoryEvents().getEventNames();
+    if (eventNameList.indexOf(eventName) > -1) {
+      const event = new ClassroomEvent(eventName, this.classroom);
+
+      const classroomFrames = this.classroom.applyEvent(event);
+
+      let classroomFramesJSON: ClassroomJSON[] = classroomFrames.map((cl) => JSON.parse(JSON.stringify(cl.toJSON(eventName))));
+
+      if (this.finalJSON !== null) {
+        this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
+      }
+    } else {
+      const str = `event: '${eventName}' is not in StoryEvents`;
+      throw new Error(str);
     }
   }
 
