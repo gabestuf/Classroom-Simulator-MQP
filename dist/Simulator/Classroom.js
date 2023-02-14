@@ -49,7 +49,10 @@ class Classroom {
                 if (eventSprite.name === sprite.name) {
                     // If there's a match, set sprite data to eventSprite data
                     sprite.currentDescription = eventSprite.currentDescription;
-                    sprite.heading = eventSprite.heading;
+                    // sprite.heading = eventSprite.heading;
+                    if (eventSprite.heading instanceof Coordinate_1.default) {
+                        sprite.pos = eventSprite.heading;
+                    }
                     sprite.mood = eventSprite.mood;
                     hasMatch = true;
                 }
@@ -62,11 +65,11 @@ class Classroom {
         // Save initial classroom
         classroomList.push(this.clone());
         // run the event
-        classroomList = [...classroomList, ...this.runEvent()];
+        // classroomList = [...classroomList, ...this.runEventWPathfinding()];
+        classroomList;
         return classroomList;
     }
     runEvent() {
-        let classroomList = [];
         for (const sprite of this.spriteList) {
             if (sprite.heading instanceof Coordinate_1.default) {
                 // First check if sprite is already at its destination. If so, set heading === null
@@ -78,10 +81,7 @@ class Classroom {
                 sprite.heading = null;
             }
         }
-        // save this instance of the classroom as a json
-        classroomList.push(this.clone());
-        console.log(classroomList);
-        return classroomList;
+        return [this.clone()];
     }
     runEventWPathfinding() {
         let classroomList = [];

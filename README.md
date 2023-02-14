@@ -121,6 +121,13 @@ This will run two terminals concurrently. One compiles the typescript code into 
 - [x] Make sure BFS works
 - [ ] Make sure all Routes work
 
+### How to write tests:
+
+- Make a new file with the .test.ts extension
+- We are using the library 'jest'
+- run `npm run test -- --coverage` to run the tests with code coverage
+- or just `npm run test` to run the tests
+
 ## //TODO
 
 - [ ] Complete TODO

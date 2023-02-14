@@ -1,6 +1,5 @@
 import Coordinate from "../Navigation/Coordinate";
 import classroomLocation from "../Navigation/Locations";
-import Room from "../Room/Room";
 import Mood from "./Emotions/Moods";
 
 class Student {

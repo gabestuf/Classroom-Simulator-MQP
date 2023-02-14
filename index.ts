@@ -146,7 +146,7 @@ app.get("/classroom-simulation/random/singleEvent", (req, res) => {
   try {
     const numEvents = 1;
     const sim = new Simulator(genRandomConfig(), numEvents);
-    sim.generateOneRandomEvent();
+    sim.generateOneRandomEvent(1);
 
     res.json({
       status: "SUCCESS",
@@ -169,7 +169,7 @@ app.get("/classroom-simulation/random/singleEvent/:seed", (req, res) => {
   try {
     const numEvents = 1;
     const sim = new Simulator(genRandomConfig(seed || undefined), numEvents);
-    sim.generateOneRandomEvent();
+    sim.generateOneRandomEvent(1);
 
     res.json({
       status: "SUCCESS",
@@ -188,6 +188,7 @@ app.get("/classroom-simulation/random/singleEvent/:seed", (req, res) => {
 });
 
 app.get("/classroom-simulation/random/:num", (req, res) => {
+  // generate 'num' number of events
   try {
     const numEvents: number = parseInt(req.params.num);
     console.log(numEvents);

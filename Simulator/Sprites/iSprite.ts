@@ -1,6 +1,5 @@
 import Coordinate from "../Navigation/Coordinate";
 import classroomLocation from "../Navigation/Locations";
-import Room from "../Room/Room";
 import Mood from "./Emotions/Moods";
 
 interface iSprite {
@@ -10,7 +9,12 @@ interface iSprite {
   heading: Coordinate | null;
   currentDescription: string;
   toString: () => string;
-  toJSON: () => { name: string; pos: number[]; mood: string; description: string };
+  toJSON: () => {
+    name: string;
+    pos: number[];
+    mood: string;
+    description: string;
+  };
   updateHeadingByLocation: (newLoc: classroomLocation) => void;
 }
 
