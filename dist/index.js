@@ -204,6 +204,27 @@ app.get("/classroom-simulation/random/:num", (req, res) => {
         });
     }
 });
+app.get("/classroom-simulation/singleEvent/:eventName", (req, res) => {
+    const eventName = req.params.eventName;
+    try {
+        const sim = new Simulator_1.default((0, GenRandomConfig_1.default)(), 1);
+        sim.generateEvents(eventName);
+        console.log("here");
+        res.json({
+            status: "SUCCESS",
+            message: `Successfully generated a single event: ${eventName}`,
+            body: {
+                classroomJSON: sim.finalJSON,
+            },
+        });
+    }
+    catch (e) {
+        res.json({
+            status: "FAILED",
+            message: `There was an error with your request: ${e}`,
+        });
+    }
+});
 app.get("/classroom-simulation/singleEvent/:eventName/:seed", (req, res) => {
     const eventName = req.params.eventName;
     const seed = parseInt(req.params.seed);
