@@ -22,6 +22,7 @@ _global_script_class_icons={
 
 config/name="Classroom Simulator"
 run/main_scene="res://Classroom.tscn"
+config/icon="res://icon.png"
 
 [display]
 
@@ -56,5 +57,4 @@ texture={
 
 [rendering]
 
-threads/thread_model=2
 environment/default_environment="res://default_env.tres"

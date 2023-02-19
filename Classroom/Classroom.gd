@@ -16,6 +16,8 @@ var numTeachers
 # classroom info (JSON)
 var classroomJSON
 var classroomConfig
+var spriteJSON
+var spriteDESC
 #list of all frames
 var frames
 #frame that we are currently working on
@@ -31,6 +33,7 @@ func _ready():
 	# init on test for testing purposes, does not require http request, in prod, comment this out and uncomment http()
 	print("Classroom ready")
 	# _init_on_test()
+	_desc_label()
 
 func http() -> void:
 	#create httpRequest object and add it as a child
@@ -145,3 +148,17 @@ func _run_next_frame():
 func _on_Timer_timeout(): # 1 tick is .25 seconds atm
 	_run_next_frame()
 	# print("")
+
+func _desc_label():
+	var label = Label.new()
+#	var json_Desc = JSON.parse('{"status":"SUCCESS","message":"Successfully generated a random event","body":{"classroomJSON":{"config":{"roomSizeX":13,"roomSizeY":14,"numStudents":4,"numTeachers":1,"numChairs":4,"numRugs":1,"numTables":1,"seed":13},"room":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","c","r","f","f","w"],["w","f","f","f","f","f","f","c","t","f","f","f","w"],["w","f","f","f","f","f","f","c","c","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"initClassroom":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","S","r","f","f","w"],["w","f","f","f","f","f","f","S","t","f","f","f","w"],["w","f","f","f","f","f","f","S","S","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","T","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"frames":[{"currentEvent":"idle","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"neutral","description":""},{"name":"Student3","pos":[2,11],"mood":"neutral","description":""},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]},{"currentEvent":"twoStudentsFight","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":"Teacher is being class"},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"sad","description":"fights"},{"name":"Student3","pos":[5,155],"mood":"angry","description":"fights"},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]}]}}}')
+#	var JSONDesc = json_Desc.result
+#	spriteJSON = JSONDesc.get("spriteList").get("name")
+#	spriteDESC = spriteJSON.get("description")
+	label.text = "Teacher is teaching class."
+	add_child(label)
+	label.rect_position = (get_viewport_rect().size - label.rect_size) / 2
+	var popup = PopupDialog.new()
+	popup.add_child(label)
+	add_child(popup)
+	popup.show()
