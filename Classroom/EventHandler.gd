@@ -101,12 +101,9 @@ func _gen_static_sprites(classroomJSON) -> void:
 				r.position = room_tilemap.cell_size * Vector2(x,y)
 
 func _gen_animated_sprites(classroomJSON) -> void:
-	var sizeX = classroomJSON.get("config").get("roomSizeX");
-	var sizeY = classroomJSON.get("config").get("roomSizeY");
 	var initSprites = classroomJSON.get("frames")[0].spriteList;
 	var teacherCount = 0
 	var studentCount = 0
-	var studentTextures = []
 	
 	# Place Sprites from initial frame
 	for sprite in initSprites:

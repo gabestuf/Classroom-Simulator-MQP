@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Sprites/Kinematic/Label.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Kinematic/Sprite.gd" type="Script" id=2]
-[ext_resource path="res://Images/Sprites/Teachers/Teacher0.png" type="Texture" id=3]
+[ext_resource path="res://Images/Sprites/Templates and Drafts/teacher_sprites_template.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=582]
 radius = 4.0

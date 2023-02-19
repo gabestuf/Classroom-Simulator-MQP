@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Sprites/Kinematic/Label.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Kinematic/Sprite.gd" type="Script" id=2]
+[ext_resource path="res://Images/Sprites/Templates and Drafts/student_sprite_template.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=585]
 radius = 3.79857
@@ -302,6 +303,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -1, -11 )
+texture = ExtResource( 3 )
 hframes = 8
 vframes = 3
 frame = 9
