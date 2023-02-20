@@ -8,6 +8,7 @@ onready var event_label = $EventLabel
 
 var tiles
 
+
 #used to add tiles to the tilemap
 var tile = []
 #size of tile map
@@ -34,10 +35,10 @@ func _ready():
 	# init on test for testing purposes, does not require http request, in prod, comment this out and uncomment http()
 	print("Classroom ready")
 	# _init_on_test()
-	_set_event_label_text("Classroom Simulator")
+	_desc_label()
 
 func http() -> void:
-	#create httpRequest object and add it as a child
+		#create httpRequest object and add it as a child
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
 	
@@ -155,6 +156,9 @@ func _run_next_frame():
 func _on_Timer_timeout(): # 1 tick is .25 seconds atm
 	_run_next_frame()
 	# print("")
+
+func _set_event_label_text(text: String):
+	event_label.text = text;
 
 func _desc_label():
 	var label = Label.new()
