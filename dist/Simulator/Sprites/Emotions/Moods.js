@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // maybe add upset, bored
-const moodList = ["happy", "sad", "neutral", "angry", "tired"];
+const moodList = ["happy", "sad", "neutral", "angry", "tired", "sick"];
 class Mood {
     constructor(name_) {
         if (moodList.includes(name_)) {

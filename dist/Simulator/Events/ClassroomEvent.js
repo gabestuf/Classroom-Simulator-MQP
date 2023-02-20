@@ -62,8 +62,11 @@ class ClassroomEvent {
                     throw new Error("updates is undefined, teacherUpdates.pop() may have popped an empty list");
                 }
                 else {
-                    sprite.mood = new Moods_1.default(updates.mood[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed * this.name.length + 1) * updates.mood.length)]);
-                    const locationName = updates.pos[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed + 7) * updates.pos.length)];
+                    console.log(updates);
+                    sprite.mood = new Moods_1.default(updates.mood[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed * 3 + 1) *
+                        updates.mood.length)]);
+                    const locationName = updates.pos[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed * 7) *
+                        updates.pos.length)];
                     if (locationName.includes("Student")) {
                         // If heading for another student, head to a random student that isn't itself
                         for (const s of studentList) {
@@ -79,7 +82,8 @@ class ClassroomEvent {
                             }
                         }
                     }
-                    else if (locationName === "current" || locationName.includes("current")) {
+                    else if (locationName === "current" ||
+                        locationName.includes("current")) {
                         sprite.heading = sprite.pos;
                     }
                     else {
@@ -90,7 +94,9 @@ class ClassroomEvent {
                         const loc = new Locations_1.default(locationName, this.classroom);
                         sprite.heading = loc.chooseRandomPosition();
                     }
-                    sprite.currentDescription = updates.description[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed * 3 + 11) * updates.description.length)];
+                    sprite.currentDescription =
+                        updates.description[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed * 3 + 11) *
+                            updates.description.length)];
                 }
             }
             if (sprite.name.includes("Student")) {
@@ -99,7 +105,9 @@ class ClassroomEvent {
                     throw new Error("updates is undefined, studentUpdates.pop() may have popped an empty list");
                 }
                 else {
-                    sprite.mood = new Moods_1.default(updates.mood[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed + this.classroom.config.roomSizeY * 2 + this.classroom.config.numTeachers) * updates.mood.length)]);
+                    sprite.mood = new Moods_1.default(updates.mood[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed +
+                        this.classroom.config.roomSizeY * 2 +
+                        this.classroom.config.numTeachers) * updates.mood.length)]);
                     const locationName = updates.pos[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed * 7 + this.classroom.config.numRugs) * updates.pos.length)];
                     if (locationName.includes("Student")) {
                         // If heading for another student, head to a random student that isn't itself
@@ -117,7 +125,8 @@ class ClassroomEvent {
                             }
                         }
                     }
-                    else if (locationName === "current" || locationName.includes("current")) {
+                    else if (locationName === "current" ||
+                        locationName.includes("current")) {
                         sprite.heading = sprite.pos;
                     }
                     else {
@@ -125,10 +134,13 @@ class ClassroomEvent {
                         updates.pos = updates.pos.filter((e) => e !== "current");
                         updates.pos = updates.pos.filter((e) => !e.includes("Student"));
                         updates.pos = updates.pos.filter((e) => !e.includes("Teacher"));
-                        const loc = new Locations_1.default(updates.pos[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed + 40) * updates.pos.length)], this.classroom);
+                        const loc = new Locations_1.default(updates.pos[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed + 40) *
+                            updates.pos.length)], this.classroom);
                         sprite.heading = loc.chooseRandomPosition();
                     }
-                    sprite.currentDescription = updates.description[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed + this.classroom.config.roomSizeX * 3) * updates.description.length)];
+                    sprite.currentDescription =
+                        updates.description[Math.floor((0, GenerateRandomNumber_1.default)(this.classroom.config.seed +
+                            this.classroom.config.roomSizeX * 3) * updates.description.length)];
                 }
             }
         }

@@ -11,6 +11,7 @@ class Teacher {
         this.heading = null;
         this.mood = new Moods_1.default("neutral");
         this.currentDescription = "";
+        this.importance = 0;
     }
     updateHeadingByLocation(newLoc) {
         this.heading = newLoc.chooseRandomPosition();

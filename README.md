@@ -1,6 +1,6 @@
 # MQP API
 
-[Currently Hosted Here](https://mqp-express.vercel.app/)
+[Currently Hosted Here](https://classroom-simulator-server.vercel.app/)
 
 ## Description
 
@@ -59,7 +59,8 @@ This will run two terminals concurrently. One compiles the typescript code into 
 | GET    | /classroom-simulation/singleEvent/:eventName/:seed    | will render a specified single event and also a given seed                                                           | classroomJSON |
 | GET    | /classroom-simulation/generateEvents/:numEvents/:seed | will render random events given the number of events and a seed.                                                     | classroomJSON |
 
-[^1]: The config is a JSON Object that looks like this: `
+[^1]:
+    The config is a JSON Object that looks like this: `
 {
 "roomSizeX": number,
 "roomSizeY": number,
@@ -121,15 +122,19 @@ This will run two terminals concurrently. One compiles the typescript code into 
 - [x] Make sure BFS works
 - [ ] Make sure all Routes work
 
+### How to write tests:
+
+- Make a new file with the .test.ts extension
+- We are using the library 'jest'
+- run `npm run test -- --coverage` to run the tests with code coverage
+- or just `npm run test` to run the tests
+
 ## //TODO
 
 - [ ] Complete TODO
-- [ ] Refactor StoryEvents.json
 - [ ] create more routes depending on client needs
 - [ ] test http requests in Godot
-- [ ] write a simulation method which applies one new event
-- [ ] write simulation method which continues to render a certain amount of events, randomly
-- [ ] create a front-end to edit the ClassroomConfig, maybe to edit/add events as well
+
 
 ---
 

@@ -24,7 +24,7 @@ class Simulator {
         };
         return fJSON;
     }
-    generateOneRandomEvent(index = 0) {
+    generateOneRandomEvent(seedMult) {
         // TODO 2. Generate events at random intervals
         // to view just the room
         // classroom.room.render()
@@ -32,7 +32,7 @@ class Simulator {
         // classroom.render()
         // 3. Create an event
         const eventNameList = new STORYEVENTS_1.default().getEventNames();
-        let eventName = eventNameList[Math.floor((0, GenerateRandomNumber_1.default)(this.config.seed * index) * eventNameList.length)];
+        let eventName = eventNameList[Math.floor((0, GenerateRandomNumber_1.default)(this.config.seed * seedMult) * eventNameList.length)];
         // this.classroom.render();
         // TODO Make sure to comment out next line, it is for testing specific events
         // eventName = "studentMakesMess";
@@ -46,7 +46,10 @@ class Simulator {
         if (this.finalJSON !== null) {
             //   console.log("___________________");
             //   console.log(util.inspect(classroomFrames, false, null, true /* enable colors */));
-            this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
+            this.finalJSON.frames = [
+                ...this.finalJSON.frames,
+                ...classroomFramesJSON,
+            ];
         }
     }
     generateEvents(eventName) {
@@ -56,7 +59,10 @@ class Simulator {
             const classroomFrames = this.classroom.applyEvent(event);
             let classroomFramesJSON = classroomFrames.map((cl) => JSON.parse(JSON.stringify(cl.toJSON(eventName))));
             if (this.finalJSON !== null) {
-                this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
+                this.finalJSON.frames = [
+                    ...this.finalJSON.frames,
+                    ...classroomFramesJSON,
+                ];
             }
         }
         else {

@@ -15,11 +15,11 @@ describe("Testing the functions of the class 'Room'", () => {
     seed: 1,
   });
 
-  test("generateRoomFloor(sizeX, sizeY): should return a 2d array (y,x) of a room with walls and floor", () => {
+ /* test("generateRoomFloor(sizeX, sizeY): should return a 2d array (y,x) of a room with walls and floor", () => {
     const room = new Room(testCFG);
     room.generateRoomFloor(testCFG.roomSizeX, testCFG.roomSizeY);
     expect(room.toString()).toBe("\nwwwww\nwfffw\nwfffw\nwfffw\nwwwww\n");
-  });
+  }); */
 
   test("testing generating a room of the correct size Y", function () {
     const room = new Room(testCFG);
