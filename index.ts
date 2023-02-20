@@ -30,9 +30,6 @@ const testCFG = new ClassroomConfig({
   seed: 1,
 });
 
-const room = new Room(testCFG);
-room.generateRoomFloor(testCFG.roomSizeX, testCFG.roomSizeY);
-console.log(room.toString());
 app.get("/", (req: Request, res: Response) => {
   res.send("MQP API");
 });
@@ -259,6 +256,39 @@ app.get("/classroom-simulation/singleEvent/:eventName/:seed", (req, res) => {
       },
     });
   } catch (e) {
+    res.json({
+      status: "FAILED",
+      message: `There was an error with your request: ${e}`,
+    });
+  }
+});
+
+app.get("/classroom-simulation/generateEvents/:numEvents/:seed", (req, res) => {
+  let seed = parseInt(req.params.seed);
+  if (Number.isNaN(seed)) {
+    seed = 0; //default
+  }
+
+  try {
+    const numEvents: number = parseInt(req.params.numEvents);
+    if (Number.isNaN(numEvents) || numEvents > 20 || numEvents < 1) {
+      res.json({
+        status: "FAILED",
+        message: "Request failed. There is a cap at 20 events currently. \n Need at least 1 event.\nIt is also possible that an invalid number/string was passed as an arguement",
+      });
+    }
+    const sim = new Simulator(genRandomConfig(seed), numEvents);
+    sim.generateRandomEvents(numEvents);
+
+    res.json({
+      status: "SUCCESS",
+      message: "Successfully generated a random event",
+      body: {
+        classroomJSON: sim.finalJSON,
+      },
+    });
+  } catch (e) {
+    console.error(e);
     res.json({
       status: "FAILED",
       message: `There was an error with your request: ${e}`,

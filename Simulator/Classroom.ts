@@ -65,8 +65,6 @@ class Classroom {
         throw new Error(`No Sprite with same ID in event and classroom. Event sprite ID: ${eventSprite.name}`);
       }
     }
-    // Save initial classroom
-    classroomList.push(this.clone());
 
     // run the event
     classroomList = [...classroomList, ...this.runEvent()];

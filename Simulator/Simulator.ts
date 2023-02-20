@@ -52,7 +52,7 @@ class Simulator {
     return fJSON;
   }
 
-  generateOneRandomEvent() {
+  generateOneRandomEvent(index: number = 0) {
     // TODO 2. Generate events at random intervals
 
     // to view just the room
@@ -62,7 +62,7 @@ class Simulator {
 
     // 3. Create an event
     const eventNameList = new StoryEvents().getEventNames();
-    let eventName = eventNameList[Math.floor(seededRandom(this.config.seed * 7) * eventNameList.length)];
+    let eventName = eventNameList[Math.floor(seededRandom(this.config.seed * index) * eventNameList.length)];
     // this.classroom.render();
     // TODO Make sure to comment out next line, it is for testing specific events
     // eventName = "studentMakesMess";
@@ -104,7 +104,7 @@ class Simulator {
 
   generateRandomEvents(numEvents: number) {
     for (let i = 0; i < numEvents; i++) {
-      this.generateOneRandomEvent();
+      this.generateOneRandomEvent(i);
     }
   }
 }
