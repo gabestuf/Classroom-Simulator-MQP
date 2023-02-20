@@ -5,7 +5,6 @@ var image_node = null
 var num
 var curr_emote
 var rng := RandomNumberGenerator.new()
-var json_desc = {}
 
 func _ready():
 
@@ -32,12 +31,3 @@ func _set_Label(emote):
 	else:
 		print("Error, emote does not exist: ", emote)
 		return false
-
-func set_json_desc(data):
-	json_desc = JSON.parse(data)
-	update_desc()
-
-func update_desc():
-	text = ""
-	for key in json_desc:
-		text += str(key) + ": " + str(json_desc[key]) + "\n"

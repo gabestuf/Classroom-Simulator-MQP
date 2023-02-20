@@ -65,12 +65,6 @@ func setMood(mood: String):
 	else:
 		print("Error setting mood: ", mood)
 
-func setDesc(desc: String):
-	if description_label._set_Label(desc):
-		currentDescription = desc
-		print("Set description of ", spriteName, " to ", desc)
-	else:
-		print("Error setting description: ", desc)
 
 func get_agent_rid() -> RID:
 	return navAgent.get_navigation_map()

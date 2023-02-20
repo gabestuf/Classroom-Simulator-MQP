@@ -327,17 +327,30 @@ script/source = "extends Label
 # Declare member variables here. Examples:
 # var a = 2
 # var b = \"text\"
-
+var image_node = null
+var json_desc = {}
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+# Set the text of the label to an empty string
+	text = \"I\"
+	# Create a new TextureRect node
+	image_node = TextureRect.new()
+	
+	# Add the TextureRect node as a child of the Label node
+	add_child(image_node)
+	#set the position of the emote to above the sprite's head
+	rect_position = Vector2(-25,-40)
+	
+func set_json_desc(data):
+	json_desc = JSON.parse(data)
+	update_desc()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func update_desc():
+	text = \"\"
+	for key in json_desc:
+		text += str(key) + \": \" + str(json_desc[key]) + \"\\n\"
 "
 
 [node name="StudentSprite" type="KinematicBody2D"]
