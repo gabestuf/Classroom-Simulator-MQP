@@ -9,12 +9,15 @@ var currentDescription = ""
 onready var navAgent := $NavigationAgent2D
 onready var maxSpeed: float = 100
 var velocity := Vector2.ZERO
+var FRICTION = 800
+var ACCELERATION = 500
 var facing := Vector2(0,1)
 var path : = PoolVector2Array() setget set_path 
 
 # animations
 onready var animation_player = $AnimationPlayer
 onready var animation_tree = $AnimationTree
+onready var animation_state = animation_tree.get("parameters/playback")
 onready var emotion_label : Label = $EmotionLabel
 onready var description_label = $DescriptionLabel
 
@@ -29,18 +32,25 @@ func _physics_process(delta: float) -> void:
 		if (global_position.distance_to(path[0]) < 2):
 			path.remove(0)
 		
-		velocity = direction * maxSpeed
+		velocity = velocity.move_toward(direction.normalized() * maxSpeed, ACCELERATION * delta)
+#velocity = direction * maxSpeed
+		
 		facing = velocity.normalized()
 	else:
-		velocity = Vector2.ZERO
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		pass
+	if (spriteName == "Student3"):
+		print(facing)
 
 	# Animation Tree
-	if velocity == Vector2.ZERO:
-		animation_tree.set("parameters/Idle/blend_position", facing)
-	else:
+	if velocity != Vector2.ZERO:
 		velocity = move_and_slide(velocity)
+		animation_tree.set("parameters/Idle/blend_position", facing)		
 		animation_tree.set("parameters/Walk/blend_position", facing)
+		animation_state.travel("Walk")
+	else:
+		animation_state.travel("Idle")
+		
 	
 #func _on_NavigationAgent2D_velocity_computed():
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Sprites/Kinematic/Label.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Kinematic/Sprite.gd" type="Script" id=2]
@@ -275,15 +275,37 @@ animation = "WalkRight"
 [sub_resource type="AnimationNodeAnimation" id=633]
 animation = "WalkUp"
 
+[sub_resource type="AnimationNodeAnimation" id=634]
+animation = "WalkDownLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=635]
+animation = "WalkDownRight"
+
+[sub_resource type="AnimationNodeAnimation" id=636]
+animation = "WalkUpRight"
+
+[sub_resource type="AnimationNodeAnimation" id=637]
+animation = "WalkUpLeft"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id=610]
 blend_point_0/node = SubResource( 630 )
 blend_point_0/pos = Vector2( -1, 0 )
 blend_point_1/node = SubResource( 631 )
-blend_point_1/pos = Vector2( 0, 1 )
+blend_point_1/pos = Vector2( 0, 1.1 )
 blend_point_2/node = SubResource( 632 )
 blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 633 )
-blend_point_3/pos = Vector2( 0, -1 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+blend_point_4/node = SubResource( 634 )
+blend_point_4/pos = Vector2( -0.7, 0.6 )
+blend_point_5/node = SubResource( 635 )
+blend_point_5/pos = Vector2( 0.7, 0.6 )
+blend_point_6/node = SubResource( 636 )
+blend_point_6/pos = Vector2( 0.7, -0.7 )
+blend_point_7/node = SubResource( 637 )
+blend_point_7/pos = Vector2( -0.7, -0.7 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=611]
@@ -326,7 +348,6 @@ scale = Vector2( 0.789773, 0.772485 )
 shape = SubResource( 585 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "IdleDown"
 anims/IdleDown = SubResource( 588 )
 anims/IdleLeft = SubResource( 600 )
 anims/IdleRight = SubResource( 601 )
@@ -346,7 +367,7 @@ tree_root = SubResource( 592 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 593 )
-parameters/Idle/blend_position = Vector2( 0, 0.991379 )
+parameters/Idle/blend_position = Vector2( 0.29582, 0.775862 )
 parameters/Walk/blend_position = Vector2( -0.00150979, 0.000964403 )
 
 [node name="DescriptionLabel" type="Label" parent="."]
