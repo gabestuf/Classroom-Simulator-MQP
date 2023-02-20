@@ -3,11 +3,29 @@
 [ext_resource path="res://Sprites/Kinematic/Label.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Kinematic/Sprite.gd" type="Script" id=2]
 [ext_resource path="res://Images/Sprites/Templates and Drafts/teacher_sprites_template.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Kinematic/DescriptionLabel.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=582]
 radius = 4.0
 height = 8.0
+
+[sub_resource type="GDScript" id=638]
+script/source = "extends Label
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
 
 [sub_resource type="Animation" id=613]
 resource_name = "IdleDown"
@@ -312,7 +330,7 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=612]
 
-[sub_resource type="AnimationNodeStateMachine" id=638]
+[sub_resource type="AnimationNodeStateMachine" id=640]
 states/Idle/node = SubResource( 599 )
 states/Idle/position = Vector2( 519, 139 )
 states/Walk/node = SubResource( 610 )
@@ -325,8 +343,6 @@ start_node = "Idle"
 [node name="TeacherSprite" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
-[node name="Line2D" type="Line2D" parent="."]
-
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -1, -11 )
 texture = ExtResource( 3 )
@@ -335,6 +351,7 @@ vframes = 3
 frame = 9
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
 
 [node name="TeacherCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 0 )
@@ -352,7 +369,7 @@ margin_top = 4.0
 margin_right = 20.0
 margin_bottom = 18.0
 align = 1
-script = ExtResource( 4 )
+script = SubResource( 638 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/IdleDown = SubResource( 613 )
@@ -370,7 +387,7 @@ anims/WalkUpLeft = SubResource( 624 )
 anims/WalkUpRight = SubResource( 625 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 638 )
+tree_root = SubResource( 640 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 639 )

@@ -5,6 +5,8 @@ var spriteName = null
 var currentMood = "neutral"
 var currentDescription = ""
 
+
+
 # Pathfinding
 onready var navAgent := $NavigationAgent2D
 onready var maxSpeed: float = 100
@@ -29,8 +31,11 @@ func _physics_process(delta: float) -> void:
 
 	if path.size() > 0:
 		var direction := global_position.direction_to(path[0])
-		if (global_position.distance_to(path[0]) < 2):
+		if (global_position.distance_to(path[0]) < 16):
 			path.remove(0)
+#		else:
+#			print(global_position.distance_to(path[0]))
+			
 		
 		velocity = velocity.move_toward(direction.normalized() * maxSpeed, ACCELERATION * delta)
 #velocity = direction * maxSpeed
@@ -39,8 +44,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		pass
-	if (spriteName == "Student3"):
-		print(facing)
 
 	# Animation Tree
 	if velocity != Vector2.ZERO:

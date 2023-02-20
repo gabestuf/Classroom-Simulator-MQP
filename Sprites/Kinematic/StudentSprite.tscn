@@ -3,7 +3,6 @@
 [ext_resource path="res://Sprites/Kinematic/Label.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Kinematic/Sprite.gd" type="Script" id=2]
 [ext_resource path="res://Images/Sprites/Templates and Drafts/student_sprite_template.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Kinematic/DescriptionLabel.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=585]
 radius = 3.79857
@@ -322,6 +321,25 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=593]
 
+[sub_resource type="GDScript" id=638]
+script/source = "extends Label
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
 [node name="StudentSprite" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
@@ -333,12 +351,11 @@ vframes = 3
 frame = 9
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 16.0
+path_desired_distance = 100.0
+target_desired_distance = 100.0
 path_max_distance = 100.0
+navigation_layers = 255
 avoidance_enabled = true
-radius = 0.1
-neighbor_dist = 1.0
-max_neighbors = 1
 max_speed = 100.0
 
 [node name="StudentCollisionShape" type="CollisionShape2D" parent="."]
@@ -346,6 +363,7 @@ position = Vector2( -0.312497, 0.132245 )
 rotation = 1.5708
 scale = Vector2( 0.789773, 0.772485 )
 shape = SubResource( 585 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/IdleDown = SubResource( 588 )
@@ -376,11 +394,12 @@ margin_top = 4.0
 margin_right = 20.0
 margin_bottom = 18.0
 align = 1
-script = ExtResource( 4 )
+script = SubResource( 638 )
 
 [node name="EmotionLabel" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 1 )
 
+[connection signal="path_changed" from="NavigationAgent2D" to="." method="_on_NavigationAgent2D_path_changed"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_NavigationAgent2D_velocity_computed"]
