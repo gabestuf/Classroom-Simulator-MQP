@@ -9,7 +9,7 @@ var currentDescription = ""
 onready var navAgent := $NavigationAgent2D
 onready var maxSpeed: float = 100
 var velocity := Vector2.ZERO
-# Nav2d
+var facing := Vector2(0,1)
 var path : = PoolVector2Array() setget set_path 
 
 # animations
@@ -19,24 +19,32 @@ onready var emotion_label : Label = $EmotionLabel
 onready var description_label = $DescriptionLabel
 
 func _ready():
+	animation_tree.set("parameters/Idle/blend_position", facing)
 	print("Created ", spriteName)
 
 func _physics_process(delta: float) -> void:
 
 	if path.size() > 0:
 		var direction := global_position.direction_to(path[0])
-		if (global_position.distance_to(path[0]) < 4):
+		if (global_position.distance_to(path[0]) < 2):
 			path.remove(0)
 		
-		print(global_position)
 		velocity = direction * maxSpeed
-		
+		facing = velocity.normalized()
 	else:
 		velocity = Vector2.ZERO
 		pass
-		
-	move_and_slide(velocity)
+
+	# Animation Tree
+	if velocity == Vector2.ZERO:
+		animation_tree.set("parameters/Idle/blend_position", facing)
+	else:
+		velocity = move_and_slide(velocity)
+		animation_tree.set("parameters/Walk/blend_position", facing)
 	
+#func _on_NavigationAgent2D_velocity_computed():
+	
+
 func setMood(mood: String):
 	if emotion_label._set_Label(mood):
 		currentMood = mood
