@@ -370,7 +370,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 [node name="Classroom" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="EventHandler" type="YSort" parent="."]
+[node name="EventHandler" type="Navigation2D" parent="."]
 script = ExtResource( 2 )
 
 [node name="RoomTileMap" type="TileMap" parent="EventHandler"]
@@ -385,5 +385,11 @@ format = 1
 [node name="Timer" type="Timer" parent="EventHandler"]
 wait_time = 2.0
 autostart = true
+
+[node name="EventLabel" type="Label" parent="."]
+margin_left = 33.0
+margin_top = 34.0
+margin_right = 73.0
+margin_bottom = 48.0
 
 [connection signal="timeout" from="EventHandler/Timer" to="." method="_on_Timer_timeout"]
