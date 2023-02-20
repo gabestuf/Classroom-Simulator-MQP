@@ -131,12 +131,9 @@ This will run two terminals concurrently. One compiles the typescript code into 
 ## //TODO
 
 - [ ] Complete TODO
-- [ ] Refactor StoryEvents.json
 - [ ] create more routes depending on client needs
 - [ ] test http requests in Godot
-- [ ] write a simulation method which applies one new event
-- [ ] write simulation method which continues to render a certain amount of events, randomly
-- [ ] create a front-end to edit the ClassroomConfig, maybe to edit/add events as well
+
 
 ---
 
