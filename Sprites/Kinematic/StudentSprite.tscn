@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Sprites/Kinematic/Label.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Kinematic/Sprite.gd" type="Script" id=2]
+[ext_resource path="res://Images/Sprites/Templates and Drafts/student_sprite_template.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=585]
 radius = 3.79857
@@ -11,7 +12,7 @@ height = 5.34805
 resource_name = "IdleDown"
 length = 3.2
 loop = true
-step = 0.8
+step = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
 tracks/0/interp = 1
@@ -19,10 +20,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8, 1.6, 2.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 4, 0 ), Vector2( 0, 0 ), Vector2( 5, 0 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=600]
@@ -238,50 +239,72 @@ tracks/0/keys = {
 "values": [ Vector2( 7, 2 ), Vector2( 7, 0 ), Vector2( 7, 1 ), Vector2( 7, 0 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=602]
+[sub_resource type="AnimationNodeAnimation" id=626]
 animation = "IdleLeft"
 
-[sub_resource type="AnimationNodeAnimation" id=603]
+[sub_resource type="AnimationNodeAnimation" id=627]
 animation = "IdleDown"
 
-[sub_resource type="AnimationNodeAnimation" id=604]
+[sub_resource type="AnimationNodeAnimation" id=628]
 animation = "IdleRight"
 
-[sub_resource type="AnimationNodeAnimation" id=605]
+[sub_resource type="AnimationNodeAnimation" id=629]
 animation = "IdleUp"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id=599]
-blend_point_0/node = SubResource( 602 )
+blend_point_0/node = SubResource( 626 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 603 )
+blend_point_1/node = SubResource( 627 )
 blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 604 )
+blend_point_2/node = SubResource( 628 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 605 )
+blend_point_3/node = SubResource( 629 )
 blend_point_3/pos = Vector2( 0, -1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=606]
+[sub_resource type="AnimationNodeAnimation" id=630]
 animation = "WalkLeft"
 
-[sub_resource type="AnimationNodeAnimation" id=607]
+[sub_resource type="AnimationNodeAnimation" id=631]
 animation = "WalkDown"
 
-[sub_resource type="AnimationNodeAnimation" id=608]
+[sub_resource type="AnimationNodeAnimation" id=632]
 animation = "WalkRight"
 
-[sub_resource type="AnimationNodeAnimation" id=609]
+[sub_resource type="AnimationNodeAnimation" id=633]
 animation = "WalkUp"
 
+[sub_resource type="AnimationNodeAnimation" id=634]
+animation = "WalkDownLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=635]
+animation = "WalkDownRight"
+
+[sub_resource type="AnimationNodeAnimation" id=636]
+animation = "WalkUpRight"
+
+[sub_resource type="AnimationNodeAnimation" id=637]
+animation = "WalkUpLeft"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id=610]
-blend_point_0/node = SubResource( 606 )
+blend_point_0/node = SubResource( 630 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 607 )
-blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 608 )
+blend_point_1/node = SubResource( 631 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 632 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 609 )
-blend_point_3/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 633 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+blend_point_4/node = SubResource( 634 )
+blend_point_4/pos = Vector2( -0.7, 0.6 )
+blend_point_5/node = SubResource( 635 )
+blend_point_5/pos = Vector2( 0.7, 0.6 )
+blend_point_6/node = SubResource( 636 )
+blend_point_6/pos = Vector2( 0.7, -0.7 )
+blend_point_7/node = SubResource( 637 )
+blend_point_7/pos = Vector2( -0.7, -0.7 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=611]
@@ -290,29 +313,49 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachine" id=592]
 states/Idle/node = SubResource( 599 )
-states/Idle/position = Vector2( 517, 139 )
+states/Idle/position = Vector2( 519, 139 )
 states/Walk/node = SubResource( 610 )
 states/Walk/position = Vector2( 680, 139 )
 transitions = [ "Idle", "Walk", SubResource( 611 ), "Walk", "Idle", SubResource( 612 ) ]
+start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=593]
+
+[sub_resource type="GDScript" id=638]
+script/source = "extends Label
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
 
 [node name="StudentSprite" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -1, -11 )
+texture = ExtResource( 3 )
 hframes = 8
 vframes = 3
 frame = 9
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-target_desired_distance = 16.0
+path_desired_distance = 100.0
+target_desired_distance = 100.0
 path_max_distance = 100.0
+navigation_layers = 255
 avoidance_enabled = true
-radius = 0.1
-neighbor_dist = 1.0
-max_neighbors = 1
 max_speed = 100.0
 
 [node name="StudentCollisionShape" type="CollisionShape2D" parent="."]
@@ -320,9 +363,9 @@ position = Vector2( -0.312497, 0.132245 )
 rotation = 1.5708
 scale = Vector2( 0.789773, 0.772485 )
 shape = SubResource( 585 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "IdleDown"
 anims/IdleDown = SubResource( 588 )
 anims/IdleLeft = SubResource( 600 )
 anims/IdleRight = SubResource( 601 )
@@ -342,12 +385,21 @@ tree_root = SubResource( 592 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 593 )
-parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Idle/blend_position = Vector2( 0.29582, 0.775862 )
 parameters/Walk/blend_position = Vector2( -0.00150979, 0.000964403 )
+
+[node name="DescriptionLabel" type="Label" parent="."]
+margin_left = -20.0
+margin_top = 4.0
+margin_right = 20.0
+margin_bottom = 18.0
+align = 1
+script = SubResource( 638 )
 
 [node name="EmotionLabel" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 1 )
 
+[connection signal="path_changed" from="NavigationAgent2D" to="." method="_on_NavigationAgent2D_path_changed"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_NavigationAgent2D_velocity_computed"]

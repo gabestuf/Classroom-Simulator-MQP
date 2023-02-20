@@ -4,6 +4,7 @@ class_name Classroom
 #tilemaps
 onready var _Nav2D = $EventHandler
 onready var _RoomTileMap = $EventHandler/RoomTileMap
+onready var event_label = $EventLabel
 
 var tiles
 
@@ -33,7 +34,7 @@ func _ready():
 	# init on test for testing purposes, does not require http request, in prod, comment this out and uncomment http()
 	print("Classroom ready")
 	# _init_on_test()
-	_desc_label()
+	_set_event_label_text("Classroom Simulator")
 
 func http() -> void:
 	#create httpRequest object and add it as a child
@@ -44,13 +45,17 @@ func http() -> void:
 	http_request.connect("request_completed", self, "_on_request_completed")
 	
 	#create request, check for error
-	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent")
+	var error = http_request.request("http://localhost:3000/classroom-simulation/generateEvents/3/77")
 	if error != OK:
-		push_error("An error occurred in the HTTP request.")
+		_init_on_test()
+		push_error("An error occurred in the HTTP request. Using default storyline")
+		
 
 func _init_on_test(): 
 	# running this request: https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent/13
-	var json = JSON.parse('{"status":"SUCCESS","message":"Successfully generated a random event","body":{"classroomJSON":{"config":{"roomSizeX":13,"roomSizeY":14,"numStudents":4,"numTeachers":1,"numChairs":4,"numRugs":1,"numTables":1,"seed":13},"room":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","c","r","f","f","w"],["w","f","f","f","f","f","f","c","t","f","f","f","w"],["w","f","f","f","f","f","f","c","c","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"initClassroom":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","S","r","f","f","w"],["w","f","f","f","f","f","f","S","t","f","f","f","w"],["w","f","f","f","f","f","f","S","S","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","T","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"frames":[{"currentEvent":"idle","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"neutral","description":""},{"name":"Student3","pos":[2,11],"mood":"neutral","description":""},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]},{"currentEvent":"twoStudentsFight","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"sad","description":"fights"},{"name":"Student3","pos":[5,155],"mood":"angry","description":"fights"},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]}]}}}')
+	var json = JSON.parse('{"status":"SUCCESS","message":"Successfully generated a random event","body":{"classroomJSON":{"config":{"roomSizeX":13,"roomSizeY":14,"numStudents":4,"numTeachers":1,"numChairs":4,"numRugs":1,"numTables":1,"seed":13},"room":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","c","r","f","f","w"],["w","f","f","f","f","f","f","c","t","f","f","f","w"],["w","f","f","f","f","f","f","c","c","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"initClassroom":[["w","w","w","w","w","w","w","w","w","w","w","w","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","S","r","f","f","w"],["w","f","f","f","f","f","f","S","t","f","f","f","w"],["w","f","f","f","f","f","f","S","S","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","f","f","w"],["w","f","f","f","f","f","f","f","f","f","T","f","w"],["w","w","w","w","w","w","w","w","w","w","w","w","w"]],"frames":[{"currentEvent":"idle","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[7,9],"mood":"neutral","description":""},{"name":"Student3","pos":[2,11],"mood":"neutral","description":""},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]},{"currentEvent":"twoStudentsFight","spriteList":[{"name":"Teacher1","pos":[10,12],"mood":"neutral","description":""},{"name":"Student1","pos":[8,9],"mood":"neutral","description":""},{"name":"Student2","pos":[5,5],"mood":"sad","description":"fights"},{"name":"Student3","pos":[4,5],"mood":"angry","description":"fights"},{"name":"Student4","pos":[8,7],"mood":"neutral","description":""}]}]}}}')
+
+	
 	var JSONDict = json.result
 	classroomJSON = JSONDict.get("body").get("classroomJSON")
 	classroomConfig = classroomJSON.get("config")
@@ -66,15 +71,19 @@ func _init_on_test():
 	setup()
 
 #function is called when httprequest is complete
-# warning-ignore:unused_argument
-# warning-ignore:unused_argument
-# warning-ignore:unused_argument
+
 func _on_request_completed(result, response_code, headers, body):
 	
 	#get json and store as a dict
 	var json = JSON.parse(body.get_string_from_utf8())
+	print(json.result == null)
+	if json.result == null:
+		_init_on_test()
+		return
 	var JSONDict = json.result
+	
 	classroomJSON = JSONDict.get("body").get("classroomJSON")
+	
 	classroomConfig = classroomJSON.get("config")
 	#gets the room layout and room size from json
 	var jsonTiles = classroomJSON.get("initClassroom")
@@ -108,7 +117,7 @@ func _run_next_frame():
 	
 	# check if all sprites are finished moving
 	for sprite in _Nav2D.spriteList:
-		if sprite._path.size():
+		if sprite.path.size():
 			return
 	# Todo, add some space between events, maybe have it calculate an rng variable and only runs if rng is over x percent
 	# pseudocode:
@@ -121,6 +130,7 @@ func _run_next_frame():
 	if frames.size():
 		var currentFrame = frames[0]
 		print("Running frame: ", currentFrame.currentEvent, "...")
+		_set_event_label_text("Running frame: " + currentFrame.currentEvent + "...")
 		# for each sprite of the current frame, first update their position
 		for sprite in _Nav2D.spriteList:
 			for s in currentFrame.spriteList:
@@ -130,15 +140,15 @@ func _run_next_frame():
 					# set mood only if it changes
 					if not sprite.currentMood == s.mood:
 						sprite.setMood(s.mood)
+					# set label only if it changes 
+					if not sprite.currentDescription == s.description:
+						sprite.description_label.text = s.description
 					# check if position didn't change
 					if target_pos == sprite.global_position:
 						continue
 					
-					var path = Navigation2DServer.map_get_path(sprite.get_agent_rid(), sprite.global_position, target_pos, false)
+					var path = Navigation2DServer.map_get_path(sprite.get_agent_rid(), sprite.global_position, target_pos, true)
 					sprite.set_path(path)
-					# sprite.navigate(path)
-					# print(sprite.spriteName, " is moving to ", path[path.size() - 1])
-					# set mood
 		# remove the frame from the frame list
 		frames.remove(0)
 	
