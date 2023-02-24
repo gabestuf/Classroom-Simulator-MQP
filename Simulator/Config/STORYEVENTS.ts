@@ -194,6 +194,19 @@ const StoryEventsJSON: iStoryEvent[] = [
     ],
     nextEvents: [],
   },
+  {
+    name: "studentGoesToLeave",
+    charactersInvolved: [
+      {
+        name: "Student1",
+        mood: ["angry", "sick", "tired"],
+        pos: ["Student1"],
+        description: ["student leaves", "student fire drill", "student needs bathroom"],
+        importance: 0.5
+      },
+    ],
+    nextEvents: [],
+  },
 
 ];
 
