@@ -203,7 +203,20 @@ const StoryEventsJSON = [
             importance: 0.8
           },
         ],
-        nextEvents: [""],
+        nextEvents: ["teacherReads"],
+      },
+      {
+        name: "teacherReads",
+        charactersInvolved: [
+          {
+            name: "Teacher1",
+            mood: ["neutral"],
+            pos: ["Teacher1"],
+            description: ["Teacher Reading"],
+            importance: 0.8
+          },
+        ],
+        nextEvents: ["teacherAngry"],
       },
 ];
 class StoryEvents {
