@@ -258,6 +258,19 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.7
       },
     ],
+    nextEvents: ["studentRaisesHand"],
+  },
+  {
+    name: "studentRaisesHand",
+    charactersInvolved: [
+      {
+        name: "Student1",
+        mood: ["happy"],
+        pos: ["Student1"],
+        description: ["teacher loves job", "teacher happy", "teacher teaching"],
+        importance: 0.6
+      },
+    ],
     nextEvents: [],
   },
 
