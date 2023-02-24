@@ -218,6 +218,19 @@ const StoryEventsJSON = [
         ],
         nextEvents: ["teacherAngry"],
       },
+      {
+        name: "TeacherAngry",
+        charactersInvolved: [
+          {
+            name: "Teacher1",
+            mood: ["angry", "neutral"],
+            pos: ["Teacher1"],
+            description: ["teacher upset", "student being disruptive", "teacher losing control of classroom"],
+            importance: 0.6
+          },
+        ],
+        nextEvents: [],
+      },
 ];
 class StoryEvents {
     constructor() {
