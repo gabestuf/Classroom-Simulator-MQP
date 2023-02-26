@@ -112,7 +112,7 @@ const StoryEventsJSON = [
                 importance: 1
             },
         ],
-        nextEvents: ["studentEatsSnack"],
+        nextEvents: ["studentEatsSnack", "studentHappy"],
     },
     {
         name: "studentEatsSnack",
@@ -164,7 +164,7 @@ const StoryEventsJSON = [
                 importance: 0.4
             },
         ],
-        nextEvents: ["studentYells"],
+        nextEvents: ["studentYells", "studentFocused"],
     },
     {
         name: "studentYells",
@@ -203,7 +203,7 @@ const StoryEventsJSON = [
             importance: 0.8
           },
         ],
-        nextEvents: ["teacherReads"],
+        nextEvents: ["teacherReads", "studentGoesToLeave"],
       },
       {
         name: "teacherReads",
