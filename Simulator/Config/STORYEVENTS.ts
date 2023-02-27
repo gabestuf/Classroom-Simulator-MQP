@@ -55,7 +55,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0
       },
     ],
-    nextEvents: ["twoStudentsFight"],
+    nextEvents: ["twoStudentsFight", "teacherMovesToStudent"],
   },
   {
     name: "twoStudentsFight",
@@ -75,7 +75,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.8
       },
     ],
-    nextEvents: ["studentSleepy", "studentLaughs", "studentAngry"],
+    nextEvents: ["studentSleepy", "studentLaughs", "studentAngry", "teacherMovesToStudent"],
   },
   {
     name: "studentSleepy",
@@ -88,7 +88,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.2
       },
     ],
-    nextEvents: ["studentSick", "studentLaughs"],
+    nextEvents: ["studentSick", "studentLaughs", "teacherMovesToStudent"],
   },
   {
     name: "studentSick",
@@ -101,7 +101,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.8
       },
     ],
-    nextEvents: ["studentBored", "studentLaughs"],
+    nextEvents: ["studentBored", "studentLaughs", "teacherMovesToStudent"],
   },
   {
     name: "studentBored",
@@ -114,7 +114,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.9
       },
     ],
-    nextEvents: ["teacherGetsTired"],
+    nextEvents: ["teacherGetsTired", "teacherMovesToStudent"],
   },
   {
     name: "teacherGetsTired",
@@ -127,7 +127,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 1
       },
     ],
-    nextEvents: ["studentEatsSnack", "studentLaughs"],
+    nextEvents: ["studentEatsSnack", "studentLaughs", "teacherMovesToStudent"],
   },
   {
     name: "studentEatsSnack",
@@ -140,7 +140,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0
       },
     ],
-    nextEvents: ["studentHappy"],
+    nextEvents: ["studentHappy", "teacherMovesToStudent"],
   },
   {
     name: "studentHappy",
