@@ -398,7 +398,7 @@ const StoryEventsJSON = [
             importance: 0.1
           },
         ],
-        nextEvents: ["studentLaughs", "teacherTimeout", "studentYells"],
+        nextEvents: ["studentLaughs", "teacherTimeout", "studentYells", "twoStudentsLaugh"],
       },
       {
         name: "twoStudentsLaugh",
