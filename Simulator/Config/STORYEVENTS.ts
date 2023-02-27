@@ -150,7 +150,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         mood: ["happy"],
         pos: ["Student1"],
         description: ["happy camper", "student happy", "happy"],
-        importance: 0.1
+        importance: 0.8
       },
     ],
     nextEvents: ["studentFocused"],
@@ -163,7 +163,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         mood: ["happy", "neutral"],
         pos: ["Student1"],
         description: ["student learning", "focused", "locked in"],
-        importance: 0.2
+        importance: 0.1
       },
     ],
     nextEvents: ["studentCries "],
@@ -176,7 +176,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         mood: ["angry", "sad"],
         pos: ["Student1"],
         description: ["student sad", "student crying", "student upset"],
-        importance: 0.4
+        importance: 0.3
       },
     ],
     nextEvents: ["studentYells"],
@@ -215,7 +215,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         mood: ["neutral", "tired"],
         pos: ["Student1"],
         description: ["student has a book", "student reads", "student learning"],
-        importance: 0.8
+        importance: 0.7
       },
     ],
     nextEvents: ["teacherReads"],
@@ -451,7 +451,7 @@ const StoryEventsJSON: iStoryEvent[] = [
             mood: ["happy", "neutral"],
             pos: ["Student1"],
             description: ["laughing student"],
-            importance: 0.3
+            importance: 1
           },
         ],
         nextEvents: ["studentSleepy", "studentAngry", "studentLaughs"],
