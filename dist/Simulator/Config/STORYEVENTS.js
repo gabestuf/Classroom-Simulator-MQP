@@ -346,7 +346,7 @@ const StoryEventsJSON = [
             importance: 0.7
           },
         ],
-        nextEvents: ["studentLaughs", "studentStudies"],
+        nextEvents: ["studentLaughs", "studentStudies", "studentTimeout"],
       },
       {
         name: "studentStudies",
@@ -359,7 +359,33 @@ const StoryEventsJSON = [
             importance: 0.8
           },
         ],
-        nextEvents: ["studentLaughs"],
+        nextEvents: ["studentLaughs", "teacherTimeout", "studentTimeout"],
+      },
+      {
+        name: "studentTimeout",
+        charactersInvolved: [
+          {
+            name: "Student1",
+            mood: ["neutral", "angry"],
+            pos: ["Student1"],
+            description: ["student timeout", "student in trouble"],
+            importance: 0.1
+          },
+        ],
+        nextEvents: ["studentLaughs", "teacherTimeout"],
+      },
+      {
+        name: "teacherTimeout",
+        charactersInvolved: [
+          {
+            name: "Teacher1",
+            mood: ["neutral", "angry"],
+            pos: ["Teacher1"],
+            description: ["teacher timeout", "break teacher"],
+            importance: 0.1
+          },
+        ],
+        nextEvents: ["studentLaughs", "studentTimeout", "studentStudies", "studentMakesAMess"],
       },
       
 ];
