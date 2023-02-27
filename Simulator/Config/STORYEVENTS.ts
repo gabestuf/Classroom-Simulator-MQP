@@ -75,7 +75,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.8
       },
     ],
-    nextEvents: ["studentSleepy"],
+    nextEvents: ["studentSleepy", "studentLaughs", "studentAngry"],
   },
   {
     name: "studentSleepy",
@@ -401,7 +401,20 @@ const StoryEventsJSON: iStoryEvent[] = [
             importance: 0.1
           },
         ],
-        nextEvents: ["studentLaughs", "studentTimeout", "studentWrites", "studentYells"],
+        nextEvents: ["studentLaughs", "studentTimeout", "studentWrites", "studentYells", "studentAngry"],
+      },
+      {
+        name: "studentAngry",
+        charactersInvolved: [
+          {
+            name: "Student1",
+            mood: ["angry"],
+            pos: ["Student1"],
+            description: ["student upset", "student mad"],
+            importance: 0.1
+          },
+        ],
+        nextEvents: ["studentLaughs", "teacherTimeout", "studentYells"],
       },
 
 ];
