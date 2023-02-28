@@ -173,7 +173,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.1,
       },
     ],
-    nextEvents: ["studentFocused"],
+    nextEvents: ["studentFocused", "studentLaughs"],
   },
   {
     name: "studentFocused",
@@ -186,7 +186,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.2,
       },
     ],
-    nextEvents: ["studentCries"],
+    nextEvents: ["studentCries", "studentLaughs", "studentHappy"],
   },
   {
     name: "studentCries",
@@ -199,7 +199,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.4,
       },
     ],
-    nextEvents: ["studentYells"],
+    nextEvents: ["studentYells", "studentLaughs"],
   },
   {
     name: "studentYells",
@@ -212,7 +212,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.4,
       },
     ],
-    nextEvents: ["studentGoesToLeave"],
+    nextEvents: ["studentGoesToLeave", "studentLaughs"],
   },
   {
     name: "studentGoesToLeave",
@@ -253,7 +253,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.8
       },
     ],
-    nextEvents: ["teacherAngry"],
+    nextEvents: ["teacherAngry", "studentLaughs"],
   },
   {
     name: "teacherAngry",
