@@ -56,11 +56,11 @@ class Classroom {
           // If there's a match, set sprite data to eventSprite data
           sprite.currentDescription = eventSprite.currentDescription;
           // This line is for BFS, comment out if not using BFS
-          sprite.heading = eventSprite.heading;
+          // sprite.heading = eventSprite.heading;
           // This if statement is for no BFS, comment out if BFS
-          // if (eventSprite.heading instanceof Coordinate) {
-          //   sprite.pos = eventSprite.heading;
-          // }
+          if (eventSprite.heading instanceof Coordinate) {
+            sprite.pos = eventSprite.heading;
+          }
           sprite.mood = eventSprite.mood;
           hasMatch = true;
         }
