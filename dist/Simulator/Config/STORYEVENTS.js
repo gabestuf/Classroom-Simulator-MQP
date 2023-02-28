@@ -40,7 +40,7 @@ const StoryEventsJSON = [
                 importance: 0,
             },
         ],
-        nextEvents: ["twoStudentsFight"],
+        nextEvents: ["twoStudentsFight", "teacherMovesToStudent"],
     },
     {
         name: "twoStudentsFight",
@@ -60,7 +60,7 @@ const StoryEventsJSON = [
                 importance: 0.8,
             },
         ],
-        nextEvents: ["studentSleepy"],
+        nextEvents: ["studentSleepy", "studentLaughs", "studentAngry", "teacherMovesToStudent"],
     },
     {
         name: "twoStudentsHide",
@@ -80,7 +80,7 @@ const StoryEventsJSON = [
                 importance: 0.4,
             },
         ],
-        nextEvents: [],
+        nextEvents: ["studentLaughs", "studentSleepy"],
     },
     {
         name: "studentSleepy",
@@ -93,7 +93,7 @@ const StoryEventsJSON = [
                 importance: 0.2,
             },
         ],
-        nextEvents: ["studentSick"],
+        nextEvents: ["studentSick", "studentLaughs", "teacherMovesToStudent"],
     },
     {
         name: "studentSick",
@@ -106,7 +106,7 @@ const StoryEventsJSON = [
                 importance: 0.8,
             },
         ],
-        nextEvents: ["studentBored"],
+        nextEvents: ["studentBored", "studentLaughs", "teacherMovesToStudent"],
     },
     {
         name: "studentBored",
@@ -119,7 +119,7 @@ const StoryEventsJSON = [
                 importance: 0.9,
             },
         ],
-        nextEvents: ["teacherGetsTired"],
+        nextEvents: ["teacherGetsTired", "teacherMovesToStudent"],
     },
     {
         name: "teacherGetsTired",
@@ -132,7 +132,7 @@ const StoryEventsJSON = [
                 importance: 1,
             },
         ],
-        nextEvents: ["studentEatsSnack", "studentHappy"],
+        nextEvents: ["studentEatsSnack", "studentLaughs", "teacherMovesToStudent"],
     },
     {
         name: "studentEatsSnack",
@@ -145,7 +145,7 @@ const StoryEventsJSON = [
                 importance: 0,
             },
         ],
-        nextEvents: ["studentHappy"],
+        nextEvents: ["studentHappy", "teacherMovesToStudent"],
     },
     {
         name: "studentHappy",
@@ -158,7 +158,7 @@ const StoryEventsJSON = [
                 importance: 0.1,
             },
         ],
-        nextEvents: ["studentFocused"],
+        nextEvents: ["studentFocused", "studentLaughs"],
     },
     {
         name: "studentFocused",
@@ -171,7 +171,7 @@ const StoryEventsJSON = [
                 importance: 0.2,
             },
         ],
-        nextEvents: ["studentCries "],
+        nextEvents: ["studentCries", "studentLaughs", "studentHappy"],
     },
     {
         name: "studentCries",
@@ -184,7 +184,7 @@ const StoryEventsJSON = [
                 importance: 0.4,
             },
         ],
-        nextEvents: ["studentYells", "studentFocused"],
+        nextEvents: ["studentYells", "studentLaughs"],
     },
     {
         name: "studentYells",
@@ -197,270 +197,269 @@ const StoryEventsJSON = [
                 importance: 0.4,
             },
         ],
-        nextEvents: ["studentGoesToLeave"],
+        nextEvents: ["studentGoesToLeave", "studentLaughs"],
     },
     {
         name: "studentGoesToLeave",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["angry", "sick", "tired"],
-            pos: ["Student1"],
-            description: ["student leaves", "student fire drill", "student needs bathroom"],
-            importance: 0.5
-          },
+            {
+                name: "Student1",
+                mood: ["angry", "sick", "tired"],
+                pos: ["Student1"],
+                description: ["student leaves", "student fire drill", "student needs bathroom"],
+                importance: 0.5,
+            },
         ],
-        nextEvents: ["studentReads"],
-      },
-      {
+        nextEvents: ["studentReads", "teacherReads"],
+    },
+    {
         name: "studentReads",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["neutral", "tired"],
-            pos: ["Student1"],
-            description: ["student has a book", "student reads", "student learning"],
-            importance: 0.8
-          },
+            {
+                name: "Student1",
+                mood: ["neutral", "tired"],
+                pos: ["Student1"],
+                description: ["student has a book", "student reads", "student learning"],
+                importance: 0.7
+            },
         ],
         nextEvents: ["teacherReads", "studentGoesToLeave"],
-      },
-      {
+    },
+    {
         name: "teacherReads",
         charactersInvolved: [
-          {
-            name: "Teacher1",
-            mood: ["neutral"],
-            pos: ["Teacher1"],
-            description: ["Teacher Reading"],
-            importance: 0.8
-          },
+            {
+                name: "Teacher1",
+                mood: ["neutral"],
+                pos: ["Teacher1"],
+                description: ["Teacher Reading"],
+                importance: 0.8
+            },
         ],
-        nextEvents: ["teacherAngry"],
-      },
-      {
-        name: "TeacherAngry",
+        nextEvents: ["teacherAngry", "studentLaughs"],
+    },
+    {
+        name: "teacherAngry",
         charactersInvolved: [
-          {
-            name: "Teacher1",
-            mood: ["angry", "neutral"],
-            pos: ["Teacher1"],
-            description: ["teacher upset", "student being disruptive", "teacher losing control of classroom"],
-            importance: 0.6
-          },
+            {
+                name: "Teacher1",
+                mood: ["angry", "neutral"],
+                pos: ["Teacher1"],
+                description: ["teacher upset", "student being disruptive", "teacher losing control of classroom"],
+                importance: 0.6
+            },
         ],
-        nextEvents: ["TeacherHappy"],
-      },
-      {
-        name: "TeacherHappy",
+        nextEvents: ["teacherHappy", "teacherReads"],
+    },
+    {
+        name: "teacherHappy",
         charactersInvolved: [
-          {
-            name: "Teacher1",
-            mood: ["happy"],
-            pos: ["Teacher1"],
-            description: ["teacher loves job", "teacher happy", "teacher teaching"],
-            importance: 0.7
-          },
+            {
+                name: "Teacher1",
+                mood: ["happy"],
+                pos: ["Teacher1"],
+                description: ["teacher loves job", "teacher happy", "teacher teaching"],
+                importance: 0.7
+            },
         ],
-        nextEvents: ["studentRaisesHand"],
-      },
-      {
+        nextEvents: ["studentRaisesHand", "studentLaughs", "teacherAngry"],
+    },
+    {
         name: "studentRaisesHand",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["happy"],
-            pos: ["Student1"],
-            description: ["student has question", "student raises hand"],
-            importance: 0.6
-          },
+            {
+                name: "Student1",
+                mood: ["happy", "neutral"],
+                pos: ["Student1"],
+                description: ["student raises hand ", "student has question"],
+                importance: 0.6
+            },
         ],
-        nextEvents: ["studentLaughs"],
-      },
-      {
+        nextEvents: ["studentLaughs", "studentCries", "teacherMovesToStudent"],
+    },
+    {
         name: "studentLaughs",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["happy"],
-            pos: ["Student1"],
-            description: ["student laughs", "teacher tells joke"],
-            importance: 0.6
-          },
+            {
+                name: "Student1",
+                mood: ["happy"],
+                pos: ["Student1"],
+                description: ["teacher loves job", "teacher happy", "teacher teaching"],
+                importance: 0.6
+            },
         ],
-        nextEvents: ["studentConfused"],
-      },
-      {
+        nextEvents: ["studentConfused", "studentRaisesHand", "teacherHappy", "teacherAngry"],
+    },
+    {
         name: "studentConfused",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["neutral"],
-            pos: ["Student1"],
-            description: ["student wants to learn more", "student confused", "student has question"],
-            importance: 0.4
-          },
+            {
+                name: "Student1",
+                mood: ["neutral"],
+                pos: ["Student1"],
+                description: ["student wants to learn more", "student confused", "student has question"],
+                importance: 0.4
+            },
         ],
-        nextEvents: ["teacherConfused"],
-      },
-      {
+        nextEvents: ["teacherConfused", "studentRaisesHand"],
+    },
+    {
         name: "teacherConfused",
         charactersInvolved: [
-          {
-            name: "Teacher1",
-            mood: ["neutral"],
-            pos: ["Teacher1"],
-            description: ["teacher confused", "teacher needs more information", "teacher does not know the answer"],
-            importance: 0.3
-          },
+            {
+                name: "Teacher1",
+                mood: ["neutral"],
+                pos: ["Teacher1"],
+                description: ["teacher confused", "teacher needs more information", "teacher does not know the answer"],
+                importance: 0.3
+            },
         ],
-        nextEvents: ["teacherDrinksWater", "studentNeedsWater"],
-      },
-      {
+        nextEvents: ["studentLaughs", "teacherDrinksWater"],
+    },
+    {
         name: "teacherDrinksWater",
         charactersInvolved: [
-          {
-            name: "Teacher1",
-            mood: ["neutral", "happy"],
-            pos: ["Teacher1"],
-            description: ["teacher drinks water", "teacher drinks"],
-            importance: 0.2
-          },
+            {
+                name: "Teacher1",
+                mood: ["neutral", "happy"],
+                pos: ["Teacher1"],
+                description: ["teacher drinks water", "teacher drinks"],
+                importance: 0.2
+            },
         ],
         nextEvents: ["studentLaughs", "studentNeedsWater"],
-      },
-      {
+    },
+    {
         name: "studentNeedsWater",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["neutral", "sad"],
-            pos: ["Student1"],
-            description: ["student needs a drink of water", "student wants water"],
-            importance: 0.3
-          },
+            {
+                name: "Student1",
+                mood: ["neutral", "sad"],
+                pos: ["Student1"],
+                description: ["student needs a drink of water", "student wants water"],
+                importance: 0.3
+            },
         ],
         nextEvents: ["studentLaughs", "studentDrinksWater"],
-      },
-      {
+    },
+    {
         name: "studentDrinksWater",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["neutral", "sad"],
-            pos: ["Student1"],
-            description: ["student drinks water", "student digests water"],
-            importance: 0.5
-          },
+            {
+                name: "Student1",
+                mood: ["neutral", "sad"],
+                pos: ["Student1"],
+                description: ["student drinks water", "student digests water"],
+                importance: 0.5
+            },
         ],
         nextEvents: ["studentLaughs", "studentWrites"],
-      },
-      {
+    },
+    {
         name: "studentWrites",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["neutral", "happy"],
-            pos: ["Student1"],
-            description: ["student practices writing", "student writes an essay"],
-            importance: 0.7
-          },
+            {
+                name: "Student1",
+                mood: ["neutral", "happy"],
+                pos: ["Student1"],
+                description: ["student practices writing", "student writes an essay"],
+                importance: 0.7
+            },
         ],
-        nextEvents: ["studentLaughs", "studentStudies", "studentTimeout"],
-      },
-      {
+        nextEvents: ["studentLaughs", "studentStudies"],
+    },
+    {
         name: "studentStudies",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["neutral"],
-            pos: ["Student1"],
-            description: ["student studies", "student looks at material"],
-            importance: 0.8
-          },
+            {
+                name: "Student1",
+                mood: ["neutral"],
+                pos: ["Student1"],
+                description: ["student studies", "student looks at material"],
+                importance: 0.8
+            },
         ],
-        nextEvents: ["studentLaughs", "teacherTimeout", "studentTimeout"],
-      },
-      {
+        nextEvents: ["studentLaughs", "studentTimeout"],
+    },
+    {
         name: "studentTimeout",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["neutral", "angry"],
-            pos: ["Student1"],
-            description: ["student timeout", "student in trouble"],
-            importance: 0.1
-          },
+            {
+                name: "Student1",
+                mood: ["neutral", "angry"],
+                pos: ["Student1"],
+                description: ["student studies", "student looks at material"],
+                importance: 0.1
+            },
         ],
-        nextEvents: ["studentLaughs", "teacherTimeout"],
-      },
-      {
+        nextEvents: ["studentLaughs", "teacherTimeout", "studentYells"],
+    },
+    {
         name: "teacherTimeout",
         charactersInvolved: [
-          {
-            name: "Teacher1",
-            mood: ["neutral", "angry"],
-            pos: ["Teacher1"],
-            description: ["teacher timeout", "break teacher"],
-            importance: 0.1
-          },
+            {
+                name: "Teacher1",
+                mood: ["neutral", "angry"],
+                pos: ["Teacher1"],
+                description: ["teacher timeout", "break teacher"],
+                importance: 0.1
+            },
         ],
-        nextEvents: ["studentLaughs", "studentTimeout", "studentStudies", "studentMakesAMess", "studentAngry"],
-      },
-      {
+        nextEvents: ["studentLaughs", "studentTimeout", "studentWrites", "studentYells", "studentAngry"],
+    },
+    {
         name: "studentAngry",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["angry"],
-            pos: ["Student1"],
-            description: ["student upset", "student mad"],
-            importance: 0.1
-          },
+            {
+                name: "Student1",
+                mood: ["angry"],
+                pos: ["Student1"],
+                description: ["student upset", "student mad"],
+                importance: 0.1
+            },
         ],
-        nextEvents: ["studentLaughs", "teacherTimeout", "studentYells", "twoStudentsLaugh"],
-      },
-      {
+        nextEvents: ["studentLaughs", "teacherTimeout", "studentYells", "twoStudentsLaugh", "teacherMovesToStudent"],
+    },
+    {
         name: "twoStudentsLaugh",
         charactersInvolved: [
-          {
-            name: "Student1",
-            mood: ["happy", "neutral"],
-            pos: ["Student1"],
-            description: ["laughing student"],
-            importance: 1
-          },
-          {
-            name: "Student2",
-            mood: ["happy", "neutral"],
-            pos: ["Student1"],
-            description: ["laughing student"],
-            importance: 0.3
-          },
+            {
+                name: "Student1",
+                mood: ["happy", "neutral"],
+                pos: ["Student1"],
+                description: ["laughing student"],
+                importance: 1
+            },
+            {
+                name: "Student2",
+                mood: ["happy", "neutral"],
+                pos: ["Student1"],
+                description: ["laughing student"],
+                importance: 0.3
+            },
         ],
         nextEvents: ["studentSleepy", "studentAngry", "teacherMovesToStudent"],
-      },
-      {
+    },
+    {
         name: "teacherMovesToStudent",
         charactersInvolved: [
-          {
-            name: "Teacher1",
-            mood: ["happy", "neutral"],
-            pos: ["Teacher1"],
-            description: ["teacher moves"],
-            importance: 1
-          },
-          {
-            name: "Student1",
-            mood: ["happy", "neutral"],
-            pos: ["Student1"],
-            description: ["laughing student"],
-            importance: 0.3
-          },
+            {
+                name: "Teacher1",
+                mood: ["happy", "neutral"],
+                pos: ["Teacher1"],
+                description: ["teacher moves"],
+                importance: 1
+            },
+            {
+                name: "Student1",
+                mood: ["happy", "neutral"],
+                pos: ["Student1"],
+                description: ["laughing student"],
+                importance: 1
+            },
         ],
         nextEvents: ["studentSleepy", "studentAngry", "studentLaughs"],
-      },
-      
+    },
 ];
 class StoryEvents {
     constructor() {
@@ -490,422 +489,4 @@ class StoryEvents {
     }
 }
 exports.StoryEvents = StoryEvents;
-const StoryEvents2 = {
-    // "studentMakesMess": {
-    //   "name": "studentMakesMess",
-    //   "charactersInvolved": ["Student1"],
-    //   "Student1": {
-    //     "mood": ["happy", "angry"],
-    //     "position": ["current", "corner", "table", "wall"],
-    //     "description": ["breaks toy", "draws on object", "student spills food"]
-    //   },
-    //   "importance": [0, 5],
-    //   "nextEvents": ["twoStudentsFight", "teacherCallsCalmDown"]
-    // },
-    // "twoStudentsFight": {
-    //   "name": "twoStudentsFight",
-    //   "charactersInvolved": ["Student1", "Student2"],
-    //   "Student1": {
-    //     "mood": ["angry", "sad"],
-    //     "position": ["Student1"],
-    //     "description": ["fights", "tumbles"]
-    //   },
-    //   "Student2": {
-    //     "mood": ["angry", "sad"],
-    //     "position": ["Student1"],
-    //     "description": ["fights", "tumbles"]
-    //   },
-    //   "importance": [6, 10],
-    //   "nextEvents": ["teacherCallsCalmDown", "teacherCallsToGather"]
-    // },
-    teacherCallsToGather: {
-        name: "teacherCallsToGather",
-        charactersInvolved: ["Teacher1"],
-        Teacher1: {
-            mood: ["neutral", "angry"],
-            position: ["current"],
-            description: ["tells everyone to pay attention", "tells everyone to gather"],
-        },
-        importance: [3, 9],
-        nextEvents: ["studentsGather"],
-    },
-    teacherCallsCalmDown: {
-        name: "teacherCallsCalmDown",
-        charactersInvolved: ["Teacher1"],
-        Teacher1: {
-            mood: ["neutral", "angry"],
-            position: ["current"],
-            description: ["tells students to calm down", "tells students to stop"],
-        },
-        importance: [5, 10],
-        nextEvents: ["StudentBecomesIdle"],
-    },
-    studentsGather: {
-        name: "studentsGather",
-        charactersInvolved: ["allStudents"],
-        allStudents: {
-            mood: ["current", "neutral"],
-            position: ["table", "rug"],
-            description: ["students gather", "students go to nap time"],
-        },
-        importance: [3, 9],
-        nextEvents: [],
-    },
-    StudentBecomesIdle: {
-        name: "StudentBecomesIdle",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["neutral"],
-            position: ["current"],
-            description: ["student becomes idle"],
-        },
-        importance: [0, 9],
-        nextEvents: [],
-    },
-    studentSneaksAway: {
-        name: "studentSneaksAway",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["neutral", "angry", "sad"],
-            position: ["corner"],
-            description: ["sneaks away"],
-        },
-        nextEvents: ["studentPlaysWithToys"],
-    },
-    studentPlaysWithToys: {
-        name: "studentPlaysWithToys",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["neutral", "happy"],
-            position: ["current"],
-            description: ["plays with toy"],
-        },
-        nextEvents: [],
-    },
-    studentPutInCorner: {
-        name: "studentPutInCorner",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["sad", "angry", "neutral"],
-            position: ["corner"],
-            description: ["student get put in corner"],
-        },
-        nextEvents: ["StudentBecomesIdle", "studentsGather"],
-    },
-    studentHappy: {
-        name: "studentHappy",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["happy"],
-            position: ["current"],
-            description: ["student is happy"],
-        },
-        nextEvents: [],
-    },
-    studentUncomfortable: {
-        name: "studentUncomfortable",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["sad"],
-            position: ["current"],
-            description: ["student is uncomfortable"],
-        },
-        nextEvents: [],
-    },
-    studentCries: {
-        name: "studentCries",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["sad"],
-            position: ["current"],
-            description: ["student is sad"],
-        },
-        nextEvents: [],
-    },
-    studentCausesDistraction: {
-        name: "studentCausesDistraction",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["sad"],
-            position: ["current"],
-            description: ["crying", "yells", "breaks toy", "breaks material"],
-        },
-        nextEvents: [],
-    },
-    napTime: {
-        name: "napTime",
-        charactersInvolved: ["allStudents"],
-        allStudents: {
-            mood: ["sad", "happy", "neutral"],
-            position: ["rug"],
-            description: ["students sleep"],
-        },
-        nextEvents: ["napTimeInterrupted"],
-    },
-    napTimeInterrupted: {
-        name: "napTimeInterrupted",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["angry", "happy", "neutral"],
-            position: ["rug", "current"],
-            description: ["student wakes up"],
-        },
-        nextEvents: ["teacherCallsCalmDown"],
-    },
-    studentGetsBored: {
-        name: "studentGetsBored",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["sad"],
-            position: ["current"],
-            description: ["student becomes bored"],
-        },
-        nextEvents: [],
-    },
-    studentGetsTired: {
-        name: "studentGetsTired",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["tired"],
-            position: ["current"],
-            description: ["student becomes tired"],
-        },
-        nextEvents: [],
-    },
-    teacherGetsTired: {
-        name: "teacherGetsTired",
-        charactersInvolved: ["Teacher1"],
-        Teacher1: {
-            mood: ["tired"],
-            position: ["current"],
-            description: ["teacher becomes tired"],
-        },
-        nextEvents: [],
-    },
-    studentEatsSnack: {
-        name: "studentEatsSnack",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["happy", "neutral"],
-            position: ["current", "corner"],
-            description: ["snack time"],
-        },
-        nextEvents: [],
-    },
-    studentYells: {
-        name: "studentYells",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["neutral", "angry", "sad"],
-            position: ["current", "corner"],
-            description: ["student yells"],
-        },
-        nextEvents: [],
-    },
-    studentRuns: {
-        name: "studentRuns",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["sad", "happy"],
-            position: ["table", "rug"],
-            description: ["Student runs around classroom"],
-        },
-        nextEvents: [],
-    },
-    TeacherGetsAngry: {
-        name: "TeacherGetsAngry",
-        charactersInvolved: ["Teacher1"],
-        Teacher1: {
-            mood: ["angry", "sad", "neutral"],
-            position: ["current", "corner"],
-            description: ["teacher anger"],
-        },
-        nextEvents: [],
-    },
-    teacherTalksToStudents: {
-        name: "teacherTalksToStudents",
-        charactersInvolved: ["Teacher1", "allStudents"],
-        Teacher1: {
-            mood: ["neutral", "angry"],
-            position: ["table", "rug", "current"],
-            description: ["teacher addresses students"],
-        },
-        allStudents: {
-            mood: ["current"],
-            position: ["table", "rug"],
-            description: ["students gather", "students go to nap time"],
-        },
-        nextEvents: [],
-    },
-    studentPlaysWithStudent: {
-        name: "studentPlaysWithStudent",
-        charactersInvolved: ["Student1", "Student2"],
-        Student1: {
-            mood: ["happy", "neutral"],
-            position: ["rug"],
-            description: ["student a plays with student b"],
-        },
-        Student2: {
-            mood: ["happy", "neutral"],
-            position: ["rug"],
-            description: ["student b plays with student a"],
-        },
-        nextEvents: ["studentPlaysWithToys", "twoStudentsFight"],
-    },
-    studentHungry: {
-        name: "studentHungry",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["sad", "angry"],
-            position: ["current"],
-            description: ["student is hungry"],
-        },
-        nextEvents: ["studentEatsSnack"],
-    },
-    studentSits: {
-        name: "studentSits",
-        charactersInvolved: ["Student1", "Student2"],
-        Student1: {
-            mood: ["neutral"],
-            position: ["table", "rug"],
-            description: ["Student takes a seat"],
-        },
-        Student2: {
-            mood: ["neutral"],
-            position: ["table", "rug"],
-            description: ["Student takes a seat"],
-        },
-        nextEvents: [],
-    },
-    studentGoesToCarpet: {
-        name: "studentGoesToCarpet",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["neutral", "happy"],
-            position: ["rug", "current"],
-            description: ["goes to carpet"],
-        },
-        nextEvents: ["studentRuns", "studentCries", "studentPutInCorner", "twoStudentsFight", "studentSneaksAway"],
-    },
-    studentHurtThemself: {
-        name: "studentHurtThemself",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["angry", "sad"],
-            position: ["current"],
-            description: ["student hurts themself"],
-        },
-        nextEvents: ["studentCries", "studentYells", "studentUncomfortable"],
-    },
-    teacherMovesTowardsStudent: {
-        name: "teacherMovesTowardsStudent",
-        charactersInvolved: ["Teacher1", "Student1"],
-        Teacher1: {
-            mood: ["neutral", "tired"],
-            position: ["Student1"],
-            description: ["moves to student"],
-        },
-        Student1: {
-            mood: ["neutral", "tired"],
-            position: ["Student1"],
-            description: ["moves to student"],
-        },
-        nextEvents: [],
-    },
-    studentFireDrill: {
-        name: "studentFireDrill",
-        charactersInvolved: ["allStudents"],
-        allStudents: {
-            mood: ["happy"],
-            position: ["wall"],
-            description: ["students prep for fire drill"],
-        },
-        nextEvents: ["studentRuns", "studentUncomfortable", "studentYells", "napTimeInterrupted"],
-    },
-    teacherTeaches: {
-        name: "teacherTeaches",
-        charactersInvolved: ["allStudents", "Teacher1"],
-        allStudents: {
-            mood: ["happy", "current"],
-            position: ["rug", "table"],
-            description: ["students listen to teacher"],
-        },
-        Teacher1: {
-            mood: ["happy", "current"],
-            position: ["rug", "table"],
-            description: ["teacher teaches students in class"],
-        },
-        nextEvents: ["studentsGather"],
-    },
-    studentCrafts: {
-        name: "studentCrafts",
-        charactersInvolved: ["Student1"],
-        Student1: {
-            mood: ["happy", "neutral"],
-            position: ["table"],
-            description: ["student does crafts"],
-        },
-        nextEvents: [],
-    },
-    studentSteals: {
-        name: "studentSteals",
-        charactersInvolved: ["Student1", "Student2"],
-        Student1: {
-            mood: ["neutral"],
-            position: ["current", "rug", "table"],
-            description: ["student steals food from student B", "student steals toy from student B"],
-        },
-        Student2: {
-            mood: ["sad", "angry"],
-            position: ["current", "rug", "table"],
-            description: ["student gets food stolen from student A", "student gets toy stolen from student B"],
-        },
-        nextEvents: ["twoStudentsFight"],
-    },
-    teacherMovesToStudent: {
-        name: "teacherMovesToStudent",
-        charactersInvolved: ["Student1", "Teacher1"],
-        Student1: {
-            mood: ["sad", "neutral"],
-            position: ["current"],
-            description: ["Teacher is moving to student"],
-        },
-        Teacher1: {
-            mood: ["sad"],
-            position: ["current", "Student1"],
-            description: ["Teacher is moving to student"],
-        },
-        nextEvents: ["TeacherGetsAngry", "teacherNeedsBreak", "studentCries", "studentUncomfortable"],
-    },
-    teacherCleansMess: {
-        name: "teacherCleansMess",
-        charactersInvolved: ["Teacher1"],
-        Teacher1: {
-            mood: ["neutral"],
-            position: ["current"],
-            description: ["Teacher Cleans up Mess"],
-        },
-        nextEvents: ["teacherNeedsBreak", "teacherMovesToStudent"],
-    },
-    teacherReads: {
-        name: "teacherReads",
-        charactersInvolved: ["Teacher1"],
-        Teacher1: {
-            mood: ["happy", "neutral"],
-            position: ["current"],
-            description: ["Teacher is Reading"],
-        },
-        nextEvents: ["studentRuns", "studentGetsBored", "studentCries", "studentSits"],
-    },
-    teacherNeedsBreak: {
-        name: "teacherNeedsBreak",
-        charactersInvolved: ["Teacher1"],
-        Teacher1: {
-            mood: ["tired", "happy"],
-            position: ["current"],
-            description: ["Teacher needs a break"],
-        },
-        nextEvents: [],
-    },
-};
 exports.default = StoryEvents;
