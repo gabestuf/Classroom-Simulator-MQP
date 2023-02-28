@@ -49,10 +49,12 @@ class Classroom {
                 if (eventSprite.name === sprite.name) {
                     // If there's a match, set sprite data to eventSprite data
                     sprite.currentDescription = eventSprite.currentDescription;
-                    // sprite.heading = eventSprite.heading;
-                    if (eventSprite.heading instanceof Coordinate_1.default) {
-                        sprite.pos = eventSprite.heading;
-                    }
+                    // This line is for BFS, comment out if not using BFS
+                    sprite.heading = eventSprite.heading;
+                    // This if statement is for no BFS, comment out if BFS
+                    // if (eventSprite.heading instanceof Coordinate) {
+                    //   sprite.pos = eventSprite.heading;
+                    // }
                     sprite.mood = eventSprite.mood;
                     hasMatch = true;
                 }
@@ -63,16 +65,14 @@ class Classroom {
             }
         }
         // run the event
-        // classroomList = [...classroomList, ...this.runEventWPathfinding()];
-        classroomList;
+        classroomList = [...classroomList, ...this.runEventWPathfinding()];
         return classroomList;
     }
     runEvent() {
         for (const sprite of this.spriteList) {
             if (sprite.heading instanceof Coordinate_1.default) {
                 // First check if sprite is already at its destination. If so, set heading === null
-                if (sprite.heading.x === sprite.pos.x &&
-                    sprite.heading.y === sprite.pos.y) {
+                if (sprite.heading.x === sprite.pos.x && sprite.heading.y === sprite.pos.y) {
                     sprite.heading === null;
                 }
                 sprite.pos = sprite.heading;
@@ -99,8 +99,7 @@ class Classroom {
             for (const sprite of this.spriteList) {
                 if (sprite.heading instanceof Coordinate_1.default) {
                     // First check if sprite is already at its destination. If so, set heading === null
-                    if (sprite.heading.x === sprite.pos.x &&
-                        sprite.heading.y === sprite.pos.y) {
+                    if (sprite.heading.x === sprite.pos.x && sprite.heading.y === sprite.pos.y) {
                         sprite.heading === null;
                     }
                     const path = (0, BFS_1.default)(this.room, sprite.pos, sprite.heading);
@@ -111,16 +110,16 @@ class Classroom {
                     // path is a list of coordinates.
                     // UPDATE SPRITE LOCATION
                     // first check if sprite has arrived
-                    if (path.length === 1) {
-                        if (sprite.heading.x === path[0].x &&
-                            sprite.heading.y === path[0].y) {
-                            // He has arrived
+                    if (path.length <= 1) {
+                        if (sprite.heading.x === path[0].x && sprite.heading.y === path[0].y) {
+                            // Sprite has arrived
                             sprite.heading = null;
                         }
                     }
                     else if (path.length > 1) {
                         // a path is an array of coords, path[0] is sprite.pos and path[path.length - 1 is dest]
                         sprite.pos = path[1];
+                        console.log(path[1]);
                         stillMoving = true;
                     }
                 }
@@ -199,10 +198,7 @@ class Classroom {
         //TODO add sprites on top
         for (const sprite of this.spriteList) {
             const rowStr = strArr[sprite.pos.y];
-            strArr[sprite.pos.y] =
-                rowStr.substring(0, sprite.pos.x) +
-                    sprite.toString() +
-                    rowStr.substring(sprite.pos.x + 1);
+            strArr[sprite.pos.y] = rowStr.substring(0, sprite.pos.x) + sprite.toString() + rowStr.substring(sprite.pos.x + 1);
         }
         for (const string of strArr) {
             str += string + "\n";

@@ -207,7 +207,7 @@ app.get("/classroom-simulation/singleEvent/:eventName", (req, res) => {
     eventName.trim();
     try {
         const sim = new Simulator_1.default((0, GenRandomConfig_1.default)(), 1);
-        sim.generateEvents(eventName);
+        sim.generateEvent(eventName);
         res.json({
             status: "SUCCESS",
             message: `Successfully generated a single event: ${eventName}`,
@@ -232,8 +232,7 @@ app.get("/classroom-simulation/singleEvent/:eventName/:seed", (req, res) => {
             config = (0, GenRandomConfig_1.default)(seed);
         }
         const sim = new Simulator_1.default(config, 1);
-        sim.generateEvents(eventName);
-        console.log("here");
+        sim.generateEvent(eventName);
         res.json({
             status: "SUCCESS",
             message: `Successfully generated a single event: ${eventName}`,

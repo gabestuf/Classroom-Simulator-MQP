@@ -17,7 +17,7 @@ const shortestPath = (room, startPos, endPos) => {
         return [];
     }
     // check if endPos is valid
-    if (!(room.RoomArray[endPos.y][endPos.x] instanceof Tiles_1.Floor) && !(room.RoomArray[endPos.y][endPos.x] instanceof Tiles_1.Rug) && !(room.RoomArray[endPos.y][endPos.x] instanceof Tiles_1.Chair)) {
+    if (!(room.RoomArray[endPos.y][endPos.x] instanceof Tiles_1.Floor || room.RoomArray[endPos.y][endPos.x] instanceof Tiles_1.Rug || room.RoomArray[endPos.y][endPos.x] instanceof Tiles_1.Chair)) {
         console.error("No available path, end position is not valid");
         return [];
     }
