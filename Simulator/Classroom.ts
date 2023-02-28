@@ -72,7 +72,7 @@ class Classroom {
     }
 
     // run the event
-    classroomList = [...classroomList, ...this.runEventWPathfinding()];
+    classroomList = [...classroomList, ...this.runEvent()];
 
     return classroomList;
   }
