@@ -46,7 +46,7 @@ func http() -> void:
 	http_request.connect("request_completed", self, "_on_request_completed")
 	
 	#create request, check for error
-	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/generateEvents/3/")
+	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/generateEvents/3/10")
 	if error != OK:
 		_init_on_test()
 		push_error("An error occurred in the HTTP request. Using default storyline")
@@ -144,6 +144,7 @@ func _run_next_frame():
 					# set label only if it changes 
 					if not sprite.currentDescription == s.description:
 						sprite.description_label.text = s.description
+						sprite.description_label.set_Desc(s.description)
 					# check if position didn't change
 					if target_pos == sprite.global_position:
 						continue
