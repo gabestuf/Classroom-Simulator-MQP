@@ -49,7 +49,7 @@ class Simulator {
             this.finalJSON.frames = [...this.finalJSON.frames, ...classroomFramesJSON];
         }
     }
-    generateEvents(eventName) {
+    generateEvent(eventName) {
         const eventNameList = new STORYEVENTS_1.default().getEventNames();
         if (eventNameList.indexOf(eventName) > -1) {
             const event = new ClassroomEvent_1.default(eventName, this.classroom);

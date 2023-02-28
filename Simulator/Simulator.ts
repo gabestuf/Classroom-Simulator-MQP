@@ -84,7 +84,7 @@ class Simulator {
     }
   }
 
-  generateEvents(eventName: string) {
+  generateEvent(eventName: string) {
     const eventNameList = new StoryEvents().getEventNames();
 
     if (eventNameList.indexOf(eventName) > -1) {
