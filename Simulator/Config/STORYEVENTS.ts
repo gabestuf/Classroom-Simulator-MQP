@@ -95,7 +95,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         importance: 0.4,
       },
     ],
-    nextEvents: [],
+    nextEvents: ["studentLaughs", "studentSleepy"],
   },
   {
     name: "studentSleepy",
