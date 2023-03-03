@@ -5,6 +5,7 @@ class_name Classroom
 onready var _Nav2D = $EventHandler
 onready var _RoomTileMap = $EventHandler/RoomTileMap
 onready var event_label = $EventLabel
+onready var timer = $EventHandler/Timer
 
 var tiles
 
@@ -27,14 +28,14 @@ var frameNum = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	http()
+	# http()
 	#calling these from http so that they run in order without async
 	#setup()
 	# setup calls generate()
 	
 	# init on test for testing purposes, does not require http request, in prod, comment this out and uncomment http()
 	print("Classroom ready")
-	# _init_on_test()
+	_init_on_test()
 	_set_event_label_text("Classroom Ready")
 
 func http() -> void:
@@ -46,7 +47,7 @@ func http() -> void:
 	http_request.connect("request_completed", self, "_on_request_completed")
 	
 	#create request, check for error
-	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/generateEvents/3/10")
+	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/generateEvents/6/22")
 	if error != OK:
 		_init_on_test()
 		push_error("An error occurred in the HTTP request. Using default storyline")
@@ -112,13 +113,7 @@ func _run_next_frame():
 	
 	# first check if ready for the next frame
 	# We can do this by seeing if all the sprites have stopped moving.
-	if not frames.size():
-		return
 	
-	# check if all sprites are finished moving
-	for sprite in _Nav2D.spriteList:
-		if sprite.path.size():
-			return
 	# Todo, add some space between events, maybe have it calculate an rng variable and only runs if rng is over x percent
 	# pseudocode:
 	# var rng = math.random()
@@ -153,10 +148,23 @@ func _run_next_frame():
 		# remove the frame from the frame list
 		frames.remove(0)
 	
-func _on_Timer_timeout(): # 1 tick is .25 seconds atm
+func _on_Timer_timeout(): # Ticks are rng now
+	var rng = RandomNumberGenerator.new()
+	var timeToTimeout = rng.randf_range(0.0, 8.0) # range from 0 to 8 seconds between frames
+	timer.set_wait_time(timeToTimeout)
+	if not frames.size():
+		return
+	
+	# check if all sprites are finished moving
+	for sprite in _Nav2D.spriteList:
+		if sprite.path.size():
+			return
+			
 	if frames:
 		_run_next_frame()
 	# print("")
 
 func _set_event_label_text(text: String):
 	event_label.text = text
+
+	

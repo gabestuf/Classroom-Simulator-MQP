@@ -9,10 +9,10 @@ var currentDescription = ""
 
 # Pathfinding
 onready var navAgent := $NavigationAgent2D
-onready var maxSpeed: float = 100
+onready var maxSpeed: float = 50
 var velocity := Vector2.ZERO
-var FRICTION = 800
-var ACCELERATION = 500
+var FRICTION = 700
+var ACCELERATION = 400
 var facing := Vector2(0,1)
 var path : = PoolVector2Array() setget set_path 
 

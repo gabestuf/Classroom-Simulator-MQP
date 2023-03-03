@@ -383,6 +383,7 @@ bake_navigation = true
 format = 1
 
 [node name="Timer" type="Timer" parent="EventHandler"]
+process_mode = 0
 wait_time = 2.0
 autostart = true
 
