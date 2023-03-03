@@ -50,7 +50,6 @@ func http() -> void:
 	if error != OK:
 		_init_on_test()
 		push_error("An error occurred in the HTTP request. Using default storyline")
-		
 
 func _init_on_test(): 
 	# running this request: https://classroom-simulator-server.vercel.app/classroom-simulation/random/singleEvent/13
@@ -155,7 +154,8 @@ func _run_next_frame():
 		frames.remove(0)
 	
 func _on_Timer_timeout(): # 1 tick is .25 seconds atm
-	_run_next_frame()
+	if frames:
+		_run_next_frame()
 	# print("")
 
 func _set_event_label_text(text: String):
