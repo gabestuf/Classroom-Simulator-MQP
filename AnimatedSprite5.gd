@@ -1,12 +1,15 @@
 extends AnimatedSprite
 
-var speed : = 200.0
+var speed : = 100.0
 var path : = PoolVector2Array() setget set_path 
 
 #https://www.youtube.com/watch?v=0fPOt0Jw52s&ab_channel=GDQuest
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	position = Vector2(145,105)
+	# Set the animation to play
+	play("default")
 	set_process(false)
 
 
