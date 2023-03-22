@@ -24,7 +24,6 @@ class Room {
                 if (x === 0 || y === 0 || x === sizeX - 1 || y === sizeY - 1) {
                     // Add windows to top wall randomly, 30% change
                     if (y === 0 && x > 1 && x < this.RoomCfg.roomSizeX - 1 && (0, GenerateRandomNumber_1.default)(x * 2) < 0.3) {
-                        console.log("etert");
                         row.push(new Tiles_1.Window(newCoord));
                     }
                     else {
@@ -58,6 +57,7 @@ class Room {
         }
         return newRoom;
     }
+    // adds tables, rugs, bookshelves, & chairs
     generateRoomElements() {
         // add tables
         for (let i = 0; i < this.RoomCfg.numTables; i++) {
@@ -91,6 +91,13 @@ class Room {
                 const newCoord = this.findRandomEmptySpaceNoEdges();
                 this.RoomArray[newCoord.y][newCoord.x] = new Tiles_1.Chair(newCoord);
             }
+        }
+        // add bookshelves
+        for (let i = 0; i < this.RoomCfg.numBookshelves; i++) {
+            const newCoord = this.findRandomEmptySpace();
+            this.RoomArray[newCoord.y][newCoord.x] = new Tiles_1.Bookshelf(newCoord);
+            console.log(this.RoomArray);
+            console.log(newCoord);
         }
     }
     getTileAtCoordinate(x, y) {

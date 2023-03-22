@@ -10,6 +10,7 @@ class ClassroomConfig {
         this.numRugs = JSONConfig.numRugs;
         this.numTables = JSONConfig.numRugs;
         this.seed = JSONConfig.seed;
+        this.numBookshelves = JSONConfig.numBookshelves;
     }
     isValid() {
         for (const property of Object.values(this)) {

@@ -29,6 +29,7 @@ const testCFG = new CONFIG_1.default({
     numTables: 0,
     numRugs: 0,
     seed: 1,
+    numBookshelves: 1,
 });
 app.get("/", (req, res) => {
     res.send("MQP API");
@@ -95,6 +96,7 @@ app.post("/render-room", (req, res) => {
         numChairs: cfg.numChairs,
         numTables: cfg.numTables,
         numRugs: cfg.numRugs,
+        numBookshelves: cfg.numBookshelves,
     });
     if (!config.isValid()) {
         res.json({

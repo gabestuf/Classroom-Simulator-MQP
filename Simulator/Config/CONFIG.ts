@@ -7,6 +7,7 @@ interface iConfig {
   numChairs: number;
   numTables: number;
   numRugs: number;
+  numBookshelves: number;
 }
 
 class ClassroomConfig implements iConfig {
@@ -18,6 +19,7 @@ class ClassroomConfig implements iConfig {
   numChairs: number;
   numTables: number;
   numRugs: number;
+  numBookshelves: number;
 
   constructor(JSONConfig: iConfig) {
     this.roomSizeX = JSONConfig.roomSizeX;
@@ -28,6 +30,7 @@ class ClassroomConfig implements iConfig {
     this.numRugs = JSONConfig.numRugs;
     this.numTables = JSONConfig.numRugs;
     this.seed = JSONConfig.seed;
+    this.numBookshelves = JSONConfig.numBookshelves;
   }
 
   isValid() {

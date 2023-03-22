@@ -1,4 +1,4 @@
-import { Wall, Floor, Table, Rug, Chair, Window, Door } from "./Tiles";
+import { Wall, Floor, Table, Rug, Chair, Window, Door, Bookshelf } from "./Tiles";
 import iTile from "./iTile";
 import Coordinate from "../Navigation/Coordinate";
 import iSprite from "../Sprites/iSprite";
@@ -29,7 +29,6 @@ class Room {
           // Add windows to top wall randomly, 30% change
 
           if (y === 0 && x > 1 && x < this.RoomCfg.roomSizeX - 1 && seededRandom(x * 2) < 0.3) {
-            console.log("etert");
             row.push(new Window(newCoord));
           } else {
             // add Walls if not window
@@ -62,7 +61,7 @@ class Room {
 
     return newRoom;
   }
-
+  // adds tables, rugs, bookshelves, & chairs
   generateRoomElements() {
     // add tables
     for (let i = 0; i < this.RoomCfg.numTables; i++) {
@@ -95,6 +94,13 @@ class Room {
         const newCoord: Coordinate = this.findRandomEmptySpaceNoEdges();
         this.RoomArray[newCoord.y][newCoord.x] = new Chair(newCoord);
       }
+    }
+    // add bookshelves
+    for (let i = 0; i < this.RoomCfg.numBookshelves; i++) {
+      const newCoord: Coordinate = this.findRandomEmptySpace();
+      this.RoomArray[newCoord.y][newCoord.x] = new Bookshelf(newCoord);
+      console.log(this.RoomArray);
+      console.log(newCoord);
     }
   }
 

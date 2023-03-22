@@ -15,6 +15,7 @@ function genRandomConfig(seed = Math.floor(Math.random() * 10000)) {
         numChairs: numS + 1,
         numTables: Math.floor((0, GenerateRandomNumber_1.default)(seed * 7) * 3) + 1,
         numRugs: Math.floor((0, GenerateRandomNumber_1.default)(seed * 5) * 2) + 1,
+        numBookshelves: Math.floor((0, GenerateRandomNumber_1.default)(seed * 12) + 1),
         seed: seed,
     });
 }
