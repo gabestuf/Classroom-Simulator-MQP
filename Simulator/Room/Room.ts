@@ -1,4 +1,4 @@
-import { Wall, Floor, Table, Rug, Chair, Window, Door, Bookshelf } from "./Tiles";
+import { Wall, Floor, Table, Rug, Chair, Window, Door } from "./Tiles";
 import iTile from "./iTile";
 import Coordinate from "../Navigation/Coordinate";
 import iSprite from "../Sprites/iSprite";
@@ -15,6 +15,7 @@ class Room {
     this.generateRoomElements();
   }
 
+  // Generates floor, windows, and a door
   generateRoomFloor(sizeX: number, sizeY: number): Array<Array<iTile>> {
     let newRoom = new Array<Array<iTile>>();
     // Generate Walls & Floors
@@ -25,9 +26,10 @@ class Room {
         const newCoord: Coordinate = new Coordinate(x, y);
         // check for wall space
         if (x === 0 || y === 0 || x === sizeX - 1 || y === sizeY - 1) {
-          // Add windows to top wall
-          // Right now every 3rd window idk why
-          if (y === 0 && x > 1 && x < newRoom.length - 1 && x % 3 === 1) {
+          // Add windows to top wall randomly, 30% change
+
+          if (y === 0 && x > 1 && x < this.RoomCfg.roomSizeX - 1 && seededRandom(x * 2) < 0.3) {
+            console.log("etert");
             row.push(new Window(newCoord));
           } else {
             // add Walls if not window

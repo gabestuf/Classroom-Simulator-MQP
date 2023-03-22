@@ -12,6 +12,7 @@ class Room {
         this.RoomArray = this.generateRoomFloor(cfg.roomSizeX, cfg.roomSizeY);
         this.generateRoomElements();
     }
+    // Generates floor, windows, and a door
     generateRoomFloor(sizeX, sizeY) {
         let newRoom = new Array();
         // Generate Walls & Floors
@@ -21,9 +22,9 @@ class Room {
                 const newCoord = new Coordinate_1.default(x, y);
                 // check for wall space
                 if (x === 0 || y === 0 || x === sizeX - 1 || y === sizeY - 1) {
-                    // Add windows to top wall
-                    // Right now every 3rd window idk why
-                    if (y === 0 && x > 1 && x < newRoom.length - 1 && x % 3 === 1) {
+                    // Add windows to top wall randomly, 30% change
+                    if (y === 0 && x > 1 && x < this.RoomCfg.roomSizeX - 1 && (0, GenerateRandomNumber_1.default)(x * 2) < 0.3) {
+                        console.log("etert");
                         row.push(new Tiles_1.Window(newCoord));
                     }
                     else {

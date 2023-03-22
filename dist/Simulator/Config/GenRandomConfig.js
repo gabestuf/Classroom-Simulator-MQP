@@ -8,8 +8,8 @@ const CONFIG_1 = __importDefault(require("./CONFIG"));
 function genRandomConfig(seed = Math.floor(Math.random() * 10000)) {
     const numS = Math.floor((0, GenerateRandomNumber_1.default)(seed * 6) * 4) + 2;
     return new CONFIG_1.default({
-        roomSizeX: Math.floor((0, GenerateRandomNumber_1.default)(seed * 2) * 10) + 5,
-        roomSizeY: Math.floor((0, GenerateRandomNumber_1.default)(seed + 3) * 10) + 5,
+        roomSizeX: Math.floor((0, GenerateRandomNumber_1.default)(seed * 2) * 10) + 7,
+        roomSizeY: Math.floor((0, GenerateRandomNumber_1.default)(seed + 3) * 10) + 7,
         numStudents: numS,
         numTeachers: Math.floor((0, GenerateRandomNumber_1.default)(seed * 1.5) + 1),
         numChairs: numS + 1,
