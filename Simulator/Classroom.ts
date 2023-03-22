@@ -44,11 +44,11 @@ class Classroom {
 
     // Update sprites from Event Spritelist
     /* 
-        An event has a list of sprites
-        For each sprite of the eventSpriteList, 
-            find the sprite of classroom.spriteList where the ID's match. 
-            update classroom sprite with the new data
-        */
+      An event has a list of sprites
+      For each sprite of the eventSpriteList, 
+      find the sprite of classroom.spriteList where the ID's match. 
+      update classroom sprite with the new data
+    */
     for (const eventSprite of event.spriteList) {
       let hasMatch: boolean = false;
       for (const sprite of this.spriteList) {
@@ -73,7 +73,6 @@ class Classroom {
 
     // run the event
     classroomList = [...classroomList, ...this.runEvent()];
-
     return classroomList;
   }
 
