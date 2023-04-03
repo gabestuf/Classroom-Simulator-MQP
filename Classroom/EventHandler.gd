@@ -118,6 +118,13 @@ func _gen_static_sprites(classroomJSON) -> void:
 				var d = DoorSprite.instance()
 				d.position = room_tilemap.cell_size * Vector2(x,y)
 				self.add_child(d)
+				# change door direction
+				if (x == 0): 
+					d.rotateSprite(-90.0)
+				elif (x >= sizeX - 1):
+					d.rotateSprite(90.0)
+				
+					
 
 func _gen_animated_sprites(classroomJSON) -> void:
 	var initSprites = classroomJSON.get("frames")[0].spriteList;
