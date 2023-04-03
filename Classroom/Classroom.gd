@@ -77,14 +77,13 @@ func _on_request_completed(result, response_code, headers, body):
 	
 	#get json and store as a dict
 	var json = JSON.parse(body.get_string_from_utf8())
-	print(json.result == null)
 	if json.result == null:
 		_init_on_test()
 		return
 	var JSONDict = json.result
 	
 	classroomJSON = JSONDict.get("body").get("classroomJSON")
-	print(classroomJSON)
+	print(classroomJSON.get("room"))
 	classroomConfig = classroomJSON.get("config")
 	#gets the room layout and room size from json
 	var jsonTiles = classroomJSON.get("initClassroom")
