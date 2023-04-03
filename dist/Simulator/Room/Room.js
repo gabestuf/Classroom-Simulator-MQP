@@ -94,7 +94,10 @@ class Room {
         }
         // add bookshelves
         for (let i = 0; i < this.RoomCfg.numBookshelves; i++) {
-            const newCoord = this.findRandomEmptySpace();
+            let newCoord = this.findRandomEmptySpaceAlongEdge();
+            if (newCoord === null) {
+                newCoord = this.findRandomEmptySpace();
+            }
             this.RoomArray[newCoord.y][newCoord.x] = new Tiles_1.Bookshelf(newCoord);
             console.log(this.RoomArray);
             console.log(newCoord);
@@ -108,6 +111,20 @@ class Room {
             console.error(`Error in function getTileAtCoordinate: ${e}`);
         }
         return null;
+    }
+    getAdjacentTiles(coord) {
+        let adjacentTileList = [];
+        for (let x = coord.x - 1; x <= coord.x + 1; x++) {
+            for (let y = coord.y - 1; y <= coord.y + 1; y++) {
+                // check if coord is within bounds
+                if (y >= 0 && y < this.RoomArray.length && x >= 0 && x < this.RoomArray[0].length) {
+                    if (this.RoomArray[y][x] instanceof Tiles_1.Floor) {
+                        adjacentTileList.push(this.RoomArray[y][x]);
+                    }
+                }
+            }
+        }
+        return adjacentTileList;
     }
     findRandomEmptyAdjacentSpace(coord) {
         let emptyAdjacentCoordinateList = [];
@@ -223,6 +240,37 @@ class Room {
         }
         if (coordinateList.length === 0) {
             throw new Error("Error, findRandomEmptySpace returned null, most likely room is too small to accomodate all sprites.");
+        }
+        return coordinateList[Math.floor((0, GenerateRandomNumber_1.default)(this.RoomCfg.seed) * coordinateList.length)];
+    }
+    findRandomEmptySpaceAlongEdge() {
+        // same as findRandomEmptySpace but no coordinates against the wall
+        let coordinateList = [];
+        // we want to get all positions where there is floor
+        for (const row of this.RoomArray) {
+            for (const tile of row) {
+                if (tile instanceof Tiles_1.Floor) {
+                    // additional check if tile.pos is close to a wall
+                    if (tile.pos.x > 2 && tile.pos.x < this.RoomArray.length - 2 && tile.pos.y > 2 && this.RoomArray.length - 2) {
+                        continue;
+                    }
+                    else {
+                        // it's along the wall, check to make sure not obstructing door
+                        let adjacentToDoor = false;
+                        for (const t of this.getAdjacentTiles(tile.pos)) {
+                            if (t instanceof Tiles_1.Door) {
+                                adjacentToDoor = true;
+                            }
+                        }
+                        if (!adjacentToDoor) {
+                            coordinateList.push(tile.pos);
+                        }
+                    }
+                }
+            }
+        }
+        if (coordinateList.length === 0) {
+            return null;
         }
         return coordinateList[Math.floor((0, GenerateRandomNumber_1.default)(this.RoomCfg.seed) * coordinateList.length)];
     }
