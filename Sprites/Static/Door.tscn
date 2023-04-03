@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Images/Tiles/bookshelf.png" type="Texture" id=1]
+[ext_resource path="res://Images/Tiles/door.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
-[node name="Bookshelf" type="StaticBody2D"]
+[node name="Door" type="StaticBody2D"]
 
-[node name="BookshelfSprite" type="Sprite" parent="."]
+[node name="DoorSprite" type="Sprite" parent="."]
 position = Vector2( 16, 16 )
 texture = ExtResource( 1 )
 

@@ -17,4 +17,3 @@ texture = ExtResource( 1 )
 position = Vector2( 20, 22.6667 )
 rotation = 1.5708
 shape = SubResource( 1 )
-disabled = true

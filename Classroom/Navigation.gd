@@ -8,6 +8,9 @@ var spriteList = []
 var TableSprite = load("res://Sprites/Static/Table.tscn") # Load the teacher scene
 var ChairSprite = load("res://Sprites/Static/Chair.tscn") # Load the chair scene
 var RugSprite = load("res://Sprites/Static/Rug.tscn") # Load the rug scene
+var BookshelfSprite = load("res://Sprites/Static/Bookshelf.tscn") # Load the bookshelf scene
+var WindowSprite = load("res://Sprites/Static/Window.tscn") # Load the window scene
+var DoorSprite = load("res://Sprites/Static/Door.tscn") # Load the window scene
 
 var StudentSprite = load("res://Sprites/Kinematic/StudentSprite.tscn") # Load the Student scene
 var TeacherSprite = load("res://Sprites/Kinematic/TeacherSprite.tscn") # Load the Teacher scene
@@ -54,6 +57,7 @@ func _init_tiles(config):
 func _gen_walls_and_floor(classroomJSON) -> void:
 	var sizeX = classroomJSON.get("config").get("roomSizeX");
 	var sizeY = classroomJSON.get("config").get("roomSizeY");
+	var room = classroomJSON.get("room");
 	for y in range(sizeY):
 		for x in range(sizeX):
 			# top wall
@@ -99,6 +103,23 @@ func _gen_static_sprites(classroomJSON) -> void:
 			if (room[y][x] == "r"):
 				var r = RugSprite.instance()
 				r.position = room_tilemap.cell_size * Vector2(x,y)
+				self.add_child(r)
+			# Bookshelfs 
+			if (room[y][x] == "b"):
+				var b = BookshelfSprite.instance()
+				b.position = room_tilemap.cell_size * Vector2(x,y)
+				self.add_child(b)
+			# Windows 
+			if (room[y][x] == "i"):
+				var i = WindowSprite.instance()
+				i.position = room_tilemap.cell_size * Vector2(x,y)
+				self.add_child(i)
+			# Doors 
+			if (room[y][x] == "d"):
+				var d = DoorSprite.instance()
+				d.position = room_tilemap.cell_size * Vector2(x,y)
+				# d.rotation_degrees = 90 # this is the code for rotating the tile
+				self.add_child(d)
 
 func _gen_animated_sprites(classroomJSON) -> void:
 	var sizeX = classroomJSON.get("config").get("roomSizeX");
