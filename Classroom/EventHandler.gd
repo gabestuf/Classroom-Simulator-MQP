@@ -123,7 +123,8 @@ func _gen_static_sprites(classroomJSON) -> void:
 					d.rotateSprite(-90.0)
 				elif (x >= sizeX - 1):
 					d.rotateSprite(90.0)
-				
+				else:
+					d.rotateSprite(180.0)
 					
 
 func _gen_animated_sprites(classroomJSON) -> void:
@@ -161,5 +162,3 @@ func _gen_animated_sprites(classroomJSON) -> void:
 				studentCount = 0
 			else:
 				studentCount += 1
-				
-				

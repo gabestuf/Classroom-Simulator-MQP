@@ -47,7 +47,7 @@ func http() -> void:
 	http_request.connect("request_completed", self, "_on_request_completed")
 	
 	#create request, check for error
-	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/generateEvents/120/32")
+	var error = http_request.request("https://classroom-simulator-server.vercel.app/classroom-simulation/generateEvents/120/6")
 	if error != OK:
 		_init_on_test()
 		push_error("An error occurred in the HTTP request. Using default storyline")
@@ -81,7 +81,7 @@ func _on_request_completed(result, response_code, headers, body):
 		_init_on_test()
 		return
 	var JSONDict = json.result
-	
+	print(JSONDict)
 	classroomJSON = JSONDict.get("body").get("classroomJSON")
 	print(classroomJSON.get("room"))
 	classroomConfig = classroomJSON.get("config")

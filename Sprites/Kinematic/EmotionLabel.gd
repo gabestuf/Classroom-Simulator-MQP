@@ -1,6 +1,6 @@
 extends Label
 
-var emotes = ["angryMild", "angryRegular", "angryStrong", "happy", "neutral", "sad", "tired"]
+var emotes = ["angryMild", "angryRegular", "angryStrong", "happy", "neutral", "sad", "tired", "sick", "sleepy", "curious", "thirsty", "focused", "reader", "studious"]
 var image_node = null
 var num
 var curr_emote
