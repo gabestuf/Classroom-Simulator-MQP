@@ -1,5 +1,5 @@
 // maybe add upset, bored
-const moodList = ["happy", "sad", "neutral", "angry", "tired", "sick", "sleepy", "curious", "thirsty", "focused", "studious"];
+const moodList = ["happy", "sad", "neutral", "angry", "tired", "sick", "sleepy", "curious", "thirsty", "focused", "studious", "reader"];
 
 class Mood {
   name: string;

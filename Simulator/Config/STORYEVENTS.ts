@@ -233,7 +233,7 @@ const StoryEventsJSON: iStoryEvent[] = [
     charactersInvolved: [
       {
         name: "Student1",
-        mood: ["neutral", "tired"],
+        mood: ["reader"],
         pos: ["Student1"],
         description: ["student has a book", "student reads", "student learning"],
         importance: 0.7
@@ -247,7 +247,7 @@ const StoryEventsJSON: iStoryEvent[] = [
     charactersInvolved: [
       {
         name: "Teacher1",
-        mood: ["neutral"],
+        mood: ["reader"],
         pos: ["Teacher1"],
         description: ["Teacher Reading"],
         importance: 0.8
@@ -390,7 +390,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         charactersInvolved: [
           {
             name: "Student1",
-            mood: ["neutral"],
+            mood: ["reader"],
             pos: ["Student1"],
             description: ["student studies", "student looks at material"],
             importance: 0.8
