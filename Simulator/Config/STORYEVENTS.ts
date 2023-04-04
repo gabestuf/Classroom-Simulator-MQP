@@ -325,7 +325,7 @@ const StoryEventsJSON: iStoryEvent[] = [
         charactersInvolved: [
           {
             name: "Teacher1",
-            mood: ["neutral"],
+            mood: ["curious"],
             pos: ["Teacher1"],
             description: ["teacher confused", "teacher needs more information", "teacher does not know the answer"],
             importance: 0.3
