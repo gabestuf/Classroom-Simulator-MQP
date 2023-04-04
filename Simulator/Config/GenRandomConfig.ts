@@ -2,7 +2,7 @@ import seededRandom from "../Helper Functions/GenerateRandomNumber";
 import ClassroomConfig from "./CONFIG";
 
 function genRandomConfig(seed = Math.floor(Math.random() * 10000)) {
-  const numS = Math.floor(seededRandom(seed * 6) * 4) + 2;
+  const numS = Math.floor(seededRandom(seed * 6) * 4) + 3;
 
   return new ClassroomConfig({
     roomSizeX: Math.floor(seededRandom(seed * 2) * 10) + 7,

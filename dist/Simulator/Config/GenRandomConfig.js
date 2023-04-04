@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const GenerateRandomNumber_1 = __importDefault(require("../Helper Functions/GenerateRandomNumber"));
 const CONFIG_1 = __importDefault(require("./CONFIG"));
 function genRandomConfig(seed = Math.floor(Math.random() * 10000)) {
-    const numS = Math.floor((0, GenerateRandomNumber_1.default)(seed * 6) * 4) + 2;
+    const numS = Math.floor((0, GenerateRandomNumber_1.default)(seed * 6) * 4) + 3;
     return new CONFIG_1.default({
         roomSizeX: Math.floor((0, GenerateRandomNumber_1.default)(seed * 2) * 10) + 7,
         roomSizeY: Math.floor((0, GenerateRandomNumber_1.default)(seed + 3) * 10) + 7,
