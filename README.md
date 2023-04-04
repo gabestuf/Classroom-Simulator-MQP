@@ -45,6 +45,14 @@ This will run two terminals concurrently. One compiles the typescript code into 
 
 ---
 
+### When Uploading
+
+First, compile into the dist folder using
+
+> `npm run build`
+
+Then push to github
+
 ### Here is the current API:
 
 | Method | Route                                                 | Description                                                                                                          | Return Type   |
@@ -59,8 +67,7 @@ This will run two terminals concurrently. One compiles the typescript code into 
 | GET    | /classroom-simulation/singleEvent/:eventName/:seed    | will render a specified single event and also a given seed                                                           | classroomJSON |
 | GET    | /classroom-simulation/generateEvents/:numEvents/:seed | will render random events given the number of events and a seed.                                                     | classroomJSON |
 
-[^1]:
-    The config is a JSON Object that looks like this: `
+[^1]: The config is a JSON Object that looks like this: `
 {
 "roomSizeX": number,
 "roomSizeY": number,
@@ -134,7 +141,6 @@ This will run two terminals concurrently. One compiles the typescript code into 
 - [ ] Complete TODO
 - [ ] create more routes depending on client needs
 - [ ] test http requests in Godot
-
 
 ---
 
