@@ -360,7 +360,7 @@ const StoryEventsJSON = [
         charactersInvolved: [
             {
                 name: "Student1",
-                mood: ["neutral", "happy"],
+                mood: ["studious"],
                 pos: ["Student1"],
                 description: ["student practices writing", "student writes an essay"],
                 importance: 0.7
