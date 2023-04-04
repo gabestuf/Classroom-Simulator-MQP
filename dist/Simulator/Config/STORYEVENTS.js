@@ -269,7 +269,7 @@ const StoryEventsJSON = [
         charactersInvolved: [
             {
                 name: "Student1",
-                mood: ["curious", "happy", "neutral"],
+                mood: ["focused"],
                 pos: ["Student1"],
                 description: ["student raises hand ", "student has question"],
                 importance: 0.6
@@ -295,7 +295,7 @@ const StoryEventsJSON = [
         charactersInvolved: [
             {
                 name: "Student1",
-                mood: ["neutral"],
+                mood: ["curious"],
                 pos: ["Student1"],
                 description: ["student wants to learn more", "student confused", "student has question"],
                 importance: 0.4
