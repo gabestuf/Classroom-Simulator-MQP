@@ -55,7 +55,7 @@ Then push to github
 
 ### Here is the current API:
 
-| Method | Route                                                 | Description                                                                                                          | Return Type   |
+| Method | Endpoint                                              | Description                                                                                                          | Return Type   |
 | ------ | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------- |
 | GET    | /render-room                                          | will render a random room with random parameters                                                                     | Room          |
 | GET    | /render-room/:seed                                    | will render a random room based on the seed you give it                                                              | Room          |
